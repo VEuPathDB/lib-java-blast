@@ -216,4 +216,46 @@ public class TBlastX extends ListBlast
   public void setNumThreads(Short numThreads) {
     this.numThreads = numThreads;
   }
+
+  // ------------------------------------------------------------------------------------------ //
+
+  private Double bestHitOverhang;
+
+  @JsonGetter(Flag.BestHitOverhang)
+  public Double getBestHitOverhang() {
+    return bestHitOverhang;
+  }
+
+  @JsonSetter(Flag.BestHitOverhang)
+  public void setBestHitOverhang(Double bestHitOverhang) {
+    this.bestHitOverhang = bestHitOverhang;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+  private Double bestHitScoreEdge;
+
+  @JsonGetter(Flag.BestHitScoreEdge)
+  public Double getBestHitScoreEdge() {
+    return bestHitScoreEdge;
+  }
+
+  @JsonSetter(Flag.BestHitScoreEdge)
+  public void setBestHitScoreEdge(Double bestHitScoreEdge) {
+    this.bestHitScoreEdge = bestHitScoreEdge;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+  private Boolean subjectBestHit;
+
+  @JsonGetter(Flag.SubjectBestHit)
+  public Boolean getSubjectBestHit() {
+    return subjectBestHit;
+  }
+
+  @JsonSetter(Flag.SubjectBestHit)
+  public void setSubjectBestHit(Boolean subjectBestHit) {
+    this.subjectBestHit = subjectBestHit;
+  }
 }

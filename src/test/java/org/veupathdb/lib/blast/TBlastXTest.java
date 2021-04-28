@@ -362,4 +362,73 @@ class TBlastXTest
     }
   }
 
+  @Nested
+  @DisplayName(Flag.BestHitOverhang)
+  class BestHitOverhang1
+  {
+    @Test
+    @DisplayName("serialization")
+    void test1() throws Exception {
+      var tgt = new TBlastX();
+      tgt.setBestHitOverhang(123.0);
+
+      assertEquals("{\"-best_hit_overhang\":123.0}", json.writeValueAsString(tgt));
+    }
+
+    @Test
+    @DisplayName("deserialization")
+    void test2() throws Exception {
+      var raw = "{\"-best_hit_overhang\":123.0}";
+      var tgt = json.readValue(raw, TBlastX.class);
+
+      assertEquals(123, tgt.getBestHitOverhang());
+    }
+  }
+
+  @Nested
+  @DisplayName(Flag.BestHitScoreEdge)
+  class BestHitScoreEdge1
+  {
+    @Test
+    @DisplayName("serialization")
+    void test1() throws Exception {
+      var tgt = new TBlastX();
+      tgt.setBestHitScoreEdge(123.0);
+
+      assertEquals("{\"-best_hit_score_edge\":123.0}", json.writeValueAsString(tgt));
+    }
+
+    @Test
+    @DisplayName("deserialization")
+    void test2() throws Exception {
+      var raw = "{\"-best_hit_score_edge\":123.0}";
+      var tgt = json.readValue(raw, TBlastX.class);
+
+      assertEquals(123, tgt.getBestHitScoreEdge());
+    }
+  }
+
+  @Nested
+  @DisplayName(Flag.SubjectBestHit)
+  class SubjectBestHit1
+  {
+    @Test
+    @DisplayName("serialization")
+    void test1() throws Exception {
+      var tgt = new TBlastX();
+      tgt.setSubjectBestHit(true);
+
+      assertEquals("{\"-subject_besthit\":true}", json.writeValueAsString(tgt));
+    }
+
+    @Test
+    @DisplayName("deserialization")
+    void test2() throws Exception {
+      var raw = "{\"-subject_besthit\":true}";
+      var tgt = json.readValue(raw, TBlastX.class);
+
+      assertEquals(true, tgt.getSubjectBestHit());
+    }
+  }
+
 }
