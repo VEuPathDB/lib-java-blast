@@ -33,7 +33,7 @@ public class Location
     return start + "-" + stop;
   }
 
-  public Location fromString(String value) {
+  public static Location fromString(String value) {
     var dashPos = value.indexOf('-');
     if (dashPos < 1)
       throw new IllegalArgumentException("Invalid location string");
