@@ -119,4 +119,22 @@ public class Seg
 
     throw new IllegalArgumentException();
   }
+
+  public static Seg fromString(String value) {
+    if (value.equals("yes"))
+      return yesSeg();
+    if (value.equals("no"))
+      return noSeg();
+
+    var split = value.split(" +");
+
+    if (split.length != 3)
+      throw new IllegalArgumentException();
+
+    return wlhSeg(
+      Integer.parseInt(split[0]),
+      Double.parseDouble(split[1]),
+      Double.parseDouble(split[2])
+    );
+  }
 }

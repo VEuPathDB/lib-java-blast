@@ -65,4 +65,28 @@ public class OutFormat
 
     return out.toString();
   }
+
+  public static OutFormat fromString(String value) {
+    if (value.isBlank())
+      return new OutFormat().setType(FormatType.Pairwise);
+
+    var split = value.split(" +");
+    var out   = new OutFormat();
+
+    out.setType(FormatType.fromIntValue(Integer.parseInt(split[0])));
+
+    if (split.length > 1) {
+      var start = 1;
+      if (split[1].startsWith("delim=")) {
+        out.setDelimiter(split[1].substring(6));
+        start = 2;
+      }
+
+      for (; start < split.length; start++) {
+        out.getFields().add(FormatField.fromString(split[start]));
+      }
+    }
+
+    return out;
+  }
 }

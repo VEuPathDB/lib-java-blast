@@ -116,4 +116,22 @@ public class Dust
 
     throw new IllegalArgumentException();
   }
+
+  public static Dust fromString(String value) {
+    if ("yes".equals(value))
+      return yesDust();
+    if ("no".equals(value))
+      return noDust();
+
+    var split = value.split(" +");
+
+    if (split.length != 3)
+      throw new IllegalArgumentException();
+
+    return lwlDust(
+      Integer.parseInt(split[0]),
+      Integer.parseInt(split[1]),
+      Integer.parseInt(split[2])
+    );
+  }
 }
