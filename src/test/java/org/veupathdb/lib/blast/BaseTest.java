@@ -23,7 +23,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setShortHelp(true);
 
       assertEquals("{\"-h\":true}", json.writeValueAsString(tgt));
@@ -33,7 +33,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-h\":true}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertTrue(tgt.getShortHelp());
     }
@@ -46,7 +46,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setLongHelp(true);
 
       assertEquals("{\"-help\":true}", json.writeValueAsString(tgt));
@@ -56,7 +56,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-help\":true}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(true, tgt.getLongHelp());
     }
@@ -69,7 +69,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setVersion(true);
 
       assertEquals("{\"-version\":true}", json.writeValueAsString(tgt));
@@ -79,7 +79,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-version\":true}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(true, tgt.getVersion());
     }
@@ -92,7 +92,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setOutFormat(new OutFormat().setDelimiter("="));
 
       assertEquals("{\"-outfmt\":{\"delimiter\":\"=\"}}", json.writeValueAsString(tgt));
@@ -102,7 +102,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-outfmt\":{\"delimiter\":\"=\"}}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals("=", tgt.getOutFormat().getDelimiter());
     }
@@ -115,7 +115,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setShowGIs(true);
 
       assertEquals("{\"-show_gis\":true}", json.writeValueAsString(tgt));
@@ -125,7 +125,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-show_gis\":true}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(true, tgt.getShowGIs());
     }
@@ -138,7 +138,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setNumDescriptions(34L);
 
       assertEquals("{\"-num_descriptions\":34}", json.writeValueAsString(tgt));
@@ -148,7 +148,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-num_descriptions\":34}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(34, tgt.getNumDescriptions());
     }
@@ -161,7 +161,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setNumAlignments(34L);
 
       assertEquals("{\"-num_alignments\":34}", json.writeValueAsString(tgt));
@@ -171,7 +171,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-num_alignments\":34}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(34, tgt.getNumAlignments());
     }
@@ -185,7 +185,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setLineLength(34);
 
       assertEquals("{\"-line_length\":34}", json.writeValueAsString(tgt));
@@ -195,7 +195,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-line_length\":34}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(34, tgt.getLineLength());
     }
@@ -208,7 +208,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setHTML(true);
 
       assertEquals("{\"-html\":true}", json.writeValueAsString(tgt));
@@ -218,7 +218,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-html\":true}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(true, tgt.getHTML());
     }
@@ -231,7 +231,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setSortHits(HitSorting.ByQueryCoverage);
 
       assertEquals("{\"-sorthits\":4}", json.writeValueAsString(tgt));
@@ -241,7 +241,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-sorthits\":4}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(HitSorting.ByQueryCoverage, tgt.getSortHits());
     }
@@ -254,7 +254,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setSortHSPs(HSPSorting.ByHSPSubjectStart);
 
       assertEquals("{\"-sorthsps\":4}", json.writeValueAsString(tgt));
@@ -264,7 +264,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-sorthsps\":4}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(HSPSorting.ByHSPSubjectStart, tgt.getSortHSPs());
     }
@@ -277,7 +277,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setMaxTargetSequences(34L);
 
       assertEquals("{\"-max_target_seqs\":34}", json.writeValueAsString(tgt));
@@ -287,7 +287,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-max_target_seqs\":34}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(34, tgt.getMaxTargetSequences());
     }
@@ -300,7 +300,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setOutFile("hi");
 
       assertEquals("{\"-out\":\"hi\"}", json.writeValueAsString(tgt));
@@ -310,7 +310,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-out\":\"hi\"}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals("hi", tgt.getOutFile());
     }
@@ -323,7 +323,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new Base();
+      var tgt = new CLIBase();
       tgt.setParseDefLines(true);
 
       assertEquals("{\"-parse_deflines\":true}", json.writeValueAsString(tgt));
@@ -333,7 +333,7 @@ class BaseTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-parse_deflines\":true}";
-      var tgt = json.readValue(raw, Base.class);
+      var tgt = json.readValue(raw, CLIBase.class);
 
       assertEquals(true, tgt.getParseDefLines());
     }

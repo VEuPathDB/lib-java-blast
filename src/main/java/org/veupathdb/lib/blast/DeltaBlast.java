@@ -8,7 +8,7 @@ import org.veupathdb.lib.blast.field.Location;
 import org.veupathdb.lib.blast.field.Seg;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DeltaBlast extends ListBlast
+public class DeltaBlast extends BlastWithLists
 {
   private Long wordSize;
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.veupathdb.lib.blast.consts.Flag;
 
-class IPGListBlast extends ListBlast
+public class BlastWithIPGList extends BlastWithLists
 {
   private String ipgList;
   private String negativeIPGList;

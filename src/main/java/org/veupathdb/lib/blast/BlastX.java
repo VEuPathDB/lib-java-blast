@@ -7,7 +7,7 @@ import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.*;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BlastX extends IPGListBlast
+public class BlastX extends BlastWithIPGList
 {
   private Strand strand;
 

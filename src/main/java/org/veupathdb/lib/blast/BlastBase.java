@@ -7,7 +7,7 @@ import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.Location;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-class BaseBlast extends Base
+public class BlastBase extends CLIBase
 {
   private String     queryFile;
   private Location   queryLocation;

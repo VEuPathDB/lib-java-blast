@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.veupathdb.lib.blast.consts.Flag;
 
-public class BlastFormatter extends Base
+public class BlastFormatter extends CLIBase
 {
   private String requestID;
   private String archiveFile;

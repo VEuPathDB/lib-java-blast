@@ -8,7 +8,7 @@ import org.veupathdb.lib.blast.field.Location;
 import org.veupathdb.lib.blast.field.Seg;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PSIBlast extends IPGListBlast
+public class PSIBlast extends BlastWithIPGList
 {
   private Long wordSize;
 

@@ -9,7 +9,7 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.TBlastNTask;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TBlastN extends ListBlast
+public class TBlastN extends BlastWithLists
 {
   private TBlastNTask task;
 

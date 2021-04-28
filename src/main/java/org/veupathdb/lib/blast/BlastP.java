@@ -9,7 +9,7 @@ import org.veupathdb.lib.blast.field.Location;
 import org.veupathdb.lib.blast.field.Seg;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BlastP extends IPGListBlast
+public class BlastP extends BlastWithIPGList
 {
   private BlastPTask task;
 

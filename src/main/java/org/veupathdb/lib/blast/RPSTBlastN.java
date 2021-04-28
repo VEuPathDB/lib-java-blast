@@ -8,7 +8,7 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.Strand;
 import org.veupathdb.lib.blast.field.ThreadMode;
 
-public class RPSTBlastN extends BaseBlast
+public class RPSTBlastN extends BlastBase
 {
   private Short queryGenCode;
 

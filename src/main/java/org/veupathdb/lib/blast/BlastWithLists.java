@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.veupathdb.lib.blast.consts.Flag;
 
-class ListBlast extends BaseBlast
+public class BlastWithLists extends BlastBase
 {
   private String       giList;
   private String       sequenceIDList;

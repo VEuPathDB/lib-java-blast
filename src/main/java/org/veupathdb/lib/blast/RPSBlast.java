@@ -9,7 +9,7 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.ThreadMode;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RPSBlast extends BaseBlast
+public class RPSBlast extends BlastBase
 {
   private Double bestHitOverhang;
 

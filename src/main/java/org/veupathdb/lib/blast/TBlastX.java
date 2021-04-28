@@ -7,7 +7,7 @@ import org.veupathdb.lib.blast.field.Location;
 import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.Strand;
 
-public class TBlastX extends ListBlast
+public class TBlastX extends BlastWithLists
 {
   private Strand strand;
 

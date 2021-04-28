@@ -20,7 +20,7 @@ class IPGListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new IPGListBlast();
+      var tgt = new BlastWithIPGList();
       tgt.setIPGList("hi");
 
       assertEquals("{\"-ipglist\":\"hi\"}", json.writeValueAsString(tgt));
@@ -30,7 +30,7 @@ class IPGListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-ipglist\":\"hi\"}";
-      var tgt = json.readValue(raw, IPGListBlast.class);
+      var tgt = json.readValue(raw, BlastWithIPGList.class);
 
       assertEquals("hi", tgt.getIPGList());
     }
@@ -43,7 +43,7 @@ class IPGListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new IPGListBlast();
+      var tgt = new BlastWithIPGList();
       tgt.setNegativeIPGList("hi");
 
       assertEquals("{\"-negative_ipglist\":\"hi\"}", json.writeValueAsString(tgt));
@@ -53,7 +53,7 @@ class IPGListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-negative_ipglist\":\"hi\"}";
-      var tgt = json.readValue(raw, IPGListBlast.class);
+      var tgt = json.readValue(raw, BlastWithIPGList.class);
 
       assertEquals("hi", tgt.getNegativeIPGList());
     }

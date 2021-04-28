@@ -22,7 +22,7 @@ class ListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new ListBlast();
+      var tgt = new BlastWithLists();
       tgt.setGIList("hi");
 
       assertEquals("{\"-gilist\":\"hi\"}", json.writeValueAsString(tgt));
@@ -32,7 +32,7 @@ class ListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-gilist\":\"hi\"}";
-      var tgt = json.readValue(raw, ListBlast.class);
+      var tgt = json.readValue(raw, BlastWithLists.class);
 
       assertEquals("hi", tgt.getGIList());
     }
@@ -45,7 +45,7 @@ class ListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new ListBlast();
+      var tgt = new BlastWithLists();
       tgt.setSequenceIDList("hi");
 
       assertEquals("{\"-seqidlist\":\"hi\"}", json.writeValueAsString(tgt));
@@ -55,7 +55,7 @@ class ListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-seqidlist\":\"hi\"}";
-      var tgt = json.readValue(raw, ListBlast.class);
+      var tgt = json.readValue(raw, BlastWithLists.class);
 
       assertEquals("hi", tgt.getSequenceIDList());
     }
@@ -68,7 +68,7 @@ class ListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new ListBlast();
+      var tgt = new BlastWithLists();
       tgt.setNegativeGIList("hi");
 
       assertEquals("{\"-negative_gilist\":\"hi\"}", json.writeValueAsString(tgt));
@@ -78,7 +78,7 @@ class ListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-negative_gilist\":\"hi\"}";
-      var tgt = json.readValue(raw, ListBlast.class);
+      var tgt = json.readValue(raw, BlastWithLists.class);
 
       assertEquals("hi", tgt.getNegativeGIList());
     }
@@ -91,7 +91,7 @@ class ListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new ListBlast();
+      var tgt = new BlastWithLists();
       tgt.setNegativeSequenceIDList("hi");
 
       assertEquals("{\"-negative_seqidlist\":\"hi\"}", json.writeValueAsString(tgt));
@@ -101,7 +101,7 @@ class ListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-negative_seqidlist\":\"hi\"}";
-      var tgt = json.readValue(raw, ListBlast.class);
+      var tgt = json.readValue(raw, BlastWithLists.class);
 
       assertEquals("hi", tgt.getNegativeSequenceIDList());
     }
@@ -114,7 +114,7 @@ class ListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt  = new ListBlast();
+      var tgt  = new BlastWithLists();
       var list = new ArrayList<String>();
       list.add("hi");
       tgt.setTaxIDs(list);
@@ -126,7 +126,7 @@ class ListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-taxids\":[\"hi\"]}";
-      var tgt = json.readValue(raw, ListBlast.class);
+      var tgt = json.readValue(raw, BlastWithLists.class);
 
       assertNotNull(tgt.getTaxIDs());
       assertEquals(1, tgt.getTaxIDs().size());
@@ -141,7 +141,7 @@ class ListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt  = new ListBlast();
+      var tgt  = new BlastWithLists();
       var list = new ArrayList<String>();
       list.add("hi");
       tgt.setNegativeTaxIDs(list);
@@ -153,7 +153,7 @@ class ListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-negative_taxids\":[\"hi\"]}";
-      var tgt = json.readValue(raw, ListBlast.class);
+      var tgt = json.readValue(raw, BlastWithLists.class);
 
       assertNotNull(tgt.getNegativeTaxIDs());
       assertEquals(1, tgt.getNegativeTaxIDs().size());
@@ -168,7 +168,7 @@ class ListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new ListBlast();
+      var tgt = new BlastWithLists();
       tgt.setTaxIDList("hi");
 
       assertEquals("{\"-taxidlist\":\"hi\"}", json.writeValueAsString(tgt));
@@ -178,7 +178,7 @@ class ListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-taxidlist\":\"hi\"}";
-      var tgt = json.readValue(raw, ListBlast.class);
+      var tgt = json.readValue(raw, BlastWithLists.class);
 
       assertEquals("hi", tgt.getTaxIDList());
     }
@@ -191,7 +191,7 @@ class ListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new ListBlast();
+      var tgt = new BlastWithLists();
       tgt.setNegativeTaxIDList("hi");
 
       assertEquals("{\"-negative_taxidlist\":\"hi\"}", json.writeValueAsString(tgt));
@@ -201,7 +201,7 @@ class ListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-negative_taxidlist\":\"hi\"}";
-      var tgt = json.readValue(raw, ListBlast.class);
+      var tgt = json.readValue(raw, BlastWithLists.class);
 
       assertEquals("hi", tgt.getNegativeTaxIDList());
     }
