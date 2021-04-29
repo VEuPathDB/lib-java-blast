@@ -1,14 +1,22 @@
 package org.veupathdb.lib.blast;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.*;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BlastN extends BlastWithLists
+public class BlastN extends BlastWithLists implements BlastConfig
 {
+  @Override
+  public BlastTool getTool() {
+    return BlastTool.BlastN;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
   private Strand strand;
 
   @JsonGetter(Flag.Strand)

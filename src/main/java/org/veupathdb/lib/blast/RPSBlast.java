@@ -9,8 +9,15 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.ThreadMode;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RPSBlast extends BlastBase
+public class RPSBlast extends BlastBase implements BlastConfig
 {
+  @Override
+  public BlastTool getTool() {
+    return BlastTool.RPSBlast;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
   private Double bestHitOverhang;
 
   @JsonGetter(Flag.BestHitOverhang)

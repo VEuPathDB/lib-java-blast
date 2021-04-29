@@ -10,8 +10,15 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.TBlastNTask;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TBlastN extends BlastWithLists
+public class TBlastN extends BlastWithLists implements BlastConfig
 {
+  @Override
+  public BlastTool getTool() {
+    return BlastTool.TBlastN;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
   private TBlastNTask task;
 
   @JsonGetter(Flag.Task)

@@ -8,8 +8,15 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.Strand;
 import org.veupathdb.lib.blast.field.ThreadMode;
 
-public class RPSTBlastN extends BlastBase
+public class RPSTBlastN extends BlastBase implements BlastConfig
 {
+  @Override
+  public BlastTool getTool() {
+    return BlastTool.RPSTBlastN;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
   private Short queryGenCode;
 
   @JsonGetter(Flag.QueryGenCode)

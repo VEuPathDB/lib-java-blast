@@ -10,8 +10,15 @@ import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BlastP extends BlastWithIPGList
+public class BlastP extends BlastWithIPGList implements BlastConfig
 {
+  @Override
+  public BlastTool getTool() {
+    return BlastTool.BlastP;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
   private BlastPTask task;
 
   @JsonGetter(Flag.Task)

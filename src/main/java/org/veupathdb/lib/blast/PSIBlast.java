@@ -9,8 +9,15 @@ import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PSIBlast extends BlastWithIPGList
+public class PSIBlast extends BlastWithIPGList implements BlastConfig
 {
+  @Override
+  public BlastTool getTool() {
+    return BlastTool.PSIBlast;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
   private Long wordSize;
 
   @JsonGetter(Flag.WordSize)

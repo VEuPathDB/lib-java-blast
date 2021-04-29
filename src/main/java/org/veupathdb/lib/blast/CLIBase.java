@@ -9,7 +9,7 @@ import org.veupathdb.lib.blast.field.HitSorting;
 import org.veupathdb.lib.blast.field.OutFormat;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CLIBase implements BlastConfig
+public class CLIBase
 {
   private Boolean   shortHelp;
   private Boolean   longHelp;

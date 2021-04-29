@@ -7,8 +7,15 @@ import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.*;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BlastX extends BlastWithIPGList
+public class BlastX extends BlastWithIPGList implements BlastConfig
 {
+  @Override
+  public BlastTool getTool() {
+    return BlastTool.BlastX;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
   private Strand strand;
 
   @JsonGetter(Flag.Strand)
