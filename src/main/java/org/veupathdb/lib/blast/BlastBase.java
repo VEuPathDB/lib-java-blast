@@ -240,4 +240,31 @@ public class BlastBase extends CLIBase
       getRemote()
     );
   }
+
+  public BlastBase copy() {
+    var out = new BlastBase();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(BlastBase out) {
+    super.copyInto(out);
+    out.setQueryFile(getQueryFile());
+    if (queryLocation != null)
+      out.setQueryLocation(getQueryLocation().copy());
+    out.setDBFile(getDBFile());
+    out.setExpectValue(getExpectValue());
+    out.setSoftMasking(getSoftMasking());
+    out.setLowercaseMasking(getLowercaseMasking());
+    out.setEntrezQuery(getEntrezQuery());
+    out.setQueryCoverageHSPPercent(getQueryCoverageHSPPercent());
+    out.setMaxHSPs(getMaxHSPs());
+    out.setDBSize(getDBSize());
+    out.setSearchSpace(getSearchSpace());
+    out.setImportSearchStrategy(getImportSearchStrategy());
+    out.setExportSearchStrategy(getExportSearchStrategy());
+    out.setExtensionDropoffUngapped(getExtensionDropoffUngapped());
+    out.setWindowSize(getWindowSize());
+    out.setRemote(getRemote());
+  }
 }

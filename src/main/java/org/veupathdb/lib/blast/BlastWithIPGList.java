@@ -47,4 +47,16 @@ public class BlastWithIPGList extends BlastWithLists
   public int hashCode() {
     return Objects.hash(super.hashCode(), ipgList, getNegativeIPGList());
   }
+
+  public BlastWithIPGList copy() {
+    var out = new BlastWithIPGList();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(BlastWithIPGList out) {
+    super.copyInto(out);
+    out.ipgList         = ipgList;
+    out.negativeIPGList = negativeIPGList;
+  }
 }

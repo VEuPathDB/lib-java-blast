@@ -218,4 +218,29 @@ public class RPSTBlastN extends BlastBase implements BlastConfig
       getUseSmithWatermanTraceback()
     );
   }
+
+  public RPSTBlastN copy() {
+    var out = new RPSTBlastN();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(RPSTBlastN out) {
+    super.copyInto(out);
+
+    out.queryGenCode   = queryGenCode;
+    out.strand         = strand;
+    out.compBasedStats = compBasedStats;
+
+    if (seg != null)
+      out.seg = seg.copy();
+
+    out.sumStats                     = sumStats;
+    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
+    out.extensionDropoffFinalGapped  = extensionDropoffFinalGapped;
+    out.ungappedAlignmentsOnly       = ungappedAlignmentsOnly;
+    out.numThreads                   = numThreads;
+    out.mtMode                       = mtMode;
+    out.useSmithWatermanTraceback    = useSmithWatermanTraceback;
+  }
 }

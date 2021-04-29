@@ -52,4 +52,16 @@ public class BlastFormatter extends CLIBase implements BlastConfig
   public int hashCode() {
     return Objects.hash(super.hashCode(), getRequestID(), getArchiveFile());
   }
+
+  public BlastFormatter copy() {
+    var out = new BlastFormatter();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(BlastFormatter out) {
+    super.copyInto(out);
+    out.requestID = requestID;
+    out.archiveFile = archiveFile;
+  }
 }

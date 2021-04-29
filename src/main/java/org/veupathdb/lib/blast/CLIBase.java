@@ -209,4 +209,28 @@ public class CLIBase
       getParseDefLines()
     );
   }
+
+  public CLIBase copy() {
+    var out = new CLIBase();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(CLIBase out) {
+    out.setShortHelp(getShortHelp());
+    out.setLongHelp(getLongHelp());
+    out.setVersion(getVersion());
+    if (outFormat != null)
+      out.setOutFormat(getOutFormat().copy());
+    out.setShowGIs(getShowGIs());
+    out.setNumDescriptions(getNumDescriptions());
+    out.setNumAlignments(getNumAlignments());
+    out.setLineLength(getLineLength());
+    out.setHTML(getHTML());
+    out.setSortHits(getSortHits());
+    out.setSortHSPs(getSortHSPs());
+    out.setMaxTargetSequences(getMaxTargetSequences());
+    out.setOutFile(getOutFile());
+    out.setParseDefLines(getParseDefLines());
+  }
 }

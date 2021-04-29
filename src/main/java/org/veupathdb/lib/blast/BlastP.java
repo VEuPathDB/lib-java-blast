@@ -390,4 +390,37 @@ public class BlastP extends BlastWithIPGList implements BlastConfig
       getSubjectBestHit()
     );
   }
+
+  public BlastP copy() {
+    var out = new BlastP();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(BlastP out) {
+    super.copyInto(out);
+    out.task = task;
+    out.wordSize = wordSize;
+    out.gapOpen = gapOpen;
+    out.gapExtend = gapExtend;
+    out.matrix = matrix;
+    out.threshold = threshold;
+    out.compBasedStats = compBasedStats;
+    out.subjectFile = subjectFile;
+    if (subjectLocation != null)
+      out.subjectLocation = subjectLocation.copy();
+    if (seg != null)
+      out.seg = seg.copy();
+    out.dbSoftMask = dbSoftMask;
+    out.dbHardMask = dbHardMask;
+    out.cullingLimit = cullingLimit;
+    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
+    out.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
+    out.ungappedAlignmentsOnly = ungappedAlignmentsOnly;
+    out.numThreads = numThreads;
+    out.useSmithWatermanTraceback = useSmithWatermanTraceback;
+    out.bestHitOverhang = bestHitOverhang;
+    out.bestHitScoreEdge = bestHitScoreEdge;
+    out.subjectBestHit = subjectBestHit;
+  }
 }

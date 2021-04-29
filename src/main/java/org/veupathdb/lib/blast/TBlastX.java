@@ -332,4 +332,37 @@ public class TBlastX extends BlastWithLists implements BlastConfig
       getSubjectBestHit()
     );
   }
+
+  public TBlastX copy() {
+    var out = new TBlastX();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(TBlastX out) {
+    super.copyInto(out);
+
+    out.strand          = strand;
+    out.queryGenCode    = queryGenCode;
+    out.wordSize        = wordSize;
+    out.maxIntronLength = maxIntronLength;
+    out.matrix          = matrix;
+    out.threshold       = threshold;
+    out.dbGenCode       = dbGenCode;
+    out.subjectFile     = subjectFile;
+
+    if (subjectLocation != null)
+      out.subjectLocation = subjectLocation.copy();
+    if (seg != null)
+      out.seg = seg.copy();
+
+    out.dbSoftMask       = dbSoftMask;
+    out.dbHardMask       = dbHardMask;
+    out.cullingLimit     = cullingLimit;
+    out.sumStats         = sumStats;
+    out.numThreads       = numThreads;
+    out.bestHitOverhang  = bestHitOverhang;
+    out.bestHitScoreEdge = bestHitScoreEdge;
+    out.subjectBestHit   = subjectBestHit;
+  }
 }

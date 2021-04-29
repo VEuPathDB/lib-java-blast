@@ -48,6 +48,10 @@ public class Location
     return Objects.hash(getStart(), getStop());
   }
 
+  public Location copy() {
+    return new Location(start, stop);
+  }
+
   public static Location fromString(String value) {
     var dashPos = value.indexOf('-');
     if (dashPos < 1)

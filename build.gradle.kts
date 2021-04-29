@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.veupathdb.lib"
-version = "2.3.0"
+version = "2.4.0"
 
 java {
   targetCompatibility = JavaVersion.VERSION_15

@@ -109,6 +109,10 @@ public class Seg
     return Objects.hash(getWindow(), getLocut(), getHicut());
   }
 
+  public Seg copy() {
+    return new Seg(yes, no, window, locut, hicut);
+  }
+
   public static Seg yesSeg() {
     return new Seg(true, false, 0, 0, 0);
   }

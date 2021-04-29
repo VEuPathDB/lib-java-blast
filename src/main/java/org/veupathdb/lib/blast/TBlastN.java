@@ -456,4 +456,44 @@ public class TBlastN extends BlastWithLists implements BlastConfig
       getInPSSMFile()
     );
   }
+
+  public TBlastN copy() {
+    var out = new TBlastN();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(TBlastN out) {
+    super.copyInto(out);
+
+    out.task            = task;
+    out.wordSize        = wordSize;
+    out.gapOpen         = gapOpen;
+    out.gapExtend       = gapExtend;
+    out.dbGenCode       = dbGenCode;
+    out.maxIntronLength = maxIntronLength;
+    out.matrix          = matrix;
+    out.threshold       = threshold;
+    out.compBasedStats  = compBasedStats;
+    out.subjectFile     = subjectFile;
+
+    if (subjectLocation != null)
+      out.subjectLocation = subjectLocation.copy();
+    if (seg != null)
+      out.seg = seg.copy();
+
+    out.dbSoftMask                   = dbSoftMask;
+    out.dbHardMask                   = dbHardMask;
+    out.cullingLimit                 = cullingLimit;
+    out.sumStats                     = sumStats;
+    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
+    out.extensionDropoffFinalGapped  = extensionDropoffFinalGapped;
+    out.ungappedAlignmentsOnly       = ungappedAlignmentsOnly;
+    out.numThreads                   = numThreads;
+    out.useSmithWatermanTraceback    = useSmithWatermanTraceback;
+    out.bestHitOverhang              = bestHitOverhang;
+    out.bestHitScoreEdge             = bestHitScoreEdge;
+    out.subjectBestHit               = subjectBestHit;
+    out.inPSSMFile                   = inPSSMFile;
+  }
 }

@@ -3,7 +3,6 @@ package org.veupathdb.lib.blast;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.veupathdb.lib.blast.consts.Flag;
@@ -551,5 +550,49 @@ public class BlastN extends BlastWithLists implements BlastConfig
       getBestHitScoreEdge(),
       getSubjectBestHit()
     );
+  }
+
+  public BlastN copy() {
+    var out = new BlastN();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(BlastN out) {
+    super.copyInto(out);
+    out.strand = strand;
+    out.task = task;
+    out.wordSize = wordSize;
+    out.gapOpen = gapOpen;
+    out.gapExtend = gapExtend;
+    out.penalty = penalty;
+    out.reward = reward;
+    out.useIndex = useIndex;
+    out.indexName = indexName;
+    out.subjectFile = subjectFile;
+    if (subjectLocation != null)
+      out.subjectLocation = subjectLocation.copy();
+    if (dust != null)
+      out.dust = dust.copy();
+    out.filteringDB = filteringDB;
+    out.windowMaskerTaxID = windowMaskerTaxID;
+    out.windowMaskerDB = windowMaskerDB;
+    out.dbSoftMask = dbSoftMask;
+    out.dbHardMask = dbHardMask;
+    out.percentIdentity = percentIdentity;
+    out.cullingLimit = cullingLimit;
+    out.templateType = templateType;
+    out.templateLength = templateLength;
+    out.sumStats = sumStats;
+    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
+    out.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
+    out.nonGreedy = nonGreedy;
+    out.minRawGappedScore = minRawGappedScore;
+    out.ungappedAlignmentsOnly = ungappedAlignmentsOnly;
+    out.offDiagonalRange = offDiagonalRange;
+    out.numThreads = numThreads;
+    out.bestHitOverhang = bestHitOverhang;
+    out.bestHitScoreEdge = bestHitScoreEdge;
+    out.subjectBestHit = subjectBestHit;
   }
 }

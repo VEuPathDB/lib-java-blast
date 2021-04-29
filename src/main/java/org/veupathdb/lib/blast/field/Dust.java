@@ -84,18 +84,6 @@ public class Dust
     }};
   }
 
-  public static Dust yesDust() {
-    return new Dust(true, false, 0, 0, 0);
-  }
-
-  public static Dust noDust() {
-    return new Dust(false, true, 0, 0, 0);
-  }
-
-  public static Dust lwlDust(int level, int window, int linker) {
-    return new Dust(false, false, level, window, linker);
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -104,10 +92,10 @@ public class Dust
     return (isYes() && dust.isYes())
       || (isNo() && dust.isNo())
       || (
-        getLevel() == dust.getLevel() &&
+      getLevel() == dust.getLevel() &&
         getWindow() == dust.getWindow() &&
         getLinker() == dust.getLinker()
-      );
+    );
   }
 
   @Override
@@ -119,6 +107,10 @@ public class Dust
       return Objects.hash(NoValue);
 
     return Objects.hash(getLevel(), getWindow(), getLinker());
+  }
+
+  public Dust copy() {
+    return new Dust(yes, no, level, window, linker);
   }
 
   @JsonCreator
@@ -144,6 +136,18 @@ public class Dust
     }
 
     throw new IllegalArgumentException();
+  }
+
+  public static Dust yesDust() {
+    return new Dust(true, false, 0, 0, 0);
+  }
+
+  public static Dust noDust() {
+    return new Dust(false, true, 0, 0, 0);
+  }
+
+  public static Dust lwlDust(int level, int window, int linker) {
+    return new Dust(false, false, level, window, linker);
   }
 
   public static Dust fromString(String value) {

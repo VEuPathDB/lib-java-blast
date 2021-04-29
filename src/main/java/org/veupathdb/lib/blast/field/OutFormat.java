@@ -83,6 +83,13 @@ public class OutFormat
     return Objects.hash(getType(), getDelimiter(), getFields());
   }
 
+  public OutFormat copy() {
+    return new OutFormat()
+      .setType(getType())
+      .setDelimiter(getDelimiter())
+      .setFields(new ArrayList<>(fields));
+  }
+
   public static OutFormat fromString(String value) {
     if (value.isBlank())
       return new OutFormat().setType(FormatType.Pairwise);

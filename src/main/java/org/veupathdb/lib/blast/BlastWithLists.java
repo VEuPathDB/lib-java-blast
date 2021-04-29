@@ -1,5 +1,6 @@
 package org.veupathdb.lib.blast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -127,5 +128,25 @@ public class BlastWithLists extends BlastBase
       getTaxIDList(),
       getNegativeTaxIDList()
     );
+  }
+
+  public BlastWithLists copy() {
+    var out = new BlastWithLists();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(BlastWithLists out) {
+    super.copyInto(out);
+    out.giList = giList;
+    out.sequenceIDList = sequenceIDList;
+    out.negativeGIList = negativeGIList;
+    out.negativeSequenceIDList = negativeSequenceIDList;
+    if (taxIDs != null)
+      out.taxIDs = new ArrayList<>(taxIDs);
+    if (negativeTaxIDs != null)
+      out.negativeTaxIDs = new ArrayList<>(negativeTaxIDs);
+    out.taxIDList = taxIDList;
+    out.negativeTaxIDList = negativeTaxIDList;
   }
 }

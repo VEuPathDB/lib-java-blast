@@ -507,4 +507,45 @@ public class DeltaBlast extends BlastWithLists implements BlastConfig
       getShowDomainHits()
     );
   }
+
+  public DeltaBlast copy() {
+    var out = new DeltaBlast();
+    copyInto(out);
+    return out;
+  }
+
+  protected void copyInto(DeltaBlast out) {
+    super.copyInto(out);
+    out.wordSize = wordSize;
+    out.gapOpen = gapOpen;
+    out.gapExtend = gapExtend;
+    out.matrix = matrix;
+    out.threshold = threshold;
+    out.compBasedStats = compBasedStats;
+    out.subjectFile = subjectFile;
+    if (subjectLocation != null)
+      out.subjectLocation = subjectLocation.copy();
+    if (seg != null)
+      out.seg = seg.copy();
+    out.cullingLimit = cullingLimit;
+    out.sumStats = sumStats;
+    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
+    out.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
+    out.gapTrigger = gapTrigger;
+    out.numThreads = numThreads;
+    out.useSmithWatermanTraceback = useSmithWatermanTraceback;
+    out.bestHitOverhang = bestHitOverhang;
+    out.bestHitScoreEdge = bestHitScoreEdge;
+    out.subjectBestHit = subjectBestHit;
+    out.numIterations = numIterations;
+    out.outPSSMFile = outPSSMFile;
+    out.outASCIIPSSMFile = outASCIIPSSMFile;
+    out.savePSSMAfterLastRound = savePSSMAfterLastRound;
+    out.saveEachPSSM = saveEachPSSM;
+    out.pseudocount = pseudocount;
+    out.domainInclusionEThreshold = domainInclusionEThreshold;
+    out.inclusionEThreshold = inclusionEThreshold;
+    out.rpsDBFile = rpsDBFile;
+    out.showDomainHits = showDomainHits;
+  }
 }
