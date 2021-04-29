@@ -11,10 +11,10 @@ import org.veupathdb.lib.blast.field.OutFormat;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CLIBase
 {
-  private Boolean   shortHelp;
-  private Boolean   longHelp;
-  private Boolean   version;
-  private OutFormat outFormat;
+  private Boolean    shortHelp;
+  private Boolean    longHelp;
+  private Boolean    version;
+  private OutFormat  outFormat;
   private Boolean    showGIs;
   private Long       numDescriptions;
   private Long       numAlignments;

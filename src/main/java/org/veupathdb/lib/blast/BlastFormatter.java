@@ -4,10 +4,15 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.veupathdb.lib.blast.consts.Flag;
 
-public class BlastFormatter extends CLIBase
+public class BlastFormatter extends CLIBase implements BlastConfig
 {
   private String requestID;
   private String archiveFile;
+
+  @Override
+  public BlastTool getTool() {
+    return BlastTool.BlastFormatter;
+  }
 
   @JsonGetter(Flag.RequestID)
   public String getRequestID() {
