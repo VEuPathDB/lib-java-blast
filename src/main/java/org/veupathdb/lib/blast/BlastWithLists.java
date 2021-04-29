@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -95,5 +96,36 @@ public class BlastWithLists extends BlastBase
   @JsonSetter(Flag.NegativeTaxIDList)
   public void setNegativeTaxIDList(String negativeTaxIDList) {
     this.negativeTaxIDList = negativeTaxIDList;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof BlastWithLists)) return false;
+    if (!super.equals(o)) return false;
+    BlastWithLists that = (BlastWithLists) o;
+    return Objects.equals(giList, that.giList)
+      && Objects.equals(getSequenceIDList(), that.getSequenceIDList())
+      && Objects.equals(getNegativeGIList(), that.getNegativeGIList())
+      && Objects.equals(getNegativeSequenceIDList(), that.getNegativeSequenceIDList())
+      && Objects.equals(getTaxIDs(), that.getTaxIDs())
+      && Objects.equals(getNegativeTaxIDs(), that.getNegativeTaxIDs())
+      && Objects.equals(getTaxIDList(), that.getTaxIDList())
+      && Objects.equals(getNegativeTaxIDList(), that.getNegativeTaxIDList());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getGIList(),
+      getSequenceIDList(),
+      getNegativeGIList(),
+      getNegativeSequenceIDList(),
+      getTaxIDs(),
+      getNegativeTaxIDs(),
+      getTaxIDList(),
+      getNegativeTaxIDList()
+    );
   }
 }

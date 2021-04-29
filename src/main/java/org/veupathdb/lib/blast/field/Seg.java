@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.field;
 
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -9,6 +10,9 @@ import org.veupathdb.lib.blast.consts.Key;
 
 public class Seg
 {
+  private static final String YesValue = "yes";
+  private static final String NoValue = "no";
+
   private boolean yes;
   private boolean no;
   private int     window;
@@ -71,9 +75,9 @@ public class Seg
   @JsonValue
   public Object toJSONSerializable() {
     if (isYes())
-      return "yes";
+      return YesValue;
     if (isNo())
-      return "no";
+      return NoValue;
 
     return new LinkedHashMap<String, Number>()
     {{
@@ -81,6 +85,28 @@ public class Seg
       put(Key.Locut, getLocut());
       put(Key.Hicut, getHicut());
     }};
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Seg seg = (Seg) o;
+    return (isYes() && seg.isYes()) ||
+      (isNo() && seg.isNo()) ||
+      (getWindow() == seg.getWindow()
+      && Double.compare(seg.getLocut(), getLocut()) == 0
+      && Double.compare(seg.getHicut(), getHicut()) == 0);
+  }
+
+  @Override
+  public int hashCode() {
+    if (isYes())
+      return Objects.hash(YesValue);
+    if (isNo())
+      return Objects.hash(NoValue);
+
+    return Objects.hash(getWindow(), getLocut(), getHicut());
   }
 
   public static Seg yesSeg() {
@@ -99,8 +125,8 @@ public class Seg
   public static Seg fromJSON(JsonNode node) {
     if (node.isTextual()) {
       return switch (node.textValue()) {
-        case "yes" -> yesSeg();
-        case "no" -> noSeg();
+        case YesValue -> yesSeg();
+        case NoValue -> noSeg();
         default -> throw new IllegalArgumentException();
       };
     }
@@ -121,9 +147,9 @@ public class Seg
   }
 
   public static Seg fromString(String value) {
-    if (value.equals("yes"))
+    if (value.equals(YesValue))
       return yesSeg();
-    if (value.equals("no"))
+    if (value.equals(NoValue))
       return noSeg();
 
     var split = value.split(" +");

@@ -22,7 +22,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setQueryFile("hi");
 
       assertEquals("{\"-query\":\"hi\"}", json.writeValueAsString(tgt));
@@ -45,7 +45,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setQueryLocation(new Location(10, 11));
 
       assertEquals("{\"-query_loc\":{\"start\":10,\"stop\":11}}", json.writeValueAsString(tgt));
@@ -69,7 +69,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setDBFile("hi");
 
       assertEquals("{\"-db\":\"hi\"}", json.writeValueAsString(tgt));
@@ -92,7 +92,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setExpectValue("hi");
 
       assertEquals("{\"-evalue\":\"hi\"}", json.writeValueAsString(tgt));
@@ -115,7 +115,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setSoftMasking(true);
 
       assertEquals("{\"-soft_masking\":true}", json.writeValueAsString(tgt));
@@ -138,7 +138,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setLowercaseMasking(true);
 
       assertEquals("{\"-lcase_masking\":true}", json.writeValueAsString(tgt));
@@ -161,7 +161,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setEntrezQuery("hi");
 
       assertEquals("{\"-entrez_query\":\"hi\"}", json.writeValueAsString(tgt));
@@ -184,7 +184,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setQueryCoverageHSPPercent(12.3);
 
       assertEquals("{\"-qcov_hsp_perc\":12.3}", json.writeValueAsString(tgt));
@@ -207,7 +207,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setMaxHSPs(12L);
 
       assertEquals("{\"-max_hsps\":12}", json.writeValueAsString(tgt));
@@ -230,7 +230,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setDBSize((byte) 12);
 
       assertEquals("{\"-dbsize\":12}", json.writeValueAsString(tgt));
@@ -253,7 +253,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setSearchSpace((short) 12);
 
       assertEquals("{\"-searchsp\":12}", json.writeValueAsString(tgt));
@@ -276,7 +276,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setImportSearchStrategy("hi");
 
       assertEquals("{\"-import_search_strategy\":\"hi\"}", json.writeValueAsString(tgt));
@@ -299,7 +299,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setExportSearchStrategy("hi");
 
       assertEquals("{\"-export_search_strategy\":\"hi\"}", json.writeValueAsString(tgt));
@@ -322,7 +322,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setExtensionDropoffUngapped(12.3);
 
       assertEquals("{\"-xdrop_ungap\":12.3}", json.writeValueAsString(tgt));
@@ -345,7 +345,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setWindowSize(12L);
 
       assertEquals("{\"-window_size\":12}", json.writeValueAsString(tgt));
@@ -368,7 +368,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase();
+      var tgt = new BlastBase(){};
       tgt.setRemote(true);
 
       assertEquals("{\"-remote\":true}", json.writeValueAsString(tgt));

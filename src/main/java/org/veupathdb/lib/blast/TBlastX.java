@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.veupathdb.lib.blast.consts.Flag;
@@ -264,5 +266,70 @@ public class TBlastX extends BlastWithLists implements BlastConfig
   @JsonSetter(Flag.SubjectBestHit)
   public void setSubjectBestHit(Boolean subjectBestHit) {
     this.subjectBestHit = subjectBestHit;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    TBlastX tBlastX = (TBlastX) o;
+    return getStrand() == tBlastX.getStrand()
+      && Objects.equals(
+      getQueryGenCode(),
+      tBlastX.getQueryGenCode()
+    )
+      && Objects.equals(getWordSize(), tBlastX.getWordSize())
+      && Objects.equals(
+      getMaxIntronLength(),
+      tBlastX.getMaxIntronLength()
+    )
+      && getMatrix() == tBlastX.getMatrix()
+      && Objects.equals(
+      getThreshold(),
+      tBlastX.getThreshold()
+    )
+      && Objects.equals(dbGenCode, tBlastX.dbGenCode)
+      && Objects.equals(
+      getSubjectFile(),
+      tBlastX.getSubjectFile()
+    )
+      && Objects.equals(getSubjectLocation(), tBlastX.getSubjectLocation())
+      && Objects.equals(getSeg(), tBlastX.getSeg())
+      && Objects.equals(dbSoftMask, tBlastX.dbSoftMask)
+      && Objects.equals(dbHardMask, tBlastX.dbHardMask)
+      && Objects.equals(getCullingLimit(), tBlastX.getCullingLimit())
+      && Objects.equals(getSumStats(), tBlastX.getSumStats())
+      && Objects.equals(getNumThreads(), tBlastX.getNumThreads())
+      && Objects.equals(getBestHitOverhang(), tBlastX.getBestHitOverhang())
+      && Objects.equals(getBestHitScoreEdge(), tBlastX.getBestHitScoreEdge())
+      && Objects.equals(getSubjectBestHit(), tBlastX.getSubjectBestHit());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getStrand(),
+      getQueryGenCode(),
+      getWordSize(),
+      getMaxIntronLength(),
+      getMatrix(),
+      getThreshold(),
+      getDBGenCode(),
+      getSubjectFile(),
+      getSubjectLocation(),
+      getSeg(),
+      getDBSoftMask(),
+      getDBHardMask(),
+      getCullingLimit(),
+      getSumStats(),
+      getNumThreads(),
+      getBestHitOverhang(),
+      getBestHitScoreEdge(),
+      getSubjectBestHit()
+    );
   }
 }

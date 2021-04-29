@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.veupathdb.lib.blast.consts.Flag;
@@ -167,5 +169,53 @@ public class RPSTBlastN extends BlastBase implements BlastConfig
   @JsonSetter(Flag.UseSmithWatermanTraceback)
   public void setUseSmithWatermanTraceback(Boolean useSmithWatermanTraceback) {
     this.useSmithWatermanTraceback = useSmithWatermanTraceback;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    RPSTBlastN that = (RPSTBlastN) o;
+    return Objects.equals(getQueryGenCode(), that.getQueryGenCode())
+      && getStrand() == that.getStrand()
+      && Objects.equals(getCompBasedStats(), that.getCompBasedStats())
+      && Objects.equals(getSeg(), that.getSeg())
+      && Objects.equals(getSumStats(), that.getSumStats())
+      && Objects.equals(
+      getExtensionDropoffPrelimGapped(),
+      that.getExtensionDropoffPrelimGapped()
+    )
+      && Objects.equals(
+      getExtensionDropoffFinalGapped(),
+      that.getExtensionDropoffFinalGapped()
+    )
+      && Objects.equals(getUngappedAlignmentsOnly(), that.getUngappedAlignmentsOnly())
+      && getNumThreads() == that.getNumThreads()
+      && mtMode == that.mtMode
+      && Objects.equals(
+      getUseSmithWatermanTraceback(),
+      that.getUseSmithWatermanTraceback()
+    );
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getQueryGenCode(),
+      getStrand(),
+      getCompBasedStats(),
+      getSeg(),
+      getSumStats(),
+      getExtensionDropoffPrelimGapped(),
+      getExtensionDropoffFinalGapped(),
+      getUngappedAlignmentsOnly(),
+      getNumThreads(),
+      getMTMode(),
+      getUseSmithWatermanTraceback()
+    );
   }
 }

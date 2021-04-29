@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -362,5 +364,90 @@ public class BlastX extends BlastWithIPGList implements BlastConfig
   @JsonSetter(Flag.SubjectBestHit)
   public void setSubjectBestHit(Boolean subjectBestHit) {
     this.subjectBestHit = subjectBestHit;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    BlastX blastX = (BlastX) o;
+    return getStrand() == blastX.getStrand()
+      && Objects.equals(
+      getQueryGenCode(),
+      blastX.getQueryGenCode()
+    )
+      && getTask() == blastX.getTask()
+      && Objects.equals(
+      getWordSize(),
+      blastX.getWordSize()
+    )
+      && Objects.equals(getGapOpen(), blastX.getGapOpen())
+      && Objects.equals(
+      getGapExtend(),
+      blastX.getGapExtend()
+    )
+      && Objects.equals(getMaxIntronLength(), blastX.getMaxIntronLength())
+      && getMatrix() == blastX.getMatrix()
+      && Objects.equals(getThreshold(), blastX.getThreshold())
+      && Objects.equals(getCompBasedStats(), blastX.getCompBasedStats())
+      && Objects.equals(getSubjectFile(), blastX.getSubjectFile())
+      && Objects.equals(getSubjectLocation(), blastX.getSubjectLocation())
+      && Objects.equals(getSeg(), blastX.getSeg())
+      && Objects.equals(dbSoftMask, blastX.dbSoftMask)
+      && Objects.equals(dbHardMask, blastX.dbHardMask)
+      && Objects.equals(getCullingLimit(), blastX.getCullingLimit())
+      && Objects.equals(getSumStats(), blastX.getSumStats())
+      && Objects.equals(
+      getExtensionDropoffPrelimGapped(),
+      blastX.getExtensionDropoffPrelimGapped()
+    )
+      && Objects.equals(
+      getExtensionDropoffFinalGapped(),
+      blastX.getExtensionDropoffFinalGapped()
+    )
+      && Objects.equals(getUngappedAlignmentsOnly(), blastX.getUngappedAlignmentsOnly())
+      && Objects.equals(getNumThreads(), blastX.getNumThreads())
+      && Objects.equals(
+      getUseSmithWatermanTraceback(),
+      blastX.getUseSmithWatermanTraceback()
+    )
+      && Objects.equals(getBestHitOverhang(), blastX.getBestHitOverhang())
+      && Objects.equals(getBestHitScoreEdge(), blastX.getBestHitScoreEdge())
+      && Objects.equals(getSubjectBestHit(), blastX.getSubjectBestHit());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getStrand(),
+      getQueryGenCode(),
+      getTask(),
+      getWordSize(),
+      getGapOpen(),
+      getGapExtend(),
+      getMaxIntronLength(),
+      getMatrix(),
+      getThreshold(),
+      getCompBasedStats(),
+      getSubjectFile(),
+      getSubjectLocation(),
+      getSeg(),
+      getDBSoftMask(),
+      getDBHardMask(),
+      getCullingLimit(),
+      getSumStats(),
+      getExtensionDropoffPrelimGapped(),
+      getExtensionDropoffFinalGapped(),
+      getUngappedAlignmentsOnly(),
+      getNumThreads(),
+      getUseSmithWatermanTraceback(),
+      getBestHitOverhang(),
+      getBestHitScoreEdge(),
+      getSubjectBestHit()
+    );
   }
 }

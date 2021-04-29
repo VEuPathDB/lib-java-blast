@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -168,5 +170,53 @@ public class RPSBlast extends BlastBase implements BlastConfig
   @JsonSetter(Flag.UseSmithWatermanTraceback)
   public void setUseSmithWatermanTraceback(Boolean useSmithWatermanTraceback) {
     this.useSmithWatermanTraceback = useSmithWatermanTraceback;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    RPSBlast rpsBlast = (RPSBlast) o;
+    return Objects.equals(getBestHitOverhang(), rpsBlast.getBestHitOverhang())
+      && Objects.equals(getBestHitScoreEdge(), rpsBlast.getBestHitScoreEdge())
+      && Objects.equals(getSubjectBestHit(), rpsBlast.getSubjectBestHit())
+      && Objects.equals(getCompBasedStats(), rpsBlast.getCompBasedStats())
+      && Objects.equals(getSeg(), rpsBlast.getSeg())
+      && Objects.equals(getSumStats(), rpsBlast.getSumStats())
+      && Objects.equals(
+      getExtensionDropoffPrelimGapped(),
+      rpsBlast.getExtensionDropoffPrelimGapped()
+    )
+      && Objects.equals(
+      getExtensionDropoffFinalGapped(),
+      rpsBlast.getExtensionDropoffFinalGapped()
+    )
+      && getNumThreads() == rpsBlast.getNumThreads()
+      && mtMode == rpsBlast.mtMode
+      && Objects.equals(
+      getUseSmithWatermanTraceback(),
+      rpsBlast.getUseSmithWatermanTraceback()
+    );
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getBestHitOverhang(),
+      getBestHitScoreEdge(),
+      getSubjectBestHit(),
+      getCompBasedStats(),
+      getSeg(),
+      getSumStats(),
+      getExtensionDropoffPrelimGapped(),
+      getExtensionDropoffFinalGapped(),
+      getNumThreads(),
+      getMTMode(),
+      getUseSmithWatermanTraceback()
+    );
   }
 }

@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.field;
 
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -8,6 +9,9 @@ import org.veupathdb.lib.blast.consts.Key;
 
 public class Dust
 {
+  private static final String YesValue = "yes";
+  private static final String NoValue = "no";
+
   private boolean yes;
   private boolean no;
   private int     level;
@@ -70,9 +74,9 @@ public class Dust
   @JsonValue
   public Object toJSONSerializable() {
     if (isYes())
-      return "yes";
+      return YesValue;
     if (isNo())
-      return "no";
+      return NoValue;
     return new LinkedHashMap<String, Integer>(){{
       put(Key.Level, getLevel());
       put(Key.Window, getWindow());
@@ -92,12 +96,37 @@ public class Dust
     return new Dust(false, false, level, window, linker);
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Dust dust = (Dust) o;
+    return (isYes() && dust.isYes())
+      || (isNo() && dust.isNo())
+      || (
+        getLevel() == dust.getLevel() &&
+        getWindow() == dust.getWindow() &&
+        getLinker() == dust.getLinker()
+      );
+  }
+
+  @Override
+  public int hashCode() {
+    if (isYes())
+      return Objects.hash(YesValue);
+
+    if (isNo())
+      return Objects.hash(NoValue);
+
+    return Objects.hash(getLevel(), getWindow(), getLinker());
+  }
+
   @JsonCreator
   public static Dust fromJSON(JsonNode node) {
     if (node.isTextual()) {
       return switch(node.textValue()) {
-        case "yes" -> yesDust();
-        case "no" -> noDust();
+        case YesValue -> yesDust();
+        case NoValue -> noDust();
         default -> throw new IllegalArgumentException();
       };
     }
@@ -118,9 +147,9 @@ public class Dust
   }
 
   public static Dust fromString(String value) {
-    if ("yes".equals(value))
+    if (YesValue.equals(value))
       return yesDust();
-    if ("no".equals(value))
+    if (NoValue.equals(value))
       return noDust();
 
     var split = value.split(" +");

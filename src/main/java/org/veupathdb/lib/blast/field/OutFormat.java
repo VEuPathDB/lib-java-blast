@@ -2,6 +2,7 @@ package org.veupathdb.lib.blast.field;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -64,6 +65,22 @@ public class OutFormat
       out.append(" ").append(field.getValue());
 
     return out.toString();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    OutFormat outFormat = (OutFormat) o;
+    return getType() == outFormat.getType() && Objects.equals(
+      getDelimiter(),
+      outFormat.getDelimiter()
+    ) && Objects.equals(getFields(), outFormat.getFields());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getType(), getDelimiter(), getFields());
   }
 
   public static OutFormat fromString(String value) {

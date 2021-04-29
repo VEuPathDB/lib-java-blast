@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -184,5 +186,58 @@ public class BlastBase extends CLIBase
   @JsonSetter(Flag.Remote)
   public void setRemote(Boolean remote) {
     this.remote = remote;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof BlastBase)) return false;
+    if (!super.equals(o)) return false;
+    BlastBase blastBase = (BlastBase) o;
+    return Objects.equals(getQueryFile(), blastBase.getQueryFile())
+      && Objects.equals(getQueryLocation(), blastBase.getQueryLocation())
+      && Objects.equals(dbFile, blastBase.dbFile)
+      && Objects.equals(getExpectValue(), blastBase.getExpectValue())
+      && Objects.equals(getSoftMasking(), blastBase.getSoftMasking())
+      && Objects.equals(getLowercaseMasking(), blastBase.getLowercaseMasking())
+      && Objects.equals(getEntrezQuery(), blastBase.getEntrezQuery())
+      && Objects.equals(
+      getQueryCoverageHSPPercent(),
+      blastBase.getQueryCoverageHSPPercent()
+    )
+      && Objects.equals(getMaxHSPs(), blastBase.getMaxHSPs())
+      && Objects.equals(dbSize, blastBase.dbSize)
+      && Objects.equals(getSearchSpace(), blastBase.getSearchSpace())
+      && Objects.equals(getImportSearchStrategy(), blastBase.getImportSearchStrategy())
+      && Objects.equals(getExportSearchStrategy(), blastBase.getExportSearchStrategy())
+      && Objects.equals(
+      getExtensionDropoffUngapped(),
+      blastBase.getExtensionDropoffUngapped()
+    )
+      && Objects.equals(getWindowSize(), blastBase.getWindowSize())
+      && Objects.equals(getRemote(), blastBase.getRemote());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getQueryFile(),
+      getQueryLocation(),
+      getDBFile(),
+      getExpectValue(),
+      getSoftMasking(),
+      getLowercaseMasking(),
+      getEntrezQuery(),
+      getQueryCoverageHSPPercent(),
+      getMaxHSPs(),
+      getDBSize(),
+      getSearchSpace(),
+      getImportSearchStrategy(),
+      getExportSearchStrategy(),
+      getExtensionDropoffUngapped(),
+      getWindowSize(),
+      getRemote()
+    );
   }
 }

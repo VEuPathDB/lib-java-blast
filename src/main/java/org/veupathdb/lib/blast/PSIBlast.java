@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -448,5 +450,93 @@ public class PSIBlast extends BlastWithIPGList implements BlastConfig
   @JsonSetter(Flag.PhiPatternFile)
   public void setPhiPatternFile(String phiPatternFile) {
     this.phiPatternFile = phiPatternFile;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    PSIBlast psiBlast = (PSIBlast) o;
+    return Objects.equals(getWordSize(), psiBlast.getWordSize())
+      && Objects.equals(getGapOpen(), psiBlast.getGapOpen())
+      && Objects.equals(getGapExtend(), psiBlast.getGapExtend())
+      && getMatrix() == psiBlast.getMatrix()
+      && Objects.equals(getThreshold(), psiBlast.getThreshold())
+      && Objects.equals(getCompBasedStats(), psiBlast.getCompBasedStats())
+      && Objects.equals(getSubjectFile(), psiBlast.getSubjectFile())
+      && Objects.equals(getSubjectLocation(), psiBlast.getSubjectLocation())
+      && Objects.equals(getSeg(), psiBlast.getSeg())
+      && Objects.equals(getCullingLimit(), psiBlast.getCullingLimit())
+      && Objects.equals(getSumStats(), psiBlast.getSumStats())
+      && Objects.equals(
+      getExtensionDropoffPrelimGapped(),
+      psiBlast.getExtensionDropoffPrelimGapped()
+    )
+      && Objects.equals(
+      getExtensionDropoffFinalGapped(),
+      psiBlast.getExtensionDropoffFinalGapped()
+    )
+      && Objects.equals(getGapTrigger(), psiBlast.getGapTrigger())
+      && Objects.equals(getNumThreads(), psiBlast.getNumThreads())
+      && Objects.equals(
+      getUseSmithWatermanTraceback(),
+      psiBlast.getUseSmithWatermanTraceback()
+    )
+      && Objects.equals(getBestHitOverhang(), psiBlast.getBestHitOverhang())
+      && Objects.equals(getBestHitScoreEdge(), psiBlast.getBestHitScoreEdge())
+      && Objects.equals(getSubjectBestHit(), psiBlast.getSubjectBestHit())
+      && Objects.equals(getNumIterations(), psiBlast.getNumIterations())
+      && Objects.equals(getOutPSSMFile(), psiBlast.getOutPSSMFile())
+      && Objects.equals(getOutASCIIPSSMFile(), psiBlast.getOutASCIIPSSMFile())
+      && Objects.equals(getSavePSSMAfterLastRound(), psiBlast.getSavePSSMAfterLastRound())
+      && Objects.equals(getSaveEachPSSM(), psiBlast.getSaveEachPSSM())
+      && Objects.equals(getInMSAFile(), psiBlast.getInMSAFile())
+      && Objects.equals(msaMasterIDX, psiBlast.msaMasterIDX)
+      && Objects.equals(getIgnoreMSAMaster(), psiBlast.getIgnoreMSAMaster())
+      && Objects.equals(getInPSSMFile(), psiBlast.getInPSSMFile())
+      && Objects.equals(getPseudocount(), psiBlast.getPseudocount())
+      && Objects.equals(getInclusionEThreshold(), psiBlast.getInclusionEThreshold())
+      && Objects.equals(getPhiPatternFile(), psiBlast.getPhiPatternFile());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getWordSize(),
+      getGapOpen(),
+      getGapExtend(),
+      getMatrix(),
+      getThreshold(),
+      getCompBasedStats(),
+      getSubjectFile(),
+      getSubjectLocation(),
+      getSeg(),
+      getCullingLimit(),
+      getSumStats(),
+      getExtensionDropoffPrelimGapped(),
+      getExtensionDropoffFinalGapped(),
+      getGapTrigger(),
+      getNumThreads(),
+      getUseSmithWatermanTraceback(),
+      getBestHitOverhang(),
+      getBestHitScoreEdge(),
+      getSubjectBestHit(),
+      getNumIterations(),
+      getOutPSSMFile(),
+      getOutASCIIPSSMFile(),
+      getSavePSSMAfterLastRound(),
+      getSaveEachPSSM(),
+      getInMSAFile(),
+      getMSAMasterIDX(),
+      getIgnoreMSAMaster(),
+      getInPSSMFile(),
+      getPseudocount(),
+      getInclusionEThreshold(),
+      getPhiPatternFile()
+    );
   }
 }

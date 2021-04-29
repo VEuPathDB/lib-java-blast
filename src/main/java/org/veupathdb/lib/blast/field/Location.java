@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast.field;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,6 +33,19 @@ public class Location
   @Override
   public String toString() {
     return start + "-" + stop;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Location location = (Location) o;
+    return getStart() == location.getStart() && getStop() == location.getStop();
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getStart(), getStop());
   }
 
   public static Location fromString(String value) {

@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -461,5 +463,93 @@ public class BlastN extends BlastWithLists implements BlastConfig
   @JsonSetter(Flag.SubjectBestHit)
   public void setSubjectBestHit(Boolean subjectBestHit) {
     this.subjectBestHit = subjectBestHit;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    BlastN blastN = (BlastN) o;
+    return getStrand() == blastN.getStrand()
+      && getTask() == blastN.getTask()
+      && Objects.equals(getWordSize(), blastN.getWordSize())
+      && Objects.equals(getGapOpen(), blastN.getGapOpen())
+      && Objects.equals(getGapExtend(), blastN.getGapExtend())
+      && Objects.equals(getPenalty(), blastN.getPenalty())
+      && Objects.equals(getReward(), blastN.getReward())
+      && Objects.equals(getUseIndex(), blastN.getUseIndex())
+      && Objects.equals(getIndexName(), blastN.getIndexName())
+      && Objects.equals(getSubjectFile(), blastN.getSubjectFile())
+      && Objects.equals(getSubjectLocation(), blastN.getSubjectLocation())
+      && Objects.equals(getDust(), blastN.getDust())
+      && Objects.equals(getFilteringDB(), blastN.getFilteringDB())
+      && Objects.equals(getWindowMaskerTaxID(), blastN.getWindowMaskerTaxID())
+      && Objects.equals(getWindowMaskerDB(), blastN.getWindowMaskerDB())
+      && Objects.equals(dbSoftMask, blastN.dbSoftMask)
+      && Objects.equals(dbHardMask, blastN.dbHardMask)
+      && Objects.equals(getPercentIdentity(), blastN.getPercentIdentity())
+      && Objects.equals(getCullingLimit(), blastN.getCullingLimit())
+      && getTemplateType() == blastN.getTemplateType()
+      && getTemplateLength() == blastN.getTemplateLength()
+      && Objects.equals(getSumStats(), blastN.getSumStats())
+      && Objects.equals(
+      getExtensionDropoffPrelimGapped(),
+      blastN.getExtensionDropoffPrelimGapped()
+    )
+      && Objects.equals(
+      getExtensionDropoffFinalGapped(),
+      blastN.getExtensionDropoffFinalGapped()
+    )
+      && Objects.equals(getNonGreedy(), blastN.getNonGreedy())
+      && Objects.equals(getMinRawGappedScore(), blastN.getMinRawGappedScore())
+      && Objects.equals(getUngappedAlignmentsOnly(), blastN.getUngappedAlignmentsOnly())
+      && Objects.equals(getOffDiagonalRange(), blastN.getOffDiagonalRange())
+      && Objects.equals(getNumThreads(), blastN.getNumThreads())
+      && Objects.equals(getBestHitOverhang(), blastN.getBestHitOverhang())
+      && Objects.equals(getBestHitScoreEdge(), blastN.getBestHitScoreEdge())
+      && Objects.equals(getSubjectBestHit(), blastN.getSubjectBestHit());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getStrand(),
+      getTask(),
+      getWordSize(),
+      getGapOpen(),
+      getGapExtend(),
+      getPenalty(),
+      getReward(),
+      getUseIndex(),
+      getIndexName(),
+      getSubjectFile(),
+      getSubjectLocation(),
+      getDust(),
+      getFilteringDB(),
+      getWindowMaskerTaxID(),
+      getWindowMaskerDB(),
+      getDBSoftMask(),
+      getDBHardMask(),
+      getPercentIdentity(),
+      getCullingLimit(),
+      getTemplateType(),
+      getTemplateLength(),
+      getSumStats(),
+      getExtensionDropoffPrelimGapped(),
+      getExtensionDropoffFinalGapped(),
+      getNonGreedy(),
+      getMinRawGappedScore(),
+      getUngappedAlignmentsOnly(),
+      getOffDiagonalRange(),
+      getNumThreads(),
+      getBestHitOverhang(),
+      getBestHitScoreEdge(),
+      getSubjectBestHit()
+    );
   }
 }

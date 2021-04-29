@@ -23,7 +23,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setShortHelp(true);
 
       assertEquals("{\"-h\":true}", json.writeValueAsString(tgt));
@@ -46,7 +46,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setLongHelp(true);
 
       assertEquals("{\"-help\":true}", json.writeValueAsString(tgt));
@@ -69,7 +69,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setVersion(true);
 
       assertEquals("{\"-version\":true}", json.writeValueAsString(tgt));
@@ -92,7 +92,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setOutFormat(new OutFormat().setDelimiter("="));
 
       assertEquals("{\"-outfmt\":{\"delimiter\":\"=\"}}", json.writeValueAsString(tgt));
@@ -115,7 +115,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setShowGIs(true);
 
       assertEquals("{\"-show_gis\":true}", json.writeValueAsString(tgt));
@@ -138,7 +138,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setNumDescriptions(34L);
 
       assertEquals("{\"-num_descriptions\":34}", json.writeValueAsString(tgt));
@@ -161,7 +161,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setNumAlignments(34L);
 
       assertEquals("{\"-num_alignments\":34}", json.writeValueAsString(tgt));
@@ -185,7 +185,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setLineLength(34);
 
       assertEquals("{\"-line_length\":34}", json.writeValueAsString(tgt));
@@ -208,7 +208,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setHTML(true);
 
       assertEquals("{\"-html\":true}", json.writeValueAsString(tgt));
@@ -231,7 +231,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setSortHits(HitSorting.ByQueryCoverage);
 
       assertEquals("{\"-sorthits\":4}", json.writeValueAsString(tgt));
@@ -254,7 +254,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setSortHSPs(HSPSorting.ByHSPSubjectStart);
 
       assertEquals("{\"-sorthsps\":4}", json.writeValueAsString(tgt));
@@ -277,7 +277,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setMaxTargetSequences(34L);
 
       assertEquals("{\"-max_target_seqs\":34}", json.writeValueAsString(tgt));
@@ -300,7 +300,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setOutFile("hi");
 
       assertEquals("{\"-out\":\"hi\"}", json.writeValueAsString(tgt));
@@ -323,7 +323,7 @@ class BaseTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new CLIBase();
+      var tgt = new CLIBase(){};
       tgt.setParseDefLines(true);
 
       assertEquals("{\"-parse_deflines\":true}", json.writeValueAsString(tgt));

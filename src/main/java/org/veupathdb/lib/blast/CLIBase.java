@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -164,5 +166,47 @@ public class CLIBase
   @JsonSetter(Flag.ParseDefLines)
   public void setParseDefLines(Boolean parseDefLines) {
     this.parseDefLines = parseDefLines;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof CLIBase)) return false;
+    CLIBase cliBase = (CLIBase) o;
+    return Objects.equals(getShortHelp(), cliBase.getShortHelp())
+      && Objects.equals(getLongHelp(), cliBase.getLongHelp())
+      && Objects.equals(getVersion(), cliBase.getVersion())
+      && Objects.equals(getOutFormat(), cliBase.getOutFormat())
+      && Objects.equals(getShowGIs(), cliBase.getShowGIs())
+      && Objects.equals(getNumDescriptions(), cliBase.getNumDescriptions())
+      && Objects.equals(getNumAlignments(), cliBase.getNumAlignments())
+      && Objects.equals(getLineLength(), cliBase.getLineLength())
+      && Objects.equals(html, cliBase.html)
+      && getSortHits() == cliBase.getSortHits()
+      && getSortHSPs() == cliBase.getSortHSPs()
+      && Objects.equals(getMaxTargetSequences(), cliBase.getMaxTargetSequences())
+      && Objects.equals(getOutFile(), cliBase.getOutFile())
+      && Objects.equals(getParseDefLines(), cliBase.getParseDefLines());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      getShortHelp(),
+      getLongHelp(),
+      getVersion(),
+      getOutFormat(),
+      getShowGIs(),
+      getNumDescriptions(),
+      getNumAlignments(),
+      getLineLength(),
+      getHTML(),
+      getSortHits(),
+      getSortHSPs(),
+      getMaxTargetSequences(),
+      getOutFile(),
+      getParseDefLines()
+    );
   }
 }

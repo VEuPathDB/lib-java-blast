@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -420,5 +422,89 @@ public class DeltaBlast extends BlastWithLists implements BlastConfig
   @JsonSetter(Flag.ShowDomainHits)
   public void setShowDomainHits(Boolean showDomainHits) {
     this.showDomainHits = showDomainHits;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    DeltaBlast that = (DeltaBlast) o;
+    return Objects.equals(getWordSize(), that.getWordSize())
+      && Objects.equals(
+      getGapOpen(),
+      that.getGapOpen()
+    )
+      && Objects.equals(getGapExtend(), that.getGapExtend())
+      && getMatrix() == that.getMatrix()
+      && Objects.equals(getThreshold(), that.getThreshold())
+      && Objects.equals(getCompBasedStats(), that.getCompBasedStats())
+      && Objects.equals(getSubjectFile(), that.getSubjectFile())
+      && Objects.equals(getSubjectLocation(), that.getSubjectLocation())
+      && Objects.equals(getSeg(), that.getSeg())
+      && Objects.equals(getCullingLimit(), that.getCullingLimit())
+      && Objects.equals(getSumStats(), that.getSumStats())
+      && Objects.equals(
+      getExtensionDropoffPrelimGapped(),
+      that.getExtensionDropoffPrelimGapped()
+    )
+      && Objects.equals(
+      getExtensionDropoffFinalGapped(),
+      that.getExtensionDropoffFinalGapped()
+    )
+      && Objects.equals(getGapTrigger(), that.getGapTrigger())
+      && Objects.equals(getNumThreads(), that.getNumThreads())
+      && Objects.equals(getUseSmithWatermanTraceback(), that.getUseSmithWatermanTraceback())
+      && Objects.equals(getBestHitOverhang(), that.getBestHitOverhang())
+      && Objects.equals(getBestHitScoreEdge(), that.getBestHitScoreEdge())
+      && Objects.equals(getSubjectBestHit(), that.getSubjectBestHit())
+      && Objects.equals(getNumIterations(), that.getNumIterations())
+      && Objects.equals(getOutPSSMFile(), that.getOutPSSMFile())
+      && Objects.equals(getOutASCIIPSSMFile(), that.getOutASCIIPSSMFile())
+      && Objects.equals(getSavePSSMAfterLastRound(), that.getSavePSSMAfterLastRound())
+      && Objects.equals(getSaveEachPSSM(), that.getSaveEachPSSM())
+      && Objects.equals(getPseudocount(), that.getPseudocount())
+      && Objects.equals(getDomainInclusionEThreshold(), that.getDomainInclusionEThreshold())
+      && Objects.equals(getInclusionEThreshold(), that.getInclusionEThreshold())
+      && Objects.equals(rpsDBFile, that.rpsDBFile)
+      && Objects.equals(getShowDomainHits(), that.getShowDomainHits());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getWordSize(),
+      getGapOpen(),
+      getGapExtend(),
+      getMatrix(),
+      getThreshold(),
+      getCompBasedStats(),
+      getSubjectFile(),
+      getSubjectLocation(),
+      getSeg(),
+      getCullingLimit(),
+      getSumStats(),
+      getExtensionDropoffPrelimGapped(),
+      getExtensionDropoffFinalGapped(),
+      getGapTrigger(),
+      getNumThreads(),
+      getUseSmithWatermanTraceback(),
+      getBestHitOverhang(),
+      getBestHitScoreEdge(),
+      getSubjectBestHit(),
+      getNumIterations(),
+      getOutPSSMFile(),
+      getOutASCIIPSSMFile(),
+      getSavePSSMAfterLastRound(),
+      getSaveEachPSSM(),
+      getPseudocount(),
+      getDomainInclusionEThreshold(),
+      getInclusionEThreshold(),
+      getRPSDBFile(),
+      getShowDomainHits()
+    );
   }
 }

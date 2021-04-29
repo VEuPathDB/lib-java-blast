@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -309,5 +311,83 @@ public class BlastP extends BlastWithIPGList implements BlastConfig
   @JsonSetter(Flag.SubjectBestHit)
   public void setSubjectBestHit(Boolean subjectBestHit) {
     this.subjectBestHit = subjectBestHit;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    BlastP blastP = (BlastP) o;
+    return getTask() == blastP.getTask()
+      && Objects.equals(
+      getWordSize(),
+      blastP.getWordSize()
+    )
+      && Objects.equals(getGapOpen(), blastP.getGapOpen())
+      && Objects.equals(
+      getGapExtend(),
+      blastP.getGapExtend()
+    )
+      && getMatrix() == blastP.getMatrix()
+      && Objects.equals(
+      getThreshold(),
+      blastP.getThreshold()
+    )
+      && Objects.equals(getCompBasedStats(), blastP.getCompBasedStats())
+      && Objects.equals(getSubjectFile(), blastP.getSubjectFile())
+      && Objects.equals(getSubjectLocation(), blastP.getSubjectLocation())
+      && Objects.equals(getSeg(), blastP.getSeg())
+      && Objects.equals(dbSoftMask, blastP.dbSoftMask)
+      && Objects.equals(dbHardMask, blastP.dbHardMask)
+      && Objects.equals(getCullingLimit(), blastP.getCullingLimit())
+      && Objects.equals(
+      getExtensionDropoffPrelimGapped(),
+      blastP.getExtensionDropoffPrelimGapped()
+    )
+      && Objects.equals(
+      getExtensionDropoffFinalGapped(),
+      blastP.getExtensionDropoffFinalGapped()
+    )
+      && Objects.equals(getUngappedAlignmentsOnly(), blastP.getUngappedAlignmentsOnly())
+      && Objects.equals(getNumThreads(), blastP.getNumThreads())
+      && Objects.equals(
+      getUseSmithWatermanTraceback(),
+      blastP.getUseSmithWatermanTraceback()
+    )
+      && Objects.equals(getBestHitOverhang(), blastP.getBestHitOverhang())
+      && Objects.equals(getBestHitScoreEdge(), blastP.getBestHitScoreEdge())
+      && Objects.equals(getSubjectBestHit(), blastP.getSubjectBestHit());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getTask(),
+      getWordSize(),
+      getGapOpen(),
+      getGapExtend(),
+      getMatrix(),
+      getThreshold(),
+      getCompBasedStats(),
+      getSubjectFile(),
+      getSubjectLocation(),
+      getSeg(),
+      getDBSoftMask(),
+      getDBHardMask(),
+      getCullingLimit(),
+      getExtensionDropoffPrelimGapped(),
+      getExtensionDropoffFinalGapped(),
+      getUngappedAlignmentsOnly(),
+      getNumThreads(),
+      getUseSmithWatermanTraceback(),
+      getBestHitOverhang(),
+      getBestHitScoreEdge(),
+      getSubjectBestHit()
+    );
   }
 }

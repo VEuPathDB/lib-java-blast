@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -365,5 +367,93 @@ public class TBlastN extends BlastWithLists implements BlastConfig
   @JsonSetter(Flag.InPSSMFile)
   public void setInPSSMFile(String inPSSMFile) {
     this.inPSSMFile = inPSSMFile;
+  }
+
+  // ------------------------------------------------------------------------------------------ //
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    TBlastN tBlastN = (TBlastN) o;
+    return getTask() == tBlastN.getTask()
+      && Objects.equals(
+      getWordSize(),
+      tBlastN.getWordSize()
+    )
+      && Objects.equals(getGapOpen(), tBlastN.getGapOpen())
+      && Objects.equals(
+      getGapExtend(),
+      tBlastN.getGapExtend()
+    )
+      && Objects.equals(dbGenCode, tBlastN.dbGenCode)
+      && Objects.equals(
+      getMaxIntronLength(),
+      tBlastN.getMaxIntronLength()
+    )
+      && getMatrix() == tBlastN.getMatrix()
+      && Objects.equals(
+      getThreshold(),
+      tBlastN.getThreshold()
+    )
+      && Objects.equals(getCompBasedStats(), tBlastN.getCompBasedStats())
+      && Objects.equals(getSubjectFile(), tBlastN.getSubjectFile())
+      && Objects.equals(getSubjectLocation(), tBlastN.getSubjectLocation())
+      && Objects.equals(getSeg(), tBlastN.getSeg())
+      && Objects.equals(dbSoftMask, tBlastN.dbSoftMask)
+      && Objects.equals(dbHardMask, tBlastN.dbHardMask)
+      && Objects.equals(getCullingLimit(), tBlastN.getCullingLimit())
+      && Objects.equals(getSumStats(), tBlastN.getSumStats())
+      && Objects.equals(
+      getExtensionDropoffPrelimGapped(),
+      tBlastN.getExtensionDropoffPrelimGapped()
+    )
+      && Objects.equals(
+      getExtensionDropoffFinalGapped(),
+      tBlastN.getExtensionDropoffFinalGapped()
+    )
+      && Objects.equals(getUngappedAlignmentsOnly(), tBlastN.getUngappedAlignmentsOnly())
+      && Objects.equals(getNumThreads(), tBlastN.getNumThreads())
+      && Objects.equals(
+      getUseSmithWatermanTraceback(),
+      tBlastN.getUseSmithWatermanTraceback()
+    )
+      && Objects.equals(getBestHitOverhang(), tBlastN.getBestHitOverhang())
+      && Objects.equals(getBestHitScoreEdge(), tBlastN.getBestHitScoreEdge())
+      && Objects.equals(getSubjectBestHit(), tBlastN.getSubjectBestHit())
+      && Objects.equals(getInPSSMFile(), tBlastN.getInPSSMFile());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+      super.hashCode(),
+      getTask(),
+      getWordSize(),
+      getGapOpen(),
+      getGapExtend(),
+      getDBGenCode(),
+      getMaxIntronLength(),
+      getMatrix(),
+      getThreshold(),
+      getCompBasedStats(),
+      getSubjectFile(),
+      getSubjectLocation(),
+      getSeg(),
+      getDBSoftMask(),
+      getDBHardMask(),
+      getCullingLimit(),
+      getSumStats(),
+      getExtensionDropoffPrelimGapped(),
+      getExtensionDropoffFinalGapped(),
+      getUngappedAlignmentsOnly(),
+      getNumThreads(),
+      getUseSmithWatermanTraceback(),
+      getBestHitOverhang(),
+      getBestHitScoreEdge(),
+      getSubjectBestHit(),
+      getInPSSMFile()
+    );
   }
 }

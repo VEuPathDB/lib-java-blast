@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.veupathdb.lib.blast.consts.Flag;
@@ -32,5 +34,22 @@ public class BlastFormatter extends CLIBase implements BlastConfig
   @JsonSetter(Flag.ArchiveFile)
   public void setArchiveFile(String archiveFile) {
     this.archiveFile = archiveFile;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    BlastFormatter that = (BlastFormatter) o;
+    return Objects.equals(getRequestID(), that.getRequestID()) && Objects.equals(
+      getArchiveFile(),
+      that.getArchiveFile()
+    );
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), getRequestID(), getArchiveFile());
   }
 }
