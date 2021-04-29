@@ -107,15 +107,15 @@ public class BlastX extends BlastWithIPGList
 
   // ------------------------------------------------------------------------------------------ //
 
-  private String matrix;
+  private ScoringMatrix matrix;
 
   @JsonGetter(Flag.Matrix)
-  public String getMatrix() {
+  public ScoringMatrix getMatrix() {
     return matrix;
   }
 
   @JsonSetter(Flag.Matrix)
-  public void setMatrix(String matrix) {
+  public void setMatrix(ScoringMatrix matrix) {
     this.matrix = matrix;
   }
 

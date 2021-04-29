@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.Location;
+import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.TBlastNTask;
 
@@ -162,18 +163,18 @@ class TBlastNTest
     @DisplayName("serialization")
     void test1() throws Exception {
       var tgt = new TBlastN();
-      tgt.setMatrix("hi");
+      tgt.setMatrix(ScoringMatrix.Blosum50);
 
-      assertEquals("{\"-matrix\":\"hi\"}", json.writeValueAsString(tgt));
+      assertEquals("{\"-matrix\":\"BLOSUM50\"}", json.writeValueAsString(tgt));
     }
 
     @Test
     @DisplayName("deserialization")
     void test2() throws Exception {
-      var raw = "{\"-matrix\":\"hi\"}";
+      var raw = "{\"-matrix\":\"BLOSUM50\"}";
       var tgt = json.readValue(raw, TBlastN.class);
 
-      assertEquals("hi", tgt.getMatrix());
+      assertEquals(ScoringMatrix.Blosum50, tgt.getMatrix());
     }
   }
 

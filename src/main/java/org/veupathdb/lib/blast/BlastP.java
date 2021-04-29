@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.BlastPTask;
 import org.veupathdb.lib.blast.field.Location;
+import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -67,15 +68,15 @@ public class BlastP extends BlastWithIPGList
 
   // ------------------------------------------------------------------------------------------ //
 
-  private String matrix;
+  private ScoringMatrix matrix;
 
   @JsonGetter(Flag.Matrix)
-  public String getMatrix() {
+  public ScoringMatrix getMatrix() {
     return matrix;
   }
 
   @JsonSetter(Flag.Matrix)
-  public void setMatrix(String matrix) {
+  public void setMatrix(ScoringMatrix matrix) {
     this.matrix = matrix;
   }
 

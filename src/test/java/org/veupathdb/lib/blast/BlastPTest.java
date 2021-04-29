@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.BlastPTask;
 import org.veupathdb.lib.blast.field.Location;
+import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -116,18 +117,18 @@ class BlastPTest
     @DisplayName("serialization")
     void test1() throws Exception {
       var tgt = new BlastP();
-      tgt.setMatrix("hi");
+      tgt.setMatrix(ScoringMatrix.Blosum50);
 
-      assertEquals("{\"-matrix\":\"hi\"}", json.writeValueAsString(tgt));
+      assertEquals("{\"-matrix\":\"BLOSUM50\"}", json.writeValueAsString(tgt));
     }
 
     @Test
     @DisplayName("deserialization")
     void test2() throws Exception {
-      var raw = "{\"-matrix\":\"hi\"}";
+      var raw = "{\"-matrix\":\"BLOSUM50\"}";
       var tgt = json.readValue(raw, BlastP.class);
 
-      assertEquals("hi", tgt.getMatrix());
+      assertEquals(ScoringMatrix.Blosum50, tgt.getMatrix());
     }
   }
 

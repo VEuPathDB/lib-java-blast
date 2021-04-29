@@ -183,18 +183,18 @@ class BlastXTest
     @DisplayName("serialization")
     void test1() throws Exception {
       var tgt = new BlastX();
-      tgt.setMatrix("hi");
+      tgt.setMatrix(ScoringMatrix.Blosum62);
 
-      assertEquals("{\"-matrix\":\"hi\"}", json.writeValueAsString(tgt));
+      assertEquals("{\"-matrix\":\"BLOSUM62\"}", json.writeValueAsString(tgt));
     }
 
     @Test
     @DisplayName("deserialization")
     void test2() throws Exception {
-      var raw = "{\"-matrix\":\"hi\"}";
+      var raw = "{\"-matrix\":\"BLOSUM62\"}";
       var tgt = json.readValue(raw, BlastX.class);
 
-      assertEquals("hi", tgt.getMatrix());
+      assertEquals(ScoringMatrix.Blosum62, tgt.getMatrix());
     }
   }
 
