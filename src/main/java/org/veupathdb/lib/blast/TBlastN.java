@@ -12,7 +12,7 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.TBlastNTask;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TBlastN extends BlastWithLists implements BlastConfig
+public class TBlastN extends BlastWithLists implements BlastQueryConfig
 {
   @Override
   public BlastTool getTool() {

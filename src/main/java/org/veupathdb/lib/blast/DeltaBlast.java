@@ -11,7 +11,7 @@ import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DeltaBlast extends BlastWithLists implements BlastConfig
+public class DeltaBlast extends BlastWithLists implements BlastQueryConfig
 {
   @Override
   public BlastTool getTool() {

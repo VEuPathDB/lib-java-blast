@@ -11,7 +11,7 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.ThreadMode;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RPSBlast extends BlastBase implements BlastConfig
+public class RPSBlast extends BlastBase implements BlastQueryConfig
 {
   @Override
   public BlastTool getTool() {

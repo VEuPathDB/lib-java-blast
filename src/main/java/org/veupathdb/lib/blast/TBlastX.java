@@ -10,7 +10,7 @@ import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.Strand;
 
-public class TBlastX extends BlastWithLists implements BlastConfig
+public class TBlastX extends BlastWithLists implements BlastQueryConfig
 {
   @Override
   public BlastTool getTool() {

@@ -9,7 +9,7 @@ import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.*;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BlastX extends BlastWithIPGList implements BlastConfig
+public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 {
   @Override
   public BlastTool getTool() {

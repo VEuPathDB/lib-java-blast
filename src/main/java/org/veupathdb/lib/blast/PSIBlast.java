@@ -11,7 +11,7 @@ import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PSIBlast extends BlastWithIPGList implements BlastConfig
+public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 {
   @Override
   public BlastTool getTool() {

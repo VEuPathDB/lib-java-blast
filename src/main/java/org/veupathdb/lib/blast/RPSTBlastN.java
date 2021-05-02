@@ -10,7 +10,7 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.Strand;
 import org.veupathdb.lib.blast.field.ThreadMode;
 
-public class RPSTBlastN extends BlastBase implements BlastConfig
+public class RPSTBlastN extends BlastBase implements BlastQueryConfig
 {
   @Override
   public BlastTool getTool() {
