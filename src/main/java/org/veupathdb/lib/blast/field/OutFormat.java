@@ -87,7 +87,7 @@ public class OutFormat
     return new OutFormat()
       .setType(getType())
       .setDelimiter(getDelimiter())
-      .setFields(new ArrayList<>(fields));
+      .setFields(fields == null ? null : new ArrayList<>(fields));
   }
 
   public static OutFormat fromString(String value) {
