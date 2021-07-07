@@ -33,6 +33,6 @@ public enum BlastTool
       if (val.getValue().equals(value))
         return val;
 
-    throw new IllegalArgumentException();
+    throw new IllegalArgumentException("Unrecognized blast tool name \"" + value + "\"");
   }
 }
