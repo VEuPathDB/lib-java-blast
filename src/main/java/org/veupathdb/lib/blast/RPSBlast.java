@@ -2,15 +2,15 @@ package org.veupathdb.lib.blast;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.MTMode;
 import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.ThreadMode;
+import org.veupathdb.lib.blast.util.JSONObjectDecoder;
+import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RPSBlast extends BlastBase implements BlastQueryConfig
 {
   @Override
@@ -22,12 +22,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private Double bestHitOverhang;
 
-  @JsonGetter(Flag.BestHitOverhang)
   public Double getBestHitOverhang() {
     return bestHitOverhang;
   }
 
-  @JsonSetter(Flag.BestHitOverhang)
   public void setBestHitOverhang(Double bestHitOverhang) {
     this.bestHitOverhang = bestHitOverhang;
   }
@@ -36,12 +34,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private Double bestHitScoreEdge;
 
-  @JsonGetter(Flag.BestHitScoreEdge)
   public Double getBestHitScoreEdge() {
     return bestHitScoreEdge;
   }
 
-  @JsonSetter(Flag.BestHitScoreEdge)
   public void setBestHitScoreEdge(Double bestHitScoreEdge) {
     this.bestHitScoreEdge = bestHitScoreEdge;
   }
@@ -50,12 +46,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private Boolean subjectBestHit;
 
-  @JsonGetter(Flag.SubjectBestHit)
   public Boolean getSubjectBestHit() {
     return subjectBestHit;
   }
 
-  @JsonSetter(Flag.SubjectBestHit)
   public void setSubjectBestHit(Boolean subjectBestHit) {
     this.subjectBestHit = subjectBestHit;
   }
@@ -64,12 +58,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private String compBasedStats;
 
-  @JsonGetter(Flag.CompBasedStats)
   public String getCompBasedStats() {
     return compBasedStats;
   }
 
-  @JsonSetter(Flag.CompBasedStats)
   public void setCompBasedStats(String compBasedStats) {
     this.compBasedStats = compBasedStats;
   }
@@ -78,12 +70,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private Seg seg;
 
-  @JsonGetter(Flag.Seg)
   public Seg getSeg() {
     return seg;
   }
 
-  @JsonSetter(Flag.Seg)
   public void setSeg(Seg seg) {
     this.seg = seg;
   }
@@ -92,12 +82,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private Boolean sumStats;
 
-  @JsonGetter(Flag.SumStats)
   public Boolean getSumStats() {
     return sumStats;
   }
 
-  @JsonSetter(Flag.SumStats)
   public void setSumStats(Boolean sumStats) {
     this.sumStats = sumStats;
   }
@@ -106,12 +94,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private Double extensionDropoffPrelimGapped;
 
-  @JsonGetter(Flag.ExtensionDropoffPrelimGapped)
   public Double getExtensionDropoffPrelimGapped() {
     return extensionDropoffPrelimGapped;
   }
 
-  @JsonSetter(Flag.ExtensionDropoffPrelimGapped)
   public void setExtensionDropoffPrelimGapped(Double extensionDropoffPrelimGapped) {
     this.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
   }
@@ -120,12 +106,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private Double extensionDropoffFinalGapped;
 
-  @JsonGetter(Flag.ExtensionDropoffFinalGapped)
   public Double getExtensionDropoffFinalGapped() {
     return extensionDropoffFinalGapped;
   }
 
-  @JsonSetter(Flag.ExtensionDropoffFinalGapped)
   public void setExtensionDropoffFinalGapped(Double extensionDropoffFinalGapped) {
     this.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
   }
@@ -134,12 +118,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private ThreadMode numThreads;
 
-  @JsonGetter(Flag.NumThreads)
   public ThreadMode getNumThreads() {
     return numThreads;
   }
 
-  @JsonSetter(Flag.NumThreads)
   public void setNumThreads(ThreadMode numThreads) {
     this.numThreads = numThreads;
   }
@@ -148,12 +130,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private MTMode mtMode;
 
-  @JsonGetter(Flag.MTMode)
   public MTMode getMTMode() {
     return mtMode;
   }
 
-  @JsonSetter(Flag.MTMode)
   public void setMTMode(MTMode mtMode) {
     this.mtMode = mtMode;
   }
@@ -162,12 +142,10 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
 
   private Boolean useSmithWatermanTraceback;
 
-  @JsonGetter(Flag.UseSmithWatermanTraceback)
   public Boolean getUseSmithWatermanTraceback() {
     return useSmithWatermanTraceback;
   }
 
-  @JsonSetter(Flag.UseSmithWatermanTraceback)
   public void setUseSmithWatermanTraceback(Boolean useSmithWatermanTraceback) {
     this.useSmithWatermanTraceback = useSmithWatermanTraceback;
   }
@@ -220,9 +198,37 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
     );
   }
 
+  @Override
   public RPSBlast copy() {
     var out = new RPSBlast();
     copyInto(out);
+    return out;
+  }
+
+  @Override
+  @JsonValue
+  public JSONObjectEncoder toJSON() {
+    var js = super.toJSON();
+
+    js.encode(Flag.BestHitOverhang, bestHitOverhang);
+    js.encode(Flag.BestHitScoreEdge, bestHitScoreEdge);
+    js.encode(Flag.SubjectBestHit, subjectBestHit);
+    js.encode(Flag.CompBasedStats, compBasedStats);
+    js.encode(Flag.Seg, seg);
+    js.encode(Flag.SumStats, sumStats);
+    js.encode(Flag.ExtensionDropoffPrelimGapped, extensionDropoffPrelimGapped);
+    js.encode(Flag.ExtensionDropoffFinalGapped, extensionDropoffFinalGapped);
+    js.encode(Flag.NumThreads, numThreads);
+    js.encode(Flag.MTMode, mtMode);
+    js.encode(Flag.UseSmithWatermanTraceback, useSmithWatermanTraceback);
+
+    return js;
+  }
+
+  @JsonCreator
+  public static RPSBlast fromJSON(JSONObjectDecoder js) {
+    var out = new RPSBlast();
+    out.copyInto(js);
     return out;
   }
 
@@ -243,5 +249,22 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
     out.numThreads                   = numThreads;
     out.mtMode                       = mtMode;
     out.useSmithWatermanTraceback    = useSmithWatermanTraceback;
+  }
+
+  @Override
+  protected void copyInto(JSONObjectDecoder js) {
+    super.copyInto(js);
+
+    js.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
+    js.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
+    js.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
+    js.decode(Flag.CompBasedStats, this::setCompBasedStats);
+    js.decode(Flag.Seg, this::setSeg, Seg::fromJSON);
+    js.decode(Flag.SumStats, this::setSumStats);
+    js.decode(Flag.ExtensionDropoffPrelimGapped, this::setExtensionDropoffPrelimGapped);
+    js.decode(Flag.ExtensionDropoffFinalGapped, this::setExtensionDropoffFinalGapped);
+    js.decode(Flag.NumThreads, this::setNumThreads, ThreadMode::fromJSON);
+    js.decode(Flag.MTMode, this::setMTMode, MTMode::fromJSON);
+    js.decode(Flag.UseSmithWatermanTraceback, this::setUseSmithWatermanTraceback);
   }
 }

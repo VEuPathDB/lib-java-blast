@@ -1,16 +1,22 @@
 package org.veupathdb.lib.blast.field;
 
-import java.util.LinkedHashMap;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.veupathdb.lib.blast.consts.Key;
+import org.veupathdb.lib.blast.util.DefaultingJSONValue;
+import org.veupathdb.lib.blast.util.JSONConstructor;
 
-public class Dust
+public class Dust implements DefaultingJSONValue
 {
   private static final String YesValue = "yes";
-  private static final String NoValue = "no";
+  private static final String NoValue  = "no";
+
+  public static final int DefaultLevel  = 20;
+  public static final int DefaultWindow = 64;
+  public static final int DefaultLinker = 1;
 
   private boolean yes;
   private boolean no;
@@ -71,17 +77,31 @@ public class Dust
     return this;
   }
 
+  @Override
+  public boolean isDefault() {
+    if (yes)
+      return false;
+    if (no)
+      return false;
+
+    return level == DefaultLevel && window == DefaultWindow && linker == DefaultLinker;
+  }
+
+  @Override
   @JsonValue
-  public Object toJSONSerializable() {
-    if (isYes())
-      return YesValue;
-    if (isNo())
-      return NoValue;
-    return new LinkedHashMap<String, Integer>(){{
-      put(Key.Level, getLevel());
-      put(Key.Window, getWindow());
-      put(Key.Linker, getLinker());
-    }};
+  public JsonNode toJSON() {
+    if (yes)
+      return JSONConstructor.newText(YesValue);
+    if (no)
+      return JSONConstructor.newText(NoValue);
+
+    var out = JSONConstructor.newObject();
+
+    out.set(Key.Level, JSONConstructor.newInt(level));
+    out.set(Key.Window, JSONConstructor.newInt(window));
+    out.set(Key.Linker, JSONConstructor.newInt(linker));
+
+    return out;
   }
 
   @Override
@@ -100,10 +120,10 @@ public class Dust
 
   @Override
   public int hashCode() {
-    if (isYes())
+    if (yes)
       return Objects.hash(YesValue);
 
-    if (isNo())
+    if (no)
       return Objects.hash(NoValue);
 
     return Objects.hash(getLevel(), getWindow(), getLinker());

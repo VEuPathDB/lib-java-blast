@@ -2,12 +2,17 @@ package org.veupathdb.lib.blast.field;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.JsonNode;
+import org.veupathdb.lib.blast.util.DefaultingJSONValue;
+import org.veupathdb.lib.blast.util.JSONConstructor;
 
-public enum BlastPTask
+public enum BlastPTask implements DefaultingJSONValue
 {
   BlastP("blastp"),
   BlastPFast("blastp-fast"),
   BlastPShort("blastp-short");
+
+  public static final BlastPTask DefaultTask = BlastP;
 
   private final String value;
 
@@ -15,17 +20,31 @@ public enum BlastPTask
     this.value = value;
   }
 
-  @JsonValue
   public String getValue() {
     return value;
   }
 
-  @JsonCreator
   public static BlastPTask fromString(String value) {
     for (var val : values())
       if (val.getValue().equals(value))
         return val;
 
     throw new IllegalArgumentException();
+  }
+
+  @Override
+  public boolean isDefault() {
+    return this == DefaultTask;
+  }
+
+  @JsonValue
+  @Override
+  public JsonNode toJSON() {
+    return JSONConstructor.newText(value);
+  }
+
+  @JsonCreator
+  public static BlastPTask fromJSON(JsonNode js) {
+    return fromString(js.textValue());
   }
 }

@@ -2,9 +2,11 @@ package org.veupathdb.lib.blast;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
+import org.veupathdb.lib.blast.util.JSONObjectDecoder;
+import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 
 public class BlastFormatter extends CLIBase implements BlastConfig
 {
@@ -16,22 +18,18 @@ public class BlastFormatter extends CLIBase implements BlastConfig
     return BlastTool.BlastFormatter;
   }
 
-  @JsonGetter(Flag.RequestID)
   public String getRequestID() {
     return requestID;
   }
 
-  @JsonSetter(Flag.RequestID)
   public void setRequestID(String requestID) {
     this.requestID = requestID;
   }
 
-  @JsonGetter(Flag.ArchiveFile)
   public String getArchiveFile() {
     return archiveFile;
   }
 
-  @JsonSetter(Flag.ArchiveFile)
   public void setArchiveFile(String archiveFile) {
     this.archiveFile = archiveFile;
   }
@@ -53,9 +51,28 @@ public class BlastFormatter extends CLIBase implements BlastConfig
     return Objects.hash(super.hashCode(), getRequestID(), getArchiveFile());
   }
 
+  @Override
+  @JsonValue
+  public JSONObjectEncoder toJSON() {
+    var js = super.toJSON();
+
+    js.encode(Flag.RequestID, requestID);
+    js.encode(Flag.ArchiveFile, archiveFile);
+
+    return js;
+  }
+
+  @Override
   public BlastFormatter copy() {
     var out = new BlastFormatter();
     copyInto(out);
+    return out;
+  }
+
+  @JsonCreator
+  public static BlastFormatter fromJSON(JSONObjectDecoder js) {
+    var out = new BlastFormatter();
+    out.copyInto(js);
     return out;
   }
 
@@ -63,5 +80,12 @@ public class BlastFormatter extends CLIBase implements BlastConfig
     super.copyInto(out);
     out.requestID = requestID;
     out.archiveFile = archiveFile;
+  }
+
+  protected void copyInto(JSONObjectDecoder js) {
+    super.copyInto(js);
+
+    js.decode(Flag.RequestID, this::setRequestID);
+    js.decode(Flag.ArchiveFile, this::setArchiveFile);
   }
 }

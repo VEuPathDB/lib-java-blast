@@ -2,13 +2,13 @@ package org.veupathdb.lib.blast;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.*;
+import org.veupathdb.lib.blast.util.JSONObjectDecoder;
+import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 {
   @Override
@@ -20,12 +20,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Strand strand;
 
-  @JsonGetter(Flag.Strand)
   public Strand getStrand() {
     return strand;
   }
 
-  @JsonSetter(Flag.Strand)
   public void setStrand(Strand strand) {
     this.strand = strand;
   }
@@ -34,12 +32,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Short queryGenCode;
 
-  @JsonGetter(Flag.QueryGenCode)
   public Short getQueryGenCode() {
     return queryGenCode;
   }
 
-  @JsonSetter(Flag.QueryGenCode)
   public void setQueryGenCode(Short queryGenCode) {
     this.queryGenCode = queryGenCode;
   }
@@ -48,12 +44,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private BlastXTask task;
 
-  @JsonGetter(Flag.Task)
   public BlastXTask getTask() {
     return task;
   }
 
-  @JsonSetter(Flag.Task)
   public void setTask(BlastXTask task) {
     this.task = task;
   }
@@ -62,12 +56,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Long wordSize;
 
-  @JsonGetter(Flag.WordSize)
   public Long getWordSize() {
     return wordSize;
   }
 
-  @JsonSetter(Flag.WordSize)
   public void setWordSize(Long wordSize) {
     this.wordSize = wordSize;
   }
@@ -76,12 +68,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Integer gapOpen;
 
-  @JsonGetter(Flag.GapOpen)
   public Integer getGapOpen() {
     return gapOpen;
   }
 
-  @JsonSetter(Flag.GapOpen)
   public void setGapOpen(Integer gapOpen) {
     this.gapOpen = gapOpen;
   }
@@ -90,12 +80,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Integer gapExtend;
 
-  @JsonGetter(Flag.GapExtend)
   public Integer getGapExtend() {
     return gapExtend;
   }
 
-  @JsonSetter(Flag.GapExtend)
   public void setGapExtend(Integer gapExtend) {
     this.gapExtend = gapExtend;
   }
@@ -104,12 +92,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Long maxIntronLength;
 
-  @JsonGetter(Flag.MaxIntronLength)
   public Long getMaxIntronLength() {
     return maxIntronLength;
   }
 
-  @JsonSetter(Flag.MaxIntronLength)
   public void setMaxIntronLength(Long maxIntronLength) {
     this.maxIntronLength = maxIntronLength;
   }
@@ -118,12 +104,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private ScoringMatrix matrix;
 
-  @JsonGetter(Flag.Matrix)
   public ScoringMatrix getMatrix() {
     return matrix;
   }
 
-  @JsonSetter(Flag.Matrix)
   public void setMatrix(ScoringMatrix matrix) {
     this.matrix = matrix;
   }
@@ -132,12 +116,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Double threshold;
 
-  @JsonGetter(Flag.Threshold)
   public Double getThreshold() {
     return threshold;
   }
 
-  @JsonSetter(Flag.Threshold)
   public void setThreshold(Double threshold) {
     this.threshold = threshold;
   }
@@ -146,12 +128,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private String compBasedStats;
 
-  @JsonGetter(Flag.CompBasedStats)
   public String getCompBasedStats() {
     return compBasedStats;
   }
 
-  @JsonSetter(Flag.CompBasedStats)
   public void setCompBasedStats(String compBasedStats) {
     this.compBasedStats = compBasedStats;
   }
@@ -160,12 +140,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private String subjectFile;
 
-  @JsonGetter(Flag.SubjectFile)
   public String getSubjectFile() {
     return subjectFile;
   }
 
-  @JsonSetter(Flag.SubjectFile)
   public void setSubjectFile(String subjectFile) {
     this.subjectFile = subjectFile;
   }
@@ -174,12 +152,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Location subjectLocation;
 
-  @JsonGetter(Flag.SubjectLocation)
   public Location getSubjectLocation() {
     return subjectLocation;
   }
 
-  @JsonSetter(Flag.SubjectLocation)
   public void setSubjectLocation(Location subjectLocation) {
     this.subjectLocation = subjectLocation;
   }
@@ -188,12 +164,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Seg seg;
 
-  @JsonGetter(Flag.Seg)
   public Seg getSeg() {
     return seg;
   }
 
-  @JsonSetter(Flag.Seg)
   public void setSeg(Seg seg) {
     this.seg = seg;
   }
@@ -202,12 +176,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private String dbSoftMask;
 
-  @JsonGetter(Flag.DBSoftMask)
   public String getDBSoftMask() {
     return dbSoftMask;
   }
 
-  @JsonSetter(Flag.DBSoftMask)
   public void setDBSoftMask(String dbSoftMask) {
     this.dbSoftMask = dbSoftMask;
   }
@@ -216,12 +188,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private String dbHardMask;
 
-  @JsonGetter(Flag.DBHardMask)
   public String getDBHardMask() {
     return dbHardMask;
   }
 
-  @JsonSetter(Flag.DBHardMask)
   public void setDBHardMask(String dbHardMask) {
     this.dbHardMask = dbHardMask;
   }
@@ -230,12 +200,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Long cullingLimit;
 
-  @JsonGetter(Flag.CullingLimit)
   public Long getCullingLimit() {
     return cullingLimit;
   }
 
-  @JsonSetter(Flag.CullingLimit)
   public void setCullingLimit(Long cullingLimit) {
     this.cullingLimit = cullingLimit;
   }
@@ -244,12 +212,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Boolean sumStats;
 
-  @JsonGetter(Flag.SumStats)
   public Boolean getSumStats() {
     return sumStats;
   }
 
-  @JsonSetter(Flag.SumStats)
   public void setSumStats(Boolean sumStats) {
     this.sumStats = sumStats;
   }
@@ -258,12 +224,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Double extensionDropoffPrelimGapped;
 
-  @JsonGetter(Flag.ExtensionDropoffPrelimGapped)
   public Double getExtensionDropoffPrelimGapped() {
     return extensionDropoffPrelimGapped;
   }
 
-  @JsonSetter(Flag.ExtensionDropoffPrelimGapped)
   public void setExtensionDropoffPrelimGapped(Double extensionDropoffPrelimGapped) {
     this.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
   }
@@ -272,12 +236,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Double extensionDropoffFinalGapped;
 
-  @JsonGetter(Flag.ExtensionDropoffFinalGapped)
   public Double getExtensionDropoffFinalGapped() {
     return extensionDropoffFinalGapped;
   }
 
-  @JsonSetter(Flag.ExtensionDropoffFinalGapped)
   public void setExtensionDropoffFinalGapped(Double extensionDropoffFinalGapped) {
     this.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
   }
@@ -286,12 +248,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Boolean ungappedAlignmentsOnly;
 
-  @JsonGetter(Flag.UngappedAlignmentsOnly)
   public Boolean getUngappedAlignmentsOnly() {
     return ungappedAlignmentsOnly;
   }
 
-  @JsonSetter(Flag.UngappedAlignmentsOnly)
   public void setUngappedAlignmentsOnly(Boolean ungappedAlignmentsOnly) {
     this.ungappedAlignmentsOnly = ungappedAlignmentsOnly;
   }
@@ -300,12 +260,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Short numThreads;
 
-  @JsonGetter(Flag.NumThreads)
   public Short getNumThreads() {
     return numThreads;
   }
 
-  @JsonSetter(Flag.NumThreads)
   public void setNumThreads(Short numThreads) {
     this.numThreads = numThreads;
   }
@@ -314,12 +272,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Boolean useSmithWatermanTraceback;
 
-  @JsonGetter(Flag.UseSmithWatermanTraceback)
   public Boolean getUseSmithWatermanTraceback() {
     return useSmithWatermanTraceback;
   }
 
-  @JsonSetter(Flag.UseSmithWatermanTraceback)
   public void setUseSmithWatermanTraceback(Boolean useSmithWatermanTraceback) {
     this.useSmithWatermanTraceback = useSmithWatermanTraceback;
   }
@@ -328,12 +284,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Double bestHitOverhang;
 
-  @JsonGetter(Flag.BestHitOverhang)
   public Double getBestHitOverhang() {
     return bestHitOverhang;
   }
 
-  @JsonSetter(Flag.BestHitOverhang)
   public void setBestHitOverhang(Double bestHitOverhang) {
     this.bestHitOverhang = bestHitOverhang;
   }
@@ -342,12 +296,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Double bestHitScoreEdge;
 
-  @JsonGetter(Flag.BestHitScoreEdge)
   public Double getBestHitScoreEdge() {
     return bestHitScoreEdge;
   }
 
-  @JsonSetter(Flag.BestHitScoreEdge)
   public void setBestHitScoreEdge(Double bestHitScoreEdge) {
     this.bestHitScoreEdge = bestHitScoreEdge;
   }
@@ -356,12 +308,10 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 
   private Boolean subjectBestHit;
 
-  @JsonGetter(Flag.SubjectBestHit)
   public Boolean getSubjectBestHit() {
     return subjectBestHit;
   }
 
-  @JsonSetter(Flag.SubjectBestHit)
   public void setSubjectBestHit(Boolean subjectBestHit) {
     this.subjectBestHit = subjectBestHit;
   }
@@ -451,9 +401,51 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
     );
   }
 
+  @Override
   public BlastX copy() {
     var out = new BlastX();
     copyInto(out);
+    return out;
+  }
+
+  @Override
+  @JsonValue
+  public JSONObjectEncoder toJSON() {
+    var js = super.toJSON();
+
+    js.encode(Flag.Strand, strand);
+    js.encode(Flag.QueryGenCode, queryGenCode);
+    js.encode(Flag.Task, task);
+    js.encode(Flag.WordSize, wordSize);
+    js.encode(Flag.GapOpen, gapOpen);
+    js.encode(Flag.GapExtend, gapExtend);
+    js.encode(Flag.MaxIntronLength, maxIntronLength);
+    js.encode(Flag.Matrix, matrix);
+    js.encode(Flag.Threshold, threshold);
+    js.encode(Flag.CompBasedStats, compBasedStats);
+    js.encode(Flag.SubjectFile, subjectFile);
+    js.encode(Flag.SubjectLocation, subjectLocation);
+    js.encode(Flag.Seg, seg);
+    js.encode(Flag.DBSoftMask, dbSoftMask);
+    js.encode(Flag.DBHardMask, dbHardMask);
+    js.encode(Flag.CullingLimit, cullingLimit);
+    js.encode(Flag.SumStats, sumStats);
+    js.encode(Flag.ExtensionDropoffPrelimGapped, extensionDropoffPrelimGapped);
+    js.encode(Flag.ExtensionDropoffFinalGapped, extensionDropoffFinalGapped);
+    js.encode(Flag.UngappedAlignmentsOnly, ungappedAlignmentsOnly);
+    js.encode(Flag.NumThreads, numThreads);
+    js.encode(Flag.UseSmithWatermanTraceback, useSmithWatermanTraceback);
+    js.encode(Flag.BestHitOverhang, bestHitOverhang);
+    js.encode(Flag.BestHitScoreEdge, bestHitScoreEdge);
+    js.encode(Flag.SubjectBestHit, subjectBestHit);
+
+    return js;
+  }
+
+  @JsonCreator
+  public static BlastX fromJSON(JSONObjectDecoder js) {
+    var out = new BlastX();
+    out.copyInto(js);
     return out;
   }
 
@@ -486,5 +478,36 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
     out.bestHitOverhang = bestHitOverhang;
     out.bestHitScoreEdge = bestHitScoreEdge;
     out.subjectBestHit = subjectBestHit;
+  }
+
+  @Override
+  protected void copyInto(JSONObjectDecoder js) {
+    super.copyInto(js);
+
+    js.decode(Flag.Strand, this::setStrand, Strand::fromJSON);
+    js.decode(Flag.QueryGenCode, this::setQueryGenCode);
+    js.decode(Flag.Task, this::setTask, BlastXTask::fromJSON);
+    js.decode(Flag.WordSize, this::setWordSize);
+    js.decode(Flag.GapOpen, this::setGapOpen);
+    js.decode(Flag.GapExtend, this::setGapExtend);
+    js.decode(Flag.MaxIntronLength, this::setMaxIntronLength);
+    js.decode(Flag.Matrix, this::setMatrix, ScoringMatrix::fromJSON);
+    js.decode(Flag.Threshold, this::setThreshold);
+    js.decode(Flag.CompBasedStats, this::setCompBasedStats);
+    js.decode(Flag.SubjectFile, this::setSubjectFile);
+    js.decode(Flag.SubjectLocation, this::setSubjectLocation, Location::fromJSON);
+    js.decode(Flag.Seg, this::setSeg, Seg::fromJSON);
+    js.decode(Flag.DBSoftMask, this::setDBSoftMask);
+    js.decode(Flag.DBHardMask, this::setDBHardMask);
+    js.decode(Flag.CullingLimit, this::setCullingLimit);
+    js.decode(Flag.SumStats, this::setSumStats);
+    js.decode(Flag.ExtensionDropoffPrelimGapped, this::setExtensionDropoffPrelimGapped);
+    js.decode(Flag.ExtensionDropoffFinalGapped, this::setExtensionDropoffFinalGapped);
+    js.decode(Flag.UngappedAlignmentsOnly, this::setUngappedAlignmentsOnly);
+    js.decode(Flag.NumThreads, this::setNumThreads);
+    js.decode(Flag.UseSmithWatermanTraceback, this::setUseSmithWatermanTraceback);
+    js.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
+    js.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
+    js.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
   }
 }

@@ -2,30 +2,27 @@ package org.veupathdb.lib.blast.field;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.veupathdb.lib.blast.consts.Key;
+import org.veupathdb.lib.blast.util.JSONConstructor;
+import org.veupathdb.lib.blast.util.JSONValue;
 
-@JsonPropertyOrder({Key.Start, Key.Stop})
-public class Location
+public class Location implements JSONValue
 {
   private final int start;
   private final int stop;
 
-  @JsonCreator
-  public Location(@JsonProperty(Key.Start) int start, @JsonProperty(Key.Stop) int stop) {
+  public Location(int start, int stop) {
     this.start = start;
     this.stop  = stop;
   }
 
-  @JsonGetter(Key.Start)
   public int getStart() {
     return start;
   }
 
-  @JsonGetter(Key.Stop)
   public int getStop() {
     return stop;
   }
@@ -50,6 +47,22 @@ public class Location
 
   public Location copy() {
     return new Location(start, stop);
+  }
+
+  @Override
+  @JsonValue
+  public ObjectNode toJSON() {
+    var out = JSONConstructor.newObject();
+
+    out.set(Key.Start, JSONConstructor.newInt(start));
+    out.set(Key.Stop, JSONConstructor.newInt(stop));
+
+    return out;
+  }
+
+  @JsonCreator
+  public static Location fromJSON(JsonNode js) {
+    return new Location(js.get(Key.Start).intValue(), js.get(Key.Stop).intValue());
   }
 
   public static Location fromString(String value) {

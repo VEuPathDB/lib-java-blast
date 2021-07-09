@@ -4,51 +4,56 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.veupathdb.lib.blast.consts.Key;
+import org.veupathdb.lib.blast.util.DefaultingJSONValue;
+import org.veupathdb.lib.blast.util.JSONConstructor;
 
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
-@JsonPropertyOrder({Key.Type, Key.Delimiter, Key.Fields})
-public class OutFormat
+public class OutFormat implements DefaultingJSONValue
 {
+  public static final FormatType DefaultFormatType = FormatType.Pairwise;
+
   private FormatType        type;
   private String            delimiter;
   private List<FormatField> fields = new ArrayList<>();
 
-  @JsonGetter(Key.Type)
   public FormatType getType() {
     return type;
   }
 
-  @JsonSetter(Key.Type)
   public OutFormat setType(FormatType type) {
     this.type = type;
     return this;
   }
 
-  @JsonGetter(Key.Delimiter)
   public String getDelimiter() {
     return delimiter;
   }
 
-  @JsonSetter(Key.Delimiter)
   public OutFormat setDelimiter(String delimiter) {
     this.delimiter = delimiter;
     return this;
   }
 
-  @JsonGetter(Key.Fields)
   public List<FormatField> getFields() {
     return fields;
   }
 
-  @JsonSetter(Key.Fields)
   public OutFormat setFields(List<FormatField> fields) {
     this.fields = fields;
     return this;
+  }
+
+  @Override
+  public boolean isDefault() {
+    return (type == null || type == DefaultFormatType) &&
+      (delimiter == null || delimiter.isBlank()) &&
+      (
+        fields == null ||
+        fields.isEmpty() ||
+        (fields.size() == 1 && fields.get(0) == FormatField.StandardFields)
+      );
   }
 
   @Override
@@ -110,6 +115,41 @@ public class OutFormat
         out.getFields().add(FormatField.fromString(split[start]));
       }
     }
+
+    return out;
+  }
+
+  @JsonValue
+  @Override
+  public JsonNode toJSON() {
+    var out = JSONConstructor.newObject();
+
+    if (type != null)
+      out.set(Key.Type, type.toJSON());
+
+    if (delimiter != null && !delimiter.isBlank())
+      out.set(Key.Delimiter, JSONConstructor.newText(delimiter));
+
+    if (
+      fields != null &&
+      !fields.isEmpty() &&
+      (fields.size() > 1 || fields.get(0) != FormatField.StandardFields)
+    )
+      out.set(Key.Fields, JSONConstructor.newArray(fields));
+
+    return out;
+  }
+
+  @JsonCreator
+  public static OutFormat fromJSON(JsonNode js) {
+    var out = new OutFormat();
+
+    if (js.has(Key.Type))
+      out.type = FormatType.fromIntValue(js.get(Key.Type).intValue());
+    if (js.has(Key.Delimiter))
+      out.delimiter = js.get(Key.Delimiter).textValue();
+    if (js.has(Key.Fields))
+      js.get(Key.Fields).forEach(f -> out.fields.add(FormatField.fromString(f.textValue())));
 
     return out;
   }

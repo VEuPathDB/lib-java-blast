@@ -2,15 +2,15 @@ package org.veupathdb.lib.blast;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.Location;
 import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
+import org.veupathdb.lib.blast.util.JSONObjectDecoder;
+import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 {
   @Override
@@ -22,12 +22,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Long wordSize;
 
-  @JsonGetter(Flag.WordSize)
   public Long getWordSize() {
     return wordSize;
   }
 
-  @JsonSetter(Flag.WordSize)
   public void setWordSize(Long wordSize) {
     this.wordSize = wordSize;
   }
@@ -36,12 +34,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Integer gapOpen;
 
-  @JsonGetter(Flag.GapOpen)
   public Integer getGapOpen() {
     return gapOpen;
   }
 
-  @JsonSetter(Flag.GapOpen)
   public void setGapOpen(Integer gapOpen) {
     this.gapOpen = gapOpen;
   }
@@ -50,12 +46,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Integer gapExtend;
 
-  @JsonGetter(Flag.GapExtend)
   public Integer getGapExtend() {
     return gapExtend;
   }
 
-  @JsonSetter(Flag.GapExtend)
   public void setGapExtend(Integer gapExtend) {
     this.gapExtend = gapExtend;
   }
@@ -64,12 +58,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private ScoringMatrix matrix;
 
-  @JsonGetter(Flag.Matrix)
   public ScoringMatrix getMatrix() {
     return matrix;
   }
 
-  @JsonSetter(Flag.Matrix)
   public void setMatrix(ScoringMatrix matrix) {
     this.matrix = matrix;
   }
@@ -78,12 +70,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Double threshold;
 
-  @JsonGetter(Flag.Threshold)
   public Double getThreshold() {
     return threshold;
   }
 
-  @JsonSetter(Flag.Threshold)
   public void setThreshold(Double threshold) {
     this.threshold = threshold;
   }
@@ -92,12 +82,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private String compBasedStats;
 
-  @JsonGetter(Flag.CompBasedStats)
   public String getCompBasedStats() {
     return compBasedStats;
   }
 
-  @JsonSetter(Flag.CompBasedStats)
   public void setCompBasedStats(String compBasedStats) {
     this.compBasedStats = compBasedStats;
   }
@@ -106,12 +94,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private String subjectFile;
 
-  @JsonGetter(Flag.SubjectFile)
   public String getSubjectFile() {
     return subjectFile;
   }
 
-  @JsonSetter(Flag.SubjectFile)
   public void setSubjectFile(String subjectFile) {
     this.subjectFile = subjectFile;
   }
@@ -120,12 +106,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Location subjectLocation;
 
-  @JsonGetter(Flag.SubjectLocation)
   public Location getSubjectLocation() {
     return subjectLocation;
   }
 
-  @JsonSetter(Flag.SubjectLocation)
   public void setSubjectLocation(Location subjectLocation) {
     this.subjectLocation = subjectLocation;
   }
@@ -134,12 +118,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Seg seg;
 
-  @JsonGetter(Flag.Seg)
   public Seg getSeg() {
     return seg;
   }
 
-  @JsonSetter(Flag.Seg)
   public void setSeg(Seg seg) {
     this.seg = seg;
   }
@@ -148,12 +130,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Long cullingLimit;
 
-  @JsonGetter(Flag.CullingLimit)
   public Long getCullingLimit() {
     return cullingLimit;
   }
 
-  @JsonSetter(Flag.CullingLimit)
   public void setCullingLimit(Long cullingLimit) {
     this.cullingLimit = cullingLimit;
   }
@@ -162,12 +142,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Boolean sumStats;
 
-  @JsonGetter(Flag.SumStats)
   public Boolean getSumStats() {
     return sumStats;
   }
 
-  @JsonSetter(Flag.SumStats)
   public void setSumStats(Boolean sumStats) {
     this.sumStats = sumStats;
   }
@@ -176,12 +154,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Double extensionDropoffPrelimGapped;
 
-  @JsonGetter(Flag.ExtensionDropoffPrelimGapped)
   public Double getExtensionDropoffPrelimGapped() {
     return extensionDropoffPrelimGapped;
   }
 
-  @JsonSetter(Flag.ExtensionDropoffPrelimGapped)
   public void setExtensionDropoffPrelimGapped(Double extensionDropoffPrelimGapped) {
     this.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
   }
@@ -190,12 +166,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Double extensionDropoffFinalGapped;
 
-  @JsonGetter(Flag.ExtensionDropoffFinalGapped)
   public Double getExtensionDropoffFinalGapped() {
     return extensionDropoffFinalGapped;
   }
 
-  @JsonSetter(Flag.ExtensionDropoffFinalGapped)
   public void setExtensionDropoffFinalGapped(Double extensionDropoffFinalGapped) {
     this.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
   }
@@ -204,12 +178,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Double gapTrigger;
 
-  @JsonGetter(Flag.GapTrigger)
   public Double getGapTrigger() {
     return gapTrigger;
   }
 
-  @JsonSetter(Flag.GapTrigger)
   public void setGapTrigger(Double gapTrigger) {
     this.gapTrigger = gapTrigger;
   }
@@ -218,12 +190,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Short numThreads;
 
-  @JsonGetter(Flag.NumThreads)
   public Short getNumThreads() {
     return numThreads;
   }
 
-  @JsonSetter(Flag.NumThreads)
   public void setNumThreads(Short numThreads) {
     this.numThreads = numThreads;
   }
@@ -232,12 +202,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Boolean useSmithWatermanTraceback;
 
-  @JsonGetter(Flag.UseSmithWatermanTraceback)
   public Boolean getUseSmithWatermanTraceback() {
     return useSmithWatermanTraceback;
   }
 
-  @JsonSetter(Flag.UseSmithWatermanTraceback)
   public void setUseSmithWatermanTraceback(Boolean useSmithWatermanTraceback) {
     this.useSmithWatermanTraceback = useSmithWatermanTraceback;
   }
@@ -246,12 +214,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Double bestHitOverhang;
 
-  @JsonGetter(Flag.BestHitOverhang)
   public Double getBestHitOverhang() {
     return bestHitOverhang;
   }
 
-  @JsonSetter(Flag.BestHitOverhang)
   public void setBestHitOverhang(Double bestHitOverhang) {
     this.bestHitOverhang = bestHitOverhang;
   }
@@ -260,12 +226,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Double bestHitScoreEdge;
 
-  @JsonGetter(Flag.BestHitScoreEdge)
   public Double getBestHitScoreEdge() {
     return bestHitScoreEdge;
   }
 
-  @JsonSetter(Flag.BestHitScoreEdge)
   public void setBestHitScoreEdge(Double bestHitScoreEdge) {
     this.bestHitScoreEdge = bestHitScoreEdge;
   }
@@ -274,12 +238,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Boolean subjectBestHit;
 
-  @JsonGetter(Flag.SubjectBestHit)
   public Boolean getSubjectBestHit() {
     return subjectBestHit;
   }
 
-  @JsonSetter(Flag.SubjectBestHit)
   public void setSubjectBestHit(Boolean subjectBestHit) {
     this.subjectBestHit = subjectBestHit;
   }
@@ -288,12 +250,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Long numIterations;
 
-  @JsonGetter(Flag.NumIterations)
   public Long getNumIterations() {
     return numIterations;
   }
 
-  @JsonSetter(Flag.NumIterations)
   public void setNumIterations(Long numIterations) {
     this.numIterations = numIterations;
   }
@@ -302,12 +262,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private String outPSSMFile;
 
-  @JsonGetter(Flag.OutPSSMFile)
   public String getOutPSSMFile() {
     return outPSSMFile;
   }
 
-  @JsonSetter(Flag.OutPSSMFile)
   public void setOutPSSMFile(String outPSSMFile) {
     this.outPSSMFile = outPSSMFile;
   }
@@ -316,12 +274,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private String outASCIIPSSMFile;
 
-  @JsonGetter(Flag.OutASCIIPSSMFile)
   public String getOutASCIIPSSMFile() {
     return outASCIIPSSMFile;
   }
 
-  @JsonSetter(Flag.OutASCIIPSSMFile)
   public void setOutASCIIPSSMFile(String outASCIIPSSMFile) {
     this.outASCIIPSSMFile = outASCIIPSSMFile;
   }
@@ -330,12 +286,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Boolean savePSSMAfterLastRound;
 
-  @JsonGetter(Flag.SavePSSMAfterLastRound)
   public Boolean getSavePSSMAfterLastRound() {
     return savePSSMAfterLastRound;
   }
 
-  @JsonSetter(Flag.SavePSSMAfterLastRound)
   public void setSavePSSMAfterLastRound(Boolean savePSSMAfterLastRound) {
     this.savePSSMAfterLastRound = savePSSMAfterLastRound;
   }
@@ -344,12 +298,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Boolean saveEachPSSM;
 
-  @JsonGetter(Flag.SaveEachPSSM)
   public Boolean getSaveEachPSSM() {
     return saveEachPSSM;
   }
 
-  @JsonSetter(Flag.SaveEachPSSM)
   public void setSaveEachPSSM(Boolean saveEachPSSM) {
     this.saveEachPSSM = saveEachPSSM;
   }
@@ -358,12 +310,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private String inMSAFile;
 
-  @JsonGetter(Flag.InMSAFile)
   public String getInMSAFile() {
     return inMSAFile;
   }
 
-  @JsonSetter(Flag.InMSAFile)
   public void setInMSAFile(String inMSAFile) {
     this.inMSAFile = inMSAFile;
   }
@@ -372,12 +322,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Long msaMasterIDX;
 
-  @JsonGetter(Flag.MSAMasterIDX)
   public Long getMSAMasterIDX() {
     return msaMasterIDX;
   }
 
-  @JsonSetter(Flag.MSAMasterIDX)
   public void setMSAMasterIDX(Long msaMasterIDX) {
     this.msaMasterIDX = msaMasterIDX;
   }
@@ -386,12 +334,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Boolean ignoreMSAMaster;
 
-  @JsonGetter(Flag.IgnoreMSAMaster)
   public Boolean getIgnoreMSAMaster() {
     return ignoreMSAMaster;
   }
 
-  @JsonSetter(Flag.IgnoreMSAMaster)
   public void setIgnoreMSAMaster(Boolean ignoreMSAMaster) {
     this.ignoreMSAMaster = ignoreMSAMaster;
   }
@@ -400,12 +346,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private String inPSSMFile;
 
-  @JsonGetter(Flag.InPSSMFile)
   public String getInPSSMFile() {
     return inPSSMFile;
   }
 
-  @JsonSetter(Flag.InPSSMFile)
   public void setInPSSMFile(String inPSSMFile) {
     this.inPSSMFile = inPSSMFile;
   }
@@ -414,12 +358,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Integer pseudocount;
 
-  @JsonGetter(Flag.Pseudocount)
   public Integer getPseudocount() {
     return pseudocount;
   }
 
-  @JsonSetter(Flag.Pseudocount)
   public void setPseudocount(Integer pseudocount) {
     this.pseudocount = pseudocount;
   }
@@ -428,12 +370,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private Double inclusionEThreshold;
 
-  @JsonGetter(Flag.InclusionEThreshold)
   public Double getInclusionEThreshold() {
     return inclusionEThreshold;
   }
 
-  @JsonSetter(Flag.InclusionEThreshold)
   public void setInclusionEThreshold(Double inclusionEThreshold) {
     this.inclusionEThreshold = inclusionEThreshold;
   }
@@ -442,12 +382,10 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
 
   private String phiPatternFile;
 
-  @JsonGetter(Flag.PhiPatternFile)
   public String getPhiPatternFile() {
     return phiPatternFile;
   }
 
-  @JsonSetter(Flag.PhiPatternFile)
   public void setPhiPatternFile(String phiPatternFile) {
     this.phiPatternFile = phiPatternFile;
   }
@@ -540,9 +478,57 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
     );
   }
 
+  @Override
   public PSIBlast copy() {
     var out = new PSIBlast();
     copyInto(out);
+    return out;
+  }
+
+  @Override
+  @JsonValue
+  public JSONObjectEncoder toJSON() {
+    var js = super.toJSON();
+
+    js.encode(Flag.WordSize, wordSize);
+    js.encode(Flag.GapOpen, gapOpen);
+    js.encode(Flag.GapExtend, gapExtend);
+    js.encode(Flag.Matrix, matrix);
+    js.encode(Flag.Threshold, threshold);
+    js.encode(Flag.CompBasedStats, compBasedStats);
+    js.encode(Flag.SubjectFile, subjectFile);
+    js.encode(Flag.SubjectLocation, subjectLocation);
+    js.encode(Flag.Seg, seg);
+    js.encode(Flag.CullingLimit, cullingLimit);
+    js.encode(Flag.SumStats, sumStats);
+    js.encode(Flag.ExtensionDropoffPrelimGapped, extensionDropoffPrelimGapped);
+    js.encode(Flag.ExtensionDropoffFinalGapped, extensionDropoffFinalGapped);
+    js.encode(Flag.GapTrigger, gapTrigger);
+    js.encode(Flag.NumThreads, numThreads);
+    js.encode(Flag.UseSmithWatermanTraceback, useSmithWatermanTraceback);
+    js.encode(Flag.BestHitOverhang, bestHitOverhang);
+    js.encode(Flag.BestHitScoreEdge, bestHitScoreEdge);
+    js.encode(Flag.SubjectBestHit, subjectBestHit);
+    js.encode(Flag.NumIterations, numIterations);
+    js.encode(Flag.OutPSSMFile, outPSSMFile);
+    js.encode(Flag.OutASCIIPSSMFile, outASCIIPSSMFile);
+    js.encode(Flag.SavePSSMAfterLastRound, savePSSMAfterLastRound);
+    js.encode(Flag.SaveEachPSSM, saveEachPSSM);
+    js.encode(Flag.InMSAFile, inMSAFile);
+    js.encode(Flag.MSAMasterIDX, msaMasterIDX);
+    js.encode(Flag.IgnoreMSAMaster, ignoreMSAMaster);
+    js.encode(Flag.InPSSMFile, inPSSMFile);
+    js.encode(Flag.Pseudocount, pseudocount);
+    js.encode(Flag.InclusionEThreshold, inclusionEThreshold);
+    js.encode(Flag.PhiPatternFile, phiPatternFile);
+
+    return js;
+  }
+
+  @JsonCreator
+  public static PSIBlast fromJSON(JSONObjectDecoder js) {
+    var out = new PSIBlast();
+    out.copyInto(js);
     return out;
   }
 
@@ -581,5 +567,42 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
     out.pseudocount                  = pseudocount;
     out.inclusionEThreshold          = inclusionEThreshold;
     out.phiPatternFile               = phiPatternFile;
+  }
+
+  @Override
+  protected void copyInto(JSONObjectDecoder js) {
+    super.copyInto(js);
+
+    js.decode(Flag.WordSize, this::setWordSize);
+    js.decode(Flag.GapOpen, this::setGapOpen);
+    js.decode(Flag.GapExtend, this::setGapExtend);
+    js.decode(Flag.Matrix, this::setMatrix, ScoringMatrix::fromJSON);
+    js.decode(Flag.Threshold, this::setThreshold);
+    js.decode(Flag.CompBasedStats, this::setCompBasedStats);
+    js.decode(Flag.SubjectFile, this::setSubjectFile);
+    js.decode(Flag.SubjectLocation, this::setSubjectLocation, Location::fromJSON);
+    js.decode(Flag.Seg, this::setSeg, Seg::fromJSON);
+    js.decode(Flag.CullingLimit, this::setCullingLimit);
+    js.decode(Flag.SumStats, this::setSumStats);
+    js.decode(Flag.ExtensionDropoffPrelimGapped, this::setExtensionDropoffPrelimGapped);
+    js.decode(Flag.ExtensionDropoffFinalGapped, this::setExtensionDropoffFinalGapped);
+    js.decode(Flag.GapTrigger, this::setGapTrigger);
+    js.decode(Flag.NumThreads, this::setNumThreads);
+    js.decode(Flag.UseSmithWatermanTraceback, this::setUseSmithWatermanTraceback);
+    js.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
+    js.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
+    js.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
+    js.decode(Flag.NumIterations, this::setNumIterations);
+    js.decode(Flag.OutPSSMFile, this::setOutPSSMFile);
+    js.decode(Flag.OutASCIIPSSMFile, this::setOutASCIIPSSMFile);
+    js.decode(Flag.SavePSSMAfterLastRound, this::setSavePSSMAfterLastRound);
+    js.decode(Flag.SaveEachPSSM, this::setSaveEachPSSM);
+    js.decode(Flag.InMSAFile, this::setInMSAFile);
+    js.decode(Flag.MSAMasterIDX, this::setMSAMasterIDX);
+    js.decode(Flag.IgnoreMSAMaster, this::setIgnoreMSAMaster);
+    js.decode(Flag.InPSSMFile, this::setInPSSMFile);
+    js.decode(Flag.Pseudocount, this::setPseudocount);
+    js.decode(Flag.InclusionEThreshold, this::setInclusionEThreshold);
+    js.decode(Flag.PhiPatternFile, this::setPhiPatternFile);
   }
 }

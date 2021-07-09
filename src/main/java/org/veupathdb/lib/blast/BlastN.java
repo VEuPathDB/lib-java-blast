@@ -2,13 +2,13 @@ package org.veupathdb.lib.blast;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.*;
+import org.veupathdb.lib.blast.util.JSONObjectDecoder;
+import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BlastN extends BlastWithLists implements BlastQueryConfig
 {
   @Override
@@ -20,12 +20,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Strand strand;
 
-  @JsonGetter(Flag.Strand)
   public Strand getStrand() {
     return strand;
   }
 
-  @JsonSetter(Flag.Strand)
   public void setStrand(Strand strand) {
     this.strand = strand;
   }
@@ -34,12 +32,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private BlastNTask task;
 
-  @JsonGetter(Flag.Task)
   public BlastNTask getTask() {
     return task;
   }
 
-  @JsonSetter(Flag.Task)
   public void setTask(BlastNTask task) {
     this.task = task;
   }
@@ -48,12 +44,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Long wordSize;
 
-  @JsonGetter(Flag.WordSize)
   public Long getWordSize() {
     return wordSize;
   }
 
-  @JsonSetter(Flag.WordSize)
   public void setWordSize(Long wordSize) {
     this.wordSize = wordSize;
   }
@@ -62,12 +56,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Integer gapOpen;
 
-  @JsonGetter(Flag.GapOpen)
   public Integer getGapOpen() {
     return gapOpen;
   }
 
-  @JsonSetter(Flag.GapOpen)
   public void setGapOpen(Integer gapOpen) {
     this.gapOpen = gapOpen;
   }
@@ -76,12 +68,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Integer gapExtend;
 
-  @JsonGetter(Flag.GapExtend)
   public Integer getGapExtend() {
     return gapExtend;
   }
 
-  @JsonSetter(Flag.GapExtend)
   public void setGapExtend(Integer gapExtend) {
     this.gapExtend = gapExtend;
   }
@@ -90,12 +80,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Integer penalty;
 
-  @JsonGetter(Flag.Penalty)
   public Integer getPenalty() {
     return penalty;
   }
 
-  @JsonSetter(Flag.Penalty)
   public void setPenalty(Integer penalty) {
     this.penalty = penalty;
   }
@@ -104,12 +92,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Long reward;
 
-  @JsonGetter(Flag.Reward)
   public Long getReward() {
     return reward;
   }
 
-  @JsonSetter(Flag.Reward)
   public void setReward(Long reward) {
     this.reward = reward;
   }
@@ -118,12 +104,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Boolean useIndex;
 
-  @JsonGetter(Flag.UseIndex)
   public Boolean getUseIndex() {
     return useIndex;
   }
 
-  @JsonSetter(Flag.UseIndex)
   public void setUseIndex(Boolean useIndex) {
     this.useIndex = useIndex;
   }
@@ -132,12 +116,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private String indexName;
 
-  @JsonGetter(Flag.IndexName)
   public String getIndexName() {
     return indexName;
   }
 
-  @JsonSetter(Flag.IndexName)
   public void setIndexName(String indexName) {
     this.indexName = indexName;
   }
@@ -146,12 +128,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private String subjectFile;
 
-  @JsonGetter(Flag.SubjectFile)
   public String getSubjectFile() {
     return subjectFile;
   }
 
-  @JsonSetter(Flag.SubjectFile)
   public void setSubjectFile(String subjectFile) {
     this.subjectFile = subjectFile;
   }
@@ -160,12 +140,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Location subjectLocation;
 
-  @JsonGetter(Flag.SubjectLocation)
   public Location getSubjectLocation() {
     return subjectLocation;
   }
 
-  @JsonSetter(Flag.SubjectLocation)
   public void setSubjectLocation(Location subjectLocation) {
     this.subjectLocation = subjectLocation;
   }
@@ -174,12 +152,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Dust dust;
 
-  @JsonGetter(Flag.Dust)
   public Dust getDust() {
     return dust;
   }
 
-  @JsonSetter(Flag.Dust)
   public void setDust(Dust dust) {
     this.dust = dust;
   }
@@ -188,12 +164,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private String filteringDB;
 
-  @JsonGetter(Flag.FilteringDB)
   public String getFilteringDB() {
     return filteringDB;
   }
 
-  @JsonSetter(Flag.FilteringDB)
   public void setFilteringDB(String filteringDB) {
     this.filteringDB = filteringDB;
   }
@@ -202,12 +176,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Integer windowMaskerTaxID;
 
-  @JsonGetter(Flag.WindowMaskerTaxID)
   public Integer getWindowMaskerTaxID() {
     return windowMaskerTaxID;
   }
 
-  @JsonSetter(Flag.WindowMaskerTaxID)
   public void setWindowMaskerTaxID(Integer windowMaskerTaxID) {
     this.windowMaskerTaxID = windowMaskerTaxID;
   }
@@ -216,12 +188,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private String windowMaskerDB;
 
-  @JsonGetter(Flag.WindowMaskerDB)
   public String getWindowMaskerDB() {
     return windowMaskerDB;
   }
 
-  @JsonSetter(Flag.WindowMaskerDB)
   public void setWindowMaskerDB(String windowMaskerDB) {
     this.windowMaskerDB = windowMaskerDB;
   }
@@ -230,12 +200,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private String dbSoftMask;
 
-  @JsonGetter(Flag.DBSoftMask)
   public String getDBSoftMask() {
     return dbSoftMask;
   }
 
-  @JsonSetter(Flag.DBSoftMask)
   public void setDBSoftMask(String dbSoftMask) {
     this.dbSoftMask = dbSoftMask;
   }
@@ -244,12 +212,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private String dbHardMask;
 
-  @JsonGetter(Flag.DBHardMask)
   public String getDBHardMask() {
     return dbHardMask;
   }
 
-  @JsonSetter(Flag.DBHardMask)
   public void setDBHardMask(String dbHardMask) {
     this.dbHardMask = dbHardMask;
   }
@@ -258,12 +224,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Double percentIdentity;
 
-  @JsonGetter(Flag.PercentIdentity)
   public Double getPercentIdentity() {
     return percentIdentity;
   }
 
-  @JsonSetter(Flag.PercentIdentity)
   public void setPercentIdentity(Double percentIdentity) {
     this.percentIdentity = percentIdentity;
   }
@@ -272,12 +236,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Long cullingLimit;
 
-  @JsonGetter(Flag.CullingLimit)
   public Long getCullingLimit() {
     return cullingLimit;
   }
 
-  @JsonSetter(Flag.CullingLimit)
   public void setCullingLimit(Long cullingLimit) {
     this.cullingLimit = cullingLimit;
   }
@@ -286,12 +248,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private TemplateType templateType;
 
-  @JsonGetter(Flag.TemplateType)
   public TemplateType getTemplateType() {
     return templateType;
   }
 
-  @JsonSetter(Flag.TemplateType)
   public void setTemplateType(TemplateType templateType) {
     this.templateType = templateType;
   }
@@ -300,12 +260,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private TemplateLength templateLength;
 
-  @JsonGetter(Flag.TemplateLength)
   public TemplateLength getTemplateLength() {
     return templateLength;
   }
 
-  @JsonSetter(Flag.TemplateLength)
   public void setTemplateLength(TemplateLength templateLength) {
     this.templateLength = templateLength;
   }
@@ -314,12 +272,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Boolean sumStats;
 
-  @JsonGetter(Flag.SumStats)
   public Boolean getSumStats() {
     return sumStats;
   }
 
-  @JsonSetter(Flag.SumStats)
   public void setSumStats(Boolean sumStats) {
     this.sumStats = sumStats;
   }
@@ -328,12 +284,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Double extensionDropoffPrelimGapped;
 
-  @JsonGetter(Flag.ExtensionDropoffPrelimGapped)
   public Double getExtensionDropoffPrelimGapped() {
     return extensionDropoffPrelimGapped;
   }
 
-  @JsonSetter(Flag.ExtensionDropoffPrelimGapped)
   public void setExtensionDropoffPrelimGapped(Double extensionDropoffPrelimGapped) {
     this.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
   }
@@ -342,12 +296,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Double extensionDropoffFinalGapped;
 
-  @JsonGetter(Flag.ExtensionDropoffFinalGapped)
   public Double getExtensionDropoffFinalGapped() {
     return extensionDropoffFinalGapped;
   }
 
-  @JsonSetter(Flag.ExtensionDropoffFinalGapped)
   public void setExtensionDropoffFinalGapped(Double extensionDropoffFinalGapped) {
     this.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
   }
@@ -356,12 +308,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Boolean nonGreedy;
 
-  @JsonGetter(Flag.NonGreedy)
   public Boolean getNonGreedy() {
     return nonGreedy;
   }
 
-  @JsonSetter(Flag.NonGreedy)
   public void setNonGreedy(Boolean nonGreedy) {
     this.nonGreedy = nonGreedy;
   }
@@ -370,12 +320,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Integer minRawGappedScore;
 
-  @JsonGetter(Flag.MinRawGappedScore)
   public Integer getMinRawGappedScore() {
     return minRawGappedScore;
   }
 
-  @JsonSetter(Flag.MinRawGappedScore)
   public void setMinRawGappedScore(Integer minRawGappedScore) {
     this.minRawGappedScore = minRawGappedScore;
   }
@@ -384,12 +332,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Boolean ungappedAlignmentsOnly;
 
-  @JsonGetter(Flag.UngappedAlignmentsOnly)
   public Boolean getUngappedAlignmentsOnly() {
     return ungappedAlignmentsOnly;
   }
 
-  @JsonSetter(Flag.UngappedAlignmentsOnly)
   public void setUngappedAlignmentsOnly(Boolean ungappedAlignmentsOnly) {
     this.ungappedAlignmentsOnly = ungappedAlignmentsOnly;
   }
@@ -398,12 +344,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Long offDiagonalRange;
 
-  @JsonGetter(Flag.OffDiagonalRange)
   public Long getOffDiagonalRange() {
     return offDiagonalRange;
   }
 
-  @JsonSetter(Flag.OffDiagonalRange)
   public void setOffDiagonalRange(Long offDiagonalRange) {
     this.offDiagonalRange = offDiagonalRange;
   }
@@ -412,12 +356,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Short numThreads;
 
-  @JsonGetter(Flag.NumThreads)
   public Short getNumThreads() {
     return numThreads;
   }
 
-  @JsonSetter(Flag.NumThreads)
   public void setNumThreads(Short numThreads) {
     this.numThreads = numThreads;
   }
@@ -426,12 +368,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Double bestHitOverhang;
 
-  @JsonGetter(Flag.BestHitOverhang)
   public Double getBestHitOverhang() {
     return bestHitOverhang;
   }
 
-  @JsonSetter(Flag.BestHitOverhang)
   public void setBestHitOverhang(Double bestHitOverhang) {
     this.bestHitOverhang = bestHitOverhang;
   }
@@ -440,12 +380,10 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Double bestHitScoreEdge;
 
-  @JsonGetter(Flag.BestHitScoreEdge)
   public Double getBestHitScoreEdge() {
     return bestHitScoreEdge;
   }
 
-  @JsonSetter(Flag.BestHitScoreEdge)
   public void setBestHitScoreEdge(Double bestHitScoreEdge) {
     this.bestHitScoreEdge = bestHitScoreEdge;
   }
@@ -454,18 +392,56 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
 
   private Boolean subjectBestHit;
 
-  @JsonGetter(Flag.SubjectBestHit)
   public Boolean getSubjectBestHit() {
     return subjectBestHit;
   }
 
-  @JsonSetter(Flag.SubjectBestHit)
   public void setSubjectBestHit(Boolean subjectBestHit) {
     this.subjectBestHit = subjectBestHit;
   }
 
   // ------------------------------------------------------------------------------------------ //
 
+  @Override
+  @JsonValue
+  public JSONObjectEncoder toJSON() {
+    var js = super.toJSON();
+
+    js.encode(Flag.Strand, strand);
+    js.encode(Flag.Task, task);
+    js.encode(Flag.WordSize, wordSize);
+    js.encode(Flag.GapOpen, gapOpen);
+    js.encode(Flag.GapExtend, gapExtend);
+    js.encode(Flag.Penalty, penalty);
+    js.encode(Flag.Reward, reward);
+    js.encode(Flag.UseIndex, useIndex);
+    js.encode(Flag.IndexName, indexName);
+    js.encode(Flag.SubjectFile, subjectFile);
+    js.encode(Flag.SubjectLocation, subjectLocation);
+    js.encode(Flag.Dust, dust);
+    js.encode(Flag.FilteringDB, filteringDB);
+    js.encode(Flag.WindowMaskerTaxID, windowMaskerTaxID);
+    js.encode(Flag.WindowMaskerDB, windowMaskerDB);
+    js.encode(Flag.DBSoftMask, dbSoftMask);
+    js.encode(Flag.DBHardMask, dbHardMask);
+    js.encode(Flag.PercentIdentity, percentIdentity);
+    js.encode(Flag.CullingLimit, cullingLimit);
+    js.encode(Flag.TemplateType, templateType);
+    js.encode(Flag.TemplateLength, templateLength);
+    js.encode(Flag.SumStats, sumStats);
+    js.encode(Flag.ExtensionDropoffPrelimGapped, extensionDropoffPrelimGapped);
+    js.encode(Flag.ExtensionDropoffFinalGapped, extensionDropoffFinalGapped);
+    js.encode(Flag.NonGreedy, nonGreedy);
+    js.encode(Flag.MinRawGappedScore, minRawGappedScore);
+    js.encode(Flag.UngappedAlignmentsOnly, ungappedAlignmentsOnly);
+    js.encode(Flag.OffDiagonalRange, offDiagonalRange);
+    js.encode(Flag.NumThreads, numThreads);
+    js.encode(Flag.BestHitOverhang, bestHitOverhang);
+    js.encode(Flag.BestHitScoreEdge, bestHitScoreEdge);
+    js.encode(Flag.SubjectBestHit, subjectBestHit);
+
+    return js;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -552,9 +528,17 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
     );
   }
 
+  @Override
   public BlastN copy() {
     var out = new BlastN();
     copyInto(out);
+    return out;
+  }
+
+  @JsonCreator
+  public static BlastN fromJSON(JSONObjectDecoder js) {
+    var out = new BlastN();
+    out.copyInto(js);
     return out;
   }
 
@@ -594,5 +578,42 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
     out.bestHitOverhang = bestHitOverhang;
     out.bestHitScoreEdge = bestHitScoreEdge;
     out.subjectBestHit = subjectBestHit;
+  }
+
+  protected void copyInto(JSONObjectDecoder js) {
+    super.copyInto(js);
+
+    js.decode(Flag.Strand, this::setStrand, Strand::fromJSON);
+    js.decode(Flag.Task, this::setTask, BlastNTask::fromJSON);
+    js.decode(Flag.WordSize, this::setWordSize);
+    js.decode(Flag.GapOpen, this::setGapOpen);
+    js.decode(Flag.GapExtend, this::setGapExtend);
+    js.decode(Flag.Penalty, this::setPenalty);
+    js.decode(Flag.Reward, this::setReward);
+    js.decode(Flag.UseIndex, this::setUseIndex);
+    js.decode(Flag.IndexName, this::setIndexName);
+    js.decode(Flag.SubjectFile, this::setSubjectFile);
+    js.decode(Flag.SubjectLocation, this::setSubjectLocation, Location::fromJSON);
+    js.decode(Flag.Dust, this::setDust, Dust::fromJSON);
+    js.decode(Flag.FilteringDB, this::setFilteringDB);
+    js.decode(Flag.WindowMaskerTaxID, this::setWindowMaskerTaxID);
+    js.decode(Flag.WindowMaskerDB, this::setWindowMaskerDB);
+    js.decode(Flag.DBSoftMask, this::setDBSoftMask);
+    js.decode(Flag.DBHardMask, this::setDBHardMask);
+    js.decode(Flag.PercentIdentity, this::setPercentIdentity);
+    js.decode(Flag.CullingLimit, this::setCullingLimit);
+    js.decode(Flag.TemplateType, this::setTemplateType, TemplateType::fromJSON);
+    js.decode(Flag.TemplateLength, this::setTemplateLength, TemplateLength::fromJSON);
+    js.decode(Flag.SumStats, this::setSumStats);
+    js.decode(Flag.ExtensionDropoffPrelimGapped, this::setExtensionDropoffPrelimGapped);
+    js.decode(Flag.ExtensionDropoffFinalGapped, this::setExtensionDropoffFinalGapped);
+    js.decode(Flag.NonGreedy, this::setNonGreedy);
+    js.decode(Flag.MinRawGappedScore, this::setMinRawGappedScore);
+    js.decode(Flag.UngappedAlignmentsOnly, this::setUngappedAlignmentsOnly);
+    js.decode(Flag.OffDiagonalRange, this::setOffDiagonalRange);
+    js.decode(Flag.NumThreads, this::setNumThreads);
+    js.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
+    js.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
+    js.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
   }
 }

@@ -230,7 +230,7 @@ class BaseBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastBase(){};
+      var tgt = new BlastBase();
       tgt.setDBSize((byte) 12);
 
       assertEquals("{\"-dbsize\":12}", json.writeValueAsString(tgt));

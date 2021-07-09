@@ -209,9 +209,9 @@ class RPSTBlastNTest
     @DisplayName("serialization")
     void test1() throws Exception {
       var tgt = new RPSTBlastN();
-      tgt.setNumThreads(ThreadMode.Disable);
+      tgt.setNumThreads(new ThreadMode(3));
 
-      assertEquals("{\"-num_threads\":1}", json.writeValueAsString(tgt));
+      assertEquals("{\"-num_threads\":3}", json.writeValueAsString(tgt));
     }
 
     @Test

@@ -1,14 +1,15 @@
 package org.veupathdb.lib.blast.field;
 
-import java.util.LinkedHashMap;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.veupathdb.lib.blast.consts.Key;
+import org.veupathdb.lib.blast.util.DefaultingJSONValue;
+import org.veupathdb.lib.blast.util.JSONConstructor;
 
-public class Seg
+public class Seg implements DefaultingJSONValue
 {
   private static final String YesValue = "yes";
   private static final String NoValue = "no";
@@ -72,19 +73,30 @@ public class Seg
     return this;
   }
 
-  @JsonValue
-  public Object toJSONSerializable() {
-    if (isYes())
-      return YesValue;
-    if (isNo())
-      return NoValue;
+  public Seg copy() {
+    return new Seg(yes, no, window, locut, hicut);
+  }
 
-    return new LinkedHashMap<String, Number>()
-    {{
-      put(Key.Window, getWindow());
-      put(Key.Locut, getLocut());
-      put(Key.Hicut, getHicut());
-    }};
+  @JsonValue
+  @Override
+  public JsonNode toJSON() {
+    if (yes)
+      return JSONConstructor.newText(YesValue);
+    if (no)
+      return JSONConstructor.newText(NoValue);
+
+    var out = JSONConstructor.newObject();
+
+    out.set(Key.Window, JSONConstructor.newInt(window));
+    out.set(Key.Locut, JSONConstructor.newDouble(locut));
+    out.set(Key.Hicut, JSONConstructor.newDouble(hicut));
+
+    return out;
+  }
+
+  @Override
+  public boolean isDefault() {
+    return no;
   }
 
   @Override
@@ -109,10 +121,6 @@ public class Seg
     return Objects.hash(getWindow(), getLocut(), getHicut());
   }
 
-  public Seg copy() {
-    return new Seg(yes, no, window, locut, hicut);
-  }
-
   public static Seg yesSeg() {
     return new Seg(true, false, 0, 0, 0);
   }
@@ -131,14 +139,19 @@ public class Seg
       return switch (node.textValue()) {
         case YesValue -> yesSeg();
         case NoValue -> noSeg();
-        default -> throw new IllegalArgumentException();
+        default -> throw new IllegalArgumentException(
+          "Unrecognized seg value \"" + node.textValue() + "\""
+        );
       };
     }
 
     if (node.isObject()) {
-      if (!node.has(Key.Window) || !node.has(Key.Locut) || !node.has(Key.Hicut)) {
-        throw new IllegalArgumentException();
-      }
+      if (!node.has(Key.Window))
+        throw new IllegalArgumentException("Invalid seg value, missing required key " + Key.Window);
+      if (!node.has(Key.Locut))
+        throw new IllegalArgumentException("Invalid seg value, missing required key " + Key.Locut);
+      if (!node.has(Key.Hicut))
+        throw new IllegalArgumentException("Invalid seg value, missing required key " + Key.Hicut);
 
       return wlhSeg(
         node.get(Key.Window).intValue(),
@@ -147,7 +160,12 @@ public class Seg
       );
     }
 
-    throw new IllegalArgumentException();
+    throw new IllegalArgumentException(
+      "Invalid seg value, must be one of \"yes\", \"no\", or an object containing the keys " +
+        Key.Window + ", " +
+        Key.Locut  + ", " +
+        Key.Hicut  + "."
+    );
   }
 
   public static Seg fromString(String value) {

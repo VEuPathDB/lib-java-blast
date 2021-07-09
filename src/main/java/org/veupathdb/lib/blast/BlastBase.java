@@ -2,15 +2,18 @@ package org.veupathdb.lib.blast;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.Location;
+import org.veupathdb.lib.blast.util.JSONObjectDecoder;
+import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BlastBase extends CLIBase
 {
+  public static final String DefaultQueryFile   = "-";
+  public static final String DefaultExpectValue = "10";
+
   private String     queryFile;
   private Location   queryLocation;
   private String     dbFile;
@@ -28,162 +31,131 @@ public class BlastBase extends CLIBase
   private Long       windowSize;
   private Boolean    remote;
 
-  @JsonGetter(Flag.QueryFile)
   public String getQueryFile() {
     return queryFile;
   }
 
-  @JsonSetter(Flag.QueryFile)
   public void setQueryFile(String queryFile) {
     this.queryFile = queryFile;
   }
 
-  @JsonGetter(Flag.QueryLocation)
   public Location getQueryLocation() {
     return queryLocation;
   }
 
-  @JsonSetter(Flag.QueryLocation)
   public void setQueryLocation(Location queryLocation) {
     this.queryLocation = queryLocation;
   }
 
-  @JsonGetter(Flag.DBFile)
   public String getDBFile() {
     return dbFile;
   }
 
-  @JsonSetter(Flag.DBFile)
   public void setDBFile(String dbFile) {
     this.dbFile = dbFile;
   }
 
-  @JsonGetter(Flag.ExpectValue)
   public String getExpectValue() {
     return expectValue;
   }
 
-  @JsonSetter(Flag.ExpectValue)
   public void setExpectValue(String expectValue) {
     this.expectValue = expectValue;
   }
 
-  @JsonGetter(Flag.SoftMasking)
   public Boolean getSoftMasking() {
     return softMasking;
   }
 
-  @JsonSetter(Flag.SoftMasking)
   public void setSoftMasking(Boolean softMasking) {
     this.softMasking = softMasking;
   }
 
-  @JsonGetter(Flag.LowercaseMasking)
   public Boolean getLowercaseMasking() {
     return lowercaseMasking;
   }
 
-  @JsonSetter(Flag.LowercaseMasking)
   public void setLowercaseMasking(Boolean lowercaseMasking) {
     this.lowercaseMasking = lowercaseMasking;
   }
 
-  @JsonGetter(Flag.EntrezQuery)
   public String getEntrezQuery() {
     return entrezQuery;
   }
 
-  @JsonSetter(Flag.EntrezQuery)
   public void setEntrezQuery(String entrezQuery) {
     this.entrezQuery = entrezQuery;
   }
 
-  @JsonGetter(Flag.QueryCoverageHSPPercent)
   public Double getQueryCoverageHSPPercent() {
     return queryCoverageHSPPercent;
   }
 
-  @JsonSetter(Flag.QueryCoverageHSPPercent)
   public void setQueryCoverageHSPPercent(Double queryCoverageHSPPercent) {
     this.queryCoverageHSPPercent = queryCoverageHSPPercent;
   }
 
-  @JsonGetter(Flag.MaxHSPs)
   public Long getMaxHSPs() {
     return maxHSPs;
   }
 
-  @JsonSetter(Flag.MaxHSPs)
   public void setMaxHSPs(Long maxHSPs) {
     this.maxHSPs = maxHSPs;
   }
 
-  @JsonGetter(Flag.DBSize)
   public Byte getDBSize() {
     return dbSize;
   }
 
-  @JsonSetter(Flag.DBSize)
   public void setDBSize(Byte dbSize) {
+    System.out.println(dbSize);
     this.dbSize = dbSize;
   }
 
-  @JsonGetter(Flag.SearchSpace)
   public Short getSearchSpace() {
     return searchSpace;
   }
 
-  @JsonSetter(Flag.SearchSpace)
   public void setSearchSpace(Short searchSpace) {
     this.searchSpace = searchSpace;
   }
 
-  @JsonGetter(Flag.ImportSearchStrategy)
   public String getImportSearchStrategy() {
     return importSearchStrategy;
   }
 
-  @JsonSetter(Flag.ImportSearchStrategy)
   public void setImportSearchStrategy(String importSearchStrategy) {
     this.importSearchStrategy = importSearchStrategy;
   }
 
-  @JsonGetter(Flag.ExportSearchStrategy)
   public String getExportSearchStrategy() {
     return exportSearchStrategy;
   }
 
-  @JsonSetter(Flag.ExportSearchStrategy)
   public void setExportSearchStrategy(String exportSearchStrategy) {
     this.exportSearchStrategy = exportSearchStrategy;
   }
 
-  @JsonGetter(Flag.ExtensionDropoffUngapped)
   public Double getExtensionDropoffUngapped() {
     return extensionDropoffUngapped;
   }
 
-  @JsonSetter(Flag.ExtensionDropoffUngapped)
   public void setExtensionDropoffUngapped(Double extensionDropoffUngapped) {
     this.extensionDropoffUngapped = extensionDropoffUngapped;
   }
 
-  @JsonGetter(Flag.WindowSize)
   public Long getWindowSize() {
     return windowSize;
   }
 
-  @JsonSetter(Flag.WindowSize)
   public void setWindowSize(Long windowSize) {
     this.windowSize = windowSize;
   }
 
-  @JsonGetter(Flag.Remote)
   public Boolean getRemote() {
     return remote;
   }
 
-  @JsonSetter(Flag.Remote)
   public void setRemote(Boolean remote) {
     this.remote = remote;
   }
@@ -241,9 +213,42 @@ public class BlastBase extends CLIBase
     );
   }
 
+  @Override
+  @JsonValue
+  public JSONObjectEncoder toJSON() {
+    var out = super.toJSON();
+
+    out.encode(Flag.QueryFile, queryFile, DefaultQueryFile);
+    out.encode(Flag.QueryLocation, queryLocation);
+    out.encode(Flag.DBFile, dbFile);
+    out.encode(Flag.ExpectValue, expectValue, DefaultExpectValue);
+    out.encode(Flag.SoftMasking, softMasking);
+    out.encode(Flag.LowercaseMasking, lowercaseMasking);
+    out.encode(Flag.EntrezQuery, entrezQuery);
+    out.encode(Flag.QueryCoverageHSPPercent, queryCoverageHSPPercent);
+    out.encode(Flag.MaxHSPs, maxHSPs);
+    out.encode(Flag.DBSize, dbSize);
+    out.encode(Flag.SearchSpace, searchSpace);
+    out.encode(Flag.ImportSearchStrategy, importSearchStrategy);
+    out.encode(Flag.ExportSearchStrategy, exportSearchStrategy);
+    out.encode(Flag.ExtensionDropoffUngapped, extensionDropoffUngapped);
+    out.encode(Flag.WindowSize, windowSize);
+    out.encode(Flag.Remote, remote);
+
+    return out;
+  }
+
+  @Override
   public BlastBase copy() {
     var out = new BlastBase();
     copyInto(out);
+    return out;
+  }
+
+  @JsonCreator
+  public static BlastBase fromJSON(JSONObjectDecoder js) {
+    var out = new BlastBase();
+    out.copyInto(js);
     return out;
   }
 
@@ -266,5 +271,27 @@ public class BlastBase extends CLIBase
     out.setExtensionDropoffUngapped(getExtensionDropoffUngapped());
     out.setWindowSize(getWindowSize());
     out.setRemote(getRemote());
+  }
+
+  @Override
+  protected void copyInto(JSONObjectDecoder js) {
+    super.copyInto(js);
+
+    js.decode(Flag.QueryFile, this::setQueryFile);
+    js.decode(Flag.QueryLocation, this::setQueryLocation, Location::fromJSON);
+    js.decode(Flag.DBFile, this::setDBFile);
+    js.decode(Flag.ExpectValue, this::setExpectValue);
+    js.decode(Flag.SoftMasking, this::setSoftMasking);
+    js.decode(Flag.LowercaseMasking, this::setLowercaseMasking);
+    js.decode(Flag.EntrezQuery, this::setEntrezQuery);
+    js.decode(Flag.QueryCoverageHSPPercent, this::setQueryCoverageHSPPercent);
+    js.decode(Flag.MaxHSPs, this::setMaxHSPs);
+    js.decode(Flag.DBSize, this::setDBSize);
+    js.decode(Flag.SearchSpace, this::setSearchSpace);
+    js.decode(Flag.ImportSearchStrategy, this::setImportSearchStrategy);
+    js.decode(Flag.ExportSearchStrategy, this::setExportSearchStrategy);
+    js.decode(Flag.ExtensionDropoffUngapped, this::setExtensionDropoffUngapped);
+    js.decode(Flag.WindowSize, this::setWindowSize);
+    js.decode(Flag.Remote, this::setRemote);
   }
 }

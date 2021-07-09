@@ -2,6 +2,8 @@ package org.veupathdb.lib.blast.field;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.JsonNode;
+import org.veupathdb.lib.blast.util.JSONConstructor;
 
 public enum FormatType
 {
@@ -26,7 +28,6 @@ public enum FormatType
   OrganismReport,
   ;
 
-  @JsonValue
   public int getValue() {
     return this.ordinal();
   }
@@ -39,5 +40,10 @@ public enum FormatType
   @JsonCreator
   public static FormatType fromIntValue(int value) {
     return FormatType.values()[value];
+  }
+
+  @JsonValue
+  public JsonNode toJSON() {
+    return JSONConstructor.newInt(this.ordinal());
   }
 }

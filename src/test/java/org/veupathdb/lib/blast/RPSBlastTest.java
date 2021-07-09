@@ -208,18 +208,18 @@ class RPSBlastTest
     @DisplayName("serialization")
     void test1() throws Exception {
       var tgt = new RPSBlast();
-      tgt.setNumThreads(ThreadMode.Disable);
+      tgt.setNumThreads(new ThreadMode(3));
 
-      assertEquals("{\"-num_threads\":1}", json.writeValueAsString(tgt));
+      assertEquals("{\"-num_threads\":3}", json.writeValueAsString(tgt));
     }
 
     @Test
     @DisplayName("deserialization")
     void test2() throws Exception {
-      var raw = "{\"-num_threads\":1}";
+      var raw = "{\"-num_threads\":3}";
       var tgt = json.readValue(raw, RPSBlast.class);
 
-      assertEquals(ThreadMode.Disable, tgt.getNumThreads());
+      assertEquals(new ThreadMode(3), tgt.getNumThreads());
     }
   }
 
