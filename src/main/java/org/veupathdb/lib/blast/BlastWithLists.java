@@ -1,16 +1,13 @@
 package org.veupathdb.lib.blast;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 
-public class BlastWithLists extends BlastBase
+import java.util.List;
+import java.util.Objects;
+
+public abstract class BlastWithLists extends BlastBase
 {
   private String       giList;
   private String       sequenceIDList;
@@ -88,9 +85,8 @@ public class BlastWithLists extends BlastBase
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof BlastWithLists)) return false;
+    if (!(o instanceof BlastWithLists that)) return false;
     if (!super.equals(o)) return false;
-    BlastWithLists that = (BlastWithLists) o;
     return Objects.equals(giList, that.giList)
       && Objects.equals(getSequenceIDList(), that.getSequenceIDList())
       && Objects.equals(getNegativeGIList(), that.getNegativeGIList())
@@ -117,61 +113,32 @@ public class BlastWithLists extends BlastBase
   }
 
   @Override
-  public BlastWithLists copy() {
-    var out = new BlastWithLists();
-    copyInto(out);
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    final var out = super.toJSON(includeTool);
+
+    out.encode(Flag.GIList, getGIList());
+    out.encode(Flag.SequenceIDList, getSequenceIDList());
+    out.encode(Flag.NegativeGIList, getNegativeGIList());
+    out.encode(Flag.NegativeSequenceIDList, getNegativeSequenceIDList());
+    out.encode(Flag.TaxIDs, getTaxIDs());
+    out.encode(Flag.NegativeTaxIDs, getNegativeTaxIDs());
+    out.encode(Flag.TaxIDList, getTaxIDList());
+    out.encode(Flag.NegativeTaxIDList, getNegativeTaxIDList());
+
     return out;
   }
 
   @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var out = super.toJSON();
+  public void decodeJSON(JSONObjectDecoder node) {
+    super.decodeJSON(node);
 
-    out.encode(Flag.GIList, giList);
-    out.encode(Flag.SequenceIDList, sequenceIDList);
-    out.encode(Flag.NegativeGIList, negativeGIList);
-    out.encode(Flag.NegativeSequenceIDList, negativeSequenceIDList);
-    out.encode(Flag.TaxIDs, taxIDs);
-    out.encode(Flag.NegativeTaxIDs, negativeTaxIDs);
-    out.encode(Flag.TaxIDList, taxIDList);
-    out.encode(Flag.NegativeTaxIDList, negativeTaxIDList);
-
-    return out;
-  }
-
-  @JsonCreator
-  public static BlastWithLists fromJSON(JSONObjectDecoder js) {
-    var out = new BlastWithLists();
-    out.copyInto(js);
-    return out;
-  }
-
-  protected void copyInto(BlastWithLists out) {
-    super.copyInto(out);
-    out.giList = giList;
-    out.sequenceIDList = sequenceIDList;
-    out.negativeGIList = negativeGIList;
-    out.negativeSequenceIDList = negativeSequenceIDList;
-    if (taxIDs != null)
-      out.taxIDs = new ArrayList<>(taxIDs);
-    if (negativeTaxIDs != null)
-      out.negativeTaxIDs = new ArrayList<>(negativeTaxIDs);
-    out.taxIDList = taxIDList;
-    out.negativeTaxIDList = negativeTaxIDList;
-  }
-
-  @Override
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
-
-    js.decode(Flag.GIList, this::setGIList);
-    js.decode(Flag.SequenceIDList, this::setSequenceIDList);
-    js.decode(Flag.NegativeGIList, this::setNegativeGIList);
-    js.decode(Flag.NegativeSequenceIDList, this::setNegativeSequenceIDList);
-    js.decode(Flag.TaxIDs, this::setTaxIDs);
-    js.decode(Flag.NegativeTaxIDs, this::setNegativeTaxIDs);
-    js.decode(Flag.TaxIDList, this::setTaxIDList);
-    js.decode(Flag.NegativeTaxIDList, this::setNegativeTaxIDList);
+    node.decode(Flag.GIList, this::setGIList);
+    node.decode(Flag.SequenceIDList, this::setSequenceIDList);
+    node.decode(Flag.NegativeGIList, this::setNegativeGIList);
+    node.decode(Flag.NegativeSequenceIDList, this::setNegativeSequenceIDList);
+    node.decode(Flag.TaxIDs, this::setTaxIDs);
+    node.decode(Flag.NegativeTaxIDs, this::setNegativeTaxIDs);
+    node.decode(Flag.TaxIDList, this::setTaxIDList);
+    node.decode(Flag.NegativeTaxIDList, this::setNegativeTaxIDList);
   }
 }

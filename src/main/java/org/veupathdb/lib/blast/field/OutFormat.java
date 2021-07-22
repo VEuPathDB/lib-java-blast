@@ -1,14 +1,15 @@
 package org.veupathdb.lib.blast.field;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.util.DefaultingJSONValue;
 import org.veupathdb.lib.blast.util.JSONConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class OutFormat implements DefaultingJSONValue
 {
@@ -62,7 +63,7 @@ public class OutFormat implements DefaultingJSONValue
     if (getType() != null)
       out.append(getType().getValue());
 
-    if (!getDelimiter().isEmpty()) {
+    if (getDelimiter() != null && !getDelimiter().isEmpty()) {
       out.append(" delim=").append(getDelimiter());
     }
 
@@ -86,13 +87,6 @@ public class OutFormat implements DefaultingJSONValue
   @Override
   public int hashCode() {
     return Objects.hash(getType(), getDelimiter(), getFields());
-  }
-
-  public OutFormat copy() {
-    return new OutFormat()
-      .setType(getType())
-      .setDelimiter(getDelimiter())
-      .setFields(fields == null ? null : new ArrayList<>(fields));
   }
 
   public static OutFormat fromString(String value) {

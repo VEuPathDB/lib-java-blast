@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast.field;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.veupathdb.lib.blast.util.DefaultingJSONValue;
 import org.veupathdb.lib.blast.util.JSONConstructor;
@@ -21,6 +23,7 @@ public enum MTMode implements DefaultingJSONValue
   }
 
   @Override
+  @JsonValue
   public JsonNode toJSON() {
     return JSONConstructor.newInt(ordinal());
   }
@@ -35,6 +38,7 @@ public enum MTMode implements DefaultingJSONValue
     );
   }
 
+  @JsonCreator
   public static MTMode fromJSON(JsonNode js) {
     return fromIntValue(js.intValue());
   }

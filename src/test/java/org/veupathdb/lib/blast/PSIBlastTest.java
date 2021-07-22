@@ -12,9 +12,19 @@ import org.veupathdb.lib.blast.field.Seg;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("PSIBlast")
-class PSIBlastTest
+class PSIBlastTest extends BlastWithIPGListContractTest
 {
   private final ObjectMapper json = new ObjectMapper();
+
+  @Override
+  PSIBlast newConfig() {
+    return new PSIBlast();
+  }
+
+  @Override
+  Class<PSIBlast> configClass() {
+    return PSIBlast.class;
+  }
 
   @Nested
   @DisplayName(Flag.WordSize)
@@ -196,8 +206,8 @@ class PSIBlastTest
       var raw = "{\"-subject_loc\":{\"start\":10,\"stop\":11}}";
       var tgt = json.readValue(raw, PSIBlast.class);
 
-      assertEquals(10, tgt.getSubjectLocation().getStart());
-      assertEquals(11, tgt.getSubjectLocation().getStop());
+      assertEquals(10, tgt.getSubjectLocation().start());
+      assertEquals(11, tgt.getSubjectLocation().stop());
     }
   }
 
@@ -209,7 +219,7 @@ class PSIBlastTest
     @DisplayName("serialization")
     void test1() throws Exception {
       var tgt = new PSIBlast();
-      tgt.setSeg(Seg.yesSeg());
+      tgt.setSeg(Seg.newYesSeg());
 
       assertEquals("{\"-seg\":\"yes\"}", json.writeValueAsString(tgt));
     }

@@ -2,8 +2,11 @@ package org.veupathdb.lib.blast.field;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.JsonNode;
+import org.veupathdb.lib.blast.util.DefaultingJSONValue;
+import org.veupathdb.lib.blast.util.JSONConstructor;
 
-public enum FormatField
+public enum FormatField implements DefaultingJSONValue
 {
   QuerySeqID("qseqid"),
   QueryGI("qgi"),
@@ -66,9 +69,19 @@ public enum FormatField
     this.value = value;
   }
 
-  @JsonValue
   public String getValue() {
     return value;
+  }
+
+  @Override
+  public boolean isDefault() {
+    return this == StandardFields;
+  }
+
+  @Override
+  @JsonValue
+  public JsonNode toJSON() {
+    return JSONConstructor.newText(value);
   }
 
   @Override
@@ -76,12 +89,16 @@ public enum FormatField
     return getValue();
   }
 
-  @JsonCreator
   public static FormatField fromString(String value) {
     for (var val : values())
       if (val.getValue().equals(value))
         return val;
 
     throw new IllegalArgumentException();
+  }
+
+  @JsonCreator
+  public static FormatField fromJSON(JsonNode js) {
+    return fromString(js.textValue());
   }
 }

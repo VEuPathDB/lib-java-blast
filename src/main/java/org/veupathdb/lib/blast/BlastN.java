@@ -1,13 +1,12 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.field.*;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
+
+import java.util.Objects;
 
 public class BlastN extends BlastWithLists implements BlastQueryConfig
 {
@@ -403,47 +402,6 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
   // ------------------------------------------------------------------------------------------ //
 
   @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var js = super.toJSON();
-
-    js.encode(Flag.Strand, strand);
-    js.encode(Flag.Task, task);
-    js.encode(Flag.WordSize, wordSize);
-    js.encode(Flag.GapOpen, gapOpen);
-    js.encode(Flag.GapExtend, gapExtend);
-    js.encode(Flag.Penalty, penalty);
-    js.encode(Flag.Reward, reward);
-    js.encode(Flag.UseIndex, useIndex);
-    js.encode(Flag.IndexName, indexName);
-    js.encode(Flag.SubjectFile, subjectFile);
-    js.encode(Flag.SubjectLocation, subjectLocation);
-    js.encode(Flag.Dust, dust);
-    js.encode(Flag.FilteringDB, filteringDB);
-    js.encode(Flag.WindowMaskerTaxID, windowMaskerTaxID);
-    js.encode(Flag.WindowMaskerDB, windowMaskerDB);
-    js.encode(Flag.DBSoftMask, dbSoftMask);
-    js.encode(Flag.DBHardMask, dbHardMask);
-    js.encode(Flag.PercentIdentity, percentIdentity);
-    js.encode(Flag.CullingLimit, cullingLimit);
-    js.encode(Flag.TemplateType, templateType);
-    js.encode(Flag.TemplateLength, templateLength);
-    js.encode(Flag.SumStats, sumStats);
-    js.encode(Flag.ExtensionDropoffPrelimGapped, extensionDropoffPrelimGapped);
-    js.encode(Flag.ExtensionDropoffFinalGapped, extensionDropoffFinalGapped);
-    js.encode(Flag.NonGreedy, nonGreedy);
-    js.encode(Flag.MinRawGappedScore, minRawGappedScore);
-    js.encode(Flag.UngappedAlignmentsOnly, ungappedAlignmentsOnly);
-    js.encode(Flag.OffDiagonalRange, offDiagonalRange);
-    js.encode(Flag.NumThreads, numThreads);
-    js.encode(Flag.BestHitOverhang, bestHitOverhang);
-    js.encode(Flag.BestHitScoreEdge, bestHitScoreEdge);
-    js.encode(Flag.SubjectBestHit, subjectBestHit);
-
-    return js;
-  }
-
-  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -493,6 +451,7 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
   public int hashCode() {
     return Objects.hash(
       super.hashCode(),
+      getTool(),
       getStrand(),
       getTask(),
       getWordSize(),
@@ -529,91 +488,87 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
   }
 
   @Override
-  public BlastN copy() {
-    var out = new BlastN();
-    copyInto(out);
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    final var out = super.toJSON(includeTool);
+
+    out.encode(Flag.Strand, getStrand());
+    out.encode(Flag.Task, getTask());
+    out.encode(Flag.WordSize, getWordSize());
+    out.encode(Flag.GapOpen, getGapOpen());
+    out.encode(Flag.GapExtend, getGapExtend());
+    out.encode(Flag.Penalty, getPenalty());
+    out.encode(Flag.Reward, getReward());
+    out.encode(Flag.UseIndex, getUseIndex());
+    out.encode(Flag.IndexName, getIndexName());
+    out.encode(Flag.SubjectFile, getSubjectFile());
+    out.encode(Flag.SubjectLocation, getSubjectLocation());
+    out.encode(Flag.Dust, getDust());
+    out.encode(Flag.FilteringDB, getFilteringDB());
+    out.encode(Flag.WindowMaskerTaxID, getWindowMaskerTaxID());
+    out.encode(Flag.WindowMaskerDB, getWindowMaskerDB());
+    out.encode(Flag.DBSoftMask, getDBSoftMask());
+    out.encode(Flag.DBHardMask, getDBHardMask());
+    out.encode(Flag.PercentIdentity, getPercentIdentity());
+    out.encode(Flag.CullingLimit, getCullingLimit());
+    out.encode(Flag.TemplateType, getTemplateType());
+    out.encode(Flag.TemplateLength, getTemplateLength());
+    out.encode(Flag.SumStats, getSumStats());
+    out.encode(Flag.ExtensionDropoffPrelimGapped, getExtensionDropoffPrelimGapped());
+    out.encode(Flag.ExtensionDropoffFinalGapped, getExtensionDropoffFinalGapped());
+    out.encode(Flag.NonGreedy, getNonGreedy());
+    out.encode(Flag.MinRawGappedScore, getMinRawGappedScore());
+    out.encode(Flag.UngappedAlignmentsOnly, getUngappedAlignmentsOnly());
+    out.encode(Flag.OffDiagonalRange, getOffDiagonalRange());
+    out.encode(Flag.NumThreads, getNumThreads());
+    out.encode(Flag.BestHitOverhang, getBestHitOverhang());
+    out.encode(Flag.BestHitScoreEdge, getBestHitScoreEdge());
+    out.encode(Flag.SubjectBestHit, getSubjectBestHit());
+
     return out;
+  }
+
+  @Override
+  public void decodeJSON(JSONObjectDecoder node) {
+    super.decodeJSON(node);
+
+    node.decode(Flag.Strand, this::setStrand, Strand::fromJSON);
+    node.decode(Flag.Task, this::setTask, BlastNTask::fromJSON);
+    node.decode(Flag.WordSize, this::setWordSize);
+    node.decode(Flag.GapOpen, this::setGapOpen);
+    node.decode(Flag.GapExtend, this::setGapExtend);
+    node.decode(Flag.Penalty, this::setPenalty);
+    node.decode(Flag.Reward, this::setReward);
+    node.decode(Flag.UseIndex, this::setUseIndex);
+    node.decode(Flag.IndexName, this::setIndexName);
+    node.decode(Flag.SubjectFile, this::setSubjectFile);
+    node.decode(Flag.SubjectLocation, this::setSubjectLocation, Location::fromJSON);
+    node.decode(Flag.Dust, this::setDust, Dust::fromJSON);
+    node.decode(Flag.FilteringDB, this::setFilteringDB);
+    node.decode(Flag.WindowMaskerTaxID, this::setWindowMaskerTaxID);
+    node.decode(Flag.WindowMaskerDB, this::setWindowMaskerDB);
+    node.decode(Flag.DBSoftMask, this::setDBSoftMask);
+    node.decode(Flag.DBHardMask, this::setDBHardMask);
+    node.decode(Flag.PercentIdentity, this::setPercentIdentity);
+    node.decode(Flag.CullingLimit, this::setCullingLimit);
+    node.decode(Flag.TemplateType, this::setTemplateType, TemplateType::fromJSON);
+    node.decode(Flag.TemplateLength, this::setTemplateLength, TemplateLength::fromJSON);
+    node.decode(Flag.SumStats, this::setSumStats);
+    node.decode(Flag.ExtensionDropoffPrelimGapped, this::setExtensionDropoffPrelimGapped);
+    node.decode(Flag.ExtensionDropoffFinalGapped, this::setExtensionDropoffFinalGapped);
+    node.decode(Flag.NonGreedy, this::setNonGreedy);
+    node.decode(Flag.MinRawGappedScore, this::setMinRawGappedScore);
+    node.decode(Flag.UngappedAlignmentsOnly, this::setUngappedAlignmentsOnly);
+    node.decode(Flag.OffDiagonalRange, this::setOffDiagonalRange);
+    node.decode(Flag.NumThreads, this::setNumThreads);
+    node.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
+    node.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
+    node.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
   }
 
   @JsonCreator
   public static BlastN fromJSON(JSONObjectDecoder js) {
     var out = new BlastN();
-    out.copyInto(js);
+    out.decodeJSON(js);
     return out;
-  }
-
-  protected void copyInto(BlastN out) {
-    super.copyInto(out);
-    out.strand = strand;
-    out.task = task;
-    out.wordSize = wordSize;
-    out.gapOpen = gapOpen;
-    out.gapExtend = gapExtend;
-    out.penalty = penalty;
-    out.reward = reward;
-    out.useIndex = useIndex;
-    out.indexName = indexName;
-    out.subjectFile = subjectFile;
-    if (subjectLocation != null)
-      out.subjectLocation = subjectLocation.copy();
-    if (dust != null)
-      out.dust = dust.copy();
-    out.filteringDB = filteringDB;
-    out.windowMaskerTaxID = windowMaskerTaxID;
-    out.windowMaskerDB = windowMaskerDB;
-    out.dbSoftMask = dbSoftMask;
-    out.dbHardMask = dbHardMask;
-    out.percentIdentity = percentIdentity;
-    out.cullingLimit = cullingLimit;
-    out.templateType = templateType;
-    out.templateLength = templateLength;
-    out.sumStats = sumStats;
-    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
-    out.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
-    out.nonGreedy = nonGreedy;
-    out.minRawGappedScore = minRawGappedScore;
-    out.ungappedAlignmentsOnly = ungappedAlignmentsOnly;
-    out.offDiagonalRange = offDiagonalRange;
-    out.numThreads = numThreads;
-    out.bestHitOverhang = bestHitOverhang;
-    out.bestHitScoreEdge = bestHitScoreEdge;
-    out.subjectBestHit = subjectBestHit;
-  }
-
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
-
-    js.decode(Flag.Strand, this::setStrand, Strand::fromJSON);
-    js.decode(Flag.Task, this::setTask, BlastNTask::fromJSON);
-    js.decode(Flag.WordSize, this::setWordSize);
-    js.decode(Flag.GapOpen, this::setGapOpen);
-    js.decode(Flag.GapExtend, this::setGapExtend);
-    js.decode(Flag.Penalty, this::setPenalty);
-    js.decode(Flag.Reward, this::setReward);
-    js.decode(Flag.UseIndex, this::setUseIndex);
-    js.decode(Flag.IndexName, this::setIndexName);
-    js.decode(Flag.SubjectFile, this::setSubjectFile);
-    js.decode(Flag.SubjectLocation, this::setSubjectLocation, Location::fromJSON);
-    js.decode(Flag.Dust, this::setDust, Dust::fromJSON);
-    js.decode(Flag.FilteringDB, this::setFilteringDB);
-    js.decode(Flag.WindowMaskerTaxID, this::setWindowMaskerTaxID);
-    js.decode(Flag.WindowMaskerDB, this::setWindowMaskerDB);
-    js.decode(Flag.DBSoftMask, this::setDBSoftMask);
-    js.decode(Flag.DBHardMask, this::setDBHardMask);
-    js.decode(Flag.PercentIdentity, this::setPercentIdentity);
-    js.decode(Flag.CullingLimit, this::setCullingLimit);
-    js.decode(Flag.TemplateType, this::setTemplateType, TemplateType::fromJSON);
-    js.decode(Flag.TemplateLength, this::setTemplateLength, TemplateLength::fromJSON);
-    js.decode(Flag.SumStats, this::setSumStats);
-    js.decode(Flag.ExtensionDropoffPrelimGapped, this::setExtensionDropoffPrelimGapped);
-    js.decode(Flag.ExtensionDropoffFinalGapped, this::setExtensionDropoffFinalGapped);
-    js.decode(Flag.NonGreedy, this::setNonGreedy);
-    js.decode(Flag.MinRawGappedScore, this::setMinRawGappedScore);
-    js.decode(Flag.UngappedAlignmentsOnly, this::setUngappedAlignmentsOnly);
-    js.decode(Flag.OffDiagonalRange, this::setOffDiagonalRange);
-    js.decode(Flag.NumThreads, this::setNumThreads);
-    js.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
-    js.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
-    js.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
   }
 }

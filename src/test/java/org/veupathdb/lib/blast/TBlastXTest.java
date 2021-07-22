@@ -220,8 +220,8 @@ class TBlastXTest
       var raw = "{\"-subject_loc\":{\"start\":10,\"stop\":11}}";
       var tgt = json.readValue(raw, TBlastX.class);
 
-      assertEquals(10, tgt.getSubjectLocation().getStart());
-      assertEquals(11, tgt.getSubjectLocation().getStop());
+      assertEquals(10, tgt.getSubjectLocation().start());
+      assertEquals(11, tgt.getSubjectLocation().stop());
     }
   }
 
@@ -233,7 +233,7 @@ class TBlastXTest
     @DisplayName("serialization")
     void test1() throws Exception {
       var tgt = new TBlastX();
-      tgt.setSeg(Seg.yesSeg());
+      tgt.setSeg(Seg.newYesSeg());
 
       assertEquals("{\"-seg\":\"yes\"}", json.writeValueAsString(tgt));
     }

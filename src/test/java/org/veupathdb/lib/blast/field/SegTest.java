@@ -1,11 +1,11 @@
 package org.veupathdb.lib.blast.field;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.BooleanNode;
-import com.fasterxml.jackson.databind.node.TextNode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.veupathdb.lib.blast.consts.Key;
+import org.veupathdb.lib.blast.util.JSONConstructor;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,51 +14,165 @@ class SegTest
 {
   private final ObjectMapper json = new ObjectMapper();
 
-  @Test
-  @DisplayName("\"yes\" seg serialization")
-  void yesDustOut() throws Exception {
-    var tgt = Seg.yesSeg();
-    assertEquals("\"yes\"", json.writeValueAsString(tgt));
+  @Nested
+  @DisplayName("#isYes()")
+  class IsYes1
+  {
+    @Test
+    @DisplayName("Returns true for \"yes\" seg values")
+    void test1() {
+      assertTrue(Seg.newYesSeg().isYes());
+    }
+
+    @Test
+    @DisplayName("Returns false for \"no\" seg values")
+    void test2() {
+      assertFalse(Seg.newNoSeg().isYes());
+    }
+
+    @Test
+    @DisplayName("Returns false for wlh seg values")
+    void test3() {
+      assertFalse(Seg.newWLHSeg(0, 0, 0).isYes());
+    }
   }
 
-  @Test
-  @DisplayName("\"yes\" seg deserialization")
-  void yesDustIn() throws Exception {
-    var raw = "\"yes\"";
-    var tgt = json.readValue(raw, Seg.class);
-    assertTrue(tgt.isYes());
+  @Nested
+  @DisplayName("#isNo()")
+  class IsNo1
+  {
+    @Test
+    @DisplayName("Returns false for \"yes\" seg values")
+    void test1() {
+      assertFalse(Seg.newYesSeg().isNo());
+    }
+
+    @Test
+    @DisplayName("Returns true for \"no\" seg values")
+    void test2() {
+      assertTrue(Seg.newNoSeg().isNo());
+    }
+
+    @Test
+    @DisplayName("Returns false for wlh seg values")
+    void test3() {
+      assertFalse(Seg.newWLHSeg(0, 0, 0).isNo());
+    }
   }
 
-  @Test
-  @DisplayName("\"no\" seg serialization")
-  void noDustOut() throws Exception {
-    var tgt = Seg.noSeg();
-    assertEquals("\"no\"", json.writeValueAsString(tgt));
+  @Nested
+  @DisplayName("#isWLH()")
+  class IsWLH1
+  {
+    @Test
+    @DisplayName("Returns false for \"yes\" seg values")
+    void test1() {
+      assertFalse(Seg.newYesSeg().isWLH());
+    }
+
+    @Test
+    @DisplayName("Returns false for \"no\" seg values")
+    void test2() {
+      assertFalse(Seg.newNoSeg().isWLH());
+    }
+
+    @Test
+    @DisplayName("Returns true for wlh seg values")
+    void test3() {
+      assertTrue(Seg.newWLHSeg(0, 0, 0).isWLH());
+    }
   }
 
-  @Test
-  @DisplayName("\"no\" seg deserialization")
-  void noDustIn() throws Exception {
-    var raw = "\"no\"";
-    var tgt = json.readValue(raw, Seg.class);
-    assertTrue(tgt.isNo());
+  @Nested
+  @DisplayName("#getWindow()")
+  class GetWindow1
+  {
+    @Test
+    @DisplayName("Throws exception when called on \"yes\" seg values")
+    void test1() {
+      assertThrows(UnsupportedOperationException.class, Seg.newYesSeg()::getWindow);
+    }
+
+    @Test
+    @DisplayName("Throws exception when called on \"no\" seg values")
+    void test2() {
+      assertThrows(UnsupportedOperationException.class, Seg.newNoSeg()::getWindow);
+    }
+
+    @Test
+    @DisplayName("Returns the set window value on wlh seg values")
+    void test3() {
+      assertEquals(10, Seg.newWLHSeg(10, 0, 0).getWindow());
+    }
   }
 
-  @Test
-  @DisplayName("\"wlh\" seg serialization")
-  void wlhDustOut() throws Exception {
-    var tgt = Seg.wlhSeg(10, 12, 14);
-    assertEquals("{\"window\":10,\"locut\":12.0,\"hicut\":14.0}", json.writeValueAsString(tgt));
+  @Nested
+  @DisplayName("#getLocut()")
+  class GetLocut1
+  {
+    @Test
+    @DisplayName("Throws exception when called on \"yes\" seg values")
+    void test1() {
+      assertThrows(UnsupportedOperationException.class, Seg.newYesSeg()::getLocut);
+    }
+
+    @Test
+    @DisplayName("Throws exception when called on \"no\" seg values")
+    void test2() {
+      assertThrows(UnsupportedOperationException.class, Seg.newNoSeg()::getLocut);
+    }
+
+    @Test
+    @DisplayName("Returns the set locut value on wlh seg values")
+    void test3() {
+      assertEquals(22.22, Seg.newWLHSeg(10, 22.22, 0).getLocut());
+    }
   }
 
-  @Test
-  @DisplayName("\"wlh\" seg deserialization")
-  void wlhDustIn() throws Exception {
-    var raw = "{\"window\":10,\"locut\":12,\"hicut\":14}";
-    var tgt = json.readValue(raw, Seg.class);
-    assertEquals(10, tgt.getWindow());
-    assertEquals(12, tgt.getLocut());
-    assertEquals(14, tgt.getHicut());
+  @Nested
+  @DisplayName("#getHicut()")
+  class GetHicut1
+  {
+    @Test
+    @DisplayName("Throws exception when called on \"yes\" seg values")
+    void test1() {
+      assertThrows(UnsupportedOperationException.class, Seg.newYesSeg()::getHicut);
+    }
+
+    @Test
+    @DisplayName("Throws exception when called on \"no\" seg values")
+    void test2() {
+      assertThrows(UnsupportedOperationException.class, Seg.newNoSeg()::getHicut);
+    }
+
+    @Test
+    @DisplayName("Returns the set hicut value on wlh seg values")
+    void test3() {
+      assertEquals(33.33, Seg.newWLHSeg(10, 22.22, 33.33).getHicut());
+    }
+  }
+
+  @Nested
+  @DisplayName("#isDefault()")
+  class IsDefault1
+  {
+    @Test
+    @DisplayName("Returns false for \"yes\" seg values")
+    void test1() {
+      assertFalse(Seg.newYesSeg().isDefault());
+    }
+
+    @Test
+    @DisplayName("Returns true for \"no\" seg values")
+    void test2() {
+      assertTrue(Seg.newNoSeg().isDefault());
+    }
+
+    @Test
+    @DisplayName("Returns false for wlh seg values")
+    void test3() {
+      assertFalse(Seg.newWLHSeg(0, 0, 0).isDefault());
+    }
   }
 
   @Nested
@@ -66,30 +180,29 @@ class SegTest
   class FromJSON1
   {
     @Test
-    @DisplayName("invalid string value")
+    @DisplayName("Returns a \"yes\" seg instance when the input value is \"yes\"")
     void test1() {
-      assertThrows(
-        IllegalArgumentException.class,
-        () -> Seg.fromJSON(TextNode.valueOf("hi"))
-      );
+      assertTrue(Seg.fromJSON(JSONConstructor.newText("yes")).isYes());
     }
 
     @Test
-    @DisplayName("invalid object value")
+    @DisplayName("Returns a \"no\" seg instance when the input value is \"no\"")
     void test2() {
-      assertThrows(
-        IllegalArgumentException.class,
-        () -> Seg.fromJSON(json.createObjectNode())
-      );
+      assertTrue(Seg.fromJSON(JSONConstructor.newText("no")).isNo());
     }
 
     @Test
-    @DisplayName("invalid array value")
+    @DisplayName("Returns a wlh seg instance when the input value is an object")
     void test3() {
-      assertThrows(
-        IllegalArgumentException.class,
-        () -> Seg.fromJSON(json.createArrayNode())
-      );
+      final var input = JSONConstructor.newObject()
+        .put(Key.Window, 10)
+        .put(Key.Locut, 11)
+        .put(Key.Hicut, 12);
+      final var test = Seg.fromJSON(input);
+      assertTrue(test.isWLH());
+      assertEquals(10, test.getWindow());
+      assertEquals(11, test.getLocut());
+      assertEquals(12, test.getHicut());
     }
   }
 }

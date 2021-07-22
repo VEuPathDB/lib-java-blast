@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast.field;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.veupathdb.lib.blast.util.JSONConstructor;
 import org.veupathdb.lib.blast.util.JSONValue;
@@ -21,6 +23,7 @@ public enum TemplateLength implements JSONValue
   }
 
   @Override
+  @JsonValue
   public JsonNode toJSON() {
     return JSONConstructor.newInt(value);
   }
@@ -35,6 +38,7 @@ public enum TemplateLength implements JSONValue
     );
   }
 
+  @JsonCreator
   public static TemplateLength fromJSON(JsonNode js) {
     return fromIntValue(js.intValue());
   }

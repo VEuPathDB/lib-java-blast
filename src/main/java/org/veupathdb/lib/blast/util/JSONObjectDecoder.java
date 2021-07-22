@@ -1,13 +1,13 @@
 package org.veupathdb.lib.blast.util;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class JSONObjectDecoder
 {
@@ -88,4 +88,9 @@ public class JSONObjectDecoder
   public interface DoubleSetter extends Consumer<Double>       {}
   public interface StringSetter extends Consumer<String>       {}
   public interface StrArrSetter extends Consumer<List<String>> {}
+
+  @Override
+  public String toString() {
+    return js.toString();
+  }
 }

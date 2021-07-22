@@ -1,15 +1,16 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.veupathdb.lib.blast.consts.Flag;
+import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.Location;
 import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.TBlastNTask;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
+
+import java.util.Objects;
 
 public class TBlastN extends BlastWithLists implements BlastQueryConfig
 {
@@ -378,6 +379,7 @@ public class TBlastN extends BlastWithLists implements BlastQueryConfig
   public int hashCode() {
     return Objects.hash(
       super.hashCode(),
+      getTool(),
       getTask(),
       getWordSize(),
       getGapOpen(),
@@ -407,16 +409,8 @@ public class TBlastN extends BlastWithLists implements BlastQueryConfig
   }
 
   @Override
-  public TBlastN copy() {
-    var out = new TBlastN();
-    copyInto(out);
-    return out;
-  }
-
-  @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var js = super.toJSON();
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    var js = super.toJSON(includeTool);
 
     js.encode(Flag.Task, task);
     js.encode(Flag.WordSize, wordSize);
@@ -447,49 +441,9 @@ public class TBlastN extends BlastWithLists implements BlastQueryConfig
     return js;
   }
 
-  @JsonCreator
-  public static TBlastN fromJSON(JSONObjectDecoder js) {
-    var out = new TBlastN();
-    out.copyInto(js);
-    return out;
-  }
-
-  protected void copyInto(TBlastN out) {
-    super.copyInto(out);
-
-    out.task            = task;
-    out.wordSize        = wordSize;
-    out.gapOpen         = gapOpen;
-    out.gapExtend       = gapExtend;
-    out.dbGenCode       = dbGenCode;
-    out.maxIntronLength = maxIntronLength;
-    out.matrix          = matrix;
-    out.threshold       = threshold;
-    out.compBasedStats  = compBasedStats;
-    out.subjectFile     = subjectFile;
-
-    if (subjectLocation != null)
-      out.subjectLocation = subjectLocation.copy();
-    if (seg != null)
-      out.seg = seg.copy();
-
-    out.dbSoftMask                   = dbSoftMask;
-    out.dbHardMask                   = dbHardMask;
-    out.cullingLimit                 = cullingLimit;
-    out.sumStats                     = sumStats;
-    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
-    out.extensionDropoffFinalGapped  = extensionDropoffFinalGapped;
-    out.ungappedAlignmentsOnly       = ungappedAlignmentsOnly;
-    out.numThreads                   = numThreads;
-    out.useSmithWatermanTraceback    = useSmithWatermanTraceback;
-    out.bestHitOverhang              = bestHitOverhang;
-    out.bestHitScoreEdge             = bestHitScoreEdge;
-    out.subjectBestHit               = subjectBestHit;
-    out.inPSSMFile                   = inPSSMFile;
-  }
-
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
+  @Override
+  public void decodeJSON(JSONObjectDecoder js) {
+    super.decodeJSON(js);
 
     js.decode(Flag.Task, this::setTask, TBlastNTask::fromJSON);
     js.decode(Flag.WordSize, this::setWordSize);
@@ -516,5 +470,12 @@ public class TBlastN extends BlastWithLists implements BlastQueryConfig
     js.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
     js.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
     js.decode(Flag.InPSSMFile, this::setInPSSMFile);
+  }
+
+  @JsonCreator
+  public static TBlastN fromJSON(JSONObjectDecoder js) {
+    var out = new TBlastN();
+    out.decodeJSON(js);
+    return out;
   }
 }

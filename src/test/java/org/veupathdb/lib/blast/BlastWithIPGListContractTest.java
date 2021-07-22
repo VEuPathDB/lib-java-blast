@@ -8,10 +8,16 @@ import org.veupathdb.lib.blast.consts.Flag;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("IPGListBlast")
-class IPGListBlastTest
+@DisplayName("BlastWithIPGList")
+abstract class BlastWithIPGListContractTest extends BlastWithListsContractTest
 {
   private final ObjectMapper json = new ObjectMapper();
+
+  @Override
+  abstract BlastWithIPGList newConfig();
+
+  @Override
+  abstract Class<? extends BlastWithIPGList> configClass();
 
   @Nested
   @DisplayName(Flag.IPGList)
@@ -20,7 +26,7 @@ class IPGListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastWithIPGList(){};
+      var tgt = newConfig();
       tgt.setIPGList("hi");
 
       assertEquals("{\"-ipglist\":\"hi\"}", json.writeValueAsString(tgt));
@@ -30,7 +36,7 @@ class IPGListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-ipglist\":\"hi\"}";
-      var tgt = json.readValue(raw, BlastWithIPGList.class);
+      var tgt = json.readValue(raw, configClass());
 
       assertEquals("hi", tgt.getIPGList());
     }
@@ -43,7 +49,7 @@ class IPGListBlastTest
     @Test
     @DisplayName("serialization")
     void test1() throws Exception {
-      var tgt = new BlastWithIPGList(){};
+      var tgt = newConfig();
       tgt.setNegativeIPGList("hi");
 
       assertEquals("{\"-negative_ipglist\":\"hi\"}", json.writeValueAsString(tgt));
@@ -53,7 +59,7 @@ class IPGListBlastTest
     @DisplayName("deserialization")
     void test2() throws Exception {
       var raw = "{\"-negative_ipglist\":\"hi\"}";
-      var tgt = json.readValue(raw, BlastWithIPGList.class);
+      var tgt = json.readValue(raw, configClass());
 
       assertEquals("hi", tgt.getNegativeIPGList());
     }

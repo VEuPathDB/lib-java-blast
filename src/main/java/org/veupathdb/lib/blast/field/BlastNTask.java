@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast.field;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.veupathdb.lib.blast.util.DefaultingJSONValue;
 import org.veupathdb.lib.blast.util.JSONConstructor;
@@ -30,6 +32,7 @@ public enum BlastNTask implements DefaultingJSONValue
   }
 
   @Override
+  @JsonValue
   public JsonNode toJSON() {
     return JSONConstructor.newText(value);
   }
@@ -42,6 +45,7 @@ public enum BlastNTask implements DefaultingJSONValue
     throw new IllegalArgumentException("Unrecognized blastn task \"" + value + "\"");
   }
 
+  @JsonCreator
   public static BlastNTask fromJSON(JsonNode js) {
     return fromString(js.textValue());
   }

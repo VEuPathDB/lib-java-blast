@@ -1,32 +1,17 @@
 package org.veupathdb.lib.blast.field;
 
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.util.JSONConstructor;
 import org.veupathdb.lib.blast.util.JSONValue;
 
-public class Location implements JSONValue
+import java.util.Objects;
+
+public record Location(int start, int stop) implements JSONValue
 {
-  private final int start;
-  private final int stop;
-
-  public Location(int start, int stop) {
-    this.start = start;
-    this.stop  = stop;
-  }
-
-  public int getStart() {
-    return start;
-  }
-
-  public int getStop() {
-    return stop;
-  }
-
   @Override
   public String toString() {
     return start + "-" + stop;
@@ -37,16 +22,12 @@ public class Location implements JSONValue
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Location location = (Location) o;
-    return getStart() == location.getStart() && getStop() == location.getStop();
+    return start == location.start && stop == location.stop;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getStart(), getStop());
-  }
-
-  public Location copy() {
-    return new Location(start, stop);
+    return Objects.hash(start, stop);
   }
 
   @Override

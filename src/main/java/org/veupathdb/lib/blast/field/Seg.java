@@ -1,144 +1,60 @@
 package org.veupathdb.lib.blast.field;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.util.DefaultingJSONValue;
 import org.veupathdb.lib.blast.util.JSONConstructor;
 
-public class Seg implements DefaultingJSONValue
+public interface Seg extends DefaultingJSONValue
 {
-  private static final String YesValue = "yes";
-  private static final String NoValue = "no";
-
-  private boolean yes;
-  private boolean no;
-  private int     window;
-  private double  locut;
-  private double  hicut;
-
-  private Seg(boolean yes, boolean no, int window, double locut, double hicut) {
-    this.yes    = yes;
-    this.no     = no;
-    this.window = window;
-    this.locut  = locut;
-    this.hicut  = hicut;
+  default boolean isYes() {
+    return false;
   }
 
-  public boolean isYes() {
-    return yes;
+  default boolean isNo() {
+    return false;
   }
 
-  public Seg setYes(boolean yes) {
-    this.yes = yes;
-    return this;
+  default boolean isWLH() {
+    return false;
   }
 
-  public boolean isNo() {
-    return no;
+  default int getWindow() {
+    throw new UnsupportedOperationException();
   }
 
-  public Seg setNo(boolean no) {
-    this.no = no;
-    return this;
+  default double getLocut() {
+    throw new UnsupportedOperationException();
   }
 
-  public int getWindow() {
-    return window;
-  }
-
-  public Seg setWindow(int window) {
-    this.window = window;
-    return this;
-  }
-
-  public double getLocut() {
-    return locut;
-  }
-
-  public Seg setLocut(double locut) {
-    this.locut = locut;
-    return this;
-  }
-
-  public double getHicut() {
-    return hicut;
-  }
-
-  public Seg setHicut(double hicut) {
-    this.hicut = hicut;
-    return this;
-  }
-
-  public Seg copy() {
-    return new Seg(yes, no, window, locut, hicut);
-  }
-
-  @JsonValue
-  @Override
-  public JsonNode toJSON() {
-    if (yes)
-      return JSONConstructor.newText(YesValue);
-    if (no)
-      return JSONConstructor.newText(NoValue);
-
-    var out = JSONConstructor.newObject();
-
-    out.set(Key.Window, JSONConstructor.newInt(window));
-    out.set(Key.Locut, JSONConstructor.newDouble(locut));
-    out.set(Key.Hicut, JSONConstructor.newDouble(hicut));
-
-    return out;
+  default double getHicut() {
+    throw new UnsupportedOperationException();
   }
 
   @Override
-  public boolean isDefault() {
-    return no;
+  default boolean isDefault() {
+    return false;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Seg seg = (Seg) o;
-    return (isYes() && seg.isYes()) ||
-      (isNo() && seg.isNo()) ||
-      (getWindow() == seg.getWindow()
-      && Double.compare(seg.getLocut(), getLocut()) == 0
-      && Double.compare(seg.getHicut(), getHicut()) == 0);
+  static Seg newYesSeg() {
+    return yesSeg.instance;
   }
 
-  @Override
-  public int hashCode() {
-    if (isYes())
-      return Objects.hash(YesValue);
-    if (isNo())
-      return Objects.hash(NoValue);
-
-    return Objects.hash(getWindow(), getLocut(), getHicut());
+  static Seg newNoSeg() {
+    return noSeg.instance;
   }
 
-  public static Seg yesSeg() {
-    return new Seg(true, false, 0, 0, 0);
-  }
-
-  public static Seg noSeg() {
-    return new Seg(false, true, 0, 0, 0);
-  }
-
-  public static Seg wlhSeg(int window, double locut, double hicut) {
-    return new Seg(false, false, window, locut, hicut);
+  static Seg newWLHSeg(int window, double locut, double hicut) {
+    return new wlhSeg(window, locut, hicut);
   }
 
   @JsonCreator
-  public static Seg fromJSON(JsonNode node) {
+  static Seg fromJSON(JsonNode node) {
     if (node.isTextual()) {
       return switch (node.textValue()) {
-        case YesValue -> yesSeg();
-        case NoValue -> noSeg();
+        case yesSeg.Value -> yesSeg.instance;
+        case noSeg.Value  -> noSeg.instance;
         default -> throw new IllegalArgumentException(
           "Unrecognized seg value \"" + node.textValue() + "\""
         );
@@ -153,7 +69,7 @@ public class Seg implements DefaultingJSONValue
       if (!node.has(Key.Hicut))
         throw new IllegalArgumentException("Invalid seg value, missing required key " + Key.Hicut);
 
-      return wlhSeg(
+      return new wlhSeg(
         node.get(Key.Window).intValue(),
         node.get(Key.Locut).doubleValue(),
         node.get(Key.Hicut).doubleValue()
@@ -163,26 +79,94 @@ public class Seg implements DefaultingJSONValue
     throw new IllegalArgumentException(
       "Invalid seg value, must be one of \"yes\", \"no\", or an object containing the keys " +
         Key.Window + ", " +
-        Key.Locut  + ", " +
-        Key.Hicut  + "."
+        Key.Locut + ", " +
+        Key.Hicut + "."
     );
   }
 
-  public static Seg fromString(String value) {
-    if (value.equals(YesValue))
-      return yesSeg();
-    if (value.equals(NoValue))
-      return noSeg();
+  static Seg fromString(String value) {
+    if (yesSeg.Value.equals(value))
+      return yesSeg.instance;
+    if (noSeg.Value.equals(value))
+      return noSeg.instance;
 
     var split = value.split(" +");
 
     if (split.length != 3)
       throw new IllegalArgumentException();
 
-    return wlhSeg(
+    return new wlhSeg(
       Integer.parseInt(split[0]),
       Double.parseDouble(split[1]),
       Double.parseDouble(split[2])
     );
+  }
+}
+
+record yesSeg() implements Seg
+{
+  static final Seg instance = new yesSeg();
+  static final String Value = "yes";
+
+  @Override
+  public boolean isYes() {
+    return true;
+  }
+
+  @Override
+  public JsonNode toJSON() {
+    return JSONConstructor.newText(Value);
+  }
+}
+
+record noSeg() implements Seg
+{
+  static final Seg instance = new noSeg();
+  static final String Value = "no";
+
+  @Override
+  public boolean isNo() {
+    return true;
+  }
+
+  @Override
+  public boolean isDefault() {
+    return true;
+  }
+
+  @Override
+  public JsonNode toJSON() {
+    return JSONConstructor.newText(Value);
+  }
+}
+
+record wlhSeg(int window, double locut, double hicut) implements Seg
+{
+  @Override
+  public boolean isWLH() {
+    return true;
+  }
+
+  @Override
+  public int getWindow() {
+    return window;
+  }
+
+  @Override
+  public double getLocut() {
+    return locut;
+  }
+
+  @Override
+  public double getHicut() {
+    return hicut;
+  }
+
+  @Override
+  public JsonNode toJSON() {
+    return JSONConstructor.newObject()
+      .put(Key.Window, window)
+      .put(Key.Locut, locut)
+      .put(Key.Hicut, hicut);
   }
 }

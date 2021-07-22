@@ -2,6 +2,7 @@ package org.veupathdb.lib.blast.consts;
 
 public class Key
 {
+  public static final String Tool      = "tool";
   public static final String Start     = "start";
   public static final String Stop      = "stop";
   public static final String Level     = "level";

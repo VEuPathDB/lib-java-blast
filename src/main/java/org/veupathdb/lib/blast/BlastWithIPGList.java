@@ -1,14 +1,12 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 
-public class BlastWithIPGList extends BlastWithLists
+import java.util.Objects;
+
+public abstract class BlastWithIPGList extends BlastWithLists
 {
   private String ipgList;
   private String negativeIPGList;
@@ -32,9 +30,8 @@ public class BlastWithIPGList extends BlastWithLists
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof BlastWithIPGList)) return false;
+    if (!(o instanceof BlastWithIPGList that)) return false;
     if (!super.equals(o)) return false;
-    BlastWithIPGList that = (BlastWithIPGList) o;
     return Objects.equals(ipgList, that.ipgList) && Objects.equals(
       getNegativeIPGList(),
       that.getNegativeIPGList()
@@ -47,41 +44,20 @@ public class BlastWithIPGList extends BlastWithLists
   }
 
   @Override
-  public BlastWithIPGList copy() {
-    var out = new BlastWithIPGList();
-    copyInto(out);
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    final var out = super.toJSON(includeTool);
+
+    out.encode(Flag.IPGList, getIPGList());
+    out.encode(Flag.NegativeIPGList, getNegativeIPGList());
+
     return out;
   }
 
   @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var out = super.toJSON();
+  public void decodeJSON(JSONObjectDecoder node) {
+    super.decodeJSON(node);
 
-    out.encode(Flag.IPGList, ipgList);
-    out.encode(Flag.NegativeIPGList, negativeIPGList);
-
-    return out;
-  }
-
-  @JsonCreator
-  public static BlastWithIPGList fromJSON(JSONObjectDecoder json) {
-    var out = new BlastWithIPGList();
-    out.copyInto(json);
-    return out;
-  }
-
-  protected void copyInto(BlastWithIPGList out) {
-    super.copyInto(out);
-    out.ipgList         = ipgList;
-    out.negativeIPGList = negativeIPGList;
-  }
-
-  @Override
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
-
-    js.decode(Flag.IPGList, this::setIPGList);
-    js.decode(Flag.NegativeIPGList, this::setNegativeIPGList);
+    node.decode(Flag.IPGList, this::setIPGList);
+    node.decode(Flag.NegativeIPGList, this::setNegativeIPGList);
   }
 }

@@ -3,3 +3,5 @@
 Library for parsing/serializing JSON blast cli configs.
 
 Based on ncbi/blast 2.10.1.
+
+Requires Java 16+.

@@ -3,9 +3,10 @@ package org.veupathdb.lib.blast.field;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.veupathdb.lib.blast.util.DefaultingJSONValue;
 import org.veupathdb.lib.blast.util.JSONConstructor;
 
-public enum FormatType
+public enum FormatType implements DefaultingJSONValue
 {
   Pairwise,
   QueryAnchoredShowingIdentities,
@@ -33,17 +34,27 @@ public enum FormatType
   }
 
   @Override
+  public boolean isDefault() {
+    return this == Pairwise;
+  }
+
+  @Override
   public String toString() {
     return String.valueOf(getValue());
   }
 
-  @JsonCreator
+  @Override
+  @JsonValue
+  public JsonNode toJSON() {
+    return JSONConstructor.newInt(this.ordinal());
+  }
+
   public static FormatType fromIntValue(int value) {
     return FormatType.values()[value];
   }
 
-  @JsonValue
-  public JsonNode toJSON() {
-    return JSONConstructor.newInt(this.ordinal());
+  @JsonCreator
+  public static FormatType fromJSON(JsonNode js) {
+    return fromIntValue(js.intValue());
   }
 }
