@@ -1,10 +1,14 @@
 package org.veupathdb.lib.blast;
 
+import org.veupathdb.lib.blast.consts.Flag;
+import org.veupathdb.lib.blast.field.ExpectValue;
 import org.veupathdb.lib.blast.field.Location;
+import org.veupathdb.lib.blast.field.QueryFile;
+import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 
 public interface BlastQueryConfig extends BlastConfig
 {
-  String getQueryFile();
+  QueryFile getQueryFile();
 
   void setQueryFile(String file);
 
@@ -16,7 +20,7 @@ public interface BlastQueryConfig extends BlastConfig
 
   void setDBFile(String file);
 
-  String getExpectValue();
+  ExpectValue getExpectValue();
 
   void setExpectValue(String val);
 
@@ -67,4 +71,17 @@ public interface BlastQueryConfig extends BlastConfig
   Boolean getRemote();
 
   void setRemote(Boolean val);
+
+  @Override
+  default JSONObjectEncoder toJSON(boolean includeTool) {
+    final var out = BlastConfig.super.toJSON(includeTool);
+
+    out.encode(Flag.QueryFile, getQueryFile());
+    out.encode(Flag.QueryLocation, getQueryLocation());
+    out.encode(Flag.DBFile, getDBFile());
+    out.encode(Flag.ExpectValue, getExpectValue());
+    out.encode(Flag.SoftMasking, getSoftMasking());
+    out.encode(Flag.LowercaseMasking, getLowercaseMasking());
+    out.encode(Flag.EntrezQuery, );
+  }
 }

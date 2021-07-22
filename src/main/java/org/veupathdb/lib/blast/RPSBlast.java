@@ -5,6 +5,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
+import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.MTMode;
 import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.ThreadMode;
@@ -184,6 +185,7 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
   public int hashCode() {
     return Objects.hash(
       super.hashCode(),
+      getTool(),
       getBestHitOverhang(),
       getBestHitScoreEdge(),
       getSubjectBestHit(),
@@ -210,6 +212,7 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
   public JSONObjectEncoder toJSON() {
     var js = super.toJSON();
 
+    js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.BestHitOverhang, bestHitOverhang);
     js.encode(Flag.BestHitScoreEdge, bestHitScoreEdge);
     js.encode(Flag.SubjectBestHit, subjectBestHit);

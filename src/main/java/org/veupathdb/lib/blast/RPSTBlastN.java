@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
+import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.MTMode;
 import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.Strand;
@@ -187,6 +188,7 @@ public class RPSTBlastN extends BlastBase implements BlastQueryConfig
   public int hashCode() {
     return Objects.hash(
       super.hashCode(),
+      getTool(),
       getQueryGenCode(),
       getStrand(),
       getCompBasedStats(),
@@ -213,6 +215,7 @@ public class RPSTBlastN extends BlastBase implements BlastQueryConfig
   public JSONObjectEncoder toJSON() {
     var js = super.toJSON();
 
+    js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.QueryGenCode, queryGenCode);
     js.encode(Flag.Strand, strand);
     js.encode(Flag.CompBasedStats, compBasedStats);

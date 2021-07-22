@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
+import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.Location;
 import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
@@ -280,6 +281,7 @@ public class TBlastX extends BlastWithLists implements BlastQueryConfig
   public int hashCode() {
     return Objects.hash(
       super.hashCode(),
+      getTool(),
       getStrand(),
       getQueryGenCode(),
       getWordSize(),
@@ -313,6 +315,7 @@ public class TBlastX extends BlastWithLists implements BlastQueryConfig
   public JSONObjectEncoder toJSON() {
     var js = super.toJSON();
 
+    js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.Strand, strand);
     js.encode(Flag.QueryGenCode, queryGenCode);
     js.encode(Flag.WordSize, wordSize);

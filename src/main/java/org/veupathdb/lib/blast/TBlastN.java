@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.*;
 import org.veupathdb.lib.blast.consts.Flag;
+import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.Location;
 import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
@@ -378,6 +379,7 @@ public class TBlastN extends BlastWithLists implements BlastQueryConfig
   public int hashCode() {
     return Objects.hash(
       super.hashCode(),
+      getTool(),
       getTask(),
       getWordSize(),
       getGapOpen(),
@@ -418,6 +420,7 @@ public class TBlastN extends BlastWithLists implements BlastQueryConfig
   public JSONObjectEncoder toJSON() {
     var js = super.toJSON();
 
+    js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.Task, task);
     js.encode(Flag.WordSize, wordSize);
     js.encode(Flag.GapOpen, gapOpen);

@@ -18,17 +18,17 @@ public enum HSPSorting implements JSONValue
     return this.ordinal();
   }
 
-  @JsonCreator
   public static HSPSorting fromIntValue(int value) {
     return values()[value];
   }
 
+  @JsonCreator
   public static HSPSorting fromJSON(JsonNode js) {
     return fromIntValue(js.intValue());
   }
 
-  @JsonValue
   @Override
+  @JsonValue
   public JsonNode toJSON() {
     return JSONConstructor.newInt(this.ordinal());
   }

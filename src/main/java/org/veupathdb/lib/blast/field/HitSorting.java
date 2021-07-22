@@ -19,17 +19,17 @@ public enum HitSorting implements JSONValue
     return this.ordinal();
   }
 
-  @JsonCreator
   public static HitSorting fromIntValue(int value) {
     return values()[value];
   }
 
+  @JsonCreator
   public static HitSorting fromJSON(JsonNode js) {
     return fromIntValue(js.intValue());
   }
 
-  @JsonValue
   @Override
+  @JsonValue
   public JsonNode toJSON() {
     return JSONConstructor.newInt(this.ordinal());
   }

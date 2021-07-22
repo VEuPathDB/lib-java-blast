@@ -10,9 +10,14 @@ import org.veupathdb.lib.blast.field.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("BlastN")
-class BlastNTest
+class BlastNTest extends BlastQueryConfigContractTest
 {
   private final ObjectMapper json = new ObjectMapper();
+
+  @Override
+  BlastQueryConfig newConfig() {
+    return new BlastN();
+  }
 
   @Nested
   @DisplayName(Flag.Strand)

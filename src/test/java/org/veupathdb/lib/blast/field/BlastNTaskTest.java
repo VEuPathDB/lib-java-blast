@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast;
+package org.veupathdb.lib.blast.field;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -15,18 +15,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.veupathdb.lib.blast.util.JSONConstructor;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayName("BlastTool")
-class BlastToolTest
+@DisplayName("BlastNTask")
+public class BlastNTaskTest
 {
   @Nested
   @DisplayName("::fromJSON(JsonNode)")
   class FromJSON1
   {
     @ParameterizedTest(name = "Correctly deserializes the JSON value \"{1}\" to {0}.")
-    @MethodSource("org.veupathdb.lib.blast.BlastToolTest#jsonWrappedValues")
-    void test1(BlastTool bt, JsonNode js) {
-      assertSame(bt, BlastTool.fromJSON(js));
+    @MethodSource("org.veupathdb.lib.blast.field.BlastNTaskTest#jsonWrappedValues")
+    void test1(BlastNTask bt, JsonNode js) {
+      assertSame(bt, BlastNTask.fromJSON(js));
     }
 
     @Test
@@ -34,16 +35,16 @@ class BlastToolTest
     void test2() {
       assertThrows(
         IllegalArgumentException.class,
-        () -> BlastTool.fromJSON(JSONConstructor.newInt(3))
+        () -> BlastNTask.fromJSON(JSONConstructor.newInt(3))
       );
     }
 
     @Test
-    @DisplayName("Throws an IllegalArgumentException if the JSON text does not match a valid BlastTool value")
+    @DisplayName("Throws an IllegalArgumentException if the JSON text does not match a valid BlastNTask value")
     void test3() {
       assertThrows(
         IllegalArgumentException.class,
-        () -> BlastTool.fromJSON(JSONConstructor.newText("hello"))
+        () -> BlastNTask.fromJSON(JSONConstructor.newText("hello"))
       );
     }
   }
@@ -53,17 +54,17 @@ class BlastToolTest
   class FromString1
   {
     @ParameterizedTest(name = "Correctly matches the given value \"{1}\" to {0}.")
-    @MethodSource("org.veupathdb.lib.blast.BlastToolTest#textValues")
-    void test1(BlastTool bt, String js) {
-      assertSame(bt, BlastTool.fromString(js));
+    @MethodSource("org.veupathdb.lib.blast.field.BlastNTaskTest#textValues")
+    void test1(BlastNTask bt, String js) {
+      assertSame(bt, BlastNTask.fromString(js));
     }
 
     @Test
-    @DisplayName("Throws an IllegalArgumentException if the given value is not a valid BlastTool")
+    @DisplayName("Throws an IllegalArgumentException if the given value is not a valid BlastNTask")
     void test2() {
       assertThrows(
         IllegalArgumentException.class,
-        () -> BlastTool.fromString("hello")
+        () -> BlastNTask.fromString("hello")
       );
     }
   }
@@ -73,8 +74,8 @@ class BlastToolTest
   class ToJSON1
   {
     @ParameterizedTest(name = "Correctly converts {0} to \"{1}\"")
-    @EnumSource(BlastTool.class)
-    void test1(BlastTool bt) {
+    @EnumSource(BlastNTask.class)
+    void test1(BlastNTask bt) {
       assertEquals(bt.getValue(), bt.toJSON().textValue());
     }
   }
@@ -86,8 +87,8 @@ class BlastToolTest
     final ObjectMapper json = new ObjectMapper();
 
     @ParameterizedTest(name = "Correctly converts {0}")
-    @EnumSource(BlastTool.class)
-    void test1(BlastTool bt) throws Exception {
+    @EnumSource(BlastNTask.class)
+    void test1(BlastNTask bt) throws Exception {
       assertEquals('"' + bt.getValue() + '"', json.writeValueAsString(bt));
     }
   }
@@ -99,19 +100,19 @@ class BlastToolTest
     final ObjectMapper json = new ObjectMapper();
 
     @ParameterizedTest(name = "Correctly converts {0}")
-    @EnumSource(BlastTool.class)
-    void test1(BlastTool bt) throws Exception {
-      assertEquals(bt, json.readValue(bt.toJSON().toString(), BlastTool.class));
+    @EnumSource(BlastNTask.class)
+    void test1(BlastNTask bt) throws Exception {
+      assertEquals(bt, json.readValue(bt.toJSON().toString(), BlastNTask.class));
     }
   }
 
   static Stream<Arguments> jsonWrappedValues() {
-    return Arrays.stream(BlastTool.values())
+    return Arrays.stream(BlastNTask.values())
       .map(bt -> Arguments.of(bt, JSONConstructor.newText(bt.getValue())));
   }
 
   static Stream<Arguments> textValues() {
-    return Arrays.stream(BlastTool.values())
+    return Arrays.stream(BlastNTask.values())
       .map(bt -> Arguments.of(bt, bt.getValue()));
   }
 }

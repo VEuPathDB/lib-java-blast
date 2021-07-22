@@ -2,17 +2,9 @@ package org.veupathdb.lib.blast;
 
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import org.veupathdb.lib.blast.consts.Flag;
-import org.veupathdb.lib.blast.field.HSPSorting;
-import org.veupathdb.lib.blast.field.HitSorting;
-import org.veupathdb.lib.blast.field.OutFormat;
-import org.veupathdb.lib.blast.util.JSONObjectDecoder;
-import org.veupathdb.lib.blast.util.JSONEncodable;
-import org.veupathdb.lib.blast.util.JSONObjectEncoder;
+import org.veupathdb.lib.blast.field.*;
 
-public class CLIBase implements JSONEncodable
+public class CLIBase implements BlastConfig
 {
   public static final long   DefaultNumDescriptions = 500;
   public static final long   DefaultNumAlignments   = 250;
@@ -59,8 +51,8 @@ public class CLIBase implements JSONEncodable
     this.version = version;
   }
 
-  public String getOutFile() {
-    return outFile;
+  public OutFile getOutFile() {
+    return outFile == null ? null : new OutFile(outFile);
   }
 
   public void setOutFile(String outFile) {
@@ -83,24 +75,24 @@ public class CLIBase implements JSONEncodable
     this.showGIs = showGIs;
   }
 
-  public Long getNumDescriptions() {
-    return numDescriptions;
+  public NumDescriptions getNumDescriptions() {
+    return numDescriptions == null ? null : new NumDescriptions(numDescriptions);
   }
 
   public void setNumDescriptions(Long numDescriptions) {
     this.numDescriptions = numDescriptions;
   }
 
-  public Long getNumAlignments() {
-    return numAlignments;
+  public NumAlignments getNumAlignments() {
+    return numAlignments == null ? null : new NumAlignments(numAlignments);
   }
 
   public void setNumAlignments(Long numAlignments) {
     this.numAlignments = numAlignments;
   }
 
-  public Integer getLineLength() {
-    return lineLength;
+  public LineLength getLineLength() {
+    return lineLength == null ? null : new LineLength(lineLength);
   }
 
   public void setLineLength(Integer lineLength) {
@@ -131,8 +123,8 @@ public class CLIBase implements JSONEncodable
     this.sortHSPs = sortHSPs;
   }
 
-  public Long getMaxTargetSequences() {
-    return maxTargetSequences;
+  public MaxTargetSeqs getMaxTargetSequences() {
+    return maxTargetSequences == null ? null : new MaxTargetSeqs(maxTargetSequences);
   }
 
   public void setMaxTargetSequences(Long maxTargetSequences) {
@@ -186,76 +178,5 @@ public class CLIBase implements JSONEncodable
       getOutFile(),
       getParseDefLines()
     );
-  }
-
-  public CLIBase copy() {
-    var out = new CLIBase();
-    copyInto(out);
-    return out;
-  }
-
-  @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var out = new JSONObjectEncoder();
-
-    out.encode(Flag.ShortHelp, shortHelp);
-    out.encode(Flag.LongHelp, longHelp);
-    out.encode(Flag.Version, version);
-    out.encode(Flag.OutFormat, outFormat);
-    out.encode(Flag.ShowGIs, showGIs);
-    out.encode(Flag.NumDescriptions, numDescriptions, DefaultNumDescriptions);
-    out.encode(Flag.NumAlignments, numAlignments, DefaultNumAlignments);
-    out.encode(Flag.LineLength, lineLength, DefaultLineLength);
-    out.encode(Flag.HTML, html);
-    out.encode(Flag.SortHits, sortHits);
-    out.encode(Flag.SortHSPs, sortHSPs);
-    out.encode(Flag.MaxTargetSequences, maxTargetSequences, DefaultMaxTargetSeqs);
-    out.encode(Flag.OutFile, outFile, DefaultOutFile);
-    out.encode(Flag.ParseDefLines, parseDefLines);
-
-    return out;
-  }
-
-  @JsonCreator
-  public static CLIBase fromJSON(JSONObjectDecoder js) {
-    var out = new CLIBase();
-    out.copyInto(js);
-    return out;
-  }
-
-  protected void copyInto(CLIBase out) {
-    out.setShortHelp(getShortHelp());
-    out.setLongHelp(getLongHelp());
-    out.setVersion(getVersion());
-    if (outFormat != null)
-      out.setOutFormat(getOutFormat().copy());
-    out.setShowGIs(getShowGIs());
-    out.setNumDescriptions(getNumDescriptions());
-    out.setNumAlignments(getNumAlignments());
-    out.setLineLength(getLineLength());
-    out.setHTML(getHTML());
-    out.setSortHits(getSortHits());
-    out.setSortHSPs(getSortHSPs());
-    out.setMaxTargetSequences(getMaxTargetSequences());
-    out.setOutFile(getOutFile());
-    out.setParseDefLines(getParseDefLines());
-  }
-
-  protected void copyInto(JSONObjectDecoder js) {
-    js.decode(Flag.ShortHelp, this::setShortHelp);
-    js.decode(Flag.LongHelp, this::setLongHelp);
-    js.decode(Flag.Version, this::setVersion);
-    js.decode(Flag.OutFormat, this::setOutFormat, OutFormat::fromJSON);
-    js.decode(Flag.ShowGIs, this::setShowGIs);
-    js.decode(Flag.NumDescriptions, this::setNumDescriptions);
-    js.decode(Flag.NumAlignments, this::setNumAlignments);
-    js.decode(Flag.LineLength, this::setLineLength);
-    js.decode(Flag.HTML, this::setHTML);
-    js.decode(Flag.SortHits, this::setSortHits, HitSorting::fromJSON);
-    js.decode(Flag.SortHSPs, this::setSortHSPs, HSPSorting::fromJSON);
-    js.decode(Flag.MaxTargetSequences, this::setMaxTargetSequences);
-    js.decode(Flag.OutFile, this::setOutFile);
-    js.decode(Flag.ParseDefLines, this::setParseDefLines);
   }
 }

@@ -24,14 +24,6 @@ public enum BlastPTask implements DefaultingJSONValue
     return value;
   }
 
-  public static BlastPTask fromString(String value) {
-    for (var val : values())
-      if (val.getValue().equals(value))
-        return val;
-
-    throw new IllegalArgumentException();
-  }
-
   @Override
   public boolean isDefault() {
     return this == DefaultTask;
@@ -41,6 +33,14 @@ public enum BlastPTask implements DefaultingJSONValue
   @Override
   public JsonNode toJSON() {
     return JSONConstructor.newText(value);
+  }
+
+  public static BlastPTask fromString(String value) {
+    for (var val : values())
+      if (val.getValue().equals(value))
+        return val;
+
+    throw new IllegalArgumentException();
   }
 
   @JsonCreator
