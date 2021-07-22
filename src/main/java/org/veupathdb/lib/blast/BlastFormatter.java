@@ -1,14 +1,13 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 
-public class BlastFormatter extends CLIBase implements BlastConfig
+import java.util.Objects;
+
+public class BlastFormatter extends CLIBase
 {
   private String requestID;
   private String archiveFile;
@@ -51,41 +50,28 @@ public class BlastFormatter extends CLIBase implements BlastConfig
     return Objects.hash(super.hashCode(), getRequestID(), getArchiveFile());
   }
 
-  @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var js = super.toJSON();
-
-    js.encode(Flag.RequestID, requestID);
-    js.encode(Flag.ArchiveFile, archiveFile);
-
-    return js;
-  }
-
-  @Override
-  public BlastFormatter copy() {
-    var out = new BlastFormatter();
-    copyInto(out);
-    return out;
-  }
-
   @JsonCreator
   public static BlastFormatter fromJSON(JSONObjectDecoder js) {
     var out = new BlastFormatter();
-    out.copyInto(js);
+    out.decodeJSON(js);
     return out;
   }
 
-  protected void copyInto(BlastFormatter out) {
-    super.copyInto(out);
-    out.requestID = requestID;
-    out.archiveFile = archiveFile;
+  @Override
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    final var out = super.toJSON(includeTool);
+
+    out.encode(Flag.RequestID, getRequestID());
+    out.encode(Flag.ArchiveFile, getArchiveFile());
+
+    return out;
   }
 
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
+  @Override
+  public void decodeJSON(JSONObjectDecoder node) {
+    super.decodeJSON(node);
 
-    js.decode(Flag.RequestID, this::setRequestID);
-    js.decode(Flag.ArchiveFile, this::setArchiveFile);
+    node.decode(Flag.RequestID, this::setRequestID);
+    node.decode(Flag.ArchiveFile, this::setArchiveFile);
   }
 }

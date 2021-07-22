@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.veupathdb.lib.blast.util.JSONConstructor;
-import org.veupathdb.lib.blast.util.JSONEncodable;
-import org.veupathdb.lib.blast.util.JSONObjectEncoder;
 import org.veupathdb.lib.blast.util.JSONValue;
 
 public enum BlastTool implements JSONValue

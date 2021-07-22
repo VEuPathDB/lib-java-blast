@@ -1,11 +1,6 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.MTMode;
@@ -14,6 +9,8 @@ import org.veupathdb.lib.blast.field.Strand;
 import org.veupathdb.lib.blast.field.ThreadMode;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
+
+import java.util.Objects;
 
 public class RPSTBlastN extends BlastBase implements BlastQueryConfig
 {
@@ -204,16 +201,8 @@ public class RPSTBlastN extends BlastBase implements BlastQueryConfig
   }
 
   @Override
-  public RPSTBlastN copy() {
-    var out = new RPSTBlastN();
-    copyInto(out);
-    return out;
-  }
-
-  @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var js = super.toJSON();
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    var js = super.toJSON(includeTool);
 
     js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.QueryGenCode, queryGenCode);
@@ -231,34 +220,9 @@ public class RPSTBlastN extends BlastBase implements BlastQueryConfig
     return js;
   }
 
-  @JsonCreator
-  public static RPSTBlastN fromJSON(JSONObjectDecoder js) {
-    var out = new RPSTBlastN();
-    out.copyInto(js);
-    return out;
-  }
-
-  protected void copyInto(RPSTBlastN out) {
-    super.copyInto(out);
-
-    out.queryGenCode   = queryGenCode;
-    out.strand         = strand;
-    out.compBasedStats = compBasedStats;
-
-    if (seg != null)
-      out.seg = seg.copy();
-
-    out.sumStats                     = sumStats;
-    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
-    out.extensionDropoffFinalGapped  = extensionDropoffFinalGapped;
-    out.ungappedAlignmentsOnly       = ungappedAlignmentsOnly;
-    out.numThreads                   = numThreads;
-    out.mtMode                       = mtMode;
-    out.useSmithWatermanTraceback    = useSmithWatermanTraceback;
-  }
-
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
+  @Override
+  public void decodeJSON(JSONObjectDecoder js) {
+    super.decodeJSON(js);
 
     js.decode(Flag.QueryGenCode, this::setQueryGenCode);
     js.decode(Flag.Strand, this::setStrand, Strand::fromJSON);
@@ -271,5 +235,12 @@ public class RPSTBlastN extends BlastBase implements BlastQueryConfig
     js.decode(Flag.NumThreads, this::setNumThreads, ThreadMode::fromJSON);
     js.decode(Flag.MTMode, this::setMTMode, MTMode::fromJSON);
     js.decode(Flag.UseSmithWatermanTraceback, this::setUseSmithWatermanTraceback);
+  }
+
+  @JsonCreator
+  public static RPSTBlastN fromJSON(JSONObjectDecoder js) {
+    var out = new RPSTBlastN();
+    out.decodeJSON(js);
+    return out;
   }
 }

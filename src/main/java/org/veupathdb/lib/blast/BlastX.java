@@ -1,14 +1,13 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.*;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
+
+import java.util.Objects;
 
 public class BlastX extends BlastWithIPGList implements BlastQueryConfig
 {
@@ -404,16 +403,8 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
   }
 
   @Override
-  public BlastX copy() {
-    var out = new BlastX();
-    copyInto(out);
-    return out;
-  }
-
-  @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var js = super.toJSON();
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    var js = super.toJSON(includeTool);
 
     js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.Strand, strand);
@@ -445,47 +436,9 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
     return js;
   }
 
-  @JsonCreator
-  public static BlastX fromJSON(JSONObjectDecoder js) {
-    var out = new BlastX();
-    out.copyInto(js);
-    return out;
-  }
-
-  protected void copyInto(BlastX out) {
-    super.copyInto(out);
-    out.strand = strand;
-    out.queryGenCode = queryGenCode;
-    out.task = task;
-    out.wordSize = wordSize;
-    out.gapOpen = gapOpen;
-    out.gapExtend = gapExtend;
-    out.maxIntronLength = maxIntronLength;
-    out.matrix = matrix;
-    out.threshold = threshold;
-    out.compBasedStats = compBasedStats;
-    out.subjectFile = subjectFile;
-    if (subjectLocation != null)
-      out.subjectLocation = subjectLocation.copy();
-    if (seg != null)
-      out.seg = seg.copy();
-    out.dbSoftMask = dbSoftMask;
-    out.dbHardMask = dbHardMask;
-    out.cullingLimit = cullingLimit;
-    out.sumStats = sumStats;
-    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
-    out.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
-    out.ungappedAlignmentsOnly = ungappedAlignmentsOnly;
-    out.numThreads = numThreads;
-    out.useSmithWatermanTraceback = useSmithWatermanTraceback;
-    out.bestHitOverhang = bestHitOverhang;
-    out.bestHitScoreEdge = bestHitScoreEdge;
-    out.subjectBestHit = subjectBestHit;
-  }
-
   @Override
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
+  public void decodeJSON(JSONObjectDecoder js) {
+    super.decodeJSON(js);
 
     js.decode(Flag.Strand, this::setStrand, Strand::fromJSON);
     js.decode(Flag.QueryGenCode, this::setQueryGenCode);
@@ -512,5 +465,12 @@ public class BlastX extends BlastWithIPGList implements BlastQueryConfig
     js.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
     js.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
     js.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
+  }
+
+  @JsonCreator
+  public static BlastX fromJSON(JSONObjectDecoder js) {
+    var out = new BlastX();
+    out.decodeJSON(js);
+    return out;
   }
 }

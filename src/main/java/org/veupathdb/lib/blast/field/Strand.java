@@ -1,13 +1,13 @@
 package org.veupathdb.lib.blast.field;
 
-import java.util.Locale;
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.veupathdb.lib.blast.util.DefaultingJSONValue;
 import org.veupathdb.lib.blast.util.JSONConstructor;
+
+import java.util.Locale;
+import java.util.Objects;
 
 public enum Strand implements DefaultingJSONValue
 {

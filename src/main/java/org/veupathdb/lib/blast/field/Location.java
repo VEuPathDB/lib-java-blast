@@ -1,13 +1,14 @@
 package org.veupathdb.lib.blast.field;
 
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.util.JSONConstructor;
 import org.veupathdb.lib.blast.util.JSONValue;
+
+import java.util.Objects;
 
 public record Location(int start, int stop) implements JSONValue
 {

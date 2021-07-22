@@ -1,9 +1,6 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.MTMode;
@@ -11,6 +8,8 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.ThreadMode;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
+
+import java.util.Objects;
 
 public class RPSBlast extends BlastBase implements BlastQueryConfig
 {
@@ -201,16 +200,8 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
   }
 
   @Override
-  public RPSBlast copy() {
-    var out = new RPSBlast();
-    copyInto(out);
-    return out;
-  }
-
-  @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var js = super.toJSON();
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    var js = super.toJSON(includeTool);
 
     js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.BestHitOverhang, bestHitOverhang);
@@ -228,35 +219,9 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
     return js;
   }
 
-  @JsonCreator
-  public static RPSBlast fromJSON(JSONObjectDecoder js) {
-    var out = new RPSBlast();
-    out.copyInto(js);
-    return out;
-  }
-
-  protected void copyInto(RPSBlast out) {
-    super.copyInto(out);
-
-    out.bestHitOverhang  = bestHitOverhang;
-    out.bestHitScoreEdge = bestHitScoreEdge;
-    out.subjectBestHit   = subjectBestHit;
-    out.compBasedStats   = compBasedStats;
-
-    if (seg != null)
-      out.seg = seg.copy();
-
-    out.sumStats                     = sumStats;
-    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
-    out.extensionDropoffFinalGapped  = extensionDropoffFinalGapped;
-    out.numThreads                   = numThreads;
-    out.mtMode                       = mtMode;
-    out.useSmithWatermanTraceback    = useSmithWatermanTraceback;
-  }
-
   @Override
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
+  public void decodeJSON(JSONObjectDecoder js) {
+    super.decodeJSON(js);
 
     js.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
     js.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
@@ -269,5 +234,12 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
     js.decode(Flag.NumThreads, this::setNumThreads, ThreadMode::fromJSON);
     js.decode(Flag.MTMode, this::setMTMode, MTMode::fromJSON);
     js.decode(Flag.UseSmithWatermanTraceback, this::setUseSmithWatermanTraceback);
+  }
+
+  @JsonCreator
+  public static RPSBlast fromJSON(JSONObjectDecoder js) {
+    var out = new RPSBlast();
+    out.decodeJSON(js);
+    return out;
   }
 }

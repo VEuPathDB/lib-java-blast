@@ -1,17 +1,15 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
-import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.BlastPTask;
 import org.veupathdb.lib.blast.field.Location;
 import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
+
+import java.util.Objects;
 
 public class BlastP extends BlastWithIPGList implements BlastQueryConfig
 {
@@ -352,101 +350,63 @@ public class BlastP extends BlastWithIPGList implements BlastQueryConfig
   }
 
   @Override
-  public BlastP copy() {
-    var out = new BlastP();
-    copyInto(out);
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    final var out = super.toJSON(includeTool);
+
+    out.encode(Flag.Task, getTask());
+    out.encode(Flag.WordSize, getWordSize());
+    out.encode(Flag.GapOpen, getGapOpen());
+    out.encode(Flag.GapExtend, getGapExtend());
+    out.encode(Flag.Matrix, getMatrix());
+    out.encode(Flag.Threshold, getThreshold());
+    out.encode(Flag.CompBasedStats, getCompBasedStats());
+    out.encode(Flag.SubjectFile, getSubjectFile());
+    out.encode(Flag.Seg, getSeg());
+    out.encode(Flag.DBSoftMask, getDBSoftMask());
+    out.encode(Flag.DBHardMask, getDBHardMask());
+    out.encode(Flag.CullingLimit, getCullingLimit());
+    out.encode(Flag.ExtensionDropoffPrelimGapped, getExtensionDropoffPrelimGapped());
+    out.encode(Flag.ExtensionDropoffFinalGapped, getExtensionDropoffFinalGapped());
+    out.encode(Flag.UngappedAlignmentsOnly, getUngappedAlignmentsOnly());
+    out.encode(Flag.NumThreads, getNumThreads());
+    out.encode(Flag.UseSmithWatermanTraceback, getUseSmithWatermanTraceback());
+    out.encode(Flag.BestHitOverhang, getBestHitOverhang());
+    out.encode(Flag.BestHitScoreEdge, getBestHitScoreEdge());
+    out.encode(Flag.SubjectBestHit, getSubjectBestHit());
+
     return out;
   }
 
   @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var js = super.toJSON();
+  public void decodeJSON(JSONObjectDecoder node) {
+    super.decodeJSON(node);
 
-    js.encode(Key.Tool, getTool().getValue());
-    js.encode(Flag.Task, task);
-    js.encode(Flag.WordSize, wordSize);
-    js.encode(Flag.GapOpen, gapOpen);
-    js.encode(Flag.GapExtend, gapExtend);
-    js.encode(Flag.Matrix, matrix);
-    js.encode(Flag.Threshold, threshold);
-    js.encode(Flag.CompBasedStats, compBasedStats);
-    js.encode(Flag.SubjectFile, subjectFile);
-    js.encode(Flag.SubjectLocation, subjectLocation);
-    js.encode(Flag.Seg, seg);
-    js.encode(Flag.DBSoftMask, dbSoftMask);
-    js.encode(Flag.DBHardMask, dbHardMask);
-    js.encode(Flag.CullingLimit, cullingLimit);
-    js.encode(Flag.ExtensionDropoffPrelimGapped, extensionDropoffPrelimGapped);
-    js.encode(Flag.ExtensionDropoffFinalGapped, extensionDropoffFinalGapped);
-    js.encode(Flag.UngappedAlignmentsOnly, ungappedAlignmentsOnly);
-    js.encode(Flag.NumThreads, numThreads);
-    js.encode(Flag.UseSmithWatermanTraceback, useSmithWatermanTraceback);
-    js.encode(Flag.BestHitOverhang, bestHitOverhang);
-    js.encode(Flag.BestHitScoreEdge, bestHitScoreEdge);
-    js.encode(Flag.SubjectBestHit, subjectBestHit);
-
-    return js;
+    node.decode(Flag.Task, this::setTask, BlastPTask::fromJSON);
+    node.decode(Flag.WordSize, this::setWordSize);
+    node.decode(Flag.GapOpen, this::setGapOpen);
+    node.decode(Flag.GapExtend, this::setGapExtend);
+    node.decode(Flag.Matrix, this::setMatrix, ScoringMatrix::fromJSON);
+    node.decode(Flag.Threshold, this::setThreshold);
+    node.decode(Flag.CompBasedStats, this::setCompBasedStats);
+    node.decode(Flag.SubjectFile, this::setSubjectFile);
+    node.decode(Flag.Seg, this::setSeg, Seg::fromJSON);
+    node.decode(Flag.DBSoftMask, this::setDBSoftMask);
+    node.decode(Flag.DBHardMask, this::setDBHardMask);
+    node.decode(Flag.CullingLimit, this::setCullingLimit);
+    node.decode(Flag.ExtensionDropoffPrelimGapped, this::setExtensionDropoffPrelimGapped);
+    node.decode(Flag.ExtensionDropoffFinalGapped, this::setExtensionDropoffFinalGapped);
+    node.decode(Flag.UngappedAlignmentsOnly, this::setUngappedAlignmentsOnly);
+    node.decode(Flag.NumThreads, this::setNumThreads);
+    node.decode(Flag.UseSmithWatermanTraceback, this::setUseSmithWatermanTraceback);
+    node.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
+    node.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
+    node.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
   }
 
   @JsonCreator
   public static BlastP fromJSON(JSONObjectDecoder js) {
     var out = new BlastP();
-    out.copyInto(js);
+    out.decodeJSON(js);
     return out;
-  }
-
-  protected void copyInto(BlastP out) {
-    super.copyInto(out);
-    out.task = task;
-    out.wordSize = wordSize;
-    out.gapOpen = gapOpen;
-    out.gapExtend = gapExtend;
-    out.matrix = matrix;
-    out.threshold = threshold;
-    out.compBasedStats = compBasedStats;
-    out.subjectFile = subjectFile;
-    if (subjectLocation != null)
-      out.subjectLocation = subjectLocation.copy();
-    if (seg != null)
-      out.seg = seg.copy();
-    out.dbSoftMask = dbSoftMask;
-    out.dbHardMask = dbHardMask;
-    out.cullingLimit = cullingLimit;
-    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
-    out.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
-    out.ungappedAlignmentsOnly = ungappedAlignmentsOnly;
-    out.numThreads = numThreads;
-    out.useSmithWatermanTraceback = useSmithWatermanTraceback;
-    out.bestHitOverhang = bestHitOverhang;
-    out.bestHitScoreEdge = bestHitScoreEdge;
-    out.subjectBestHit = subjectBestHit;
-  }
-
-  @Override
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
-
-    js.decode(Flag.Task, this::setTask, BlastPTask::fromJSON);
-    js.decode(Flag.WordSize, this::setWordSize);
-    js.decode(Flag.GapOpen, this::setGapOpen);
-    js.decode(Flag.GapExtend, this::setGapExtend);
-    js.decode(Flag.Matrix, this::setMatrix, ScoringMatrix::fromJSON);
-    js.decode(Flag.Threshold, this::setThreshold);
-    js.decode(Flag.CompBasedStats, this::setCompBasedStats);
-    js.decode(Flag.SubjectFile, this::setSubjectFile);
-    js.decode(Flag.SubjectLocation, this::setSubjectLocation, Location::fromJSON);
-    js.decode(Flag.Seg, this::setSeg, Seg::fromJSON);
-    js.decode(Flag.DBSoftMask, this::setDBSoftMask);
-    js.decode(Flag.DBHardMask, this::setDBHardMask);
-    js.decode(Flag.CullingLimit, this::setCullingLimit);
-    js.decode(Flag.ExtensionDropoffPrelimGapped, this::setExtensionDropoffPrelimGapped);
-    js.decode(Flag.ExtensionDropoffFinalGapped, this::setExtensionDropoffFinalGapped);
-    js.decode(Flag.UngappedAlignmentsOnly, this::setUngappedAlignmentsOnly);
-    js.decode(Flag.NumThreads, this::setNumThreads);
-    js.decode(Flag.UseSmithWatermanTraceback, this::setUseSmithWatermanTraceback);
-    js.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
-    js.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
-    js.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
   }
 }

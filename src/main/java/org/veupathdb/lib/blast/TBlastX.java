@@ -1,11 +1,6 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.Location;
@@ -14,6 +9,8 @@ import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.field.Strand;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
+
+import java.util.Objects;
 
 public class TBlastX extends BlastWithLists implements BlastQueryConfig
 {
@@ -304,16 +301,8 @@ public class TBlastX extends BlastWithLists implements BlastQueryConfig
   }
 
   @Override
-  public TBlastX copy() {
-    var out = new TBlastX();
-    copyInto(out);
-    return out;
-  }
-
-  @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var js = super.toJSON();
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    var js = super.toJSON(includeTool);
 
     js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.Strand, strand);
@@ -338,43 +327,9 @@ public class TBlastX extends BlastWithLists implements BlastQueryConfig
     return js;
   }
 
-  @JsonCreator
-  public static TBlastX fromJSON(JSONObjectDecoder js) {
-    var out = new TBlastX();
-    out.copyInto(js);
-    return out;
-  }
-
-  protected void copyInto(TBlastX out) {
-    super.copyInto(out);
-
-    out.strand          = strand;
-    out.queryGenCode    = queryGenCode;
-    out.wordSize        = wordSize;
-    out.maxIntronLength = maxIntronLength;
-    out.matrix          = matrix;
-    out.threshold       = threshold;
-    out.dbGenCode       = dbGenCode;
-    out.subjectFile     = subjectFile;
-
-    if (subjectLocation != null)
-      out.subjectLocation = subjectLocation.copy();
-    if (seg != null)
-      out.seg = seg.copy();
-
-    out.dbSoftMask       = dbSoftMask;
-    out.dbHardMask       = dbHardMask;
-    out.cullingLimit     = cullingLimit;
-    out.sumStats         = sumStats;
-    out.numThreads       = numThreads;
-    out.bestHitOverhang  = bestHitOverhang;
-    out.bestHitScoreEdge = bestHitScoreEdge;
-    out.subjectBestHit   = subjectBestHit;
-  }
-
   @Override
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
+  public void decodeJSON(JSONObjectDecoder js) {
+    super.decodeJSON(js);
 
     js.decode(Flag.Strand, this::setStrand, Strand::fromJSON);
     js.decode(Flag.QueryGenCode, this::setQueryGenCode);
@@ -394,5 +349,12 @@ public class TBlastX extends BlastWithLists implements BlastQueryConfig
     js.decode(Flag.BestHitOverhang, this::setBestHitOverhang);
     js.decode(Flag.BestHitScoreEdge, this::setBestHitScoreEdge);
     js.decode(Flag.SubjectBestHit, this::setSubjectBestHit);
+  }
+
+  @JsonCreator
+  public static TBlastX fromJSON(JSONObjectDecoder js) {
+    var out = new TBlastX();
+    out.decodeJSON(js);
+    return out;
   }
 }

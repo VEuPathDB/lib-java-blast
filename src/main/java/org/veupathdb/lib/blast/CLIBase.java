@@ -1,17 +1,11 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
 import org.veupathdb.lib.blast.field.*;
 
-public class CLIBase implements BlastConfig
-{
-  public static final long   DefaultNumDescriptions = 500;
-  public static final long   DefaultNumAlignments   = 250;
-  public static final int    DefaultLineLength      = 60;
-  public static final long   DefaultMaxTargetSeqs   = 500;
-  public static final String DefaultOutFile         = "-";
+import java.util.Objects;
 
+public abstract class CLIBase implements BlastConfig
+{
   private Boolean    shortHelp;
   private Boolean    longHelp;
   private Boolean    version;
@@ -142,8 +136,7 @@ public class CLIBase implements BlastConfig
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof CLIBase)) return false;
-    CLIBase cliBase = (CLIBase) o;
+    if (!(o instanceof CLIBase cliBase)) return false;
     return Objects.equals(getShortHelp(), cliBase.getShortHelp())
       && Objects.equals(getLongHelp(), cliBase.getLongHelp())
       && Objects.equals(getVersion(), cliBase.getVersion())

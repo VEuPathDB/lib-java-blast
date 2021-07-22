@@ -1,9 +1,6 @@
 package org.veupathdb.lib.blast;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.Location;
@@ -11,6 +8,8 @@ import org.veupathdb.lib.blast.field.ScoringMatrix;
 import org.veupathdb.lib.blast.field.Seg;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
+
+import java.util.Objects;
 
 public class DeltaBlast extends BlastWithLists implements BlastQueryConfig
 {
@@ -453,16 +452,8 @@ public class DeltaBlast extends BlastWithLists implements BlastQueryConfig
   }
 
   @Override
-  public DeltaBlast copy() {
-    var out = new DeltaBlast();
-    copyInto(out);
-    return out;
-  }
-
-  @Override
-  @JsonValue
-  public JSONObjectEncoder toJSON() {
-    var js = super.toJSON();
+  public JSONObjectEncoder toJSON(boolean includeTool) {
+    var js = super.toJSON(includeTool);
 
     js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.WordSize, wordSize);
@@ -498,51 +489,9 @@ public class DeltaBlast extends BlastWithLists implements BlastQueryConfig
     return js;
   }
 
-  @JsonCreator
-  public static DeltaBlast fromJSON(JSONObjectDecoder js) {
-    var out = new DeltaBlast();
-    out.copyInto(js);
-    return out;
-  }
-
-  protected void copyInto(DeltaBlast out) {
-    super.copyInto(out);
-    out.wordSize = wordSize;
-    out.gapOpen = gapOpen;
-    out.gapExtend = gapExtend;
-    out.matrix = matrix;
-    out.threshold = threshold;
-    out.compBasedStats = compBasedStats;
-    out.subjectFile = subjectFile;
-    if (subjectLocation != null)
-      out.subjectLocation = subjectLocation.copy();
-    if (seg != null)
-      out.seg = seg.copy();
-    out.cullingLimit = cullingLimit;
-    out.sumStats = sumStats;
-    out.extensionDropoffPrelimGapped = extensionDropoffPrelimGapped;
-    out.extensionDropoffFinalGapped = extensionDropoffFinalGapped;
-    out.gapTrigger = gapTrigger;
-    out.numThreads = numThreads;
-    out.useSmithWatermanTraceback = useSmithWatermanTraceback;
-    out.bestHitOverhang = bestHitOverhang;
-    out.bestHitScoreEdge = bestHitScoreEdge;
-    out.subjectBestHit = subjectBestHit;
-    out.numIterations = numIterations;
-    out.outPSSMFile = outPSSMFile;
-    out.outASCIIPSSMFile = outASCIIPSSMFile;
-    out.savePSSMAfterLastRound = savePSSMAfterLastRound;
-    out.saveEachPSSM = saveEachPSSM;
-    out.pseudocount = pseudocount;
-    out.domainInclusionEThreshold = domainInclusionEThreshold;
-    out.inclusionEThreshold = inclusionEThreshold;
-    out.rpsDBFile = rpsDBFile;
-    out.showDomainHits = showDomainHits;
-  }
-
   @Override
-  protected void copyInto(JSONObjectDecoder js) {
-    super.copyInto(js);
+  public void decodeJSON(JSONObjectDecoder js) {
+    super.decodeJSON(js);
 
     js.decode(Flag.WordSize, this::setWordSize);
     js.decode(Flag.GapOpen, this::setGapOpen);
@@ -573,5 +522,12 @@ public class DeltaBlast extends BlastWithLists implements BlastQueryConfig
     js.decode(Flag.InclusionEThreshold, this::setInclusionEThreshold);
     js.decode(Flag.RPSDBFile, this::setRPSDBFile);
     js.decode(Flag.ShowDomainHits, this::setShowDomainHits);
+  }
+
+  @JsonCreator
+  public static DeltaBlast fromJSON(JSONObjectDecoder js) {
+    var out = new DeltaBlast();
+    out.decodeJSON(js);
+    return out;
   }
 }
