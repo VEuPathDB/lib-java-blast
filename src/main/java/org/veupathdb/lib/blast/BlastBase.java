@@ -6,7 +6,7 @@ import org.veupathdb.lib.blast.field.QueryFile;
 
 import java.util.Objects;
 
-public abstract class BlastBase extends CLIBase
+public abstract class BlastBase extends CLIBase implements BlastQueryConfig
 {
   private String     queryFile;
   private Location   queryLocation;
@@ -26,7 +26,7 @@ public abstract class BlastBase extends CLIBase
   private Boolean    remote;
 
   public QueryFile getQueryFile() {
-    return new QueryFile(queryFile);
+    return queryFile == null ? null : new QueryFile(queryFile);
   }
 
   public void setQueryFile(String queryFile) {
@@ -50,7 +50,7 @@ public abstract class BlastBase extends CLIBase
   }
 
   public ExpectValue getExpectValue() {
-    return new ExpectValue(expectValue);
+    return expectValue == null ? null : new ExpectValue(expectValue);
   }
 
   public void setExpectValue(String expectValue) {
@@ -102,7 +102,6 @@ public abstract class BlastBase extends CLIBase
   }
 
   public void setDBSize(Byte dbSize) {
-    System.out.println(dbSize);
     this.dbSize = dbSize;
   }
 

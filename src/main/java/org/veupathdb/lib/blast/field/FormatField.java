@@ -69,7 +69,6 @@ public enum FormatField implements DefaultingJSONValue
     this.value = value;
   }
 
-  @JsonValue
   public String getValue() {
     return value;
   }

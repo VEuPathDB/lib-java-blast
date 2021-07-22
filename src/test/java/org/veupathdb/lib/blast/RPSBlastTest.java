@@ -116,7 +116,7 @@ class RPSBlastTest
     @DisplayName("serialization")
     void test1() throws Exception {
       var tgt = new RPSBlast();
-      tgt.setSeg(Seg.yesSeg());
+      tgt.setSeg(Seg.newYesSeg());
 
       assertEquals("{\"-seg\":\"yes\"}", json.writeValueAsString(tgt));
     }

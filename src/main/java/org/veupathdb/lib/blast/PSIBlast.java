@@ -483,7 +483,6 @@ public class PSIBlast extends BlastWithIPGList implements BlastQueryConfig
   public JSONObjectEncoder toJSON(boolean includeTool) {
     var js = super.toJSON(includeTool);
 
-    js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.WordSize, wordSize);
     js.encode(Flag.GapOpen, gapOpen);
     js.encode(Flag.GapExtend, gapExtend);

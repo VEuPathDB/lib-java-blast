@@ -13,9 +13,19 @@ import org.veupathdb.lib.blast.field.Seg;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("BlastP")
-class BlastPTest
+class BlastPTest extends BlastWithIPGListContractTest
 {
   private final ObjectMapper json = new ObjectMapper();
+
+  @Override
+  BlastP newConfig() {
+    return new BlastP();
+  }
+
+  @Override
+  Class<BlastP> configClass() {
+    return BlastP.class;
+  }
 
   @Nested
   @DisplayName(Flag.Task)
@@ -220,8 +230,18 @@ class BlastPTest
       var raw = "{\"-subject_loc\":{\"start\":10,\"stop\":11}}";
       var tgt = json.readValue(raw, BlastP.class);
 
-      assertEquals(10, tgt.getSubjectLocation().getStart());
-      assertEquals(11, tgt.getSubjectLocation().getStop());
+      assertEquals(10, tgt.getSubjectLocation().start());
+      assertEquals(11, tgt.getSubjectLocation().stop());
+    }
+
+    @Test
+    @DisplayName("can be configured")
+    void test3() {
+      final var tgt = newConfig();
+
+      tgt.setSubjectLocation(new Location(10, 12));
+
+      assertEquals(new Location(10, 12), tgt.getSubjectLocation());
     }
   }
 
@@ -233,7 +253,7 @@ class BlastPTest
     @DisplayName("serialization")
     void test1() throws Exception {
       var tgt = new BlastP();
-      tgt.setSeg(Seg.yesSeg());
+      tgt.setSeg(Seg.newYesSeg());
 
       assertEquals("{\"-seg\":\"yes\"}", json.writeValueAsString(tgt));
     }

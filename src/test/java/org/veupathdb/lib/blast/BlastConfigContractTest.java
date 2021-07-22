@@ -1,5 +1,7 @@
 package org.veupathdb.lib.blast;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public abstract class BlastConfigContractTest
 {
   abstract BlastConfig newConfig();
+
+  abstract Class<? extends BlastConfig> configClass();
+
+  private static final ObjectMapper JSON = new ObjectMapper();
 
   @Nested
   @DisplayName("#getTool()")
@@ -126,7 +132,7 @@ public abstract class BlastConfigContractTest
       assertFalse(json.has(Flag.OutFile));
 
       test.setOutFile("Hello");
-      assertEquals("Hello", test.getOutFile());
+      assertEquals("Hello", test.getOutFile().value());
       json = test.toJSON().toJSON();
       assertTrue(json.has(Flag.OutFile));
       assertTrue(json.get(Flag.OutFile).isTextual());
@@ -149,7 +155,7 @@ public abstract class BlastConfigContractTest
       assertFalse(json.has(Flag.OutFormat));
 
       test.setOutFormat(new OutFormat());
-      assertNull(test.getOutFormat());
+      assertNotNull(test.getOutFormat());
       json = test.toJSON().toJSON();
       assertFalse(json.has(Flag.OutFormat));
 
@@ -166,7 +172,7 @@ public abstract class BlastConfigContractTest
   }
 
   @Nested
-  @DisplayName("-show_gis Flag")
+  @DisplayName(Flag.ShowGIs)
   class ShowGIsFlag
   {
     @Test
@@ -176,26 +182,58 @@ public abstract class BlastConfigContractTest
 
       test.setShowGIs(null);
       assertNull(test.getShowGIs());
-      var json = test.toJSON().toJSON();
-      assertFalse(json.has(Flag.ShowGIs));
 
       test.setShowGIs(true);
       assertTrue(test.getShowGIs());
-      json = test.toJSON().toJSON();
-      assertTrue(json.has(Flag.ShowGIs));
-      assertTrue(json.get(Flag.ShowGIs).isBoolean());
-      assertTrue(json.get(Flag.ShowGIs).booleanValue());
 
       test.setShowGIs(false);
       assertFalse(test.getShowGIs());
-      json = test.toJSON().toJSON();
-      assertFalse(json.has(Flag.ShowGIs));
+    }
+
+    @Test
+    @DisplayName("Can be deserialized")
+    void test2() throws JsonProcessingException {
+      final var input1 = """
+        {
+          "-show_gis": true
+        }
+        """;
+
+      final var test1 = JSON.readValue(input1, configClass());
+
+      assertTrue(test1.getShowGIs());
+
+      final var input2 = """
+        {
+          "-show_gis": false
+        }
+        """;
+
+      final var test2 = JSON.readValue(input2, configClass());
+
+      assertFalse(test2.getShowGIs());
+    }
+
+    @Test
+    @DisplayName("Can be serialized")
+    void test3() throws JsonProcessingException {
+      final var test1 = newConfig();
+
+      assertEquals("{}", JSON.writeValueAsString(test1));
+
+      test1.setShowGIs(true);
+
+      assertEquals("{\"-show_gis\":true}", JSON.writeValueAsString(test1));
+
+      test1.setShowGIs(false);
+
+      assertEquals("{}", JSON.writeValueAsString(test1));
     }
   }
 
   @Nested
-  @DisplayName("-num_descriptions Flag")
-  class NumDescriptions
+  @DisplayName(Flag.NumDescriptions)
+  class NumDescriptionsFlag
   {
     @Test
     @DisplayName("Can be configured")
@@ -204,21 +242,39 @@ public abstract class BlastConfigContractTest
 
       test.setNumDescriptions(null);
       assertNull(test.getNumDescriptions());
-      var json = test.toJSON().toJSON();
-      assertFalse(json.has(Flag.NumDescriptions));
 
-      test.setNumDescriptions(33L);
-      assertEquals(33L, test.getNumDescriptions());
-      json = test.toJSON().toJSON();
-      assertTrue(json.has(Flag.NumDescriptions));
-      assertTrue(json.get(Flag.NumDescriptions).isNumber());
-      assertEquals(33, json.get(Flag.NumDescriptions).longValue());
+      test.setNumDescriptions(12L);
+      assertEquals(12, test.getNumDescriptions().value());
+    }
+
+    @Test
+    @DisplayName("Can be deserialized")
+    void test2() throws JsonProcessingException {
+      final var input = """
+        {
+          "-num_descriptions": 32
+        }
+        """;
+
+      final var parsed = JSON.readValue(input, configClass());
+
+      assertEquals(32, parsed.getNumDescriptions().value());
+    }
+
+    @Test
+    @DisplayName("Can be serialized")
+    void test3() throws JsonProcessingException {
+      final var object = newConfig();
+
+      object.setNumDescriptions(69L);
+
+      assertEquals("{\"-num_descriptions\":69}", JSON.writeValueAsString(object));
     }
   }
 
   @Nested
-  @DisplayName("-num_alignments Flag")
-  class NumAlignments
+  @DisplayName(Flag.NumAlignments)
+  class NumAlignmentsFlag
   {
     @Test
     @DisplayName("Can be configured")
@@ -227,21 +283,39 @@ public abstract class BlastConfigContractTest
 
       test.setNumAlignments(null);
       assertNull(test.getNumAlignments());
-      var json = test.toJSON().toJSON();
-      assertFalse(json.has(Flag.NumAlignments));
 
-      test.setNumAlignments(33L);
-      assertEquals(33L, test.getNumAlignments());
-      json = test.toJSON().toJSON();
-      assertTrue(json.has(Flag.NumAlignments));
-      assertTrue(json.get(Flag.NumAlignments).isNumber());
-      assertEquals(33, json.get(Flag.NumAlignments).longValue());
+      test.setNumAlignments(12L);
+      assertEquals(12, test.getNumAlignments().value());
+    }
+
+    @Test
+    @DisplayName("Can be deserialized")
+    void test2() throws JsonProcessingException {
+      final var input = """
+        {
+          "-num_alignments": 32
+        }
+        """;
+
+      final var parsed = JSON.readValue(input, configClass());
+
+      assertEquals(32, parsed.getNumAlignments().value());
+    }
+
+    @Test
+    @DisplayName("Can be serialized")
+    void test3() throws JsonProcessingException {
+      final var object = newConfig();
+
+      object.setNumAlignments(69L);
+
+      assertEquals("{\"-num_alignments\":69}", JSON.writeValueAsString(object));
     }
   }
 
   @Nested
-  @DisplayName("-line_length Flag")
-  class LineLength
+  @DisplayName(Flag.LineLength)
+  class LineLengthFlag
   {
     @Test
     @DisplayName("Can be configured")
@@ -250,20 +324,38 @@ public abstract class BlastConfigContractTest
 
       test.setLineLength(null);
       assertNull(test.getLineLength());
-      var json = test.toJSON().toJSON();
-      assertFalse(json.has(Flag.LineLength));
 
-      test.setLineLength(33);
-      assertEquals(33, test.getLineLength());
-      json = test.toJSON().toJSON();
-      assertTrue(json.has(Flag.LineLength));
-      assertTrue(json.get(Flag.LineLength).isNumber());
-      assertEquals(33, json.get(Flag.LineLength).intValue());
+      test.setLineLength(12);
+      assertEquals(12, test.getLineLength().value());
+    }
+
+    @Test
+    @DisplayName("Can be deserialized")
+    void test2() throws JsonProcessingException {
+      final var input = """
+        {
+          "-line_length": 32
+        }
+        """;
+
+      final var parsed = JSON.readValue(input, configClass());
+
+      assertEquals(32, parsed.getLineLength().value());
+    }
+
+    @Test
+    @DisplayName("Can be serialized")
+    void test3() throws JsonProcessingException {
+      final var object = newConfig();
+
+      object.setLineLength(69);
+
+      assertEquals("{\"-line_length\":69}", JSON.writeValueAsString(object));
     }
   }
 
   @Nested
-  @DisplayName("-html Flag")
+  @DisplayName(Flag.HTML)
   class HTMLFlag
   {
     @Test
@@ -273,25 +365,57 @@ public abstract class BlastConfigContractTest
 
       test.setHTML(null);
       assertNull(test.getHTML());
-      var json = test.toJSON().toJSON();
-      assertFalse(json.has(Flag.HTML));
 
       test.setHTML(true);
       assertTrue(test.getHTML());
-      json = test.toJSON().toJSON();
-      assertTrue(json.has(Flag.HTML));
-      assertTrue(json.get(Flag.HTML).isBoolean());
-      assertTrue(json.get(Flag.HTML).booleanValue());
 
       test.setHTML(false);
       assertFalse(test.getHTML());
-      json = test.toJSON().toJSON();
-      assertFalse(json.has(Flag.HTML));
+    }
+
+    @Test
+    @DisplayName("Can be deserialized")
+    void test2() throws JsonProcessingException {
+      final var input1 = """
+        {
+          "-html": true
+        }
+        """;
+
+      final var test1 = JSON.readValue(input1, configClass());
+
+      assertTrue(test1.getHTML());
+
+      final var input2 = """
+        {
+          "-html": false
+        }
+        """;
+
+      final var test2 = JSON.readValue(input2, configClass());
+
+      assertFalse(test2.getHTML());
+    }
+
+    @Test
+    @DisplayName("Can be serialized")
+    void test3() throws JsonProcessingException {
+      final var test1 = newConfig();
+
+      assertEquals("{}", JSON.writeValueAsString(test1));
+
+      test1.setHTML(true);
+
+      assertEquals("{\"-html\":true}", JSON.writeValueAsString(test1));
+
+      test1.setHTML(false);
+
+      assertEquals("{}", JSON.writeValueAsString(test1));
     }
   }
 
   @Nested
-  @DisplayName("-sorthits Flag")
+  @DisplayName(Flag.SortHits)
   class SortHits
   {
     @Test
@@ -301,22 +425,42 @@ public abstract class BlastConfigContractTest
 
       test.setSortHits(null);
       assertNull(test.getSortHits());
-      var json = test.toJSON().toJSON();
-      assertFalse(json.has(Flag.SortHits));
 
       for (final var hs : HitSorting.values()) {
         test.setSortHits(hs);
         assertEquals(hs, test.getSortHits());
-        json = test.toJSON().toJSON();
-        assertTrue(json.has(Flag.SortHits));
-        assertTrue(json.get(Flag.SortHits).isNumber());
-        assertEquals(hs.ordinal(), json.get(Flag.SortHits).intValue());
+      }
+    }
+
+    @Test
+    @DisplayName("Can be serialized")
+    void test2() throws JsonProcessingException {
+      final var test = newConfig();
+
+      for (final var val : HitSorting.values()) {
+        test.setSortHits(val);
+
+        assertEquals(
+          "{\"" + Flag.SortHits + "\":" + val.ordinal() + "}",
+          JSON.writeValueAsString(test)
+        );
+      }
+    }
+
+    @Test
+    @DisplayName("Can be deserialized")
+    void test3() throws JsonProcessingException {
+      for (final var val : HitSorting.values()) {
+        final var json = "{\""+ Flag.SortHits + "\":" + val.ordinal() + "}";
+        final var test = JSON.readValue(json, configClass());
+
+        assertEquals(val, test.getSortHits());
       }
     }
   }
 
   @Nested
-  @DisplayName("-sorthsps Flag")
+  @DisplayName(Flag.SortHSPs)
   class SortHSPs
   {
     @Test
@@ -326,18 +470,37 @@ public abstract class BlastConfigContractTest
 
       test.setSortHSPs(null);
       assertNull(test.getSortHSPs());
-      var json = test.toJSON().toJSON();
-      assertFalse(json.has(Flag.SortHSPs));
 
       for (final var hs : HSPSorting.values()) {
         test.setSortHSPs(hs);
         assertEquals(hs, test.getSortHSPs());
-        json = test.toJSON().toJSON();
-        assertTrue(json.has(Flag.SortHSPs));
-        assertTrue(json.get(Flag.SortHSPs).isNumber());
-        assertEquals(hs.ordinal(), json.get(Flag.SortHSPs).intValue());
+      }
+    }
+
+    @Test
+    @DisplayName("Can be serialized")
+    void test2() throws JsonProcessingException {
+      final var test = newConfig();
+
+      for (final var val : HSPSorting.values()) {
+        test.setSortHSPs(val);
+
+        assertEquals(
+          "{\"" + Flag.SortHSPs + "\":" + val.ordinal() + "}",
+          JSON.writeValueAsString(test)
+        );
+      }
+    }
+
+    @Test
+    @DisplayName("Can be deserialized")
+    void test3() throws JsonProcessingException {
+      for (final var val : HSPSorting.values()) {
+        final var json = "{\""+ Flag.SortHSPs + "\":" + val.ordinal() + "}";
+        final var test = JSON.readValue(json, configClass());
+
+        assertEquals(val, test.getSortHSPs());
       }
     }
   }
-
 }

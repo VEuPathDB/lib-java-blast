@@ -2,7 +2,6 @@ package org.veupathdb.lib.blast;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import org.veupathdb.lib.blast.consts.Flag;
-import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.*;
 import org.veupathdb.lib.blast.util.JSONObjectDecoder;
 import org.veupathdb.lib.blast.util.JSONObjectEncoder;
@@ -401,47 +400,6 @@ public class BlastN extends BlastWithLists implements BlastQueryConfig
   }
 
   // ------------------------------------------------------------------------------------------ //
-
-  @Override
-  public JSONObjectEncoder toJSON() {
-    var js = super.toJSON();
-
-    js.encode(Key.Tool, getTool().getValue());
-    js.encode(Flag.Strand, strand);
-    js.encode(Flag.Task, task);
-    js.encode(Flag.WordSize, wordSize);
-    js.encode(Flag.GapOpen, gapOpen);
-    js.encode(Flag.GapExtend, gapExtend);
-    js.encode(Flag.Penalty, penalty);
-    js.encode(Flag.Reward, reward);
-    js.encode(Flag.UseIndex, useIndex);
-    js.encode(Flag.IndexName, indexName);
-    js.encode(Flag.SubjectFile, subjectFile);
-    js.encode(Flag.SubjectLocation, subjectLocation);
-    js.encode(Flag.Dust, dust);
-    js.encode(Flag.FilteringDB, filteringDB);
-    js.encode(Flag.WindowMaskerTaxID, windowMaskerTaxID);
-    js.encode(Flag.WindowMaskerDB, windowMaskerDB);
-    js.encode(Flag.DBSoftMask, dbSoftMask);
-    js.encode(Flag.DBHardMask, dbHardMask);
-    js.encode(Flag.PercentIdentity, percentIdentity);
-    js.encode(Flag.CullingLimit, cullingLimit);
-    js.encode(Flag.TemplateType, templateType);
-    js.encode(Flag.TemplateLength, templateLength);
-    js.encode(Flag.SumStats, sumStats);
-    js.encode(Flag.ExtensionDropoffPrelimGapped, extensionDropoffPrelimGapped);
-    js.encode(Flag.ExtensionDropoffFinalGapped, extensionDropoffFinalGapped);
-    js.encode(Flag.NonGreedy, nonGreedy);
-    js.encode(Flag.MinRawGappedScore, minRawGappedScore);
-    js.encode(Flag.UngappedAlignmentsOnly, ungappedAlignmentsOnly);
-    js.encode(Flag.OffDiagonalRange, offDiagonalRange);
-    js.encode(Flag.NumThreads, numThreads);
-    js.encode(Flag.BestHitOverhang, bestHitOverhang);
-    js.encode(Flag.BestHitScoreEdge, bestHitScoreEdge);
-    js.encode(Flag.SubjectBestHit, subjectBestHit);
-
-    return js;
-  }
 
   @Override
   public boolean equals(Object o) {

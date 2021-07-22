@@ -88,4 +88,9 @@ public class JSONObjectDecoder
   public interface DoubleSetter extends Consumer<Double>       {}
   public interface StringSetter extends Consumer<String>       {}
   public interface StrArrSetter extends Consumer<List<String>> {}
+
+  @Override
+  public String toString() {
+    return js.toString();
+  }
 }

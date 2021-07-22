@@ -23,7 +23,7 @@ class LocationTest
   void test2() throws Exception {
     var raw = "{\"start\":10,\"stop\":12}";
     var tgt = json.readValue(raw, Location.class);
-    assertEquals(10, tgt.getStart());
-    assertEquals(12, tgt.getStop());
+    assertEquals(10, tgt.start());
+    assertEquals(12, tgt.stop());
   }
 }

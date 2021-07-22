@@ -361,6 +361,7 @@ public class BlastP extends BlastWithIPGList implements BlastQueryConfig
     out.encode(Flag.Threshold, getThreshold());
     out.encode(Flag.CompBasedStats, getCompBasedStats());
     out.encode(Flag.SubjectFile, getSubjectFile());
+    out.encode(Flag.SubjectLocation, getSubjectLocation());
     out.encode(Flag.Seg, getSeg());
     out.encode(Flag.DBSoftMask, getDBSoftMask());
     out.encode(Flag.DBHardMask, getDBHardMask());
@@ -389,6 +390,7 @@ public class BlastP extends BlastWithIPGList implements BlastQueryConfig
     node.decode(Flag.Threshold, this::setThreshold);
     node.decode(Flag.CompBasedStats, this::setCompBasedStats);
     node.decode(Flag.SubjectFile, this::setSubjectFile);
+    node.decode(Flag.SubjectLocation, this::setSubjectLocation, Location::fromJSON);
     node.decode(Flag.Seg, this::setSeg, Seg::fromJSON);
     node.decode(Flag.DBSoftMask, this::setDBSoftMask);
     node.decode(Flag.DBHardMask, this::setDBHardMask);

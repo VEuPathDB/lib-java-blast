@@ -30,10 +30,6 @@ public record Location(int start, int stop) implements JSONValue
     return Objects.hash(start, stop);
   }
 
-  public Location copy() {
-    return new Location(start, stop);
-  }
-
   @Override
   @JsonValue
   public ObjectNode toJSON() {

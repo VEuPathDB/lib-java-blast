@@ -203,7 +203,6 @@ public class RPSBlast extends BlastBase implements BlastQueryConfig
   public JSONObjectEncoder toJSON(boolean includeTool) {
     var js = super.toJSON(includeTool);
 
-    js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.BestHitOverhang, bestHitOverhang);
     js.encode(Flag.BestHitScoreEdge, bestHitScoreEdge);
     js.encode(Flag.SubjectBestHit, subjectBestHit);

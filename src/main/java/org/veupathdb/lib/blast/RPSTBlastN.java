@@ -204,7 +204,6 @@ public class RPSTBlastN extends BlastBase implements BlastQueryConfig
   public JSONObjectEncoder toJSON(boolean includeTool) {
     var js = super.toJSON(includeTool);
 
-    js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.QueryGenCode, queryGenCode);
     js.encode(Flag.Strand, strand);
     js.encode(Flag.CompBasedStats, compBasedStats);

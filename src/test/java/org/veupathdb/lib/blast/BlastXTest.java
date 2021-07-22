@@ -10,8 +10,18 @@ import org.veupathdb.lib.blast.field.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("BlastX")
-class BlastXTest
+class BlastXTest extends BlastWithIPGListContractTest
 {
+  @Override
+  BlastX newConfig() {
+    return new BlastX();
+  }
+
+  @Override
+  Class<BlastX> configClass() {
+    return BlastX.class;
+  }
+
   private final ObjectMapper json = new ObjectMapper();
 
   @Nested
@@ -286,8 +296,8 @@ class BlastXTest
       var raw = "{\"-subject_loc\":{\"start\":10,\"stop\":11}}";
       var tgt = json.readValue(raw, BlastX.class);
 
-      assertEquals(10, tgt.getSubjectLocation().getStart());
-      assertEquals(11, tgt.getSubjectLocation().getStop());
+      assertEquals(10, tgt.getSubjectLocation().start());
+      assertEquals(11, tgt.getSubjectLocation().stop());
     }
   }
 
@@ -299,7 +309,7 @@ class BlastXTest
     @DisplayName("serialization")
     void test1() throws Exception {
       var tgt = new BlastX();
-      tgt.setSeg(Seg.yesSeg());
+      tgt.setSeg(Seg.newYesSeg());
 
       assertEquals("{\"-seg\":\"yes\"}", json.writeValueAsString(tgt));
     }

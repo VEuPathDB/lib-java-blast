@@ -10,13 +10,18 @@ import org.veupathdb.lib.blast.field.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("BlastN")
-class BlastNTest extends BlastQueryConfigContractTest
+class BlastNTest extends BlastWithListsContractTest
 {
   private final ObjectMapper json = new ObjectMapper();
 
   @Override
-  BlastQueryConfig newConfig() {
+  BlastN newConfig() {
     return new BlastN();
+  }
+
+  @Override
+  Class<BlastN> configClass() {
+    return BlastN.class;
   }
 
   @Nested
@@ -268,8 +273,8 @@ class BlastNTest extends BlastQueryConfigContractTest
       var raw = "{\"-subject_loc\":{\"start\":10,\"stop\":11}}";
       var tgt = json.readValue(raw, BlastN.class);
 
-      assertEquals(10, tgt.getSubjectLocation().getStart());
-      assertEquals(11, tgt.getSubjectLocation().getStop());
+      assertEquals(10, tgt.getSubjectLocation().start());
+      assertEquals(11, tgt.getSubjectLocation().stop());
     }
   }
 

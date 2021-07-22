@@ -63,7 +63,7 @@ public class OutFormat implements DefaultingJSONValue
     if (getType() != null)
       out.append(getType().getValue());
 
-    if (!getDelimiter().isEmpty()) {
+    if (getDelimiter() != null && !getDelimiter().isEmpty()) {
       out.append(" delim=").append(getDelimiter());
     }
 
@@ -87,13 +87,6 @@ public class OutFormat implements DefaultingJSONValue
   @Override
   public int hashCode() {
     return Objects.hash(getType(), getDelimiter(), getFields());
-  }
-
-  public OutFormat copy() {
-    return new OutFormat()
-      .setType(getType())
-      .setDelimiter(getDelimiter())
-      .setFields(fields == null ? null : new ArrayList<>(fields));
   }
 
   public static OutFormat fromString(String value) {

@@ -412,7 +412,6 @@ public class TBlastN extends BlastWithLists implements BlastQueryConfig
   public JSONObjectEncoder toJSON(boolean includeTool) {
     var js = super.toJSON(includeTool);
 
-    js.encode(Key.Tool, getTool().getValue());
     js.encode(Flag.Task, task);
     js.encode(Flag.WordSize, wordSize);
     js.encode(Flag.GapOpen, gapOpen);

@@ -1,5 +1,6 @@
 package org.veupathdb.lib.blast;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.veupathdb.lib.blast.consts.Flag;
 import org.veupathdb.lib.blast.consts.Key;
 import org.veupathdb.lib.blast.field.*;
@@ -68,6 +69,12 @@ public interface BlastConfig extends JSONEncodable, JSONDecodable
 
   void setParseDefLines(Boolean val);
 
+  @Override
+  @JsonValue
+  default JSONObjectEncoder toJSON() {
+    return toJSON(false);
+  }
+
   default JSONObjectEncoder toJSON(boolean includeTool) {
     final var out = new JSONObjectEncoder();
 
@@ -90,11 +97,6 @@ public interface BlastConfig extends JSONEncodable, JSONDecodable
     out.encode(Flag.ParseDefLines, getParseDefLines());
 
     return out;
-  }
-
-  @Override
-  default JSONObjectEncoder toJSON() {
-    return toJSON(false);
   }
 
   @Override
