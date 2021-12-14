@@ -110,7 +110,7 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
     @Throws(Exception::class)
     fun test1() {
       val tgt = newConfig()
-      val list = ArrayList<String?>()
+      val list = ArrayList<String>()
       list.add("hi")
       tgt.taxIDs = list
       Assertions.assertEquals("{\"-taxids\":[\"hi\"]}", json.writeValueAsString(tgt))
@@ -136,7 +136,7 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
     @Throws(Exception::class)
     fun test1() {
       val tgt = newConfig()
-      val list = ArrayList<String?>()
+      val list = ArrayList<String>()
       list.add("hi")
       tgt.negativeTaxIDs = list
       Assertions.assertEquals("{\"-negative_taxids\":[\"hi\"]}", json.writeValueAsString(tgt))

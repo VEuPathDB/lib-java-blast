@@ -40,8 +40,8 @@ abstract class BlastWithLists(
   var sequenceIDList: String? = null,
   var negativeGIList: String? = null,
   var negativeSequenceIDList: String? = null,
-  var taxIDs: List<String?>? = null,
-  var negativeTaxIDs: List<String?>? = null,
+  var taxIDs: List<String>? = null,
+  var negativeTaxIDs: List<String>? = null,
   var taxIDList: String? = null,
   var negativeTaxIDList: String? = null,
 ) : BlastBase(
