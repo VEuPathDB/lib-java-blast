@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import org.veupathdb.lib.blast.consts.Flag
 import org.veupathdb.lib.blast.field.*
 
-class BlastN(
+open class BlastN(
   shortHelp: Boolean? = null,
   longHelp: Boolean? = null,
   version: Boolean? = null,

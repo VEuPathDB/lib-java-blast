@@ -10,7 +10,7 @@ import org.veupathdb.lib.blast.field.Seg
 import org.veupathdb.lib.blast.util.JSONObjectEncoder
 import org.veupathdb.lib.blast.util.JSONObjectDecoder
 
-class DeltaBlast(
+open class DeltaBlast(
   var wordSize: Long? = null,
   var gapOpen: Int? = null,
   var gapExtend: Int? = null,

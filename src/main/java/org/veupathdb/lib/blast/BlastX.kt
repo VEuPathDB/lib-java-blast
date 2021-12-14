@@ -6,7 +6,7 @@ import org.veupathdb.lib.blast.field.*
 import org.veupathdb.lib.blast.util.JSONObjectDecoder
 import org.veupathdb.lib.blast.util.JSONObjectEncoder
 
-class BlastX(
+open class BlastX(
   shortHelp: Boolean? = null,
   longHelp: Boolean? = null,
   version: Boolean? = null,
