@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.veupathdb.lib.blast.consts.Flag
+import org.veupathdb.lib.blast.field.CompBasedStatsLong
+import org.veupathdb.lib.blast.field.CompBasedStatsLong.Statistics
 import org.veupathdb.lib.blast.field.Location
 import org.veupathdb.lib.blast.field.ScoringMatrix.Blosum50
 import org.veupathdb.lib.blast.field.Seg.Companion.YesSeg
@@ -137,17 +139,17 @@ internal class PSIBlastTest : BlastWithIPGListContractTest() {
     @Throws(Exception::class)
     fun test1() {
       val tgt = PSIBlast()
-      tgt.compBasedStats = "hi"
-      Assertions.assertEquals("{\"-comp_based_stats\":\"hi\"}", json.writeValueAsString(tgt))
+      tgt.compBasedStats = Statistics
+      Assertions.assertEquals("{\"-comp_based_stats\":\"1\"}", json.writeValueAsString(tgt))
     }
 
     @Test
     @DisplayName("deserialization")
     @Throws(Exception::class)
     fun test2() {
-      val raw = "{\"-comp_based_stats\":\"hi\"}"
+      val raw = "{\"-comp_based_stats\":\"1\"}"
       val tgt = json.readValue(raw, PSIBlast::class.java)
-      Assertions.assertEquals("hi", tgt.compBasedStats)
+      Assertions.assertEquals(CompBasedStatsLong.Statistics, tgt.compBasedStats)
     }
   }
 

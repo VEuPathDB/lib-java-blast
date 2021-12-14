@@ -19,14 +19,18 @@ import java.util.stream.Stream
 
 @DisplayName("BlastPTask")
 class BlastPTaskTest {
-  fun jsonWrappedValues(): Stream<Arguments> {
-    return Arrays.stream(BlastPTask.values())
-      .map { bt: BlastPTask -> Arguments.of(bt, newText(bt.value)) }
-  }
+  companion object {
+    @JvmStatic
+    fun jsonWrappedValues(): Stream<Arguments> {
+      return Arrays.stream(BlastPTask.values())
+        .map { bt: BlastPTask -> Arguments.of(bt, newText(bt.value)) }
+    }
 
-  fun textValues(): Stream<Arguments> {
-    return Arrays.stream(BlastPTask.values())
-      .map { bt: BlastPTask -> Arguments.of(bt, bt.value) }
+    @JvmStatic
+    fun textValues(): Stream<Arguments> {
+      return Arrays.stream(BlastPTask.values())
+        .map { bt: BlastPTask -> Arguments.of(bt, bt.value) }
+    }
   }
 
   @Nested

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.veupathdb.lib.blast.consts.Flag
+import org.veupathdb.lib.blast.field.CompBasedStatsShort
 import org.veupathdb.lib.blast.field.MTMode.SplitByQueries
 import org.veupathdb.lib.blast.field.Seg.Companion.YesSeg
 import org.veupathdb.lib.blast.field.Strand.Minus
@@ -21,7 +22,6 @@ internal class RPSTBlastNTest {
   internal inner class QueryGenCode1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = RPSTBlastN()
       tgt.queryGenCode = 1285.toShort()
@@ -30,7 +30,6 @@ internal class RPSTBlastNTest {
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-query_gencode\":1285}"
       val tgt = json.readValue(raw, RPSTBlastN::class.java)
@@ -43,7 +42,6 @@ internal class RPSTBlastNTest {
   internal inner class Strand1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = RPSTBlastN()
       tgt.strand = Minus
@@ -52,7 +50,6 @@ internal class RPSTBlastNTest {
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-strand\":\"minus\"}"
       val tgt = json.readValue(raw, RPSTBlastN::class.java)
@@ -65,20 +62,18 @@ internal class RPSTBlastNTest {
   internal inner class CompBasedStats1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = RPSTBlastN()
-      tgt.compBasedStats = "hi"
-      Assertions.assertEquals("{\"-comp_based_stats\":\"hi\"}", json.writeValueAsString(tgt))
+      tgt.compBasedStats = CompBasedStatsShort.None
+      Assertions.assertEquals("{\"-comp_based_stats\":\"0\"}", json.writeValueAsString(tgt))
     }
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
-      val raw = "{\"-comp_based_stats\":\"hi\"}"
+      val raw = "{\"-comp_based_stats\":\"0\"}"
       val tgt = json.readValue(raw, RPSTBlastN::class.java)
-      Assertions.assertEquals("hi", tgt.compBasedStats)
+      Assertions.assertEquals(CompBasedStatsShort.None, tgt.compBasedStats)
     }
   }
 
@@ -87,7 +82,6 @@ internal class RPSTBlastNTest {
   internal inner class Seg1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = RPSTBlastN()
       tgt.seg = YesSeg
@@ -96,7 +90,6 @@ internal class RPSTBlastNTest {
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-seg\":\"yes\"}"
       val tgt = json.readValue(raw, RPSTBlastN::class.java)
@@ -109,7 +102,6 @@ internal class RPSTBlastNTest {
   internal inner class SumStats1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = RPSTBlastN()
       tgt.sumStats = true
@@ -118,7 +110,6 @@ internal class RPSTBlastNTest {
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-sum_stats\":true}"
       val tgt = json.readValue(raw, RPSTBlastN::class.java)
@@ -131,7 +122,6 @@ internal class RPSTBlastNTest {
   internal inner class ExtensionDropoffPrelimGapped1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = RPSTBlastN()
       tgt.extensionDropoffPrelimGapped = 3.14
@@ -140,7 +130,6 @@ internal class RPSTBlastNTest {
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-xdrop_gap\":3.14}"
       val tgt = json.readValue(raw, RPSTBlastN::class.java)
@@ -153,7 +142,6 @@ internal class RPSTBlastNTest {
   internal inner class ExtensionDropoffFinalGapped1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = RPSTBlastN()
       tgt.extensionDropoffFinalGapped = 3.14
@@ -162,7 +150,6 @@ internal class RPSTBlastNTest {
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-xdrop_gap_final\":3.14}"
       val tgt = json.readValue(raw, RPSTBlastN::class.java)
@@ -210,7 +197,7 @@ internal class RPSTBlastNTest {
     fun test2() {
       val raw = "{\"-num_threads\":1}"
       val tgt = json.readValue(raw, RPSTBlastN::class.java)
-      Assertions.assertEquals(Disable, tgt.numThreads!!.value)
+      Assertions.assertEquals(Disable, tgt.numThreads)
     }
   }
 

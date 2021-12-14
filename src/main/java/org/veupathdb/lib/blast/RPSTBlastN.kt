@@ -105,19 +105,19 @@ class RPSTBlastN(
     return js
   }
 
-  override fun decodeJSON(js: JSONObjectDecoder) {
-    super<BlastBase>.decodeJSON(js)
+  override fun decodeJSON(node: JSONObjectDecoder) {
+    super<BlastBase>.decodeJSON(node)
 
-    js.decodeShort(Flag.QueryGenCode) { queryGenCode = it }
-    js.decodeJSON(Flag.Strand) { strand = Strand.fromJSON(it) }
-    js.decodeJSON(Flag.CompBasedStats) { compBasedStats = CompBasedStatsShort.fromJSON(it) }
-    js.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }
-    js.decodeBool(Flag.SumStats) { sumStats = it }
-    js.decodeDouble(Flag.ExtensionDropoffPrelimGapped) { extensionDropoffPrelimGapped = it }
-    js.decodeDouble(Flag.ExtensionDropoffFinalGapped) { extensionDropoffFinalGapped = it }
-    js.decodeBool(Flag.UngappedAlignmentsOnly) { ungappedAlignmentsOnly = it }
-    js.decodeJSON(Flag.NumThreads) { numThreads = ThreadMode.fromJSON(it) }
-    js.decodeJSON(Flag.MTMode) { mTMode = MTMode.fromJSON(it) }
-    js.decodeBool(Flag.UseSmithWatermanTraceback) { useSmithWatermanTraceback = it }
+    node.decodeShort(Flag.QueryGenCode) { queryGenCode = it }
+    node.decodeJSON(Flag.Strand) { strand = Strand.fromJSON(it) }
+    node.decodeJSON(Flag.CompBasedStats) { compBasedStats = CompBasedStatsShort.fromJSON(it) }
+    node.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }
+    node.decodeBool(Flag.SumStats) { sumStats = it }
+    node.decodeDouble(Flag.ExtensionDropoffPrelimGapped) { extensionDropoffPrelimGapped = it }
+    node.decodeDouble(Flag.ExtensionDropoffFinalGapped) { extensionDropoffFinalGapped = it }
+    node.decodeBool(Flag.UngappedAlignmentsOnly) { ungappedAlignmentsOnly = it }
+    node.decodeJSON(Flag.NumThreads) { numThreads = ThreadMode.fromJSON(it) }
+    node.decodeJSON(Flag.MTMode) { mTMode = MTMode.fromJSON(it) }
+    node.decodeBool(Flag.UseSmithWatermanTraceback) { useSmithWatermanTraceback = it }
   }
 }

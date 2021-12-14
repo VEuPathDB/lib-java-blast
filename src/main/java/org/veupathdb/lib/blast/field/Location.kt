@@ -10,8 +10,14 @@ import org.veupathdb.lib.blast.util.JSONValue
 
 data class Location(val start: Int, val stop: Int) : JSONValue {
 
+  init {
+    println("Start: $start -- Stop: $stop")
+  }
+
   @JsonCreator
-  constructor(js: JsonNode) : this(js.get(Key.Start).intValue(), js.get(Key.Stop).intValue())
+  constructor(js: JsonNode) : this(js.get(Key.Start).intValue(), js.get(Key.Stop).intValue()) {
+    println(js.toString())
+  }
 
   override fun toString() = "$start-$stop"
 

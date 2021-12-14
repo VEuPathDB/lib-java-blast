@@ -34,7 +34,9 @@ enum class BlastTool(val value: String) : JSONValue {
 
     @JvmStatic
     fun fromString(value: String): BlastTool {
-      for (`val` in values()) if (`val`.value == value) return `val`
+      for (`val` in values())
+        if (`val`.value == value)
+          return `val`
       throw IllegalArgumentException("Unrecognized blast tool name \"$value\"")
     }
   }

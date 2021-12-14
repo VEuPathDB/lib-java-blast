@@ -136,26 +136,26 @@ class TBlastX(
     return js
   }
 
-  override fun decodeJSON(js: JSONObjectDecoder) {
-    super<BlastWithLists>.decodeJSON(js)
+  override fun decodeJSON(node: JSONObjectDecoder) {
+    super<BlastWithLists>.decodeJSON(node)
 
-    js.decodeJSON(Flag.Strand) { this.strand = Strand.fromJSON(it) }
-    js.decodeShort(Flag.QueryGenCode) { this.queryGenCode = it }
-    js.decodeLong(Flag.WordSize) { this.wordSize = it }
-    js.decodeLong(Flag.MaxIntronLength) { this.maxIntronLength = it }
-    js.decodeJSON(Flag.Matrix) { this.matrix = ScoringMatrix.fromJSON(it) }
-    js.decodeDouble(Flag.Threshold) { this.threshold = it }
-    js.decodeShort(Flag.DBGenCode) { dBGenCode = it }
-    js.decodeString(Flag.SubjectFile) { this.subjectFile = it }
-    js.decodeJSON(Flag.SubjectLocation) { this.subjectLocation = Location(it) }
-    js.decodeJSON(Flag.Seg) { this.seg = Seg.fromJSON(it) }
-    js.decodeString(Flag.DBSoftMask) { dBSoftMask = it }
-    js.decodeString(Flag.DBHardMask) { dBHardMask = it }
-    js.decodeLong(Flag.CullingLimit) { this.cullingLimit = it }
-    js.decodeBool(Flag.SumStats) { this.sumStats = it }
-    js.decodeShort(Flag.NumThreads) { this.numThreads = it }
-    js.decodeDouble(Flag.BestHitOverhang) { this.bestHitOverhang = it }
-    js.decodeDouble(Flag.BestHitScoreEdge) { this.bestHitScoreEdge = it }
-    js.decodeBool(Flag.SubjectBestHit) { this.subjectBestHit = it }
+    node.decodeJSON(Flag.Strand) { this.strand = Strand.fromJSON(it) }
+    node.decodeShort(Flag.QueryGenCode) { this.queryGenCode = it }
+    node.decodeLong(Flag.WordSize) { this.wordSize = it }
+    node.decodeLong(Flag.MaxIntronLength) { this.maxIntronLength = it }
+    node.decodeJSON(Flag.Matrix) { this.matrix = ScoringMatrix.fromJSON(it) }
+    node.decodeDouble(Flag.Threshold) { this.threshold = it }
+    node.decodeShort(Flag.DBGenCode) { dBGenCode = it }
+    node.decodeString(Flag.SubjectFile) { this.subjectFile = it }
+    node.decodeJSON(Flag.SubjectLocation) { this.subjectLocation = Location(it) }
+    node.decodeJSON(Flag.Seg) { this.seg = Seg.fromJSON(it) }
+    node.decodeString(Flag.DBSoftMask) { dBSoftMask = it }
+    node.decodeString(Flag.DBHardMask) { dBHardMask = it }
+    node.decodeLong(Flag.CullingLimit) { this.cullingLimit = it }
+    node.decodeBool(Flag.SumStats) { this.sumStats = it }
+    node.decodeShort(Flag.NumThreads) { this.numThreads = it }
+    node.decodeDouble(Flag.BestHitOverhang) { this.bestHitOverhang = it }
+    node.decodeDouble(Flag.BestHitScoreEdge) { this.bestHitScoreEdge = it }
+    node.decodeBool(Flag.SubjectBestHit) { this.subjectBestHit = it }
   }
 }

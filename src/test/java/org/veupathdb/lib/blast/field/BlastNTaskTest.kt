@@ -22,14 +22,18 @@ import kotlin.Throws
 
 @DisplayName("BlastNTask")
 class BlastNTaskTest {
-  fun jsonWrappedValues(): Stream<Arguments> {
-    return Arrays.stream(BlastNTask.values())
-      .map { bt: BlastNTask -> Arguments.of(bt, newText(bt.value)) }
-  }
+  companion object {
+    @JvmStatic
+    fun jsonWrappedValues(): Stream<Arguments> {
+      return Arrays.stream(BlastNTask.values())
+        .map { bt: BlastNTask -> Arguments.of(bt, newText(bt.value)) }
+    }
 
-  fun textValues(): Stream<Arguments> {
-    return Arrays.stream(BlastNTask.values())
-      .map { bt: BlastNTask -> Arguments.of(bt, bt.value) }
+    @JvmStatic
+    fun textValues(): Stream<Arguments> {
+      return Arrays.stream(BlastNTask.values())
+        .map { bt: BlastNTask -> Arguments.of(bt, bt.value) }
+    }
   }
 
   @Nested
@@ -44,9 +48,7 @@ class BlastNTaskTest {
     @Test
     @DisplayName("Throws an IllegalArgumentException if the input JSON is not text")
     fun test2() {
-      Assertions.assertThrows(
-        IllegalArgumentException::class.java
-      ) { fromJSON(newInt(3)) }
+      Assertions.assertThrows(IllegalArgumentException::class.java) { fromJSON(newInt(3)) }
     }
 
     @Test

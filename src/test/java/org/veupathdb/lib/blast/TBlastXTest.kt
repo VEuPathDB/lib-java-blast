@@ -10,7 +10,6 @@ import org.veupathdb.lib.blast.field.Location
 import org.veupathdb.lib.blast.field.ScoringMatrix.Blosum50
 import org.veupathdb.lib.blast.field.Seg.Companion.YesSeg
 import org.veupathdb.lib.blast.field.Strand.Minus
-import org.veupathdb.lib.blast.util.JSONObjectDecoder
 
 @DisplayName("TBlastX")
 internal class TBlastXTest {

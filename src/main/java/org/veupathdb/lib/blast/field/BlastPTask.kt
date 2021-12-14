@@ -35,7 +35,7 @@ enum class BlastPTask(val value: String): DefaultingJSONValue
     @JvmStatic
     @JsonCreator
     fun fromJSON(js: JsonNode): BlastPTask {
-      return fromString(js.textValue())
+      return fromString(js.textValue() ?: throw IllegalArgumentException())
     }
   }
 }

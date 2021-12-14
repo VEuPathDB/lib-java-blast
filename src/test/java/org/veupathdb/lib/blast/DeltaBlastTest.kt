@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.veupathdb.lib.blast.consts.Flag
+import org.veupathdb.lib.blast.field.CompBasedStatsShort
 import org.veupathdb.lib.blast.field.Location
 import org.veupathdb.lib.blast.field.ScoringMatrix.Blosum50
 import org.veupathdb.lib.blast.field.Seg.Companion.YesSeg
@@ -133,17 +134,17 @@ internal class DeltaBlastTest {
     @Throws(Exception::class)
     fun test1() {
       val tgt = DeltaBlast(JSONObjectDecoder(json.createObjectNode()))
-      tgt.compBasedStats = "hi"
-      Assertions.assertEquals("{\"-comp_based_stats\":\"hi\"}", json.writeValueAsString(tgt))
+      tgt.compBasedStats = CompBasedStatsShort.None
+      Assertions.assertEquals("{\"-comp_based_stats\":\"0\"}", json.writeValueAsString(tgt))
     }
 
     @Test
     @DisplayName("deserialization")
     @Throws(Exception::class)
     fun test2() {
-      val raw = "{\"-comp_based_stats\":\"hi\"}"
+      val raw = "{\"-comp_based_stats\":\"0\"}"
       val tgt = json.readValue(raw, DeltaBlast::class.java)
-      Assertions.assertEquals("hi", tgt.compBasedStats)
+      Assertions.assertEquals(CompBasedStatsShort.None, tgt.compBasedStats)
     }
   }
 

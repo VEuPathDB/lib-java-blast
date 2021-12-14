@@ -27,7 +27,7 @@ abstract class BlastQueryConfigContractTest : BlastConfigContractTest() {
       test.queryFile = null
       Assertions.assertNull(test.queryFile)
       test.queryFile = QueryFile("hello")
-      Assertions.assertEquals("hello", test.queryFile)
+      Assertions.assertEquals("hello", test.queryFile?.value)
     }
 
     @Test
@@ -37,7 +37,7 @@ abstract class BlastQueryConfigContractTest : BlastConfigContractTest() {
     fun test2() {
       val input = "{\"-query\": \"hello\"}"
       val parsed = json.readValue(input, configClass().java)!!
-      Assertions.assertEquals("hello", parsed.queryFile)
+      Assertions.assertEquals("hello", parsed.queryFile?.value)
     }
 
     @Test
@@ -66,8 +66,6 @@ abstract class BlastQueryConfigContractTest : BlastConfigContractTest() {
 
     @Test
     @DisplayName("Can be deserialized")
-    @Throws(
-      JsonProcessingException::class)
     fun test2() {
       val input = "{\"-query_loc\": {\"start\": 10,\"stop\": 12}}"
       val parsed = json.readValue(input, configClass().java)!!
@@ -76,8 +74,6 @@ abstract class BlastQueryConfigContractTest : BlastConfigContractTest() {
 
     @Test
     @DisplayName("Can be serialized")
-    @Throws(
-      JsonProcessingException::class)
     fun test3() {
       val `object` = newConfig()
       `object`.queryLocation = Location(10, 12)
@@ -139,7 +135,7 @@ abstract class BlastQueryConfigContractTest : BlastConfigContractTest() {
     fun test2() {
       val input = "{\"-evalue\": \"yellow\"}"
       val parsed = json.readValue(input, configClass().java)!!
-      Assertions.assertEquals("yellow", parsed.expectValue)
+      Assertions.assertEquals("yellow", parsed.expectValue?.value)
     }
 
     @Test

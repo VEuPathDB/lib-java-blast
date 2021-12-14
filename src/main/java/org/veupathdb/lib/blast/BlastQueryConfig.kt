@@ -28,7 +28,7 @@ interface BlastQueryConfig : BlastConfig {
   override fun decodeJSON(node: JSONObjectDecoder) {
     super.decodeJSON(node)
     node.decodeString(Flag.QueryFile)                { queryFile = QueryFile(it)     }
-    node.decodeJSON(Flag.QueryLocation)              { Location(it)                  }
+    node.decodeJSON(Flag.QueryLocation)              { queryLocation = Location(it)  }
     node.decodeString(Flag.DBFile)                   { dbFile = it                   }
     node.decodeString(Flag.ExpectValue)              { expectValue = ExpectValue(it) }
     node.decodeBool(Flag.SoftMasking)                { softMasking = it              }

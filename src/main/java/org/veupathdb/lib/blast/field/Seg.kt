@@ -124,7 +124,7 @@ private object NoSegImpl : Seg {
   override val hicut
     get() = throw UnsupportedOperationException()
 
-  override val isDefault = false
+  override val isDefault = true
 
   override fun toJSON(): JsonNode = JSONConstructor.newText(YesSegImpl.Value)
 }

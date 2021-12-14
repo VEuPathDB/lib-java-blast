@@ -20,14 +20,19 @@ import java.util.stream.Stream
 
 @DisplayName("BlastTool")
 internal class BlastToolTest {
-  fun jsonWrappedValues(): Stream<Arguments> {
-    return Arrays.stream(BlastTool.values())
-      .map { bt: BlastTool -> Arguments.of(bt, newText(bt.value)) }
-  }
 
-  fun textValues(): Stream<Arguments> {
-    return Arrays.stream(BlastTool.values())
-      .map { bt: BlastTool -> Arguments.of(bt, bt.value) }
+  companion object {
+    @JvmStatic
+    fun jsonWrappedValues(): Stream<Arguments> {
+      return Arrays.stream(BlastTool.values())
+        .map { bt: BlastTool -> Arguments.of(bt, newText(bt.value)) }
+    }
+
+    @JvmStatic
+    fun textValues(): Stream<Arguments> {
+      return Arrays.stream(BlastTool.values())
+        .map { bt: BlastTool -> Arguments.of(bt, bt.value) }
+    }
   }
 
   @Nested
@@ -61,7 +66,7 @@ internal class BlastToolTest {
   internal inner class FromString1 {
     @ParameterizedTest(name = "Correctly matches the given value \"{1}\" to {0}.")
     @MethodSource("org.veupathdb.lib.blast.BlastToolTest#textValues")
-    fun test1(bt: BlastTool?, js: String?) {
+    fun test1(bt: BlastTool, js: String) {
       Assertions.assertSame(bt, fromString(js!!))
     }
 

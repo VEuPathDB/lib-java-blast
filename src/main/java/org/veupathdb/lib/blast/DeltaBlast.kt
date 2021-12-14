@@ -82,37 +82,37 @@ class DeltaBlast(
     return js
   }
 
-  override fun decodeJSON(js: JSONObjectDecoder) {
-    super<BlastWithLists>.decodeJSON(js)
+  override fun decodeJSON(node: JSONObjectDecoder) {
+    super<BlastWithLists>.decodeJSON(node)
 
-    js.decodeLong(Flag.WordSize) { wordSize = it }
-    js.decodeInt(Flag.GapOpen) { gapOpen = it }
-    js.decodeInt(Flag.GapExtend) { gapExtend = it }
-    js.decodeJSON(Flag.Matrix) { matrix = ScoringMatrix.fromJSON(it) }
-    js.decodeDouble(Flag.Threshold) { threshold = it }
-    js.decodeJSON(Flag.CompBasedStats) { compBasedStats = CompBasedStatsShort.fromJSON(it) }
-    js.decodeString(Flag.SubjectFile) { subjectFile = it }
-    js.decodeJSON(Flag.SubjectLocation) { subjectLocation = Location(it) }
-    js.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }
-    js.decodeLong(Flag.CullingLimit) { cullingLimit = it }
-    js.decodeBool(Flag.SumStats) { sumStats = it }
-    js.decodeDouble(Flag.ExtensionDropoffPrelimGapped) { extensionDropoffPrelimGapped = it }
-    js.decodeDouble(Flag.ExtensionDropoffFinalGapped) { extensionDropoffFinalGapped = it }
-    js.decodeDouble(Flag.GapTrigger) { gapTrigger = it }
-    js.decodeShort(Flag.NumThreads) { numThreads = it }
-    js.decodeBool(Flag.UseSmithWatermanTraceback) { useSmithWatermanTraceback = it }
-    js.decodeDouble(Flag.BestHitOverhang) { bestHitOverhang = it }
-    js.decodeDouble(Flag.BestHitScoreEdge) { bestHitScoreEdge = it }
-    js.decodeBool(Flag.SubjectBestHit) { subjectBestHit = it }
-    js.decodeLong(Flag.NumIterations) { numIterations = it }
-    js.decodeString(Flag.OutPSSMFile) { outPSSMFile = it }
-    js.decodeString(Flag.OutASCIIPSSMFile) { outASCIIPSSMFile = it }
-    js.decodeBool(Flag.SavePSSMAfterLastRound) { savePSSMAfterLastRound = it }
-    js.decodeBool(Flag.SaveEachPSSM) { saveEachPSSM = it }
-    js.decodeInt(Flag.Pseudocount) { pseudocount = it }
-    js.decodeDouble(Flag.DomainInclusionEThreshold) { domainInclusionEThreshold = it }
-    js.decodeDouble(Flag.InclusionEThreshold) { inclusionEThreshold = it }
-    js.decodeString(Flag.RPSDBFile) { rPSDBFile = it }
-    js.decodeBool(Flag.ShowDomainHits) { showDomainHits = it }
+    node.decodeLong(Flag.WordSize) { wordSize = it }
+    node.decodeInt(Flag.GapOpen) { gapOpen = it }
+    node.decodeInt(Flag.GapExtend) { gapExtend = it }
+    node.decodeJSON(Flag.Matrix) { matrix = ScoringMatrix.fromJSON(it) }
+    node.decodeDouble(Flag.Threshold) { threshold = it }
+    node.decodeJSON(Flag.CompBasedStats) { compBasedStats = CompBasedStatsShort.fromJSON(it) }
+    node.decodeString(Flag.SubjectFile) { subjectFile = it }
+    node.decodeJSON(Flag.SubjectLocation) { subjectLocation = Location(it) }
+    node.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }
+    node.decodeLong(Flag.CullingLimit) { cullingLimit = it }
+    node.decodeBool(Flag.SumStats) { sumStats = it }
+    node.decodeDouble(Flag.ExtensionDropoffPrelimGapped) { extensionDropoffPrelimGapped = it }
+    node.decodeDouble(Flag.ExtensionDropoffFinalGapped) { extensionDropoffFinalGapped = it }
+    node.decodeDouble(Flag.GapTrigger) { gapTrigger = it }
+    node.decodeShort(Flag.NumThreads) { numThreads = it }
+    node.decodeBool(Flag.UseSmithWatermanTraceback) { useSmithWatermanTraceback = it }
+    node.decodeDouble(Flag.BestHitOverhang) { bestHitOverhang = it }
+    node.decodeDouble(Flag.BestHitScoreEdge) { bestHitScoreEdge = it }
+    node.decodeBool(Flag.SubjectBestHit) { subjectBestHit = it }
+    node.decodeLong(Flag.NumIterations) { numIterations = it }
+    node.decodeString(Flag.OutPSSMFile) { outPSSMFile = it }
+    node.decodeString(Flag.OutASCIIPSSMFile) { outASCIIPSSMFile = it }
+    node.decodeBool(Flag.SavePSSMAfterLastRound) { savePSSMAfterLastRound = it }
+    node.decodeBool(Flag.SaveEachPSSM) { saveEachPSSM = it }
+    node.decodeInt(Flag.Pseudocount) { pseudocount = it }
+    node.decodeDouble(Flag.DomainInclusionEThreshold) { domainInclusionEThreshold = it }
+    node.decodeDouble(Flag.InclusionEThreshold) { inclusionEThreshold = it }
+    node.decodeString(Flag.RPSDBFile) { rPSDBFile = it }
+    node.decodeBool(Flag.ShowDomainHits) { showDomainHits = it }
   }
 }

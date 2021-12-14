@@ -110,7 +110,7 @@ abstract class BlastConfigContractTest {
       var json = test.toJSON().toJSON()
       Assertions.assertFalse(json.has(Flag.OutFile))
       test.outFile = OutFile("Hello")
-      Assertions.assertEquals("Hello", test.outFile)
+      Assertions.assertEquals("Hello", test.outFile?.value)
       json = test.toJSON().toJSON()
       Assertions.assertTrue(json.has(Flag.OutFile))
       Assertions.assertTrue(json[Flag.OutFile].isTextual)

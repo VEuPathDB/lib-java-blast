@@ -197,8 +197,8 @@ class SegTest
       val test = Seg.fromJSON(input)
       assertTrue(test.isWLH)
       assertEquals(10, test.window)
-      assertEquals(11, test.locut)
-      assertEquals(12, test.hicut)
+      assertEquals(11.0, test.locut)
+      assertEquals(12.0, test.hicut)
     }
   }
 }
