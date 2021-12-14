@@ -60,8 +60,8 @@ class BlastX(
   var subjectFile: String? = null,
   var subjectLocation: Location? = null,
   var seg: Seg? = null,
-  var dBSoftMask: String? = null,
-  var dBHardMask: String? = null,
+  var dbSoftMask: String? = null,
+  var dbHardMask: String? = null,
   var cullingLimit: Long? = null,
   var sumStats: Boolean? = null,
   var extensionDropoffPrelimGapped: Double? = null,
@@ -136,8 +136,8 @@ class BlastX(
     js.encode(Flag.SubjectFile, subjectFile)
     js.encode(Flag.SubjectLocation, subjectLocation)
     js.encode(Flag.Seg, seg)
-    js.encode(Flag.DBSoftMask, dBSoftMask)
-    js.encode(Flag.DBHardMask, dBHardMask)
+    js.encode(Flag.DBSoftMask, dbSoftMask)
+    js.encode(Flag.DBHardMask, dbHardMask)
     js.encode(Flag.CullingLimit, cullingLimit)
     js.encode(Flag.SumStats, sumStats)
     js.encode(Flag.ExtensionDropoffPrelimGapped, extensionDropoffPrelimGapped)
@@ -166,8 +166,8 @@ class BlastX(
     node.decodeString(Flag.SubjectFile) { subjectFile = it }
     node.decodeJSON(Flag.SubjectLocation) { subjectLocation = Location(it) }
     node.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }
-    node.decodeString(Flag.DBSoftMask) { dBSoftMask = it }
-    node.decodeString(Flag.DBHardMask) { dBHardMask = it }
+    node.decodeString(Flag.DBSoftMask) { dbSoftMask = it }
+    node.decodeString(Flag.DBHardMask) { dbHardMask = it }
     node.decodeLong(Flag.CullingLimit) { cullingLimit = it }
     node.decodeBool(Flag.SumStats) { sumStats = it }
     node.decodeDouble(Flag.ExtensionDropoffPrelimGapped) { extensionDropoffPrelimGapped = it }

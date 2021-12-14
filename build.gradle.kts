@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "org.veupathdb.lib"
-version = "5.0.0"
+version = "5.0.1"
 
 java {
   targetCompatibility = JavaVersion.VERSION_16
@@ -32,13 +32,13 @@ repositories {
 }
 
 dependencies {
-  implementation("com.fasterxml.jackson.core:jackson-core:2.12.3")
-  implementation("com.fasterxml.jackson.core:jackson-databind:2.12.3")
-  implementation("com.fasterxml.jackson.core:jackson-annotations:2.12.3")
+  implementation("com.fasterxml.jackson.core:jackson-core:2.13.0")
+  implementation("com.fasterxml.jackson.core:jackson-databind:2.13.0")
+  implementation("com.fasterxml.jackson.core:jackson-annotations:2.13.0")
 
-  testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
-  testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.0")
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+  testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+  testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 }
 
 tasks.jar {
@@ -67,11 +67,12 @@ tasks.withType<Test> {
   ignoreFailures = true // Always try to run all tests for all modules
 }
 
+
 publishing {
   repositories {
     maven {
       name = "GitHub"
-      url = uri("https://maven.pkg.github.com/veupathdb/lib-java-blast")
+      url = uri("https://maven.pkg.github.com/VEuPathDB/lib-java-blast")
       credentials {
         username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
         password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")

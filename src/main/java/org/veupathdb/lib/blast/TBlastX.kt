@@ -51,12 +51,12 @@ class TBlastX(
   var maxIntronLength: Long? = null,
   var matrix: ScoringMatrix? = null,
   var threshold: Double? = null,
-  var dBGenCode: Short? = null,
+  var dbGenCode: Short? = null,
   var subjectFile: String? = null,
   var subjectLocation: Location? = null,
   var seg: Seg? = null,
-  var dBSoftMask: String? = null,
-  var dBHardMask: String? = null,
+  var dbSoftMask: String? = null,
+  var dbHardMask: String? = null,
   var cullingLimit: Long? = null,
   var sumStats: Boolean? = null,
   var numThreads: Short? = null,
@@ -120,12 +120,12 @@ class TBlastX(
     js.encode(Flag.MaxIntronLength, maxIntronLength)
     js.encode(Flag.Matrix, matrix)
     js.encode(Flag.Threshold, threshold)
-    js.encode(Flag.DBGenCode, dBGenCode)
+    js.encode(Flag.DBGenCode, dbGenCode)
     js.encode(Flag.SubjectFile, subjectFile)
     js.encode(Flag.SubjectLocation, subjectLocation)
     js.encode(Flag.Seg, seg)
-    js.encode(Flag.DBSoftMask, dBSoftMask)
-    js.encode(Flag.DBHardMask, dBHardMask)
+    js.encode(Flag.DBSoftMask, dbSoftMask)
+    js.encode(Flag.DBHardMask, dbHardMask)
     js.encode(Flag.CullingLimit, cullingLimit)
     js.encode(Flag.SumStats, sumStats)
     js.encode(Flag.NumThreads, numThreads)
@@ -145,12 +145,12 @@ class TBlastX(
     node.decodeLong(Flag.MaxIntronLength) { this.maxIntronLength = it }
     node.decodeJSON(Flag.Matrix) { this.matrix = ScoringMatrix.fromJSON(it) }
     node.decodeDouble(Flag.Threshold) { this.threshold = it }
-    node.decodeShort(Flag.DBGenCode) { dBGenCode = it }
+    node.decodeShort(Flag.DBGenCode) { dbGenCode = it }
     node.decodeString(Flag.SubjectFile) { this.subjectFile = it }
     node.decodeJSON(Flag.SubjectLocation) { this.subjectLocation = Location(it) }
     node.decodeJSON(Flag.Seg) { this.seg = Seg.fromJSON(it) }
-    node.decodeString(Flag.DBSoftMask) { dBSoftMask = it }
-    node.decodeString(Flag.DBHardMask) { dBHardMask = it }
+    node.decodeString(Flag.DBSoftMask) { dbSoftMask = it }
+    node.decodeString(Flag.DBHardMask) { dbHardMask = it }
     node.decodeLong(Flag.CullingLimit) { this.cullingLimit = it }
     node.decodeBool(Flag.SumStats) { this.sumStats = it }
     node.decodeShort(Flag.NumThreads) { this.numThreads = it }

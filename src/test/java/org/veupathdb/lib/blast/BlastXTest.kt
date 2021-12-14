@@ -317,7 +317,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     @Throws(Exception::class)
     fun test1() {
       val tgt = BlastX(JSONObjectDecoder(json.createObjectNode()))
-      tgt.dBSoftMask = "hi"
+      tgt.dbSoftMask = "hi"
       Assertions.assertEquals("{\"-db_soft_mask\":\"hi\"}", json.writeValueAsString(tgt))
     }
 
@@ -327,7 +327,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     fun test2() {
       val raw = "{\"-db_soft_mask\":\"hi\"}"
       val tgt = json.readValue(raw, BlastX::class.java)
-      Assertions.assertEquals("hi", tgt.dBSoftMask)
+      Assertions.assertEquals("hi", tgt.dbSoftMask)
     }
   }
 
@@ -339,7 +339,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     @Throws(Exception::class)
     fun test1() {
       val tgt = BlastX(JSONObjectDecoder(json.createObjectNode()))
-      tgt.dBHardMask = "hi"
+      tgt.dbHardMask = "hi"
       Assertions.assertEquals("{\"-db_hard_mask\":\"hi\"}", json.writeValueAsString(tgt))
     }
 
@@ -349,7 +349,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     fun test2() {
       val raw = "{\"-db_hard_mask\":\"hi\"}"
       val tgt = json.readValue(raw, BlastX::class.java)
-      Assertions.assertEquals("hi", tgt.dBHardMask)
+      Assertions.assertEquals("hi", tgt.dbHardMask)
     }
   }
 

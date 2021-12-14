@@ -359,7 +359,7 @@ internal class BlastNTest : BlastWithListsContractTest() {
     @Throws(Exception::class)
     fun test1() {
       val tgt = BlastN()
-      tgt.dBSoftMask = "hi"
+      tgt.dbSoftMask = "hi"
       Assertions.assertEquals("{\"-db_soft_mask\":\"hi\"}", json.writeValueAsString(tgt))
     }
 
@@ -369,7 +369,7 @@ internal class BlastNTest : BlastWithListsContractTest() {
     fun test2() {
       val raw = "{\"-db_soft_mask\":\"hi\"}"
       val tgt = json.readValue(raw, BlastN::class.java)
-      Assertions.assertEquals("hi", tgt.dBSoftMask)
+      Assertions.assertEquals("hi", tgt.dbSoftMask)
     }
   }
 
@@ -381,7 +381,7 @@ internal class BlastNTest : BlastWithListsContractTest() {
     @Throws(Exception::class)
     fun test1() {
       val tgt = BlastN()
-      tgt.dBHardMask = "hi"
+      tgt.dbHardMask = "hi"
       Assertions.assertEquals("{\"-db_hard_mask\":\"hi\"}", json.writeValueAsString(tgt))
     }
 
@@ -391,7 +391,7 @@ internal class BlastNTest : BlastWithListsContractTest() {
     fun test2() {
       val raw = "{\"-db_hard_mask\":\"hi\"}"
       val tgt = json.readValue(raw, BlastN::class.java)
-      Assertions.assertEquals("hi", tgt.dBHardMask)
+      Assertions.assertEquals("hi", tgt.dbHardMask)
     }
   }
 

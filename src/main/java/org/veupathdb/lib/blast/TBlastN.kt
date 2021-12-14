@@ -49,7 +49,7 @@ class TBlastN constructor(
   var wordSize: Long? = null,
   var gapOpen: Int? = null,
   var gapExtend: Int? = null,
-  var dBGenCode: Short? = null,
+  var dbGenCode: Short? = null,
   var maxIntronLength: Long? = null,
   var matrix: ScoringMatrix? = null,
   var threshold: Double? = null,
@@ -57,8 +57,8 @@ class TBlastN constructor(
   var subjectFile: String? = null,
   var subjectLocation: Location? = null,
   var seg: Seg? = null,
-  var dBSoftMask: String? = null,
-  var dBHardMask: String? = null,
+  var dbSoftMask: String? = null,
+  var dbHardMask: String? = null,
   var cullingLimit: Long? = null,
   var sumStats: Boolean? = null,
   var extensionDropoffPrelimGapped: Double? = null,
@@ -124,7 +124,7 @@ class TBlastN constructor(
     js.encode(Flag.WordSize, wordSize)
     js.encode(Flag.GapOpen, gapOpen)
     js.encode(Flag.GapExtend, gapExtend)
-    js.encode(Flag.DBGenCode, dBGenCode)
+    js.encode(Flag.DBGenCode, dbGenCode)
     js.encode(Flag.MaxIntronLength, maxIntronLength)
     js.encode(Flag.Matrix, matrix)
     js.encode(Flag.Threshold, threshold)
@@ -132,8 +132,8 @@ class TBlastN constructor(
     js.encode(Flag.SubjectFile, subjectFile)
     js.encode(Flag.SubjectLocation, subjectLocation)
     js.encode(Flag.Seg, seg)
-    js.encode(Flag.DBSoftMask, dBSoftMask)
-    js.encode(Flag.DBHardMask, dBHardMask)
+    js.encode(Flag.DBSoftMask, dbSoftMask)
+    js.encode(Flag.DBHardMask, dbHardMask)
     js.encode(Flag.CullingLimit, cullingLimit)
     js.encode(Flag.SumStats, sumStats)
     js.encode(Flag.ExtensionDropoffPrelimGapped, extensionDropoffPrelimGapped)
@@ -156,7 +156,7 @@ class TBlastN constructor(
     node.decodeLong(Flag.WordSize) { wordSize = it }
     node.decodeInt(Flag.GapOpen) { gapOpen = it }
     node.decodeInt(Flag.GapExtend) { gapExtend = it }
-    node.decodeShort(Flag.DBGenCode) { dBGenCode = it }
+    node.decodeShort(Flag.DBGenCode) { dbGenCode = it }
     node.decodeLong(Flag.MaxIntronLength) { maxIntronLength = it }
     node.decodeJSON(Flag.Matrix) { matrix = ScoringMatrix.fromJSON(it) }
     node.decodeDouble(Flag.Threshold) { threshold = it }
@@ -164,8 +164,8 @@ class TBlastN constructor(
     node.decodeString(Flag.SubjectFile) { subjectFile = it }
     node.decodeJSON(Flag.SubjectLocation) { subjectLocation = Location(it) }
     node.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }
-    node.decodeString(Flag.DBSoftMask) { dBSoftMask = it }
-    node.decodeString(Flag.DBHardMask) { dBHardMask = it }
+    node.decodeString(Flag.DBSoftMask) { dbSoftMask = it }
+    node.decodeString(Flag.DBHardMask) { dbHardMask = it }
     node.decodeLong(Flag.CullingLimit) { cullingLimit = it }
     node.decodeBool(Flag.SumStats) { sumStats = it }
     node.decodeDouble(Flag.ExtensionDropoffPrelimGapped) { extensionDropoffPrelimGapped = it }

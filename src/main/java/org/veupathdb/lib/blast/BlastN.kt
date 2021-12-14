@@ -60,8 +60,8 @@ class BlastN(
   var filteringDB: String? = null,
   var windowMaskerTaxID: Int? = null,
   var windowMaskerDB: String? = null,
-  var dBSoftMask: String? = null,
-  var dBHardMask: String? = null,
+  var dbSoftMask: String? = null,
+  var dbHardMask: String? = null,
   var percentIdentity: Double? = null,
   var cullingLimit: Long? = null,
   var templateType: TemplateType? = null,
@@ -141,8 +141,8 @@ class BlastN(
     out.encode(Flag.FilteringDB, filteringDB)
     out.encode(Flag.WindowMaskerTaxID, windowMaskerTaxID)
     out.encode(Flag.WindowMaskerDB, windowMaskerDB)
-    out.encode(Flag.DBSoftMask, dBSoftMask)
-    out.encode(Flag.DBHardMask, dBHardMask)
+    out.encode(Flag.DBSoftMask, dbSoftMask)
+    out.encode(Flag.DBHardMask, dbHardMask)
     out.encode(Flag.PercentIdentity, percentIdentity)
     out.encode(Flag.CullingLimit, cullingLimit)
     out.encode(Flag.TemplateType, templateType)
@@ -179,8 +179,8 @@ class BlastN(
     node.decodeString(Flag.FilteringDB) { filteringDB = it }
     node.decodeInt(Flag.WindowMaskerTaxID) { windowMaskerTaxID = it }
     node.decodeString(Flag.WindowMaskerDB) { windowMaskerDB = it }
-    node.decodeString(Flag.DBSoftMask) { dBSoftMask = it }
-    node.decodeString(Flag.DBHardMask) { dBHardMask = it }
+    node.decodeString(Flag.DBSoftMask) { dbSoftMask = it }
+    node.decodeString(Flag.DBHardMask) { dbHardMask = it }
     node.decodeDouble(Flag.PercentIdentity) { percentIdentity = it }
     node.decodeLong(Flag.CullingLimit) { cullingLimit = it }
     node.decodeJSON(Flag.TemplateType) { templateType = TemplateType.fromJSON(it) }

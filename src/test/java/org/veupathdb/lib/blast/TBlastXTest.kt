@@ -155,7 +155,7 @@ internal class TBlastXTest {
     @Throws(Exception::class)
     fun test1() {
       val tgt = TBlastX()
-      tgt.dBGenCode = 1285.toShort()
+      tgt.dbGenCode = 1285.toShort()
       Assertions.assertEquals("{\"-db_gencode\":1285}", json.writeValueAsString(tgt))
     }
 
@@ -165,7 +165,7 @@ internal class TBlastXTest {
     fun test2() {
       val raw = "{\"-db_gencode\":1285}"
       val tgt = json.readValue(raw, TBlastX::class.java)
-      Assertions.assertEquals(1285.toShort(), tgt.dBGenCode)
+      Assertions.assertEquals(1285.toShort(), tgt.dbGenCode)
     }
   }
 
@@ -244,7 +244,7 @@ internal class TBlastXTest {
     @Throws(Exception::class)
     fun test1() {
       val tgt = TBlastX()
-      tgt.dBSoftMask = "hi"
+      tgt.dbSoftMask = "hi"
       Assertions.assertEquals("{\"-db_soft_mask\":\"hi\"}", json.writeValueAsString(tgt))
     }
 
@@ -254,7 +254,7 @@ internal class TBlastXTest {
     fun test2() {
       val raw = "{\"-db_soft_mask\":\"hi\"}"
       val tgt = json.readValue(raw, TBlastX::class.java)
-      Assertions.assertEquals("hi", tgt.dBSoftMask)
+      Assertions.assertEquals("hi", tgt.dbSoftMask)
     }
   }
 
@@ -266,7 +266,7 @@ internal class TBlastXTest {
     @Throws(Exception::class)
     fun test1() {
       val tgt = TBlastX()
-      tgt.dBHardMask = "hi"
+      tgt.dbHardMask = "hi"
       Assertions.assertEquals("{\"-db_hard_mask\":\"hi\"}", json.writeValueAsString(tgt))
     }
 
@@ -276,7 +276,7 @@ internal class TBlastXTest {
     fun test2() {
       val raw = "{\"-db_hard_mask\":\"hi\"}"
       val tgt = json.readValue(raw, TBlastX::class.java)
-      Assertions.assertEquals("hi", tgt.dBHardMask)
+      Assertions.assertEquals("hi", tgt.dbHardMask)
     }
   }
 
