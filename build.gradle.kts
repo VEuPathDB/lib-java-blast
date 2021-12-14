@@ -72,7 +72,7 @@ publishing {
   repositories {
     maven {
       name = "GitHub"
-      url = uri("https://maven.pkg.github.com/VEuPathDB/lib-java-blast")
+      url = uri("https://maven.pkg.github.com/VEuPathDB/maven-packages")
       credentials {
         username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
         password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
