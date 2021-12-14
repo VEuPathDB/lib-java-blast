@@ -1,4 +1,5 @@
 plugins {
+  kotlin("jvm") version "1.6.0"
   `java-library`
   `maven-publish`
 }
@@ -17,7 +18,7 @@ allprojects {
     mavenCentral()
     maven {
       name = "GitHubPackages"
-      url = uri("https://maven.pkg.github.com/veupathdb/maven-packages")
+      url = uri("https://maven.pkg.github.com/veupathdb/packages")
       credentials {
         username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USERNAME")
         password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
@@ -70,7 +71,7 @@ publishing {
   repositories {
     maven {
       name = "GitHub"
-      url = uri("https://maven.pkg.github.com/veupathdb/maven-packages")
+      url = uri("https://maven.pkg.github.com/veupathdb/lib-java-blast")
       credentials {
         username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
         password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
