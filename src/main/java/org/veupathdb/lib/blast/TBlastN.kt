@@ -53,7 +53,7 @@ class TBlastN constructor(
   var maxIntronLength: Long? = null,
   var matrix: ScoringMatrix? = null,
   var threshold: Double? = null,
-  var compBasedStats: String? = null,
+  var compBasedStats: CompBasedStatsLong? = null,
   var subjectFile: String? = null,
   var subjectLocation: Location? = null,
   var seg: Seg? = null,
@@ -152,30 +152,30 @@ class TBlastN constructor(
   override fun decodeJSON(js: JSONObjectDecoder) {
     super<BlastWithLists>.decodeJSON(js)
 
-    js.decodeJSON(Flag.Task) { this.task = TBlastNTask.fromJSON(it) }
-    js.decodeLong(Flag.WordSize) { this.wordSize = it }
-    js.decodeInt(Flag.GapOpen) { this.gapOpen = it }
-    js.decodeInt(Flag.GapExtend) { this.gapExtend = it }
+    js.decodeJSON(Flag.Task) { task = TBlastNTask.fromJSON(it) }
+    js.decodeLong(Flag.WordSize) { wordSize = it }
+    js.decodeInt(Flag.GapOpen) { gapOpen = it }
+    js.decodeInt(Flag.GapExtend) { gapExtend = it }
     js.decodeShort(Flag.DBGenCode) { dBGenCode = it }
-    js.decodeLong(Flag.MaxIntronLength) { this.maxIntronLength = it }
-    js.decodeJSON(Flag.Matrix) { this.matrix = ScoringMatrix.fromJSON(it) }
-    js.decodeDouble(Flag.Threshold) { this.threshold = it }
-    js.decodeString(Flag.CompBasedStats) { this.compBasedStats = it }
-    js.decodeString(Flag.SubjectFile) { this.subjectFile = it }
-    js.decodeJSON(Flag.SubjectLocation) { this.subjectLocation = Location(it) }
-    js.decodeJSON(Flag.Seg) { this.seg = Seg.fromJSON(it) }
+    js.decodeLong(Flag.MaxIntronLength) { maxIntronLength = it }
+    js.decodeJSON(Flag.Matrix) { matrix = ScoringMatrix.fromJSON(it) }
+    js.decodeDouble(Flag.Threshold) { threshold = it }
+    js.decodeJSON(Flag.CompBasedStats) { compBasedStats = CompBasedStatsLong.fromJSON(it) }
+    js.decodeString(Flag.SubjectFile) { subjectFile = it }
+    js.decodeJSON(Flag.SubjectLocation) { subjectLocation = Location(it) }
+    js.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }
     js.decodeString(Flag.DBSoftMask) { dBSoftMask = it }
     js.decodeString(Flag.DBHardMask) { dBHardMask = it }
-    js.decodeLong(Flag.CullingLimit) { this.cullingLimit = it }
-    js.decodeBool(Flag.SumStats) { this.sumStats = it }
-    js.decodeDouble(Flag.ExtensionDropoffPrelimGapped) { this.extensionDropoffPrelimGapped = it }
-    js.decodeDouble(Flag.ExtensionDropoffFinalGapped) { this.extensionDropoffFinalGapped = it }
-    js.decodeBool(Flag.UngappedAlignmentsOnly) { this.ungappedAlignmentsOnly = it }
-    js.decodeShort(Flag.NumThreads) { this.numThreads = it }
-    js.decodeBool(Flag.UseSmithWatermanTraceback) { this.useSmithWatermanTraceback = it }
-    js.decodeDouble(Flag.BestHitOverhang) { this.bestHitOverhang = it }
-    js.decodeDouble(Flag.BestHitScoreEdge) { this.bestHitScoreEdge = it }
-    js.decodeBool(Flag.SubjectBestHit) { this.subjectBestHit = it }
-    js.decodeString(Flag.InPSSMFile) { this.inPSSMFile = it }
+    js.decodeLong(Flag.CullingLimit) { cullingLimit = it }
+    js.decodeBool(Flag.SumStats) { sumStats = it }
+    js.decodeDouble(Flag.ExtensionDropoffPrelimGapped) { extensionDropoffPrelimGapped = it }
+    js.decodeDouble(Flag.ExtensionDropoffFinalGapped) { extensionDropoffFinalGapped = it }
+    js.decodeBool(Flag.UngappedAlignmentsOnly) { ungappedAlignmentsOnly = it }
+    js.decodeShort(Flag.NumThreads) { numThreads = it }
+    js.decodeBool(Flag.UseSmithWatermanTraceback) { useSmithWatermanTraceback = it }
+    js.decodeDouble(Flag.BestHitOverhang) { bestHitOverhang = it }
+    js.decodeDouble(Flag.BestHitScoreEdge) { bestHitScoreEdge = it }
+    js.decodeBool(Flag.SubjectBestHit) { subjectBestHit = it }
+    js.decodeString(Flag.InPSSMFile) { inPSSMFile = it }
   }
 }

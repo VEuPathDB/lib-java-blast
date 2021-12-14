@@ -3,6 +3,7 @@ package org.veupathdb.lib.blast
 import com.fasterxml.jackson.annotation.JsonCreator
 
 import org.veupathdb.lib.blast.consts.Flag
+import org.veupathdb.lib.blast.field.CompBasedStatsShort
 import org.veupathdb.lib.blast.field.Location
 import org.veupathdb.lib.blast.field.ScoringMatrix
 import org.veupathdb.lib.blast.field.Seg
@@ -15,7 +16,7 @@ class DeltaBlast(
   var gapExtend: Int? = null,
   var matrix: ScoringMatrix? = null,
   var threshold: Double? = null,
-  var compBasedStats: String? = null,
+  var compBasedStats: CompBasedStatsShort? = null,
   var subjectFile: String? = null,
   var subjectLocation: Location? = null,
   var seg: Seg? = null,
@@ -89,7 +90,7 @@ class DeltaBlast(
     js.decodeInt(Flag.GapExtend) { gapExtend = it }
     js.decodeJSON(Flag.Matrix) { matrix = ScoringMatrix.fromJSON(it) }
     js.decodeDouble(Flag.Threshold) { threshold = it }
-    js.decodeString(Flag.CompBasedStats) { compBasedStats = it }
+    js.decodeJSON(Flag.CompBasedStats) { compBasedStats = CompBasedStatsShort.fromJSON(it) }
     js.decodeString(Flag.SubjectFile) { subjectFile = it }
     js.decodeJSON(Flag.SubjectLocation) { subjectLocation = Location(it) }
     js.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }

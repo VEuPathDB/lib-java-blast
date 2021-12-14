@@ -39,7 +39,7 @@ class RPSTBlastN(
   remote: Boolean? = null,
   var queryGenCode: Short? = null,
   var strand: Strand? = null,
-  var compBasedStats: String? = null,
+  var compBasedStats: CompBasedStatsShort? = null,
   var seg: Seg? = null,
   var sumStats: Boolean? = null,
   var extensionDropoffPrelimGapped: Double? = null,
@@ -110,7 +110,7 @@ class RPSTBlastN(
 
     js.decodeShort(Flag.QueryGenCode) { queryGenCode = it }
     js.decodeJSON(Flag.Strand) { strand = Strand.fromJSON(it) }
-    js.decodeString(Flag.CompBasedStats) { compBasedStats = it }
+    js.decodeJSON(Flag.CompBasedStats) { compBasedStats = CompBasedStatsShort.fromJSON(it) }
     js.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }
     js.decodeBool(Flag.SumStats) { sumStats = it }
     js.decodeDouble(Flag.ExtensionDropoffPrelimGapped) { extensionDropoffPrelimGapped = it }

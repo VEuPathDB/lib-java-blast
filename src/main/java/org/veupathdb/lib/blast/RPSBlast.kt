@@ -40,7 +40,7 @@ class RPSBlast(
   var bestHitOverhang: Double? = null,
   var bestHitScoreEdge: Double? = null,
   var subjectBestHit: Boolean? = null,
-  var compBasedStats: String? = null,
+  var compBasedStats: CompBasedStatsShort? = null,
   var seg: Seg? = null,
   var sumStats: Boolean? = null,
   var extensionDropoffPrelimGapped: Double? = null,
@@ -110,7 +110,7 @@ class RPSBlast(
     node.decodeDouble(Flag.BestHitOverhang) { bestHitOverhang = it }
     node.decodeDouble(Flag.BestHitScoreEdge) { bestHitScoreEdge = it }
     node.decodeBool(Flag.SubjectBestHit) { subjectBestHit = it }
-    node.decodeString(Flag.CompBasedStats) { compBasedStats = it }
+    node.decodeJSON(Flag.CompBasedStats) { compBasedStats = CompBasedStatsShort.fromJSON(it) }
     node.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }
     node.decodeBool(Flag.SumStats) { sumStats = it }
     node.decodeDouble(Flag.ExtensionDropoffPrelimGapped) { extensionDropoffPrelimGapped = it }

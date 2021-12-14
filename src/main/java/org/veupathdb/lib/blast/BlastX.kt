@@ -56,7 +56,7 @@ class BlastX(
   var maxIntronLength: Long? = null,
   var matrix: ScoringMatrix? = null,
   var threshold: Double? = null,
-  var compBasedStats: String? = null,
+  var compBasedStats: CompBasedStatsLong? = null,
   var subjectFile: String? = null,
   var subjectLocation: Location? = null,
   var seg: Seg? = null,
@@ -162,7 +162,7 @@ class BlastX(
     js.decodeLong(Flag.MaxIntronLength) { maxIntronLength = it }
     js.decodeJSON(Flag.Matrix) { matrix = ScoringMatrix.fromJSON(it) }
     js.decodeDouble(Flag.Threshold) { threshold = it }
-    js.decodeString(Flag.CompBasedStats) { compBasedStats = it }
+    js.decodeJSON(Flag.CompBasedStats) { compBasedStats = CompBasedStatsLong.fromJSON(it) }
     js.decodeString(Flag.SubjectFile) { subjectFile = it }
     js.decodeJSON(Flag.SubjectLocation) { subjectLocation = Location(it) }
     js.decodeJSON(Flag.Seg) { seg = Seg.fromJSON(it) }
