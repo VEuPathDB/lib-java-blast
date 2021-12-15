@@ -2,7 +2,7 @@ package org.veupathdb.lib.blast
 
 import org.veupathdb.lib.blast.field.*
 
-sealed class BlastBase(
+abstract class BlastBase(
   shortHelp:                             Boolean?         = null,
   longHelp:                              Boolean?         = null,
   version:                               Boolean?         = null,

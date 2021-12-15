@@ -9,7 +9,7 @@ import org.veupathdb.lib.blast.util.JSONEncodable
 import org.veupathdb.lib.blast.util.JSONObjectDecoder
 import org.veupathdb.lib.blast.util.JSONObjectEncoder
 
-sealed interface BlastConfig : JSONEncodable, JSONDecodable
+interface BlastConfig : JSONEncodable, JSONDecodable
 {
   val tool: BlastTool
 
