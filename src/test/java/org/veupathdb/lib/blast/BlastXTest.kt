@@ -316,8 +316,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     @DisplayName("serialization")
     @Throws(Exception::class)
     fun test1() {
-      val tgt = BlastX(JSONObjectDecoder(json.createObjectNode()))
-      tgt.dbSoftMask = "hi"
+      val tgt = BlastX(dbSoftMask = "hi")
       Assertions.assertEquals("{\"-db_soft_mask\":\"hi\"}", json.writeValueAsString(tgt))
     }
 
@@ -338,8 +337,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     @DisplayName("serialization")
     @Throws(Exception::class)
     fun test1() {
-      val tgt = BlastX(JSONObjectDecoder(json.createObjectNode()))
-      tgt.dbHardMask = "hi"
+      val tgt = BlastX(dbHardMask = "hi")
       Assertions.assertEquals("{\"-db_hard_mask\":\"hi\"}", json.writeValueAsString(tgt))
     }
 
@@ -360,8 +358,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     @DisplayName("serialization")
     @Throws(Exception::class)
     fun test1() {
-      val tgt = BlastX(JSONObjectDecoder(json.createObjectNode()))
-      tgt.cullingLimit = 123L
+      val tgt = BlastX(cullingLimit = 123L)
       Assertions.assertEquals("{\"-culling_limit\":123}", json.writeValueAsString(tgt))
     }
 
@@ -382,8 +379,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     @DisplayName("serialization")
     @Throws(Exception::class)
     fun test1() {
-      val tgt = BlastX(JSONObjectDecoder(json.createObjectNode()))
-      tgt.sumStats = true
+      val tgt = BlastX(sumStats = true)
       Assertions.assertEquals("{\"-sum_stats\":true}", json.writeValueAsString(tgt))
     }
 
@@ -404,8 +400,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     @DisplayName("serialization")
     @Throws(Exception::class)
     fun test1() {
-      val tgt = BlastX(JSONObjectDecoder(json.createObjectNode()))
-      tgt.extensionDropoffPrelimGapped = 3.14
+      val tgt = BlastX(extensionDropoffPrelimGapped = 3.14)
       Assertions.assertEquals("{\"-xdrop_gap\":3.14}", json.writeValueAsString(tgt))
     }
 
@@ -426,8 +421,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     @DisplayName("serialization")
     @Throws(Exception::class)
     fun test1() {
-      val tgt = BlastX(JSONObjectDecoder(json.createObjectNode()))
-      tgt.extensionDropoffFinalGapped = 3.14
+      val tgt = BlastX(extensionDropoffFinalGapped = 3.14)
       Assertions.assertEquals("{\"-xdrop_gap_final\":3.14}", json.writeValueAsString(tgt))
     }
 
@@ -448,8 +442,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     @DisplayName("serialization")
     @Throws(Exception::class)
     fun test1() {
-      val tgt = BlastX(JSONObjectDecoder(json.createObjectNode()))
-      tgt.ungappedAlignmentsOnly = true
+      val tgt = BlastX(ungappedAlignmentsOnly = true)
       Assertions.assertEquals("{\"-ungapped\":true}", json.writeValueAsString(tgt))
     }
 
@@ -470,8 +463,7 @@ internal class BlastXTest : BlastWithIPGListContractTest() {
     @DisplayName("serialization")
     @Throws(Exception::class)
     fun test1() {
-      val tgt = BlastX(JSONObjectDecoder(json.createObjectNode()))
-      tgt.numThreads = 123.toShort()
+      val tgt = BlastX(numThreads = 123.toShort())
       Assertions.assertEquals("{\"-num_threads\":123}", json.writeValueAsString(tgt))
     }
 

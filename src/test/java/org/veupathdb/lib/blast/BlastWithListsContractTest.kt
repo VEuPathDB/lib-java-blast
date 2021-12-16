@@ -19,20 +19,18 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
   internal inner class GIList1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = newConfig()
-      tgt.gIList = "hi"
+      tgt.giList = "hi"
       Assertions.assertEquals("{\"-gilist\":\"hi\"}", json.writeValueAsString(tgt))
     }
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-gilist\":\"hi\"}"
       val tgt = json.readValue(raw, configClass().java)
-      Assertions.assertEquals("hi", tgt.gIList)
+      Assertions.assertEquals("hi", tgt.giList)
     }
   }
 
@@ -41,7 +39,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
   internal inner class SequenceIDList1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = newConfig()
       tgt.sequenceIDList = "hi"
@@ -50,7 +47,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-seqidlist\":\"hi\"}"
       val tgt = json.readValue(raw, configClass().java)
@@ -63,7 +59,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
   internal inner class NegativeGIList1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = newConfig()
       tgt.negativeGIList = "hi"
@@ -72,7 +67,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-negative_gilist\":\"hi\"}"
       val tgt = json.readValue(raw, configClass().java)
@@ -85,7 +79,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
   internal inner class NegativeSequenceIDList1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = newConfig()
       tgt.negativeSequenceIDList = "hi"
@@ -94,7 +87,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-negative_seqidlist\":\"hi\"}"
       val tgt = json.readValue(raw, configClass().java)
@@ -107,7 +99,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
   internal inner class TaxIDs1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = newConfig()
       val list = ArrayList<String>()
@@ -118,7 +109,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-taxids\":[\"hi\"]}"
       val tgt = json.readValue(raw, configClass().java)
@@ -133,7 +123,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
   internal inner class NegativeTaxIDs1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = newConfig()
       val list = ArrayList<String>()
@@ -144,7 +133,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-negative_taxids\":[\"hi\"]}"
       val tgt = json.readValue(raw, configClass().java)
@@ -159,7 +147,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
   internal inner class TaxIDList1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = newConfig()
       tgt.taxIDList = "hi"
@@ -168,7 +155,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-taxidlist\":\"hi\"}"
       val tgt = json.readValue(raw, configClass().java)
@@ -181,7 +167,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
   internal inner class NegativeTaxIDList1 {
     @Test
     @DisplayName("serialization")
-    @Throws(Exception::class)
     fun test1() {
       val tgt = newConfig()
       tgt.negativeTaxIDList = "hi"
@@ -190,7 +175,6 @@ internal abstract class BlastWithListsContractTest : BlastQueryConfigContractTes
 
     @Test
     @DisplayName("deserialization")
-    @Throws(Exception::class)
     fun test2() {
       val raw = "{\"-negative_taxidlist\":\"hi\"}"
       val tgt = json.readValue(raw, configClass().java)

@@ -36,7 +36,7 @@ abstract class BlastWithLists(
   extensionDropoffUngapped:              Double?          = null,
   windowSize:                            Long?            = null,
   remote:                                Boolean?         = null,
-  var gIList: String? = null,
+  var giList: String? = null,
   var sequenceIDList: String? = null,
   var negativeGIList: String? = null,
   var negativeSequenceIDList: String? = null,
@@ -78,7 +78,7 @@ abstract class BlastWithLists(
 ) {
   override fun toJSON(includeTool: Boolean): JSONObjectEncoder {
     val out = super.toJSON(includeTool)
-    out.encode(Flag.GIList, gIList)
+    out.encode(Flag.GIList, giList)
     out.encode(Flag.SequenceIDList, sequenceIDList)
     out.encode(Flag.NegativeGIList, negativeGIList)
     out.encode(Flag.NegativeSequenceIDList, negativeSequenceIDList)
@@ -91,7 +91,7 @@ abstract class BlastWithLists(
 
   override fun decodeJSON(node: JSONObjectDecoder) {
     super.decodeJSON(node)
-    node.decodeString(Flag.GIList) { gIList = it }
+    node.decodeString(Flag.GIList) { giList = it }
     node.decodeString(Flag.SequenceIDList) { sequenceIDList = it }
     node.decodeString(Flag.NegativeGIList) { negativeGIList = it }
     node.decodeString(Flag.NegativeSequenceIDList) { negativeSequenceIDList = it }
