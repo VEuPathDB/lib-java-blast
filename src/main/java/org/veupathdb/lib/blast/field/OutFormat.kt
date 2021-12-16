@@ -15,7 +15,7 @@ import org.veupathdb.lib.blast.util.JSONConstructor.newText
 data class OutFormat(
   var type: FormatType? = null,
   var delimiter: String? = null,
-  var fields: MutableList<FormatField?> = ArrayList(),
+  var fields: MutableList<FormatField> = ArrayList(),
 ) : DefaultingJSONValue {
 
   override val isDefault: Boolean
