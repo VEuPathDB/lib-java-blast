@@ -69,7 +69,7 @@ sealed interface Seg : DefaultingJSONValue
       if (NoSegImpl.Value == value)
         return NoSegImpl
 
-      val split = value.split(" +")
+      val split = value.split(Regex(" +"))
 
       if (split.size != 3)
         throw IllegalArgumentException()

@@ -112,7 +112,7 @@ class Dust private constructor(
     fun fromString(value: String): Dust {
       if (YesValue == value) return yesDust()
       if (NoValue == value) return noDust()
-      val split = value.split(" +").toTypedArray()
+      val split = value.split(Regex(" +")).toTypedArray()
       require(split.size == 3)
       return lwlDust(split[0].toInt(), split[1].toInt(), split[2].toInt())
     }
