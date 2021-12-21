@@ -64,7 +64,7 @@ data class OutFormat(
       if (value.isBlank())
         return OutFormat().apply { type = Pairwise }
 
-      val split = value.split(" +").toTypedArray()
+      val split = value.split(Regex(" +")).toTypedArray()
       val out = OutFormat()
 
       out.type = fromIntValue(split[0].toInt())
