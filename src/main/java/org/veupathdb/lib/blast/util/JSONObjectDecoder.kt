@@ -1,13 +1,11 @@
 package org.veupathdb.lib.blast.util
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.node.ObjectNode
 
-import java.util.function.Consumer
-import java.util.function.Function
-
-class JSONObjectDecoder @JsonCreator constructor(val js: ObjectNode) {
+@JsonDeserialize(using = JSONObjectDecoderDeserializer::class)
+class JSONObjectDecoder(val js: ObjectNode) {
 
   fun decodeString(key: String, fn: (String) -> Unit) {
     val value = js.get(key)

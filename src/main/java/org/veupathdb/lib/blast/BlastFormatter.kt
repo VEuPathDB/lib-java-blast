@@ -56,7 +56,7 @@ open class BlastFormatter(
     return out
   }
 
-  override fun decodeJSON(node: JSONObjectDecoder) {
+  final override fun decodeJSON(node: JSONObjectDecoder) {
     super.decodeJSON(node)
 
     node.decodeString(Flag.RequestID) { requestID = it }
