@@ -1,11 +1,11 @@
 plugins {
-  kotlin("jvm") version "1.6.0"
+  kotlin("jvm") version "1.6.10"
   `java-library`
   `maven-publish`
 }
 
 group = "org.veupathdb.lib"
-version = "5.0.9"
+version = "6.0.0"
 
 java {
   targetCompatibility = JavaVersion.VERSION_16
@@ -32,9 +32,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.fasterxml.jackson.core:jackson-core:2.13.0")
-  implementation("com.fasterxml.jackson.core:jackson-databind:2.13.0")
-  implementation("com.fasterxml.jackson.core:jackson-annotations:2.13.0")
+  api("org.veupathdb.lib:jackson-singleton:2.1.0")
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
   testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
