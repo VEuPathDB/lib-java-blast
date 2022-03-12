@@ -14,6 +14,15 @@ internal inline fun StringBuilder.append(
 internal inline fun StringBuilder.append(
   isDefault: Boolean,
   key:       String,
+  value:     Double,
+) {
+  if (!isDefault)
+    append(' ').append(key).append(' ').append(value)
+}
+
+internal inline fun StringBuilder.append(
+  isDefault: Boolean,
+  key:       String,
   value:     Int,
 ) {
   if (!isDefault)
@@ -23,10 +32,10 @@ internal inline fun StringBuilder.append(
 internal inline fun StringBuilder.append(
   isDefault: Boolean,
   key:       String,
-  value:     UInt
+  value:     Long,
 ) {
   if (!isDefault)
-    append(' ').append(key).append(' ').append(value.toString())
+    append(' ').append(key).append(' ').append(value)
 }
 
 internal inline fun StringBuilder.append(
@@ -36,4 +45,22 @@ internal inline fun StringBuilder.append(
 ) {
   if (!isDefault)
     append(' ').append(key).append(' ').append(value)
+}
+
+internal inline fun StringBuilder.append(
+  isDefault: Boolean,
+  key:       String,
+  value:     UByte
+) {
+  if (!isDefault)
+    append(' ').append(key).append(' ').append(value.toString())
+}
+
+internal inline fun StringBuilder.append(
+  isDefault: Boolean,
+  key:       String,
+  value:     UInt
+) {
+  if (!isDefault)
+    append(' ').append(key).append(' ').append(value.toString())
 }

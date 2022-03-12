@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast.field
+package org.veupathdb.lib.blast.blastn
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.serial.BlastField
@@ -7,7 +7,7 @@ import org.veupathdb.lib.blast.util.append
 import org.veupathdb.lib.blast.util.put
 
 
-private const val KeyReward = "-penalty"
+private const val KeyReward = "-reward"
 private const val DefReward = UInt.MAX_VALUE
 
 

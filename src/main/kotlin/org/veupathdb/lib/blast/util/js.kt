@@ -16,6 +16,15 @@ internal inline fun ObjectNode.put(
 internal inline fun ObjectNode.put(
   isDefault: Boolean,
   key:       String,
+  value:     Double,
+) {
+  if (!isDefault)
+    put(key, value)
+}
+
+internal inline fun ObjectNode.put(
+  isDefault: Boolean,
+  key:       String,
   value:     Int,
 ) {
   if (!isDefault)
@@ -25,10 +34,10 @@ internal inline fun ObjectNode.put(
 internal inline fun ObjectNode.put(
   isDefault: Boolean,
   key:       String,
-  value:     UInt,
+  value:     Long,
 ) {
   if (!isDefault)
-    put(key, value.toLong())
+    put(key, value)
 }
 
 internal inline fun ObjectNode.put(
@@ -38,4 +47,22 @@ internal inline fun ObjectNode.put(
 ) {
   if (!isDefault)
     put(key, value)
+}
+
+internal inline fun ObjectNode.put(
+  isDefault: Boolean,
+  key:       String,
+  value:     UByte,
+) {
+  if (!isDefault)
+    put(key, value.toShort())
+}
+
+internal inline fun ObjectNode.put(
+  isDefault: Boolean,
+  key:       String,
+  value:     UInt,
+) {
+  if (!isDefault)
+    put(key, value.toLong())
 }

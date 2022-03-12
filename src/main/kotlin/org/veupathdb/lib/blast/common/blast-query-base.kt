@@ -2,6 +2,8 @@ package org.veupathdb.lib.blast.common
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
+import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.field.*
 
 
 /**
@@ -22,7 +24,7 @@ interface BlastQueryBase : BlastCLI {
   /**
    * BLAST database name(s)
    */
-  var dbFile: DbFile
+  var dbFile: DBFile
 
   /**
    * Expectation value (E) threshold for saving hits
@@ -108,7 +110,7 @@ internal open class blastQueryBase(
 
   override var queryFile:                QueryFile,
   override var queryLocation:            QueryLocation,
-  override var dbFile:                   DbFile,
+  override var dbFile:                   DBFile,
   override var expectValue:              ExpectValue,
   override var softMasking:              SoftMasking,
   override var lowercaseMasking:         LowercaseMasking,

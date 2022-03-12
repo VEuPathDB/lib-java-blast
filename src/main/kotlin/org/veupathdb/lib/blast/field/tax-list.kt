@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.serial.BlastField
 
 
-private const val KeyTIL  = "-seqidlist"
-private const val KeyNTIL = "-negative_seqidlist"
+private const val KeyTIL  = "-taxidlist"
+private const val KeyNTIL = "-negative_taxidlist"
 
 
 internal fun ParseTaxIdList(js: ObjectNode) =

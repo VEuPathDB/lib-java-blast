@@ -37,11 +37,11 @@ value class ExtensionDropoffUngapped(val value: Double = Double.NaN) : BlastFiel
 
 
 internal fun ParseXDropGap(js: ObjectNode) =
-  ExtensionDropoffGapped(js[KeyXDropGap]?.doubleValue() ?: Double.NaN)
+  ExtensionDropoffPrelimGapped(js[KeyXDropGap]?.doubleValue() ?: Double.NaN)
 
 
 @JvmInline
-value class ExtensionDropoffGapped(val value: Double = Double.NaN) : BlastField {
+value class ExtensionDropoffPrelimGapped(val value: Double = Double.NaN) : BlastField {
   override val isDefault get() = value.isNaN()
 
   override fun appendJson(json: ObjectNode) {

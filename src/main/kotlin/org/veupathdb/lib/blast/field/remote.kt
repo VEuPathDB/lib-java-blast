@@ -5,7 +5,7 @@ import org.veupathdb.lib.blast.serial.BlastField
 
 
 private const val DefaultRemote = false
-private const val KeyRemote     = "-html"
+private const val KeyRemote     = "-remote"
 
 
 internal fun ParseRemote(js: ObjectNode) =

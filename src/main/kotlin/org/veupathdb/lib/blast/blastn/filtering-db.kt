@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast.field
+package org.veupathdb.lib.blast.blastn
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.serial.BlastField
@@ -7,23 +7,23 @@ import org.veupathdb.lib.blast.util.append
 import org.veupathdb.lib.blast.util.put
 
 
-private const val KeyIndexName = "-index_name"
+private const val KeyFilteringDB = "-filtering_db"
 
 
-internal fun ParseIndexName(js: ObjectNode) =
-  IndexName(js[KeyIndexName]?.textValue() ?: "")
+internal fun ParseFilteringDB(js: ObjectNode) =
+  FilteringDB(js[KeyFilteringDB]?.textValue() ?: "")
 
 
 @JvmInline
-value class IndexName(val value: String = "") : BlastField {
+value class FilteringDB(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
   override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, KeyIndexName, value)
+    json.put(isDefault, KeyFilteringDB, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, KeyIndexName, value)
+    cli.append(isDefault, KeyFilteringDB, value)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, KeyIndexName, value)
+    cli.add(isDefault, KeyFilteringDB, value)
 }

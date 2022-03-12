@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast.field
+package org.veupathdb.lib.blast.blastn
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.serial.BlastField

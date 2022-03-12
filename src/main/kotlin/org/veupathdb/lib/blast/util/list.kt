@@ -16,6 +16,17 @@ internal inline fun MutableList<String>.add(
 internal inline fun MutableList<String>.add(
   isDefault: Boolean,
   key:       String,
+  value:     Double,
+) {
+  if (!isDefault) {
+    add(key)
+    add(value.toString())
+  }
+}
+
+internal inline fun MutableList<String>.add(
+  isDefault: Boolean,
+  key:       String,
   value:     Int,
 ) {
   if (!isDefault) {
@@ -27,7 +38,7 @@ internal inline fun MutableList<String>.add(
 internal inline fun MutableList<String>.add(
   isDefault: Boolean,
   key:       String,
-  value:     UInt,
+  value:     Long,
 ) {
   if (!isDefault) {
     add(key)
@@ -43,5 +54,27 @@ internal inline fun MutableList<String>.add(
   if (!isDefault) {
     add(key)
     add(value)
+  }
+}
+
+internal inline fun MutableList<String>.add(
+  isDefault: Boolean,
+  key:       String,
+  value:     UByte,
+) {
+  if (!isDefault) {
+    add(key)
+    add(value.toString())
+  }
+}
+
+internal inline fun MutableList<String>.add(
+  isDefault: Boolean,
+  key:       String,
+  value:     UInt,
+) {
+  if (!isDefault) {
+    add(key)
+    add(value.toString())
   }
 }
