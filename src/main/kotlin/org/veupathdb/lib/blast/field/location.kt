@@ -72,3 +72,22 @@ class QueryLocation(
 ////////////////////////////////////////////////////////////////////////////////
 
 
+private const val KeySubjectLoc = "-subject_loc"
+
+
+internal fun ParseSubjectLocation(js: ObjectNode): SubjectLocation {
+  val obj = js[KeySubjectLoc] ?: return SubjectLocation()
+  obj.isObject || return SubjectLocation()
+  obj as ObjectNode
+
+  return SubjectLocation(
+    obj.get(KeyStart)?.longValue()?.toUInt() ?: DefaultLocationStart,
+    obj.get(KeyStop)?.longValue()?.toUInt() ?: DefaultLocationStop
+  )
+}
+
+
+class SubjectLocation(
+  start: UInt = DefaultLocationStart,
+  stop:  UInt = DefaultLocationStop,
+) : Location(KeySubjectLoc, start, stop)

@@ -1,2 +1,2 @@
-rootProject.name = "java-blast"
+rootProject.name = "blast-types"
 
