@@ -10,6 +10,9 @@ version = "6.0.0"
 java {
   targetCompatibility = JavaVersion.VERSION_16
   sourceCompatibility = JavaVersion.VERSION_16
+
+  withSourcesJar()
+  withJavadocJar()
 }
 
 allprojects {
