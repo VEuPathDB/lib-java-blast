@@ -38,12 +38,12 @@ internal abstract class BlastQueryWithListsImpl(
   windowSize: WindowSize,
   remote: Remote,
 
-  override var giList: GIList,
-  override var negativeGIList: NegativeGIList,
-  override var seqIdList: SeqIdList,
-  override var negativeSeqIdList: NegativeSeqIdList,
-  override var taxIdList: TaxIdList,
-  override var negativeTaxIdList: NegativeTaxIdList,
+  override var giListFile: GIList,
+  override var negativeGIListFile: NegativeGIList,
+  override var seqIdListFile: SeqIdList,
+  override var negativeSeqIdListFile: NegativeSeqIdList,
+  override var taxIdListFile: TaxIdList,
+  override var negativeTaxIdListFile: NegativeTaxIdList,
   override var taxIds: TaxIds,
   override var negativeTaxIds: NegativeTaxIds,
 ) : BlastQueryWithLists, BlastQueryBaseImpl(
@@ -123,12 +123,12 @@ internal abstract class BlastQueryWithListsImpl(
   override fun appendJson(js: ObjectNode) {
     super.appendJson(js)
 
-    giList.appendJson(js)
-    negativeGIList.appendJson(js)
-    seqIdList.appendJson(js)
-    negativeSeqIdList.appendJson(js)
-    taxIdList.appendJson(js)
-    negativeTaxIdList.appendJson(js)
+    giListFile.appendJson(js)
+    negativeGIListFile.appendJson(js)
+    seqIdListFile.appendJson(js)
+    negativeSeqIdListFile.appendJson(js)
+    taxIdListFile.appendJson(js)
+    negativeTaxIdListFile.appendJson(js)
     taxIds.appendJson(js)
     negativeTaxIds.appendJson(js)
   }
@@ -136,12 +136,12 @@ internal abstract class BlastQueryWithListsImpl(
   override fun appendCli(sb: StringBuilder) {
     super.appendCli(sb)
 
-    giList.appendCliSegment(sb)
-    negativeGIList.appendCliSegment(sb)
-    seqIdList.appendCliSegment(sb)
-    negativeSeqIdList.appendCliSegment(sb)
-    taxIdList.appendCliSegment(sb)
-    negativeTaxIdList.appendCliSegment(sb)
+    giListFile.appendCliSegment(sb)
+    negativeGIListFile.appendCliSegment(sb)
+    seqIdListFile.appendCliSegment(sb)
+    negativeSeqIdListFile.appendCliSegment(sb)
+    taxIdListFile.appendCliSegment(sb)
+    negativeTaxIdListFile.appendCliSegment(sb)
     taxIds.appendCliSegment(sb)
     negativeTaxIds.appendCliSegment(sb)
   }
@@ -149,12 +149,12 @@ internal abstract class BlastQueryWithListsImpl(
   override fun appendCli(cli: MutableList<String>) {
     super.appendCli(cli)
 
-    giList.appendCliParts(cli)
-    negativeGIList.appendCliParts(cli)
-    seqIdList.appendCliParts(cli)
-    negativeSeqIdList.appendCliParts(cli)
-    taxIdList.appendCliParts(cli)
-    negativeTaxIdList.appendCliParts(cli)
+    giListFile.appendCliParts(cli)
+    negativeGIListFile.appendCliParts(cli)
+    seqIdListFile.appendCliParts(cli)
+    negativeSeqIdListFile.appendCliParts(cli)
+    taxIdListFile.appendCliParts(cli)
+    negativeTaxIdListFile.appendCliParts(cli)
     taxIds.appendCliParts(cli)
     negativeTaxIds.appendCliParts(cli)
   }

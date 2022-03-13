@@ -1,9 +1,5 @@
 package org.veupathdb.lib.blast.common
 
-import com.fasterxml.jackson.databind.node.ObjectNode
-import org.veupathdb.lib.blast.BlastTool
-import org.veupathdb.lib.blast.common.fields.DBFile
-import org.veupathdb.lib.blast.common.fields.ParseDBFile
 import org.veupathdb.lib.blast.field.*
 
 /**
@@ -16,42 +12,42 @@ interface BlastQueryWithLists : BlastQueryBase {
    *
    * Restrict search of database to list of GIs
    */
-  var giList: GIList
+  var giListFile: GIList
 
   /**
    * -negative_gilist
    *
    * Restrict search of database to everything except the specified GIs
    */
-  var negativeGIList: NegativeGIList
+  var negativeGIListFile: NegativeGIList
 
   /**
    * -seqidlist
    *
    * Restrict search of database to list of SeqIDs
    */
-  var seqIdList: SeqIdList
+  var seqIdListFile: SeqIdList
 
   /**
    * -negative_seqidlist
    *
    * Restrict search of database to everything except the specified SeqIDs
    */
-  var negativeSeqIdList: NegativeSeqIdList
+  var negativeSeqIdListFile: NegativeSeqIdList
 
   /**
    * -taxidlist
    *
    * Restrict search of database to include only the specified taxonomy IDs
    */
-  var taxIdList: TaxIdList
+  var taxIdListFile: TaxIdList
 
   /**
    * -negative_taxidlist
    *
    * Restrict search of database to everything except the specified taxonomy IDs
    */
-  var negativeTaxIdList: NegativeTaxIdList
+  var negativeTaxIdListFile: NegativeTaxIdList
 
   /**
    * -taxids

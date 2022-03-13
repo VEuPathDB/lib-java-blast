@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.serial.BlastField
 
 
+// TODO: The minimum value for this is app dependent, there should be multiple classes for this.
+
 private const val KeyWordSize = "-word_size"
 private const val DefWordSize = 0u
 
