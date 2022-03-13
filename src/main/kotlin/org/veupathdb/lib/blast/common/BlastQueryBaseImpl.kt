@@ -2,128 +2,43 @@ package org.veupathdb.lib.blast.common
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
-import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.common.fields.DBFile
+import org.veupathdb.lib.blast.common.fields.ParseDBFile
 import org.veupathdb.lib.blast.field.*
 
-
-/**
- * Basic fields common to all BLAST+ query tools.
- */
-interface BlastQueryBase : BlastCLI {
-
-  /**
-   * Input file name
-   */
-  var queryFile: QueryFile
-
-  /**
-   * Location on the query sequence in 1-based offsets (Format: start-stop)
-   */
-  var queryLocation: QueryLocation
-
-  /**
-   * BLAST database name(s)
-   */
-  var dbFile: DBFile
-
-  /**
-   * Expectation value (E) threshold for saving hits
-   */
-  var expectValue: ExpectValue
-
-  /**
-   * Apply filtering locations as soft masks
-   */
-  var softMasking: SoftMasking
-
-  /**
-   * Use lower case filtering in query and subject sequence(s)
-   */
-  var lowercaseMasking: LowercaseMasking
-
-  /**
-   * Restrict search with the given Entrez query
-   */
-  var entrezQuery: EntrezQuery
-
-  /**
-   * Set maximum number of HSPs per subject sequence to save for each query
-   */
-  var maxHSPs: MaxHSPs
-
-  /**
-   * Effective length of the database
-   */
-  var dbSize: DBSize
-
-  /**
-   * Effective length of the search space
-   */
-  var searchSpace: SearchSpace
-
-  /**
-   * Search strategy to use
-   */
-  var importSearchStrategy: ImportSearchStrategy
-
-  /**
-   * File name to record the search strategy used
-   */
-  var exportSearchStrategy: ExportSearchStrategy
-
-  /**
-   * X-dropoff value (in bits) for ungapped extensions
-   */
-  var extensionDropoffUngapped: ExtensionDropoffUngapped
-
-  /**
-   * Multiple hits window size, use 0 to specify 1-hit algorithm
-   */
-  var windowSize: WindowSize
-
-  /**
-   * Execute search remotely
-   */
-  var remote: Remote
-}
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-
-internal open class blastQueryBase(
-  tool:            BlastTool,
-  shortHelp:       HelpShort,
-  longHelp:        HelpLong,
-  version:         Version,
-  outFile:         OutFile,
-  outFormat:       OutFormat,
-  showGIs:         ShowGIs,
+internal abstract class BlastQueryBaseImpl(
+  tool: BlastTool,
+  shortHelp: HelpShort,
+  longHelp: HelpLong,
+  version: Version,
+  outFile: OutFile,
+  outFormat: OutFormat,
+  showGIs: ShowGIs,
   numDescriptions: NumDescriptions,
-  numAlignments:   NumAlignments,
-  lineLength:      LineLength,
-  html:            HTML,
-  sortHits:        SortHits,
-  sortHSPs:        SortHSPs,
-  maxTargetSeqs:   MaxTargetSeqs,
-  parseDefLines:   ParseDefLines,
+  numAlignments: NumAlignments,
+  lineLength: LineLength,
+  html: HTML,
+  sortHits: SortHits,
+  sortHSPs: SortHSPs,
+  maxTargetSeqs: MaxTargetSeqs,
+  parseDefLines: ParseDefLines,
 
-  override var queryFile:                QueryFile,
-  override var queryLocation:            QueryLocation,
-  override var dbFile:                   DBFile,
-  override var expectValue:              ExpectValue,
-  override var softMasking:              SoftMasking,
-  override var lowercaseMasking:         LowercaseMasking,
-  override var entrezQuery:              EntrezQuery,
-  override var maxHSPs:                  MaxHSPs,
-  override var dbSize:                   DBSize,
-  override var searchSpace:              SearchSpace,
-  override var importSearchStrategy:     ImportSearchStrategy,
-  override var exportSearchStrategy:     ExportSearchStrategy,
+  override var queryFile: QueryFile,
+  override var queryLocation: QueryLocation,
+  override var dbFile: DBFile,
+  override var expectValue: ExpectValue,
+  override var softMasking: SoftMasking,
+  override var lowercaseMasking: LowercaseMasking,
+  override var entrezQuery: EntrezQuery,
+  override var maxHSPs: MaxHSPs,
+  override var dbSize: DBSize,
+  override var searchSpace: SearchSpace,
+  override var importSearchStrategy: ImportSearchStrategy,
+  override var exportSearchStrategy: ExportSearchStrategy,
   override var extensionDropoffUngapped: ExtensionDropoffUngapped,
-  override var windowSize:               WindowSize,
-  override var remote:                   Remote,
-) : BlastQueryBase, blastCLI(
+  override var windowSize: WindowSize,
+  override var remote: Remote,
+) : BlastQueryBase, BlastCLIImpl(
   tool,
   shortHelp,
   longHelp,

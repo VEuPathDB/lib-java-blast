@@ -1,13 +1,7 @@
 package org.veupathdb.lib.blast.blastn
 
-import com.fasterxml.jackson.databind.node.ObjectNode
-import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.blastn.fields.*
-import org.veupathdb.lib.blast.blastn.fields.ParseMinRawGappedScore
-import org.veupathdb.lib.blast.blastn.fields.ParseOffDiagonalRange
-import org.veupathdb.lib.blast.blastn.fields.ParseTemplateType
 import org.veupathdb.lib.blast.common.BlastQueryWithLists
-import org.veupathdb.lib.blast.common.blastWithLists
 import org.veupathdb.lib.blast.common.fields.*
 import org.veupathdb.lib.blast.field.*
 

@@ -3,7 +3,7 @@ package org.veupathdb.lib.blast.blastn
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.blastn.fields.*
-import org.veupathdb.lib.blast.common.blastWithLists
+import org.veupathdb.lib.blast.common.BlastQueryWithListsImpl
 import org.veupathdb.lib.blast.common.fields.*
 import org.veupathdb.lib.blast.field.*
 
@@ -77,7 +77,7 @@ internal class BlastNImpl(
   override var bestHitOverhang: BestHitOverhang,
   override var bestHitScoreEdge: BestHitScoreEdge,
   override var subjectBestHit: SubjectBestHit,
-) : BlastN, blastWithLists(
+) : BlastN, BlastQueryWithListsImpl(
   BlastTool.BlastN,
   shortHelp,
   longHelp,

@@ -6,113 +6,47 @@ import org.veupathdb.lib.blast.common.fields.DBFile
 import org.veupathdb.lib.blast.common.fields.ParseDBFile
 import org.veupathdb.lib.blast.field.*
 
-/**
- * List fields common to most BLAST+ query tools.
- */
-interface BlastQueryWithLists : BlastQueryBase {
-
-  /**
-   * -gilist
-   *
-   * Restrict search of database to list of GIs
-   */
-  var giList: GIList
-
-  /**
-   * -negative_gilist
-   *
-   * Restrict search of database to everything except the specified GIs
-   */
-  var negativeGIList: NegativeGIList
-
-  /**
-   * -seqidlist
-   *
-   * Restrict search of database to list of SeqIDs
-   */
-  var seqIdList: SeqIdList
-
-  /**
-   * -negative_seqidlist
-   *
-   * Restrict search of database to everything except the specified SeqIDs
-   */
-  var negativeSeqIdList: NegativeSeqIdList
-
-  /**
-   * -taxidlist
-   *
-   * Restrict search of database to include only the specified taxonomy IDs
-   */
-  var taxIdList: TaxIdList
-
-  /**
-   * -negative_taxidlist
-   *
-   * Restrict search of database to everything except the specified taxonomy IDs
-   */
-  var negativeTaxIdList: NegativeTaxIdList
-
-  /**
-   * -taxids
-   *
-   * Restrict search of database to include only the specified taxonomy IDs
-   */
-  var taxIds: TaxIds
-
-  /**
-   * -negative_taxids
-   *
-   * Restrict search of database to everything except the specified taxonomy IDs
-   */
-  var negativeTaxIds: NegativeTaxIds
-}
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-
-internal open class blastWithLists(
-  tool:                     BlastTool,
-  shortHelp:                HelpShort,
-  longHelp:                 HelpLong,
-  version:                  Version,
-  outFile:                  OutFile,
-  outFormat:                OutFormat,
-  showGIs:                  ShowGIs,
-  numDescriptions:          NumDescriptions,
-  numAlignments:            NumAlignments,
-  lineLength:               LineLength,
-  html:                     HTML,
-  sortHits:                 SortHits,
-  sortHSPs:                 SortHSPs,
-  maxTargetSeqs:            MaxTargetSeqs,
-  parseDefLines:            ParseDefLines,
-  queryFile:                QueryFile,
-  queryLocation:            QueryLocation,
-  dbFile:                   DBFile,
-  expectValue:              ExpectValue,
-  softMasking:              SoftMasking,
-  lowercaseMasking:         LowercaseMasking,
-  entrezQuery:              EntrezQuery,
-  maxHSPs:                  MaxHSPs,
-  dbSize:                   DBSize,
-  searchSpace:              SearchSpace,
-  importSearchStrategy:     ImportSearchStrategy,
-  exportSearchStrategy:     ExportSearchStrategy,
+internal abstract class BlastQueryWithListsImpl(
+  tool: BlastTool,
+  shortHelp: HelpShort,
+  longHelp: HelpLong,
+  version: Version,
+  outFile: OutFile,
+  outFormat: OutFormat,
+  showGIs: ShowGIs,
+  numDescriptions: NumDescriptions,
+  numAlignments: NumAlignments,
+  lineLength: LineLength,
+  html: HTML,
+  sortHits: SortHits,
+  sortHSPs: SortHSPs,
+  maxTargetSeqs: MaxTargetSeqs,
+  parseDefLines: ParseDefLines,
+  queryFile: QueryFile,
+  queryLocation: QueryLocation,
+  dbFile: DBFile,
+  expectValue: ExpectValue,
+  softMasking: SoftMasking,
+  lowercaseMasking: LowercaseMasking,
+  entrezQuery: EntrezQuery,
+  maxHSPs: MaxHSPs,
+  dbSize: DBSize,
+  searchSpace: SearchSpace,
+  importSearchStrategy: ImportSearchStrategy,
+  exportSearchStrategy: ExportSearchStrategy,
   extensionDropoffUngapped: ExtensionDropoffUngapped,
-  windowSize:               WindowSize,
-  remote:                   Remote,
+  windowSize: WindowSize,
+  remote: Remote,
 
-  override var giList:            GIList,
-  override var negativeGIList:    NegativeGIList,
-  override var seqIdList:         SeqIdList,
+  override var giList: GIList,
+  override var negativeGIList: NegativeGIList,
+  override var seqIdList: SeqIdList,
   override var negativeSeqIdList: NegativeSeqIdList,
-  override var taxIdList:         TaxIdList,
+  override var taxIdList: TaxIdList,
   override var negativeTaxIdList: NegativeTaxIdList,
-  override var taxIds:            TaxIds,
-  override var negativeTaxIds:    NegativeTaxIds,
-) : BlastQueryWithLists, blastQueryBase(
+  override var taxIds: TaxIds,
+  override var negativeTaxIds: NegativeTaxIds,
+) : BlastQueryWithLists, BlastQueryBaseImpl(
   tool,
   shortHelp,
   longHelp,
