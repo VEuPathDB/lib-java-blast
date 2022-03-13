@@ -30,9 +30,9 @@ data class OutFormat(
   override val isDefault: Boolean
     get() = type.isDefault && delimiter.isDefault && fields.isDefault
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      with(json.putObject(KeyOutFormat)) {
+      with(js.putObject(KeyOutFormat)) {
         type.appendJson(this)
         delimiter.appendJson(this)
         fields.appendJson(this)

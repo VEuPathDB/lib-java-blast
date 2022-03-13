@@ -19,8 +19,8 @@ internal fun ParseSumStats(js: ObjectNode) =
 value class SumStats(val value: Boolean = DefSumStats) : BlastField {
   override val isDefault get() = value == DefSumStats
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, KeySumStats, value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, KeySumStats, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, KeySumStats, value)

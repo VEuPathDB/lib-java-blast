@@ -19,9 +19,9 @@ internal fun ParseVersion(js: ObjectNode) =
 value class Version(val value: Boolean = DefaultVersion) : BlastField {
   override val isDefault get() = value == DefaultVersion
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyVersion, value)
+      js.put(KeyVersion, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

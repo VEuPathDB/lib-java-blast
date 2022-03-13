@@ -16,9 +16,9 @@ internal fun ParseSeqIdList(js: ObjectNode) =
 value class SeqIdList(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeySIL, value)
+      js.put(KeySIL, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
@@ -43,9 +43,9 @@ internal fun ParseNegSeqIdList(js: ObjectNode) =
 value class NegativeSeqIdList(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyNSIL, value)
+      js.put(KeyNSIL, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

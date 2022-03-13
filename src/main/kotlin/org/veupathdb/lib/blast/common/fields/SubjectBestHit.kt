@@ -25,12 +25,12 @@ internal fun ParseSubjectBestHit(js: ObjectNode): SubjectBestHit {
 value class SubjectBestHit(val value: Boolean = Def) : BlastField {
   override val isDefault get() = value == Def
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, Key, value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, Key, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, Key, value)
+    cli.append(isDefault, Key)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, Key, value)
+    cli.add(isDefault, Key)
 }

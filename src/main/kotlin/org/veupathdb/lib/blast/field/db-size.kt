@@ -16,9 +16,9 @@ internal fun ParseDBSize(js: ObjectNode) =
 value class DBSize(val value: Byte = DefaultDBSize) : BlastField {
   override val isDefault get() = value == DefaultDBSize
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyDBSize, value.toShort())
+      js.put(KeyDBSize, value.toShort())
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

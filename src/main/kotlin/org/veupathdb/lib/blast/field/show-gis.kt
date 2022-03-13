@@ -16,9 +16,9 @@ internal fun ParseShowGIs(js: ObjectNode) =
 value class ShowGIs(val value: Boolean = DefaultShowGIs) : BlastField {
   override val isDefault get() = value == DefaultShowGIs
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyShowGIs, value)
+      js.put(KeyShowGIs, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

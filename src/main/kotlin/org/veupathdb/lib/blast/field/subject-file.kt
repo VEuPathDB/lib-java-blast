@@ -18,8 +18,8 @@ internal fun ParseSubjectFile(js: ObjectNode) =
 value class SubjectFile(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, KeySubjectFile, value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, KeySubjectFile, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, KeySubjectFile, value)

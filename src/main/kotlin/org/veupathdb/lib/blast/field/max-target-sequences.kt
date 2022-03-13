@@ -16,9 +16,9 @@ internal fun ParseMaxTargetSeqs(js: ObjectNode) =
 value class MaxTargetSeqs(val value: Long = DefaultMaxTargetSeqs) : BlastField {
   override val isDefault get() = value == DefaultMaxTargetSeqs
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyMaxTargetSeqs, value)
+      js.put(KeyMaxTargetSeqs, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

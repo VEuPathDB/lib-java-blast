@@ -16,9 +16,9 @@ internal fun ParseRemote(js: ObjectNode) =
 value class Remote(val value: Boolean = DefaultRemote) : BlastField {
   override val isDefault get() = value == DefaultRemote
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyRemote, value)
+      js.put(KeyRemote, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

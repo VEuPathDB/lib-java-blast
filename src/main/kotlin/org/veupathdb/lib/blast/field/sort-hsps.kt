@@ -15,9 +15,9 @@ internal fun ParseSortHSPs(js: ObjectNode) =
 value class SortHSPs(val value: HSPSorting = HSPSorting.None) : BlastField {
   override val isDefault get() = value == HSPSorting.None
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyHSPSorting, value.value)
+      js.put(KeyHSPSorting, value.value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

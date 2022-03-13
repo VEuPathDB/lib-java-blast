@@ -14,9 +14,9 @@ internal fun ParseWindowSize(js: ObjectNode) =
 value class WindowSize(val value: Int = -1) : BlastField {
   override val isDefault get() = value == -1
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyWinSize, value)
+      js.put(KeyWinSize, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

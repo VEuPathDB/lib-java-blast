@@ -15,9 +15,9 @@ internal fun ParseSortHits(js: ObjectNode) =
 value class SortHits(val value: HitSorting = HitSorting.None) : BlastField {
   override val isDefault get() = value == HitSorting.None
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyHitSorting, value.value)
+      js.put(KeyHitSorting, value.value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

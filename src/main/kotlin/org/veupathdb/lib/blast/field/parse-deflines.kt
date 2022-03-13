@@ -16,9 +16,9 @@ internal fun ParseParseDefLines(js: ObjectNode) =
 value class ParseDefLines(val value: Boolean = DefaultParseDefLines) : BlastField {
   override val isDefault get() = value == DefaultParseDefLines
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyParseDefLines, value)
+      js.put(KeyParseDefLines, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

@@ -19,8 +19,8 @@ internal fun ParseDBSoftMask(js: ObjectNode) =
 value class DBSoftMask(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, KeyDBSoftMask, value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, KeyDBSoftMask, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, KeyDBSoftMask, value)
@@ -38,8 +38,8 @@ internal fun ParseDBHardMask(js: ObjectNode) =
 value class DBHardMask(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, KeyDBHardMask, value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, KeyDBHardMask, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, KeyDBHardMask, value)

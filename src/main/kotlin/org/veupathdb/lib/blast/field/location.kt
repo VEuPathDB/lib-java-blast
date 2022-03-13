@@ -17,9 +17,9 @@ sealed class Location(
   override val isDefault
     get() = start == DefaultLocationStart && stop == DefaultLocationStop
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      with(json.putObject(key)) {
+      with(js.putObject(key)) {
         put(KeyStart, start.toLong())
         put(KeyStop, stop.toLong())
       }

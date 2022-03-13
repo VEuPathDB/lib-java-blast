@@ -20,8 +20,8 @@ internal fun ParsePenalty(js: ObjectNode) =
 value class Penalty(val value: Int = Def) : BlastField {
   override val isDefault get() = value > 0
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, Key, value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, Key, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, Key, value)

@@ -16,9 +16,9 @@ internal fun ParseHTML(js: ObjectNode) =
 value class HTML(val value: Boolean = DefaultHTML) : BlastField {
   override val isDefault get() = value == DefaultHTML
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyHTML, value)
+      js.put(KeyHTML, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

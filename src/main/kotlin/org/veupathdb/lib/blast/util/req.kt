@@ -16,9 +16,22 @@ internal inline fun JsonNode.reqDub(key: String) =
   else
     doubleValue()
 
+internal inline fun JsonNode.reqDub(k: () -> String) =
+  if (!isNumber)
+    throw IllegalArgumentException("${k()} must be a boolean value.")
+  else
+    doubleValue()
+
 internal inline fun JsonNode.reqInt(key: String): Int {
   if (!isIntegralNumber)
     throw IllegalArgumentException("$key must be an int value.")
+
+  return intValue()
+}
+
+internal inline fun JsonNode.reqInt(k: () -> String): Int {
+  if (!isIntegralNumber)
+    throw IllegalArgumentException("${k()} must be an int value.")
 
   return intValue()
 }

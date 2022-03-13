@@ -5,6 +5,15 @@ package org.veupathdb.lib.blast.util
 internal inline fun StringBuilder.append(
   isDefault: Boolean,
   key:       String,
+) {
+  if (!isDefault)
+    append(' ').append(key)
+}
+
+
+internal inline fun StringBuilder.append(
+  isDefault: Boolean,
+  key:       String,
   value:     Boolean,
 ) {
   if (!isDefault)

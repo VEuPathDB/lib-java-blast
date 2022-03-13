@@ -16,9 +16,9 @@ internal fun ParseLineLength(js: ObjectNode) =
 value class LineLength(val value: Int = DefaultLineLength) : BlastField {
   override val isDefault get() = value == DefaultLineLength
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyLineLength, value)
+      js.put(KeyLineLength, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

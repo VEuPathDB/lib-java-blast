@@ -18,9 +18,9 @@ value class QueryCoverageHSPPercent(val value: Double = DefaultQueryCovHSPPerc)
 {
   override val isDefault get() = value == DefaultQueryCovHSPPerc
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyQueryCovHSPPerc, value)
+      js.put(KeyQueryCovHSPPerc, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

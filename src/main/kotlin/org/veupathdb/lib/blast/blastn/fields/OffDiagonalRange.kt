@@ -30,8 +30,8 @@ internal fun ParseOffDiagonalRange(js: ObjectNode): OffDiagonalRange {
 value class OffDiagonalRange(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, Key, value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, Key, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, Key, value)

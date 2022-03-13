@@ -16,9 +16,9 @@ internal fun ParseQueryFile(js: ObjectNode) =
 value class QueryFile(val value: String = DefaultQueryFile) : BlastField {
   override val isDefault get() = value == DefaultQueryFile
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyQueryFile, DefaultQueryFile)
+      js.put(KeyQueryFile, DefaultQueryFile)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

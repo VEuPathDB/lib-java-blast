@@ -11,7 +11,7 @@ interface BlastField {
   @JsonValue
   fun toJson() = Json.new(this::appendJson)
 
-  fun appendJson(json: ObjectNode)
+  fun appendJson(js: ObjectNode)
 
   fun appendCliSegment(cli: StringBuilder)
 

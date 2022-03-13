@@ -16,9 +16,9 @@ internal fun ParseEntrezQuery(js: ObjectNode) =
 value class EntrezQuery(val value: String = DefaultEntrezQuery) : BlastField {
   override val isDefault get() = value == DefaultEntrezQuery
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyEntrezQuery, value)
+      js.put(KeyEntrezQuery, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

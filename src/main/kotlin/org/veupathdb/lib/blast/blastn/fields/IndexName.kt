@@ -18,8 +18,8 @@ internal fun ParseIndexName(js: ObjectNode) =
 value class IndexName(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, Key, value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, Key, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, Key, value)

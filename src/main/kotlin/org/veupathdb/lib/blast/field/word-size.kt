@@ -18,9 +18,9 @@ internal fun ParseWordSize(js: ObjectNode) =
 value class WordSize(val value: UInt = DefWordSize) : BlastField {
   override val isDefault get() = value == DefWordSize
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyWordSize, value.toLong())
+      js.put(KeyWordSize, value.toLong())
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

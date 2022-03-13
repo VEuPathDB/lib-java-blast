@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast.blastn.fields
+package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.serial.BlastField
@@ -8,24 +8,24 @@ import org.veupathdb.lib.blast.util.put
 import org.veupathdb.lib.blast.util.reqBool
 
 
-private const val Key = "-use_index"
-private const val Def = false
+private const val Key = "-use_sw_traceback"
 
 
-internal fun ParseUseIndex(js: ObjectNode) =
-  js[Key]?.let { UseIndex(it.reqBool(Key)) } ?: UseIndex()
+internal fun ParseUseSWTBack(js: ObjectNode) =
+  js[Key]?.let { UseSmithWatermanTraceback(it.reqBool(Key)) }
+    ?: UseSmithWatermanTraceback()
 
 
 @JvmInline
-value class UseIndex(val value: Boolean = Def) : BlastField {
-  override val isDefault get() = value == Def
+value class UseSmithWatermanTraceback(val value: Boolean = false) : BlastField {
+  override val isDefault get() = !value
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, Key, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, Key, value)
+    cli.append(isDefault, Key)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, Key, value)
+    cli.add(isDefault, Key)
 }

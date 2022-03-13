@@ -15,9 +15,9 @@ internal fun ParseMaxHSPs(js: ObjectNode) =
 value class MaxHSPs(val value: UInt = DefaultMaxHSPs) : BlastField {
   override val isDefault get() = value == DefaultMaxHSPs
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyMaxHSPs, value.toLong())
+      js.put(KeyMaxHSPs, value.toLong())
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

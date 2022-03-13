@@ -24,8 +24,8 @@ value class TemplateType(val value: TemplateTypeType = TemplateTypeType.None)
 {
   override val isDefault get() = value == TemplateTypeType.None
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, Key, value.value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, Key, value.value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, Key, value.value)

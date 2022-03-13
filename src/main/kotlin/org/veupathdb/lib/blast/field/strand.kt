@@ -16,9 +16,9 @@ internal fun ParseStrand(js: ObjectNode) =
 value class Strand(val value: StrandType = StrandType.Both) : BlastField {
   override val isDefault get() = value == StrandType.Both
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyStrand, value.value)
+      js.put(KeyStrand, value.value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

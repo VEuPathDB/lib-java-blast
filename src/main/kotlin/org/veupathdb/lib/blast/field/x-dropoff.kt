@@ -17,9 +17,9 @@ internal fun ParseXDropUngap(js: ObjectNode) =
 value class ExtensionDropoffUngapped(val value: Double = Double.NaN) : BlastField {
   override val isDefault get() = value.isNaN()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyXDropUngap, value)
+      js.put(KeyXDropUngap, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
@@ -44,9 +44,9 @@ internal fun ParseXDropGap(js: ObjectNode) =
 value class ExtensionDropoffPrelimGapped(val value: Double = Double.NaN) : BlastField {
   override val isDefault get() = value.isNaN()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyXDropGap, value)
+      js.put(KeyXDropGap, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
@@ -71,9 +71,9 @@ internal fun ParseXDropGapFinal(js: ObjectNode) =
 value class ExtensionDropoffFinalGapped(val value: Double = Double.NaN) : BlastField {
   override val isDefault get() = value.isNaN()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyXDropGapFinal, value)
+      js.put(KeyXDropGapFinal, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

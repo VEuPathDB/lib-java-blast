@@ -18,9 +18,9 @@ value class LowercaseMasking(
 ) : BlastField {
   override val isDefault get() = value == DefaultLCaseMasking
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyLCaseMasking, value)
+      js.put(KeyLCaseMasking, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

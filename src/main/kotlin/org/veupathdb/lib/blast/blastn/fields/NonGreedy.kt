@@ -17,9 +17,9 @@ internal fun ParseNonGreedy(js: ObjectNode) =
 value class NonGreedy(val value: Boolean = Def) : BlastField {
   override val isDefault get() = value == Def
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(Key, value)
+      js.put(Key, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

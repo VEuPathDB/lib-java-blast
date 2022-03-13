@@ -16,9 +16,9 @@ internal fun ParseGIList(js: ObjectNode) =
 value class GIList(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyGIList, value)
+      js.put(KeyGIList, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
@@ -43,9 +43,9 @@ internal fun ParseNegGIList(js: ObjectNode) =
 value class NegativeGIList(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyNegGIList, value)
+      js.put(KeyNegGIList, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

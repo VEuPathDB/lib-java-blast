@@ -16,9 +16,9 @@ internal fun ParseSoftMasking(js: ObjectNode) =
 value class SoftMasking(val value: Boolean = DefaultSoftMask) : BlastField {
   override val isDefault get() = value == DefaultSoftMask
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeySoftMask, value)
+      js.put(KeySoftMask, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

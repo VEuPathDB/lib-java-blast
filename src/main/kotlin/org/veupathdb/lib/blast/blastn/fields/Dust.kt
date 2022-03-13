@@ -97,11 +97,11 @@ internal data class ValDust(
   override val isDefault
     get() = level == DefLevel && window == DefWindow && linker == DefLinker
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (isDefault)
       return
 
-    with(json.putObject(KeyDust)) {
+    with(js.putObject(KeyDust)) {
       put(KeyLevel, level)
       put(KeyWindow, window)
       put(KeyLinker, linker)
@@ -160,8 +160,8 @@ internal object YesDust : Dust {
 
   override val isDefault get() = false
 
-  override fun appendJson(json: ObjectNode) {
-    json.put(KeyDust, "yes")
+  override fun appendJson(js: ObjectNode) {
+    js.put(KeyDust, "yes")
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
@@ -194,8 +194,8 @@ internal object NoDust : Dust {
 
   override val isDefault get() = false
 
-  override fun appendJson(json: ObjectNode) {
-    json.put(KeyDust, "no")
+  override fun appendJson(js: ObjectNode) {
+    js.put(KeyDust, "no")
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

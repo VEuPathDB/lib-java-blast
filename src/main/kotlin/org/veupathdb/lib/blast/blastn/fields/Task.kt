@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast.blastn
+package org.veupathdb.lib.blast.blastn.fields
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
@@ -21,8 +21,8 @@ value class BlastNTask(val value: BlastNTaskType = BlastNTaskType.Megablast)
 {
   override val isDefault get() = value == BlastNTaskType.Megablast
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, Key, value.value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, Key, value.value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, Key, value.value)

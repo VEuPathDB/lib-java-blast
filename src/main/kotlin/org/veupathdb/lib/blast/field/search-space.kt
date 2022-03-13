@@ -16,9 +16,9 @@ internal fun ParseSearchSpace(js: ObjectNode) =
 value class SearchSpace(val value: Byte = DefaultSearchSpace) : BlastField {
   override val isDefault get() = value == DefaultSearchSpace
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeySearchSpace, value.toShort())
+      js.put(KeySearchSpace, value.toShort())
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

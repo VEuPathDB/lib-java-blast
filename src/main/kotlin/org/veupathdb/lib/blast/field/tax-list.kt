@@ -16,9 +16,9 @@ internal fun ParseTaxIdList(js: ObjectNode) =
 value class TaxIdList(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyTIL, value)
+      js.put(KeyTIL, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
@@ -43,9 +43,9 @@ internal fun ParseNegTaxIdList(js: ObjectNode) =
 value class NegativeTaxIdList(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyNTIL, value)
+      js.put(KeyNTIL, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

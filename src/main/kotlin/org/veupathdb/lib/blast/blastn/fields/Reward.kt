@@ -20,8 +20,8 @@ internal fun ParseReward(js: ObjectNode) =
 value class Reward(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, Key, value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, Key, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, Key, value)

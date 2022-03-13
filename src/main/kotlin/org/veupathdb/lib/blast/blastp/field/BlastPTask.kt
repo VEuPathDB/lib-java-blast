@@ -21,8 +21,8 @@ value class BlastPTask(val value: BlastPTaskType = BlastPTaskType.BlastP)
 {
   override val isDefault get() = value == BlastPTaskType.BlastP
 
-  override fun appendJson(json: ObjectNode) =
-    json.put(isDefault, Key, value.value)
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, Key, value.value)
 
   override fun appendCliSegment(cli: StringBuilder) =
     cli.append(isDefault, Key, value.value)

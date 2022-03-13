@@ -16,9 +16,9 @@ internal fun ParseNumAlignments(js: ObjectNode) =
 value class NumAlignments(val value: Long = DefaultNumAlignments) : BlastField {
   override val isDefault get() = value == DefaultNumAlignments
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyNumAlignments, value)
+      js.put(KeyNumAlignments, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

@@ -16,9 +16,9 @@ internal fun ParseEValue(j: ObjectNode) =
 value class ExpectValue(val value: String = DefaultEValue): BlastField {
   override val isDefault get() = value == DefaultEValue
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyEValue, value)
+      js.put(KeyEValue, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

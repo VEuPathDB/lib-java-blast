@@ -19,9 +19,9 @@ value class UngappedAlignmentsOnly(
 ) : BlastField {
   override val isDefault get() = value == DefaultUngappedAlignmentsOnly
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyUngappedAlignmentsOnly, value)
+      js.put(KeyUngappedAlignmentsOnly, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

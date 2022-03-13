@@ -18,9 +18,9 @@ internal fun ParseHelpShort(json: ObjectNode) =
 value class HelpShort(private val value: Boolean = HelpDefault) : BlastField {
   override val isDefault get() = value == HelpDefault
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyHelpShort, value)
+      js.put(KeyHelpShort, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
@@ -50,9 +50,9 @@ internal fun ParseHelpLong(json: ObjectNode) =
 value class HelpLong(val value: Boolean = HelpDefault) : BlastField {
   override val isDefault get() = value == HelpDefault
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyHelpLong, value)
+      js.put(KeyHelpLong, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

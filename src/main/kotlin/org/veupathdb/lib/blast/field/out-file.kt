@@ -15,9 +15,9 @@ internal fun ParseOutFile(js: ObjectNode) =
 value class OutFile(val value: String = DefaultOutFile): BlastField {
   override val isDefault get() = value == DefaultOutFile && value.isNotBlank()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyOutFile, value)
+      js.put(KeyOutFile, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

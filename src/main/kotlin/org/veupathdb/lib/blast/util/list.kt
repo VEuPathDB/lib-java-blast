@@ -5,6 +5,15 @@ package org.veupathdb.lib.blast.util
 internal inline fun MutableList<String>.add(
   isDefault: Boolean,
   key:       String,
+) {
+  if (!isDefault) {
+    add(key)
+  }
+}
+
+internal inline fun MutableList<String>.add(
+  isDefault: Boolean,
+  key:       String,
   value:     Boolean,
 ) {
   if (!isDefault) {

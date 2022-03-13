@@ -16,9 +16,9 @@ internal fun ParseImportSearchStrategy(js: ObjectNode) =
 value class ImportSearchStrategy(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyISS, value)
+      js.put(KeyISS, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
@@ -43,9 +43,9 @@ internal fun ParseExportSearchStrategy(js: ObjectNode) =
 value class ExportSearchStrategy(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyESS, value)
+      js.put(KeyESS, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {

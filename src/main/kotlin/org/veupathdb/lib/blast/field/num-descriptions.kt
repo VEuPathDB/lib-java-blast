@@ -18,9 +18,9 @@ value class NumDescriptions(
 ) : BlastField {
   override val isDefault get() = value == DefaultNumDescriptions
 
-  override fun appendJson(json: ObjectNode) {
+  override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      json.put(KeyNumDescriptions, value)
+      js.put(KeyNumDescriptions, value)
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
