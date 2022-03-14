@@ -1,10 +1,16 @@
 package org.veupathdb.lib.blast.field
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagQueryLocation
+import org.veupathdb.lib.blast.common.FlagSubjectLocation
 import org.veupathdb.lib.blast.serial.BlastField
+import org.veupathdb.lib.blast.util.*
+import org.veupathdb.lib.blast.util.add
+import org.veupathdb.lib.blast.util.append
+import org.veupathdb.lib.blast.util.requireObject
 
-private const val DefaultLocationStart = 0u
-private const val DefaultLocationStop  = 0u
+private const val DefStart = 0u
+private const val DefStop  = 0u
 private const val KeyStart = "start"
 private const val KeyStop  = "stop"
 
@@ -15,7 +21,7 @@ sealed class Location(
   val stop:  UInt
 ) : BlastField {
   override val isDefault
-    get() = start == DefaultLocationStart && stop == DefaultLocationStop
+    get() = start == DefStart && stop == DefStop
 
   override fun appendJson(js: ObjectNode) {
     if (!isDefault)
@@ -48,46 +54,24 @@ sealed class Location(
 ////////////////////////////////////////////////////////////////////////////////
 
 
-private const val KeyQueryLoc = "-query_loc"
-
-
-internal fun ParseQueryLocation(js: ObjectNode): QueryLocation {
-  val obj = js[KeyQueryLoc] ?: return QueryLocation()
-  obj.isObject || return QueryLocation()
-  obj as ObjectNode
-
-  return QueryLocation(
-    obj.get(KeyStart)?.longValue()?.toUInt() ?: DefaultLocationStart,
-    obj.get(KeyStop)?.longValue()?.toUInt() ?: DefaultLocationStop
-  )
-}
-
-
-class QueryLocation(
-  start: UInt = DefaultLocationStart,
-  stop:  UInt = DefaultLocationStop,
-) : Location(KeyQueryLoc, start, stop)
 
 
 ////////////////////////////////////////////////////////////////////////////////
 
 
-private const val KeySubjectLoc = "-subject_loc"
-
-
 internal fun ParseSubjectLocation(js: ObjectNode): SubjectLocation {
-  val obj = js[KeySubjectLoc] ?: return SubjectLocation()
+  val obj = js[FlagSubjectLocation] ?: return SubjectLocation()
   obj.isObject || return SubjectLocation()
   obj as ObjectNode
 
   return SubjectLocation(
-    obj.get(KeyStart)?.longValue()?.toUInt() ?: DefaultLocationStart,
-    obj.get(KeyStop)?.longValue()?.toUInt() ?: DefaultLocationStop
+    obj.get(KeyStart)?.longValue()?.toUInt() ?: DefStart,
+    obj.get(KeyStop)?.longValue()?.toUInt() ?: DefStop
   )
 }
 
 
 class SubjectLocation(
-  start: UInt = DefaultLocationStart,
-  stop:  UInt = DefaultLocationStop,
-) : Location(KeySubjectLoc, start, stop)
+  start: UInt = DefStart,
+  stop:  UInt = DefStop,
+) : Location(FlagSubjectLocation, start, stop)

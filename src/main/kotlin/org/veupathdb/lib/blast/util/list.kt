@@ -80,6 +80,17 @@ internal inline fun MutableList<String>.add(
 internal inline fun MutableList<String>.add(
   isDefault: Boolean,
   key:       String,
+  value:     () -> String,
+) {
+  if (!isDefault) {
+    add(key)
+    add(value())
+  }
+}
+
+internal inline fun MutableList<String>.add(
+  isDefault: Boolean,
+  key:       String,
   value:     UByte,
 ) {
   if (!isDefault) {

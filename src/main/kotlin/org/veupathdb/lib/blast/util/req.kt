@@ -3,6 +3,7 @@
 package org.veupathdb.lib.blast.util
 
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.node.ObjectNode
 
 /**
  * Ensures that the input [JsonNode] is wrapping a boolean value then returns
@@ -112,9 +113,24 @@ internal inline fun JsonNode.reqInt(k: () -> String): Int {
   return intValue()
 }
 
+internal inline fun JsonNode.requireObject(key: String): ObjectNode {
+  if (!isObject)
+    throw IllegalArgumentException("$key must be an object.")
+
+  return this as ObjectNode
+}
+
 internal inline fun JsonNode.reqString(key: String): String {
   if (!isTextual)
     throw IllegalArgumentException("$key must be a string value.")
+
+  return textValue()
+}
+
+
+internal inline fun JsonNode.reqString(k: () -> String): String {
+  if (!isTextual)
+    throw IllegalArgumentException("${k()} must be a string value.")
 
   return textValue()
 }
@@ -129,6 +145,18 @@ internal inline fun JsonNode.reqUByte(key: String): UByte {
     throw IllegalArgumentException("$key must be a uint value.")
 
   return tmp.toUByte()
+}
+
+internal inline fun JsonNode.reqUInt(k: () -> String): UInt {
+  if (!isIntegralNumber)
+    throw IllegalArgumentException("${k()} must be a uint value.")
+
+  val tmp = longValue()
+
+  if (tmp < 0 || tmp > 42_949_672_95L)
+    throw IllegalArgumentException("${k()} must be a uint value.")
+
+  return tmp.toUInt()
 }
 
 internal inline fun JsonNode.reqUInt(key: String): UInt {

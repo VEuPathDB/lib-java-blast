@@ -155,6 +155,28 @@ internal inline fun StringBuilder.append(
  *
  * @param key CLI flag to append if [isDefault] is `false`.
  *
+ * @param value Provider for the argument value to append if [isDefault] is
+ * `false`.
+ */
+internal inline fun StringBuilder.append(
+  isDefault: Boolean,
+  key:       String,
+  value:     () -> String,
+) {
+  if (!isDefault)
+    append(' ').append(key).append(" '").append(value()).append('\'')
+}
+
+
+/**
+ * Appends the given key/value pair to the receiver [StringBuilder] only if
+ * [isDefault] is `false`.
+ *
+ * @param isDefault Whether the calling type has its default value and thus
+ * should not be appended to the receiver.
+ *
+ * @param key CLI flag to append if [isDefault] is `false`.
+ *
  * @param value Argument value to append if [isDefault] is `false`.
  */
 internal inline fun StringBuilder.append(
