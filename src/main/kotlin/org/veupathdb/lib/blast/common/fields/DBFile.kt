@@ -1,45 +1,33 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDBFile
 import org.veupathdb.lib.blast.serial.BlastField
-
-private const val Key = "-db"
-private const val Def = ""
+import org.veupathdb.lib.blast.util.add
+import org.veupathdb.lib.blast.util.append
+import org.veupathdb.lib.blast.util.put
 
 
 internal fun ParseDBFile(js: ObjectNode): DBFile {
-  val tmp = js[Key] ?: return DBFile()
+  val tmp = js[FlagDBFile] ?: return DBFile()
 
   if (!tmp.isTextual)
-    throw IllegalArgumentException("$Key must be a text value.")
+    throw IllegalArgumentException("$FlagDBFile must be a text value.")
 
   return DBFile(tmp.textValue())
 }
 
 
 @JvmInline
-value class DBFile(val value: String = Def) : BlastField {
-  override val isDefault get() = value == Def
+value class DBFile(val value: String = "") : BlastField {
+  override val isDefault get() = value.isBlank()
 
-  override fun appendJson(js: ObjectNode) {
-    if (!isDefault)
-      js.put(Key, value)
-  }
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, FlagDBFile, value)
 
-  override fun appendCliSegment(cli: StringBuilder) {
-    if (!isDefault) {
-      cli.append(' ')
-        .append(Key)
-        .append(" '")
-        .append(value)
-        .append('\'')
-    }
-  }
+  override fun appendCliSegment(cli: StringBuilder) =
+    cli.append(isDefault, FlagDBFile, value)
 
-  override fun appendCliParts(cli: MutableList<String>) {
-    if (isDefault) {
-      cli.add(Key)
-      cli.add(value)
-    }
-  }
+  override fun appendCliParts(cli: MutableList<String>) =
+    cli.add(isDefault, FlagDBFile, value)
 }
