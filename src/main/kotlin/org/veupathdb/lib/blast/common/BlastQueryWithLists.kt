@@ -54,12 +54,12 @@ interface BlastQueryWithLists : BlastQueryBase {
    *
    * Restrict search of database to include only the specified taxonomy IDs
    */
-  var taxIds: TaxIds
+  var taxIds: TaxIDs
 
   /**
    * -negative_taxids
    *
    * Restrict search of database to everything except the specified taxonomy IDs
    */
-  var negativeTaxIds: NegativeTaxIds
+  var negativeTaxIds: NegativeTaxIDs
 }

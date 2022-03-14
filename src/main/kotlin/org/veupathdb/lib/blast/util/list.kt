@@ -25,6 +25,17 @@ internal inline fun MutableList<String>.add(
 internal inline fun MutableList<String>.add(
   isDefault: Boolean,
   key:       String,
+  value:     Byte,
+) {
+  if (!isDefault) {
+    add(key)
+    add(value.toString())
+  }
+}
+
+internal inline fun MutableList<String>.add(
+  isDefault: Boolean,
+  key:       String,
   value:     Double,
 ) {
   if (!isDefault) {

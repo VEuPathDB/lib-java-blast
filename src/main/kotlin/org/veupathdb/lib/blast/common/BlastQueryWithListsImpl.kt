@@ -43,8 +43,8 @@ internal abstract class BlastQueryWithListsImpl(
   override var negativeSeqIdListFile: NegativeSeqIdList,
   override var taxIdListFile: TaxIdList,
   override var negativeTaxIdListFile: NegativeTaxIdList,
-  override var taxIds: TaxIds,
-  override var negativeTaxIds: NegativeTaxIds,
+  override var taxIds: TaxIDs,
+  override var negativeTaxIds: NegativeTaxIDs,
 ) : BlastQueryWithLists, BlastQueryBaseImpl(
   tool,
   shortHelp,
@@ -115,8 +115,8 @@ internal abstract class BlastQueryWithListsImpl(
     ParseNegSeqIdList(js),
     ParseTaxIdList(js),
     ParseNegTaxIdList(js),
-    ParseTaxIds(js),
-    ParseNegTaxIds(js),
+    ParseTaxIDs(js),
+    ParseNegTaxIDs(js),
   )
 
   override fun appendJson(js: ObjectNode) {

@@ -42,8 +42,8 @@ internal abstract class BlastQueryWithIPGImpl(
   negativeSeqIdListFile: NegativeSeqIdList,
   taxIdListFile: TaxIdList,
   negativeTaxIdListFile: NegativeTaxIdList,
-  taxIds: TaxIds,
-  negativeTaxIds: NegativeTaxIds,
+  taxIds: TaxIDs,
+  negativeTaxIds: NegativeTaxIDs,
 
   override var ipgListFile: IPGList,
   override var negativeIPGListFile: NegativeIPGList,

@@ -16,6 +16,15 @@ internal inline fun ObjectNode.put(
 internal inline fun ObjectNode.put(
   isDefault: Boolean,
   key:       String,
+  value:     Byte,
+) {
+  if (!isDefault)
+    put(key, value.toShort())
+}
+
+internal inline fun ObjectNode.put(
+  isDefault: Boolean,
+  key:       String,
   value:     Double,
 ) {
   if (!isDefault)
