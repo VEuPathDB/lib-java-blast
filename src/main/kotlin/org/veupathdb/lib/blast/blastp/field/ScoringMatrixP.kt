@@ -11,16 +11,16 @@ import org.veupathdb.lib.blast.util.reqString
 private const val Key = "-matrix"
 
 
-internal fun ParseBlastPMatrix(js: ObjectNode) =
+internal fun ScoringMatrixP(js: ObjectNode) =
   js[Key]?.let { BlastPMatrix(parseMatrix(it.reqString(Key))) }
     ?: BlastPMatrix()
 
 
 @JvmInline
-value class BlastPMatrix(val value: BlastPMatrixType = BlastPMatrixType.None)
+value class BlastPMatrix(val value: ScoringMatrixPType = ScoringMatrixPType.None)
   : BlastField
 {
-  override val isDefault get() = value == BlastPMatrixType.None
+  override val isDefault get() = value == ScoringMatrixPType.None
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, Key, value.value)
@@ -35,21 +35,21 @@ value class BlastPMatrix(val value: BlastPMatrixType = BlastPMatrixType.None)
 
 private fun parseMatrix(value: String) =
   when(value.lowercase()) {
-    "blosum45" -> BlastPMatrixType.Blosum45
-    "blosum50" -> BlastPMatrixType.Blosum50
-    "blosum62" -> BlastPMatrixType.Blosum62
-    "blosum80" -> BlastPMatrixType.Blosum80
-    "blosum90" -> BlastPMatrixType.Blosum90
-    "pam30"    -> BlastPMatrixType.Pam30
-    "pam70"    -> BlastPMatrixType.Pam70
-    "pam250"   -> BlastPMatrixType.Pam250
-    "identity" -> BlastPMatrixType.Identity
-    "none"     -> BlastPMatrixType.None
+    "blosum45" -> ScoringMatrixPType.Blosum45
+    "blosum50" -> ScoringMatrixPType.Blosum50
+    "blosum62" -> ScoringMatrixPType.Blosum62
+    "blosum80" -> ScoringMatrixPType.Blosum80
+    "blosum90" -> ScoringMatrixPType.Blosum90
+    "pam30"    -> ScoringMatrixPType.Pam30
+    "pam70"    -> ScoringMatrixPType.Pam70
+    "pam250"   -> ScoringMatrixPType.Pam250
+    "identity" -> ScoringMatrixPType.Identity
+    "none"     -> ScoringMatrixPType.None
     else       -> throw IllegalArgumentException("Invalid value $value for enum BlastPMatrixType")
   }
 
 
-enum class BlastPMatrixType {
+enum class ScoringMatrixPType {
   Blosum45,
   Blosum50,
   Blosum62,

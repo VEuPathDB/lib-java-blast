@@ -24,7 +24,7 @@ interface BlastP : BlastQueryWithIPG {
    *
    * Word size for wordfinder algorithm
    */
-  var wordSize: BlastPWordSize
+  var wordSize: WordSizeP
 
   /**
    * -gapopen

@@ -43,13 +43,25 @@ internal inline fun JsonNode.reqString(key: String): String {
   return textValue()
 }
 
+internal inline fun JsonNode.reqUByte(key: String): UByte {
+  if (!isIntegralNumber)
+    throw IllegalArgumentException("$key must be a uint value.")
+
+  val tmp = longValue()
+
+  if (tmp < 0 || tmp > 255)
+    throw IllegalArgumentException("$key must be a uint value.")
+
+  return tmp.toUByte()
+}
+
 internal inline fun JsonNode.reqUInt(key: String): UInt {
   if (!isIntegralNumber)
     throw IllegalArgumentException("$key must be a uint value.")
 
   val tmp = longValue()
 
-  if (tmp < 0)
+  if (tmp < 0 || tmp > 42_949_672_95L)
     throw IllegalArgumentException("$key must be a uint value.")
 
   return tmp.toUInt()

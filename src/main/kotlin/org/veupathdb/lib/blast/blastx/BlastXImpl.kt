@@ -1,13 +1,13 @@
-package org.veupathdb.lib.blast.blastp
+package org.veupathdb.lib.blast.blastx
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
-import org.veupathdb.lib.blast.blastp.field.*
+import org.veupathdb.lib.blast.blastx.field.*
 import org.veupathdb.lib.blast.common.BlastQueryWithIPGImpl
 import org.veupathdb.lib.blast.common.fields.*
 import org.veupathdb.lib.blast.field.*
 
-internal class BlastPImpl(
+internal class BlastXImpl(
   shortHelp:                HelpShort                = HelpShort(),
   longHelp:                 HelpLong                 = HelpLong(),
   version:                  Version                  = Version(),
@@ -48,30 +48,33 @@ internal class BlastPImpl(
   ipgListFile:              IPGList                  = IPGList(),
   negativeIPGListFile:      NegativeIPGList          = NegativeIPGList(),
 
-  override var task:                         BlastPTask                   = BlastPTask(),
-  override var wordSize:                     WordSizeP               = WordSizeP(),
-  override var gapOpen:                      GapOpen                      = GapOpen(),
-  override var gapExtend:                    GapExtend                    = GapExtend(),
-  override var matrix:                       BlastPMatrix                 = BlastPMatrix(),
-  override var threshold:                    Threshold                    = Threshold(),
-  override var compBasedStats:               CompBasedStatsP              = CompBasedStatsP(),
-  override var subjectFile:                  SubjectFile                  = SubjectFile(),
-  override var subjectLocation:              SubjectLocation              = SubjectLocation(),
-  override var seg:                          SegP                         = NoSeg,
-  override var dbSoftMask:                   DBSoftMask                   = DBSoftMask(),
-  override var dbHardMask:                   DBHardMask                   = DBHardMask(),
-  override var cullingLimit:                 CullingLimit                 = CullingLimit(),
-  override var extensionDropoffPrelimGapped: ExtensionDropoffPrelimGapped = ExtensionDropoffPrelimGapped(),
-  override var extensionDropoffFinalGapped:  ExtensionDropoffFinalGapped  = ExtensionDropoffFinalGapped(),
-  override var ungappedAlignmentsOnly:       UngappedAlignmentsOnly       = UngappedAlignmentsOnly(),
-  override var numCPUCores:                  NumCPUCores                  = NumCPUCores(),
-  override var useSmithWatermanTraceback:    UseSmithWatermanTraceback    = UseSmithWatermanTraceback(),
-  override var bestHitOverhang:              BestHitOverhang              = BestHitOverhang(),
-  override var bestHitScoreEdge:             BestHitScoreEdge             = BestHitScoreEdge(),
-  override var subjectBestHit:               SubjectBestHit               = SubjectBestHit(),
-
-  ) : BlastP, BlastQueryWithIPGImpl(
-  BlastTool.BlastP,
+  override var strand:                       Strand,
+  override var queryGenCode:                 QueryGenCode,
+  override var task:                         BlastXTask,
+  override var wordSize:                     WordSizeX,
+  override var gapOpen:                      GapOpen,
+  override var gapExtend:                    GapExtend,
+  override var maxIntronLength:              MaxIntronLength,
+  override var matrix:                       ScoringMatrixX,
+  override var threshold:                    Threshold,
+  override var compBasedStats:               CompBasedStatsX,
+  override var subjectFile:                  SubjectFile,
+  override var subjectLocation:              SubjectLocation,
+  override var seg:                          SegX,
+  override var dbSoftMask:                   DBSoftMask,
+  override var dbHardMask:                   DBHardMask,
+  override var cullingLimit:                 CullingLimit,
+  override var sumStats:                     SumStats,
+  override var extensionDropoffPrelimGapped: ExtensionDropoffPrelimGapped,
+  override var extensionDropoffFinalGapped:  ExtensionDropoffFinalGapped,
+  override var ungappedAlignmentsOnly:       UngappedAlignmentsOnly,
+  override var numCPUCores:                  NumCPUCores,
+  override var useSmithWatermanTraceback:    UseSmithWatermanTraceback,
+  override var bestHitOverhang:              BestHitOverhang,
+  override var bestHitScoreEdge:             BestHitScoreEdge,
+  override var subjectBestHit:               SubjectBestHit
+) : BlastX, BlastQueryWithIPGImpl(
+  BlastTool.BlastX,
   shortHelp,
   longHelp,
   version,
@@ -112,7 +115,6 @@ internal class BlastPImpl(
   ipgListFile,
   negativeIPGListFile,
 ) {
-
   constructor(js: ObjectNode) : this (
     ParseHelpShort(js),
     ParseHelpLong(js),
@@ -153,19 +155,23 @@ internal class BlastPImpl(
     ParseNegTaxIds(js),
     ParseIPGList(js),
     ParseNegativeIPGList(js),
-    ParseBlastPTask(js),
-    ParseWordSizeP(js),
+    ParseStrand(js),
+    ParseQueryGenCode(js),
+    ParseBlastXTask(js),
+    ParseWordSizeX(js),
     ParseGapOpen(js),
     ParseGapExtend(js),
-    ScoringMatrixP(js),
+    ParseMaxIntronLength(js),
+    ParseScoringMatrixX(js),
     ParseThreshold(js),
-    ParseCompBasedStatsP(js),
+    ParseCompBasedStatsX(js),
     ParseSubjectFile(js),
     ParseSubjectLocation(js),
-    ParseSegP(js),
+    ParseSegX(js),
     ParseDBSoftMask(js),
     ParseDBHardMask(js),
     ParseCullingLimit(js),
+    ParseSumStats(js),
     ParseXDropGap(js),
     ParseXDropGapFinal(js),
     ParseUngappedAlignmentsOnly(js),
@@ -173,16 +179,19 @@ internal class BlastPImpl(
     ParseUseSWTBack(js),
     ParseBestHitOverhang(js),
     ParseBestHitScoreEdge(js),
-    ParseSubjectBestHit(js),
+    ParseSubjectBestHit(js)
   )
 
   override fun appendJson(js: ObjectNode) {
     super.appendJson(js)
 
+    strand.appendJson(js)
+    queryGenCode.appendJson(js)
     task.appendJson(js)
     wordSize.appendJson(js)
     gapOpen.appendJson(js)
     gapExtend.appendJson(js)
+    maxIntronLength.appendJson(js)
     matrix.appendJson(js)
     threshold.appendJson(js)
     compBasedStats.appendJson(js)
@@ -192,6 +201,7 @@ internal class BlastPImpl(
     dbSoftMask.appendJson(js)
     dbHardMask.appendJson(js)
     cullingLimit.appendJson(js)
+    sumStats.appendJson(js)
     extensionDropoffPrelimGapped.appendJson(js)
     extensionDropoffFinalGapped.appendJson(js)
     ungappedAlignmentsOnly.appendJson(js)
@@ -205,10 +215,13 @@ internal class BlastPImpl(
   override fun appendCli(sb: StringBuilder) {
     super.appendCli(sb)
 
+    strand.appendCliSegment(sb)
+    queryGenCode.appendCliSegment(sb)
     task.appendCliSegment(sb)
     wordSize.appendCliSegment(sb)
     gapOpen.appendCliSegment(sb)
     gapExtend.appendCliSegment(sb)
+    maxIntronLength.appendCliSegment(sb)
     matrix.appendCliSegment(sb)
     threshold.appendCliSegment(sb)
     compBasedStats.appendCliSegment(sb)
@@ -218,6 +231,7 @@ internal class BlastPImpl(
     dbSoftMask.appendCliSegment(sb)
     dbHardMask.appendCliSegment(sb)
     cullingLimit.appendCliSegment(sb)
+    sumStats.appendCliSegment(sb)
     extensionDropoffPrelimGapped.appendCliSegment(sb)
     extensionDropoffFinalGapped.appendCliSegment(sb)
     ungappedAlignmentsOnly.appendCliSegment(sb)
@@ -231,10 +245,13 @@ internal class BlastPImpl(
   override fun appendCli(cli: MutableList<String>) {
     super.appendCli(cli)
 
+    strand.appendCliParts(cli)
+    queryGenCode.appendCliParts(cli)
     task.appendCliParts(cli)
     wordSize.appendCliParts(cli)
     gapOpen.appendCliParts(cli)
     gapExtend.appendCliParts(cli)
+    maxIntronLength.appendCliParts(cli)
     matrix.appendCliParts(cli)
     threshold.appendCliParts(cli)
     compBasedStats.appendCliParts(cli)
@@ -244,6 +261,7 @@ internal class BlastPImpl(
     dbSoftMask.appendCliParts(cli)
     dbHardMask.appendCliParts(cli)
     cullingLimit.appendCliParts(cli)
+    sumStats.appendCliParts(cli)
     extensionDropoffPrelimGapped.appendCliParts(cli)
     extensionDropoffFinalGapped.appendCliParts(cli)
     ungappedAlignmentsOnly.appendCliParts(cli)

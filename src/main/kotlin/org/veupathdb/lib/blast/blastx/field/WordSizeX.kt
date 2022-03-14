@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast.blastp.field
+package org.veupathdb.lib.blast.blastx.field
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.serial.BlastField
@@ -7,20 +7,19 @@ import org.veupathdb.lib.blast.util.append
 import org.veupathdb.lib.blast.util.put
 import org.veupathdb.lib.blast.util.reqUInt
 
-
 private const val Key = "-word_size"
 private const val Def = UInt.MAX_VALUE
 
 
-internal fun ParseBlastPWordSize(js: ObjectNode) =
-  js[Key]?.let { BlastPWordSize(it.reqUInt(Key)) } ?: BlastPWordSize()
+internal fun ParseWordSizeX(js: ObjectNode) =
+  js[Key]?.let { WordSizeX(it.reqUInt(Key)) } ?: WordSizeX()
 
 
 @JvmInline
-value class BlastPWordSize(val value: UInt = Def) : BlastField {
+value class WordSizeX(val value: UInt = Def) : BlastField {
   init {
     if (value < 2u)
-      throw IllegalArgumentException("$Key must be a uint value >= 2.")
+      throw IllegalArgumentException("$Key must be an int value >= 2")
   }
 
   override val isDefault get() = value == Def

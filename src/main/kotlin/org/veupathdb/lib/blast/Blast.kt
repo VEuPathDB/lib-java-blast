@@ -5,6 +5,8 @@ import org.veupathdb.lib.blast.blastn.BlastN
 import org.veupathdb.lib.blast.blastn.BlastNImpl
 import org.veupathdb.lib.blast.blastp.BlastP
 import org.veupathdb.lib.blast.blastp.BlastPImpl
+import org.veupathdb.lib.blast.blastx.BlastX
+import org.veupathdb.lib.blast.blastx.BlastXImpl
 
 object Blast {
 
@@ -39,4 +41,20 @@ object Blast {
    * @return The new [BlastP] instance.
    */
   fun blastp(): BlastP = BlastPImpl()
+
+  /**
+   * Creates a new [BlastX] instance by parsing the given JSON input.
+   *
+   * @param js JSON object to parse.
+   *
+   * @return The new [BlastX] instance.
+   */
+  fun blastx(js: ObjectNode): BlastX = BlastXImpl(js)
+
+  /**
+   * Creates a new, defaulted [BlastX] instance.
+   *
+   * @return The new [BlastX] instance.
+   */
+  fun blastx(): BlastX = BlastXImpl()
 }
