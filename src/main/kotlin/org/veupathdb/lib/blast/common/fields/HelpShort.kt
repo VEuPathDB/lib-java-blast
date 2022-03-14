@@ -14,7 +14,7 @@ internal fun ParseHelpShort(js: ObjectNode) =
 
 
 @JvmInline
-value class HelpShort(private val value: Boolean = false) : BlastField {
+value class HelpShort(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value
 
   override fun appendJson(js: ObjectNode) =

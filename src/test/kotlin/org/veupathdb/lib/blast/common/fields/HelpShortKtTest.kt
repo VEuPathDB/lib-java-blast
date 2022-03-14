@@ -11,34 +11,34 @@ import org.veupathdb.lib.jackson.Json
 internal class HelpShortKtTest {
 
   @Test
-  @DisplayName("returns a defaulted HelpLong instance when the input object does not contain a -help entry")
+  @DisplayName("returns a defaulted HelpLong instance when the input object does not contain a -h entry")
   fun t1() {
     val inp = Json.newObject()
 
-    assertTrue(ParseHelpLong(inp).isDefault)
+    assertTrue(ParseHelpShort(inp).isDefault)
   }
 
   @Test
-  @DisplayName("returns a HelpLong instance wrapping true when the input object contains -help: true")
+  @DisplayName("returns a HelpShort instance wrapping true when the input object contains -h: true")
   fun t2() {
-    val inp = Json.new<ObjectNode> { put("-help", true) }
+    val inp = Json.new<ObjectNode> { put("-h", true) }
 
-    assertTrue(ParseHelpLong(inp).value)
+    assertTrue(ParseHelpShort(inp).value)
   }
 
   @Test
-  @DisplayName("returns a HelpLong instance wrapping false when the input object contains -help: false")
+  @DisplayName("returns a HelpShort instance wrapping false when the input object contains -h: false")
   fun t3() {
-    val inp = Json.new<ObjectNode> { put("-help", false) }
+    val inp = Json.new<ObjectNode> { put("-h", false) }
 
-    assertFalse(ParseHelpLong(inp).value)
+    assertFalse(ParseHelpShort(inp).value)
   }
 
   @Test
-  @DisplayName("throws when the input object contains a non-boolean -help value")
+  @DisplayName("throws when the input object contains a non-boolean -h value")
   fun t4() {
-    val inp = Json.new<ObjectNode> { put("-help", "yo-yo") }
+    val inp = Json.new<ObjectNode> { put("-h", "yo-yo") }
 
-    assertThrows<IllegalArgumentException> { ParseHelpLong(inp) }
+    assertThrows<IllegalArgumentException> { ParseHelpShort(inp) }
   }
 }

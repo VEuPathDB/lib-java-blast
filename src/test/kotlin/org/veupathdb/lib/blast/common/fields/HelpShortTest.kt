@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.veupathdb.lib.jackson.Json
 
-@DisplayName("-help")
+@DisplayName("-h")
 internal class HelpShortTest {
 
   @Test
   @DisplayName("no-arg constructor sets the default to false")
   fun t1() {
-    assertFalse(HelpLong().value)
+    assertFalse(HelpShort().value)
   }
 
   @Nested
@@ -22,7 +22,7 @@ internal class HelpShortTest {
     @Test
     @DisplayName("isDefault == false")
     fun t1() {
-      assertFalse(HelpLong(true).isDefault)
+      assertFalse(HelpShort(true).isDefault)
     }
 
     @Test
@@ -30,12 +30,12 @@ internal class HelpShortTest {
     fun t2() {
       val inp = Json.newObject()
 
-      HelpLong(true).appendJson(inp)
+      HelpShort(true).appendJson(inp)
 
       assertEquals(1, inp.size())
-      assertTrue(inp.has("-help"))
-      assertTrue(inp["-help"].isBoolean)
-      assertTrue(inp["-help"].booleanValue())
+      assertTrue(inp.has("-h"))
+      assertTrue(inp["-h"].isBoolean)
+      assertTrue(inp["-h"].booleanValue())
     }
 
     @Test
@@ -43,9 +43,9 @@ internal class HelpShortTest {
     fun t3() {
       val inp = StringBuilder(6)
 
-      HelpLong(true).appendCliSegment(inp)
+      HelpShort(true).appendCliSegment(inp)
 
-      assertEquals(" -help", inp.toString())
+      assertEquals(" -h", inp.toString())
     }
 
     @Test
@@ -53,10 +53,10 @@ internal class HelpShortTest {
     fun t4() {
       val inp = ArrayList<String>(1)
 
-      HelpLong(true).appendCliParts(inp)
+      HelpShort(true).appendCliParts(inp)
 
       assertEquals(1, inp.size)
-      assertEquals("-help", inp[0])
+      assertEquals("-h", inp[0])
     }
   }
 
@@ -68,7 +68,7 @@ internal class HelpShortTest {
     @Test
     @DisplayName("isDefault == true")
     fun t1() {
-      assertTrue(HelpLong(false).isDefault)
+      assertTrue(HelpShort(false).isDefault)
     }
 
     @Test
@@ -76,7 +76,7 @@ internal class HelpShortTest {
     fun t2() {
       val inp = Json.newObject()
 
-      HelpLong(false).appendJson(inp)
+      HelpShort(false).appendJson(inp)
 
       assertEquals(0, inp.size())
     }
@@ -86,7 +86,7 @@ internal class HelpShortTest {
     fun t3() {
       val inp = StringBuilder(0)
 
-      HelpLong(false).appendCliSegment(inp)
+      HelpShort(false).appendCliSegment(inp)
 
       assertEquals(0, inp.length)
     }
@@ -96,7 +96,7 @@ internal class HelpShortTest {
     fun t4() {
       val inp = ArrayList<String>(0)
 
-      HelpLong(false).appendCliParts(inp)
+      HelpShort(false).appendCliParts(inp)
 
       assertTrue(inp.isEmpty())
     }
