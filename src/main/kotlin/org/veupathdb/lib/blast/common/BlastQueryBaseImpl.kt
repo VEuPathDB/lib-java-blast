@@ -26,7 +26,6 @@ internal abstract class BlastQueryBaseImpl(
   override var queryLocation: QueryLocation,
   override var dbFile: DBFile,
   override var expectValue: ExpectValue,
-  override var softMasking: SoftMasking,
   override var lowercaseMasking: LowercaseMasking,
   override var entrezQuery: EntrezQuery,
   override var maxHSPs: MaxHSPs,
@@ -75,7 +74,6 @@ internal abstract class BlastQueryBaseImpl(
       ParseQueryLocation(js),
       ParseDBFile(js),
       ParseEValue(js),
-      ParseSoftMasking(js),
       ParseLowercaseMasking(js),
       ParseEntrezQuery(js),
       ParseMaxHSPs(js),
@@ -93,7 +91,6 @@ internal abstract class BlastQueryBaseImpl(
     queryLocation.appendJson(js)
     dbFile.appendJson(js)
     expectValue.appendJson(js)
-    softMasking.appendJson(js)
     lowercaseMasking.appendJson(js)
     entrezQuery.appendJson(js)
     maxHSPs.appendJson(js)
@@ -111,7 +108,6 @@ internal abstract class BlastQueryBaseImpl(
     queryLocation.appendCliSegment(sb)
     dbFile.appendCliSegment(sb)
     expectValue.appendCliSegment(sb)
-    softMasking.appendCliSegment(sb)
     lowercaseMasking.appendCliSegment(sb)
     entrezQuery.appendCliSegment(sb)
     maxHSPs.appendCliSegment(sb)
@@ -129,7 +125,6 @@ internal abstract class BlastQueryBaseImpl(
     queryLocation.appendCliParts(cli)
     dbFile.appendCliParts(cli)
     expectValue.appendCliParts(cli)
-    softMasking.appendCliParts(cli)
     lowercaseMasking.appendCliParts(cli)
     entrezQuery.appendCliParts(cli)
     maxHSPs.appendCliParts(cli)

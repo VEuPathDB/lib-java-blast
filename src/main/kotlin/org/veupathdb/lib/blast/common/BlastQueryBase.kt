@@ -30,11 +30,6 @@ interface BlastQueryBase : BlastCLI {
   var expectValue: ExpectValue
 
   /**
-   * Apply filtering locations as soft masks
-   */
-  var softMasking: SoftMasking
-
-  /**
    * Use lower case filtering in query and subject sequence(s)
    */
   var lowercaseMasking: LowercaseMasking

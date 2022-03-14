@@ -173,4 +173,6 @@ interface BlastP : BlastQueryWithIPG {
    * Turn on best hit per subject sequence
    */
   var subjectBestHit: SubjectBestHit
+
+  var softMasking: SoftMaskingP
 }

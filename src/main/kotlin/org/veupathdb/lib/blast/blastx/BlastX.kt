@@ -59,4 +59,6 @@ interface BlastX : BlastQueryWithIPG {
   var bestHitScoreEdge: BestHitScoreEdge
 
   var subjectBestHit: SubjectBestHit
+
+  var softMasking: SoftMaskingX
 }

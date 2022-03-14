@@ -247,4 +247,9 @@ interface BlastN : BlastQueryWithLists {
    * Turn on best hit per subject sequence
    */
   var subjectBestHit: SubjectBestHit
+
+  /**
+   * Apply filtering locations as soft masks
+   */
+  var softMasking: SoftMaskingN
 }

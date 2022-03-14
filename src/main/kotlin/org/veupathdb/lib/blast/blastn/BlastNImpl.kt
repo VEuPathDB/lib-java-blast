@@ -26,7 +26,6 @@ internal class BlastNImpl(
   queryLocation:            QueryLocation            = QueryLocation(),
   dbFile:                   DBFile                   = DBFile(),
   expectValue:              ExpectValue              = ExpectValue(),
-  softMasking:              SoftMasking              = SoftMasking(),
   lowercaseMasking:         LowercaseMasking         = LowercaseMasking(),
   entrezQuery:              EntrezQuery              = EntrezQuery(),
   maxHSPs:                  MaxHSPs                  = MaxHSPs(),
@@ -77,6 +76,7 @@ internal class BlastNImpl(
   override var bestHitOverhang:              BestHitOverhang              = BestHitOverhang(),
   override var bestHitScoreEdge:             BestHitScoreEdge             = BestHitScoreEdge(),
   override var subjectBestHit:               SubjectBestHit               = SubjectBestHit(),
+  override var softMasking:                  SoftMaskingN                 = SoftMaskingN()
 ) : BlastN, BlastQueryWithListsImpl(
   BlastTool.BlastN,
   shortHelp,
@@ -97,7 +97,6 @@ internal class BlastNImpl(
   queryLocation,
   dbFile,
   expectValue,
-  softMasking,
   lowercaseMasking,
   entrezQuery,
   maxHSPs,
@@ -136,7 +135,6 @@ internal class BlastNImpl(
     ParseQueryLocation(js),
     ParseDBFile(js),
     ParseEValue(js),
-    ParseSoftMasking(js),
     ParseLowercaseMasking(js),
     ParseEntrezQuery(js),
     ParseMaxHSPs(js),
@@ -185,7 +183,8 @@ internal class BlastNImpl(
     ParseNumCPUCores(js),
     ParseBestHitOverhang(js),
     ParseBestHitScoreEdge(js),
-    ParseSubjectBestHit(js)
+    ParseSubjectBestHit(js),
+    ParseSoftMaskingN(js),
   )
 
   override fun appendJson(js: ObjectNode) {

@@ -26,7 +26,6 @@ internal class BlastPImpl(
   queryLocation:            QueryLocation            = QueryLocation(),
   dbFile:                   DBFile                   = DBFile(),
   expectValue:              ExpectValue              = ExpectValue(),
-  softMasking:              SoftMasking              = SoftMasking(),
   lowercaseMasking:         LowercaseMasking         = LowercaseMasking(),
   entrezQuery:              EntrezQuery              = EntrezQuery(),
   maxHSPs:                  MaxHSPs                  = MaxHSPs(),
@@ -69,8 +68,8 @@ internal class BlastPImpl(
   override var bestHitOverhang:              BestHitOverhang              = BestHitOverhang(),
   override var bestHitScoreEdge:             BestHitScoreEdge             = BestHitScoreEdge(),
   override var subjectBestHit:               SubjectBestHit               = SubjectBestHit(),
-
-  ) : BlastP, BlastQueryWithIPGImpl(
+  override var softMasking:                  SoftMaskingP                 = SoftMaskingP()
+) : BlastP, BlastQueryWithIPGImpl(
   BlastTool.BlastP,
   shortHelp,
   longHelp,
@@ -90,7 +89,6 @@ internal class BlastPImpl(
   queryLocation,
   dbFile,
   expectValue,
-  softMasking,
   lowercaseMasking,
   entrezQuery,
   maxHSPs,
@@ -132,7 +130,6 @@ internal class BlastPImpl(
     ParseQueryLocation(js),
     ParseDBFile(js),
     ParseEValue(js),
-    ParseSoftMasking(js),
     ParseLowercaseMasking(js),
     ParseEntrezQuery(js),
     ParseMaxHSPs(js),
@@ -174,6 +171,7 @@ internal class BlastPImpl(
     ParseBestHitOverhang(js),
     ParseBestHitScoreEdge(js),
     ParseSubjectBestHit(js),
+    ParseSoftMaskingP(js),
   )
 
   override fun appendJson(js: ObjectNode) {
