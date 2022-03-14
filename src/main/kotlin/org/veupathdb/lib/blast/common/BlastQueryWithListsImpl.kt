@@ -78,47 +78,6 @@ internal abstract class BlastQueryWithListsImpl(
   remote,
 ) {
 
-  constructor(tool: BlastTool, js: ObjectNode): this(
-    tool,
-    ParseHelpShort(js),
-    ParseHelpLong(js),
-    ParseVersion(js),
-    ParseOutFile(js),
-    ParseOutFormat(js),
-    ParseShowGIs(js),
-    ParseNumDescriptions(js),
-    ParseNumAlignments(js),
-    ParseLineLength(js),
-    ParseHTML(js),
-    ParseSortHits(js),
-    ParseSortHSPs(js),
-    ParseMaxTargetSeqs(js),
-    ParseParseDefLines(js),
-    ParseQueryFile(js),
-    ParseQueryLocation(js),
-    ParseDBFile(js),
-    ParseEValue(js),
-    ParseSoftMasking(js),
-    ParseLowercaseMasking(js),
-    ParseEntrezQuery(js),
-    ParseMaxHSPs(js),
-    ParseDBSize(js),
-    ParseSearchSpace(js),
-    ParseImportSearchStrategy(js),
-    ParseExportSearchStrategy(js),
-    ParseXDropUngap(js),
-    ParseWindowSize(js),
-    ParseRemote(js),
-    ParseGIList(js),
-    ParseNegGIList(js),
-    ParseSeqIdList(js),
-    ParseNegSeqIdList(js),
-    ParseTaxIdList(js),
-    ParseNegTaxIdList(js),
-    ParseTaxIDs(js),
-    ParseNegTaxIDs(js),
-  )
-
   override fun appendJson(js: ObjectNode) {
     super.appendJson(js)
 

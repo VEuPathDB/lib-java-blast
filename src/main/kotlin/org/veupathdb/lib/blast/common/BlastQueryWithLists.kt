@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common
 
 import org.veupathdb.lib.blast.field.*
+import org.veupathdb.lib.blast.common.fields.*
 
 /**
  * List fields common to most BLAST+ query tools.
