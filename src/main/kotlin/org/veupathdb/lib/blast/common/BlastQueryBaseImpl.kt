@@ -53,38 +53,6 @@ internal abstract class BlastQueryBaseImpl(
   maxTargetSeqs,
   parseDefLines,
 ) {
-  constructor(tool: BlastTool, js: ObjectNode) :
-    this(
-      tool,
-      ParseHelpShort(js),
-      ParseHelpLong(js),
-      ParseVersion(js),
-      ParseOutFile(js),
-      ParseOutFormat(js),
-      ParseShowGIs(js),
-      ParseNumDescriptions(js),
-      ParseNumAlignments(js),
-      ParseLineLength(js),
-      ParseHTML(js),
-      ParseSortHits(js),
-      ParseSortHSPs(js),
-      ParseMaxTargetSeqs(js),
-      ParseParseDefLines(js),
-      ParseQueryFile(js),
-      ParseQueryLocation(js),
-      ParseDBFile(js),
-      ParseEValue(js),
-      ParseLowercaseMasking(js),
-      ParseEntrezQuery(js),
-      ParseMaxHSPs(js),
-      ParseDBSize(js),
-      ParseSearchSpace(js),
-      ParseImportSearchStrategy(js),
-      ParseExportSearchStrategy(js),
-      ParseXDropUngap(js),
-      ParseWindowSize(js),
-      ParseRemote(js),
-    )
 
   override fun appendJson(js: ObjectNode) {
     queryFile.appendJson(js)

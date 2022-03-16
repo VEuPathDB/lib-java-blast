@@ -24,25 +24,6 @@ internal abstract class BlastCLIImpl(
   override var parseDefLines: ParseDefLines
 ) :  BlastCLI {
 
-  constructor(tool: BlastTool, js: ObjectNode) :
-    this(
-      tool,
-      ParseHelpShort(js),
-      ParseHelpLong(js),
-      ParseVersion(js),
-      ParseOutFile(js),
-      ParseOutFormat(js),
-      ParseShowGIs(js),
-      ParseNumDescriptions(js),
-      ParseNumAlignments(js),
-      ParseLineLength(js),
-      ParseHTML(js),
-      ParseSortHits(js),
-      ParseSortHSPs(js),
-      ParseMaxTargetSeqs(js),
-      ParseParseDefLines(js)
-    )
-
   override fun toJson() = Json.new<ObjectNode> {
     put("tool", tool.value)
 

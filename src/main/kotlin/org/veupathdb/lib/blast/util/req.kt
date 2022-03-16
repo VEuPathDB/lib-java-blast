@@ -3,7 +3,16 @@
 package org.veupathdb.lib.blast.util
 
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.ObjectNode
+
+
+internal inline fun JsonNode.requireArray(k: () -> String): ArrayNode {
+  if (!isArray)
+    throw IllegalArgumentException("${k()} must be an array.")
+
+  return this as ArrayNode
+}
 
 /**
  * Ensures that the input [JsonNode] is wrapping a boolean value then returns
@@ -77,6 +86,23 @@ internal inline fun JsonNode.reqDub(k: () -> String) =
     throw IllegalArgumentException("${k()} must be a boolean value.")
   else
     doubleValue()
+
+
+/**
+ * Ensures that the input [JsonNode] is wrapping a double value then returns
+ * that value.
+ *
+ * @param k Key provider used to get a key value to generate an error message.
+ *
+ * @receiver JsonNode to test.
+ *
+ * @return The value wrapped by the receiver node.
+ */
+internal inline fun JsonNode.reqLong(k: String) =
+  if (!isNumber)
+    throw IllegalArgumentException("$k must be a boolean value.")
+  else
+    longValue()
 
 
 /**

@@ -1,18 +1,19 @@
-package org.veupathdb.lib.blast.field
+package org.veupathdb.lib.blast.common.fields
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagOutFormat
 import org.veupathdb.lib.blast.serial.BlastField
+import org.veupathdb.lib.blast.util.reqInt
+import org.veupathdb.lib.blast.util.reqString
+import org.veupathdb.lib.blast.util.requireArray
+import org.veupathdb.lib.blast.util.requireObject
 
 
 private const val KeyOutFormat = "-outfmt"
 
 
 internal fun ParseOutFormat(js: ObjectNode): OutFormat {
-  val obj = js[KeyOutFormat] ?: return OutFormat()
-  obj.isObject || return OutFormat()
-  obj as ObjectNode
+  val obj = js[KeyOutFormat]?.requireObject(FlagOutFormat) ?: return OutFormat()
 
   return OutFormat(
     parseFormatType(obj),
@@ -74,18 +75,18 @@ data class OutFormat(
 ////////////////////////////////////////////////////////////////////////////////
 
 
-private const val DefaultDelimiter = ""
-
 private const val KeyDelimiter = "delimiter"
 
 
 private fun parseFormatDelimiter(js: ObjectNode) =
-  FormatDelimiter(js[KeyDelimiter]?.textValue() ?: DefaultDelimiter)
+  js[KeyDelimiter]?.let {
+    FormatDelimiter(it.reqString { "$FlagOutFormat.$KeyDelimiter" })
+  } ?: FormatDelimiter()
 
 
 @JvmInline
-value class FormatDelimiter(val value: String = DefaultDelimiter) {
-  val isDefault get() = value == DefaultDelimiter
+value class FormatDelimiter(val value: String = "") {
+  val isDefault get() = value == ""
 
   fun appendJson(json: ObjectNode) {
     if (!isDefault)
@@ -106,14 +107,19 @@ private const val KeyFormatFields = "fields"
 
 
 private fun parseFormatFields(js: ObjectNode): FormatFields {
-  val arr = js[KeyFormatFields] ?: return FormatFields()
-  arr.isArray || return FormatFields()
-  arr as ArrayNode
+  // Require node is a JSON array (or absent)
+  val arr = js[KeyFormatFields]?.requireArray {
+    "$FlagOutFormat.$KeyFormatFields"
+  }
+    ?: return FormatFields()
+
+  // If array is empty, return default
+  arr.size() > 0 || return FormatFields()
 
   val tmp = ArrayList<FormatField>(arr.size())
 
   arr.forEach {
-    tmp.add(FormatField.fromString(it.textValue()))
+    tmp.add(parseField(it.reqString { "$FlagOutFormat.$KeyFormatFields" }))
   }
 
   return FormatFields(tmp)
@@ -151,8 +157,17 @@ private val DefaultFormatType = FormatType.Pairwise
 private const val KeyFormatType = "type"
 
 
-private fun parseFormatType(js: ObjectNode) =
-  js[KeyFormatType]?.run { FormatType.fromIntValue(intValue()) } ?: DefaultFormatType
+private fun parseFormatType(js: ObjectNode): FormatType {
+  val tmp = js[KeyFormatType]?.reqInt { "$FlagOutFormat.$KeyFormatType" }
+    ?: return DefaultFormatType
+
+  val vals = FormatType.values()
+
+  if (tmp < 0 || tmp >= vals.size)
+    throw IllegalArgumentException("$FlagOutFormat.$KeyFormatType must be an int value > 0 and < ${vals.size}")
+
+  return vals[tmp]
+}
 
 
 enum class FormatType {
@@ -189,16 +204,6 @@ enum class FormatType {
     if (!isDefault)
       cli.append(value)
   }
-
-  override fun toString() = value.toString()
-
-  companion object {
-    @JvmStatic
-    @JsonCreator
-    fun fromIntValue(value: Int): FormatType {
-      return values()[value]
-    }
-  }
 }
 
 
@@ -206,6 +211,15 @@ enum class FormatType {
 
 
 private val DefaultFormatField = FormatField.StandardFields
+
+
+private fun parseField(value: String): FormatField {
+  for (v in FormatField.values())
+    if (v.value == value)
+      return v
+
+  throw IllegalArgumentException("Invalid value for $FlagOutFormat.$KeyFormatFields: $value")
+}
 
 
 enum class FormatField(val value: String) {
@@ -264,15 +278,4 @@ enum class FormatField(val value: String) {
   StandardFields("std");
 
   val isDefault: Boolean get() = this == DefaultFormatField
-
-  override fun toString() = value
-
-  companion object {
-    @JvmStatic
-    @JsonCreator
-    fun fromString(value: String): FormatField {
-      for (`val` in values()) if (`val`.value == value) return `val`
-      throw IllegalArgumentException()
-    }
-  }
 }

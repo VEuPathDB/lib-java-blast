@@ -132,7 +132,7 @@ class DustKtTest {
       @Test
       @DisplayName("throws when level property is not an int value")
       fun test6() {
-        val inp = Json.new<ObjectNode> { put("-dust", Json.new<ObjectNode> {
+        val inp = Json.new<ObjectNode> { set<ObjectNode>("-dust", Json.new<ObjectNode> {
           put("level", "hi")
         }) }
 
@@ -142,7 +142,7 @@ class DustKtTest {
       @Test
       @DisplayName("throws when window property is not an int value")
       fun test7() {
-        val inp = Json.new<ObjectNode> { put("-dust", Json.new<ObjectNode> {
+        val inp = Json.new<ObjectNode> { set<ObjectNode>("-dust", Json.new<ObjectNode> {
           put("window", "hi")
         }) }
 
@@ -152,7 +152,7 @@ class DustKtTest {
       @Test
       @DisplayName("throws when window property is not an int value")
       fun test8() {
-        val inp = Json.new<ObjectNode> { put("-dust", Json.new<ObjectNode> {
+        val inp = Json.new<ObjectNode> { set<ObjectNode>("-dust", Json.new<ObjectNode> {
           put("linker", "hi")
         }) }
 

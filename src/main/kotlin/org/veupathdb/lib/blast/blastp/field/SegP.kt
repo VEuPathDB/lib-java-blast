@@ -32,7 +32,7 @@ internal fun ParseSegP(js: ObjectNode): SegP {
   val tmp = js[KeySeg] ?: return NoSeg
 
   if (tmp.isTextual) {
-    return when (val v = js.textValue()) {
+    return when (js.textValue()) {
       "yes" -> YesSeg
       "no"  -> NoSeg
       else  -> throw IllegalArgumentException("$KeySeg must be an object or one of the string values \"yes\" or \"no\".")
