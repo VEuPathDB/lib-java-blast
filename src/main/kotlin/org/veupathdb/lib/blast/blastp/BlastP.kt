@@ -3,7 +3,6 @@ package org.veupathdb.lib.blast.blastp
 import org.veupathdb.lib.blast.blastp.field.*
 import org.veupathdb.lib.blast.common.BlastQueryWithIPG
 import org.veupathdb.lib.blast.common.fields.*
-import org.veupathdb.lib.blast.field.*
 
 /**
  * Protein-Protein BLAST 2.11.0+

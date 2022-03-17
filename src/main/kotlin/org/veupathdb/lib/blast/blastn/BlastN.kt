@@ -3,7 +3,6 @@ package org.veupathdb.lib.blast.blastn
 import org.veupathdb.lib.blast.blastn.fields.*
 import org.veupathdb.lib.blast.common.BlastQueryWithLists
 import org.veupathdb.lib.blast.common.fields.*
-import org.veupathdb.lib.blast.field.*
 
 /**
  * Nucleotide-Nucleotide BLAST 2.11.0+

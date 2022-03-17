@@ -1,7 +1,6 @@
 package org.veupathdb.lib.blast.common
 
 import org.veupathdb.lib.blast.common.fields.*
-import org.veupathdb.lib.blast.field.*
 
 
 /**

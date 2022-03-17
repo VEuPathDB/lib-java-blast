@@ -67,7 +67,7 @@ internal class BlastNImpl(
   override var templateLength:               TemplateLength               = TemplateLength(),
   override var sumStats:                     SumStats                     = SumStats(),
   override var extensionDropoffPrelimGapped: ExtensionDropoffPrelimGapped = ExtensionDropoffPrelimGapped(),
-  override var extensionDropoffFinalGapped:  ExtensionDropoffFinalGapped  = ExtensionDropoffFinalGapped(),
+  override var extensionDropoffFinalGapped: ExtensionDropoffFinalGapped = ExtensionDropoffFinalGapped(),
   override var nonGreedy:                    NonGreedy                    = NonGreedy(),
   override var minRawGappedScore:            MinRawGappedScore            = MinRawGappedScore(),
   override var ungappedAlignmentsOnly:       UngappedAlignmentsOnly       = UngappedAlignmentsOnly(),

@@ -61,7 +61,7 @@ internal class BlastPImpl(
   override var dbHardMask:                   DBHardMask                   = DBHardMask(),
   override var cullingLimit:                 CullingLimit                 = CullingLimit(),
   override var extensionDropoffPrelimGapped: ExtensionDropoffPrelimGapped = ExtensionDropoffPrelimGapped(),
-  override var extensionDropoffFinalGapped:  ExtensionDropoffFinalGapped  = ExtensionDropoffFinalGapped(),
+  override var extensionDropoffFinalGapped: ExtensionDropoffFinalGapped = ExtensionDropoffFinalGapped(),
   override var ungappedAlignmentsOnly:       UngappedAlignmentsOnly       = UngappedAlignmentsOnly(),
   override var numCPUCores:                  NumCPUCores                  = NumCPUCores(),
   override var useSmithWatermanTraceback:    UseSmithWatermanTraceback    = UseSmithWatermanTraceback(),
