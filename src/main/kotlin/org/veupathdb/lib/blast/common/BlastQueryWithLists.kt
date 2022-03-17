@@ -27,7 +27,7 @@ interface BlastQueryWithLists : BlastQueryBase {
    *
    * Restrict search of database to list of SeqIDs
    */
-  var seqIdListFile: SeqIdList
+  var seqIDListFile: SeqIDList
 
   /**
    * -negative_seqidlist
