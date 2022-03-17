@@ -34,7 +34,7 @@ interface BlastQueryWithLists : BlastQueryBase {
    *
    * Restrict search of database to everything except the specified SeqIDs
    */
-  var negativeSeqIdListFile: NegativeSeqIdList
+  var negativeSeqIDListFile: NegativeSeqIDList
 
   /**
    * -taxidlist

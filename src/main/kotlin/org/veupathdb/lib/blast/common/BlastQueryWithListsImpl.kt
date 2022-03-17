@@ -39,7 +39,7 @@ internal abstract class BlastQueryWithListsImpl(
   override var giListFile: GIList,
   override var negativeGIListFile: NegativeGIList,
   override var seqIdListFile: SeqIdList,
-  override var negativeSeqIdListFile: NegativeSeqIdList,
+  override var negativeSeqIDListFile: NegativeSeqIDList,
   override var taxIdListFile: TaxIdList,
   override var negativeTaxIdListFile: NegativeTaxIdList,
   override var taxIds: TaxIDs,
@@ -82,7 +82,7 @@ internal abstract class BlastQueryWithListsImpl(
     giListFile.appendJson(js)
     negativeGIListFile.appendJson(js)
     seqIdListFile.appendJson(js)
-    negativeSeqIdListFile.appendJson(js)
+    negativeSeqIDListFile.appendJson(js)
     taxIdListFile.appendJson(js)
     negativeTaxIdListFile.appendJson(js)
     taxIds.appendJson(js)
@@ -95,7 +95,7 @@ internal abstract class BlastQueryWithListsImpl(
     giListFile.appendCliSegment(sb)
     negativeGIListFile.appendCliSegment(sb)
     seqIdListFile.appendCliSegment(sb)
-    negativeSeqIdListFile.appendCliSegment(sb)
+    negativeSeqIDListFile.appendCliSegment(sb)
     taxIdListFile.appendCliSegment(sb)
     negativeTaxIdListFile.appendCliSegment(sb)
     taxIds.appendCliSegment(sb)
@@ -108,7 +108,7 @@ internal abstract class BlastQueryWithListsImpl(
     giListFile.appendCliParts(cli)
     negativeGIListFile.appendCliParts(cli)
     seqIdListFile.appendCliParts(cli)
-    negativeSeqIdListFile.appendCliParts(cli)
+    negativeSeqIDListFile.appendCliParts(cli)
     taxIdListFile.appendCliParts(cli)
     negativeTaxIdListFile.appendCliParts(cli)
     taxIds.appendCliParts(cli)

@@ -5,10 +5,9 @@ import org.veupathdb.lib.blast.serial.BlastField
 
 
 private const val KeySIL  = "-seqidlist"
-private const val KeyNSIL = "-negative_seqidlist"
 
 
-internal fun ParseSeqIdList(js: ObjectNode) =
+internal fun ParseSeqIDList(js: ObjectNode) =
   SeqIdList(js[KeySIL]?.textValue() ?: "")
 
 
@@ -34,33 +33,3 @@ value class SeqIdList(val value: String = "") : BlastField {
   }
 }
 
-
-internal fun ParseNegSeqIdList(js: ObjectNode) =
-  NegativeSeqIdList(js[KeyNSIL]?.textValue() ?: "")
-
-
-@JvmInline
-value class NegativeSeqIdList(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
-
-  override fun appendJson(js: ObjectNode) {
-    if (!isDefault)
-      js.put(KeyNSIL, value)
-  }
-
-  override fun appendCliSegment(cli: StringBuilder) {
-    if (!isDefault)
-      cli.append(' ')
-        .append(KeyNSIL)
-        .append(" '")
-        .append(value)
-        .append('\'')
-  }
-
-  override fun appendCliParts(cli: MutableList<String>) {
-    if (!isDefault) {
-      cli.add(KeyNSIL)
-      cli.add(value)
-    }
-  }
-}
