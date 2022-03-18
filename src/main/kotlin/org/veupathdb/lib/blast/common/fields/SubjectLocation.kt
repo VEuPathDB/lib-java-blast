@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagQueryLocation
 import org.veupathdb.lib.blast.common.FlagSubjectLocation
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -29,12 +30,19 @@ internal fun ParseSubjectLocation(js: ObjectNode): SubjectLocation {
 data class SubjectLocation(val start: UInt = DefStart, val stop: UInt = DefStop)
   : BlastField
 {
+  init {
+    if (stop < start)
+      throw IllegalArgumentException("$FlagQueryLocation stop cannot be greater than the start.  Given value: $start-$stop")
+  }
+
   override val isDefault get() = start == DefStart && stop == DefStop
 
   override fun appendJson(js: ObjectNode) {
-    with(js.putObject(FlagSubjectLocation)) {
-      put(KeyStart, start.toLong())
-      put(KeyStop, stop.toLong())
+    if(!isDefault) {
+      with(js.putObject(FlagSubjectLocation)) {
+        put(KeyStart, start.toLong())
+        put(KeyStop, stop.toLong())
+      }
     }
   }
 

@@ -9,13 +9,13 @@ import org.veupathdb.lib.blast.util.put
 import org.veupathdb.lib.blast.util.reqString
 
 
-internal fun ParseTaxIdList(js: ObjectNode) =
-  js[FlagTaxIDList]?.let { TaxIdList(it.reqString(FlagTaxIDList)) }
-    ?: TaxIdList()
+internal fun ParseTaxIDList(js: ObjectNode) =
+  js[FlagTaxIDList]?.let { TaxIDList(it.reqString(FlagTaxIDList)) }
+    ?: TaxIDList()
 
 
 @JvmInline
-value class TaxIdList(val value: String = "") : BlastField {
+value class TaxIDList(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
   override fun appendJson(js: ObjectNode) =

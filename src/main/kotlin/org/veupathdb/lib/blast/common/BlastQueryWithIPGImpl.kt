@@ -3,7 +3,6 @@ package org.veupathdb.lib.blast.common
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.fields.*
-import org.veupathdb.lib.blast.field.*
 
 internal abstract class BlastQueryWithIPGImpl(
   tool: BlastTool,
@@ -39,8 +38,8 @@ internal abstract class BlastQueryWithIPGImpl(
   negativeGIListFile: NegativeGIList,
   seqIDListFile: SeqIDList,
   negativeSeqIDListFile: NegativeSeqIDList,
-  taxIdListFile: TaxIdList,
-  negativeTaxIdListFile: NegativeTaxIdList,
+  taxIDListFile: TaxIDList,
+  negativeTaxIDListFile: NegativeTaxIDList,
   taxIds: TaxIDs,
   negativeTaxIds: NegativeTaxIDs,
 
@@ -80,8 +79,8 @@ internal abstract class BlastQueryWithIPGImpl(
   negativeGIListFile,
   seqIDListFile,
   negativeSeqIDListFile,
-  taxIdListFile,
-  negativeTaxIdListFile,
+  taxIDListFile,
+  negativeTaxIDListFile,
   taxIds,
   negativeTaxIds,
 ) {

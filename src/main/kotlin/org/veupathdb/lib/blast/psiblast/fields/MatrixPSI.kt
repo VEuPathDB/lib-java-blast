@@ -31,6 +31,7 @@ value class MatrixPSI(val value: MatrixPSIType = MatrixPSIType.None)
 }
 
 
+@Suppress("NOTHING_TO_INLINE")
 private inline fun parseEnum(js: JsonNode): MatrixPSIType {
   val tmp = js.reqString(FlagMatrix).uppercase()
 

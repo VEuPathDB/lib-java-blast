@@ -5,7 +5,6 @@ import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.blastn.fields.*
 import org.veupathdb.lib.blast.common.BlastQueryWithListsImpl
 import org.veupathdb.lib.blast.common.fields.*
-import org.veupathdb.lib.blast.field.*
 
 internal class BlastNImpl(
   shortHelp:                HelpShort                = HelpShort(),
@@ -40,8 +39,8 @@ internal class BlastNImpl(
   negativeGIList:           NegativeGIList           = NegativeGIList(),
   seqIdList:                SeqIDList                = SeqIDList(),
   negativeSeqIdList:        NegativeSeqIDList        = NegativeSeqIDList(),
-  taxIdList:                TaxIdList                = TaxIdList(),
-  negativeTaxIdList:        NegativeTaxIdList        = NegativeTaxIdList(),
+  taxIdList:                TaxIDList                = TaxIDList(),
+  negativeTaxIdList: NegativeTaxIDList = NegativeTaxIDList(),
   taxIds:                   TaxIDs                   = TaxIDs(),
   negativeTaxIds:           NegativeTaxIDs           = NegativeTaxIDs(),
 
@@ -149,8 +148,8 @@ internal class BlastNImpl(
     ParseNegGIList(js),
     ParseSeqIDList(js),
     ParseNegSeqIdList(js),
-    ParseTaxIdList(js),
-    ParseNegTaxIdList(js),
+    ParseTaxIDList(js),
+    ParseNegTaxIDList(js),
     ParseTaxIDs(js),
     ParseNegTaxIDs(js),
     ParseStrand(js),

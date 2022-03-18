@@ -5,8 +5,8 @@ import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.BlastQueryWithListsImpl
 import org.veupathdb.lib.blast.common.fields.*
 import org.veupathdb.lib.blast.deltablast.fields.*
-import org.veupathdb.lib.blast.field.NegativeTaxIdList
-import org.veupathdb.lib.blast.field.ParseNegTaxIdList
+import org.veupathdb.lib.blast.common.fields.NegativeTaxIDList
+import org.veupathdb.lib.blast.common.fields.ParseNegTaxIDList
 
 internal class DeltaBlastImpl(
   shortHelp: HelpShort = HelpShort(),
@@ -41,8 +41,8 @@ internal class DeltaBlastImpl(
   negativeGIListFile: NegativeGIList = NegativeGIList(),
   seqIDListFile: SeqIDList = SeqIDList(),
   negativeSeqIDListFile: NegativeSeqIDList = NegativeSeqIDList(),
-  taxIdListFile: TaxIdList = TaxIdList(),
-  negativeTaxIdListFile: NegativeTaxIdList = NegativeTaxIdList(),
+  taxIDListFile: TaxIDList = TaxIDList(),
+  negativeTaxIDListFile: NegativeTaxIDList = NegativeTaxIDList(),
   taxIds: TaxIDs = TaxIDs(),
   negativeTaxIds: NegativeTaxIDs = NegativeTaxIDs(),
 
@@ -111,8 +111,8 @@ internal class DeltaBlastImpl(
   negativeGIListFile,
   seqIDListFile,
   negativeSeqIDListFile,
-  taxIdListFile,
-  negativeTaxIdListFile,
+  taxIDListFile,
+  negativeTaxIDListFile,
   taxIds,
   negativeTaxIds
 ) {
@@ -149,8 +149,8 @@ internal class DeltaBlastImpl(
     ParseNegGIList(js),
     ParseSeqIDList(js),
     ParseNegSeqIdList(js),
-    ParseTaxIdList(js),
-    ParseNegTaxIdList(js),
+    ParseTaxIDList(js),
+    ParseNegTaxIDList(js),
     ParseTaxIDs(js),
     ParseNegTaxIDs(js),
     ParseWordSizeDelta(js),

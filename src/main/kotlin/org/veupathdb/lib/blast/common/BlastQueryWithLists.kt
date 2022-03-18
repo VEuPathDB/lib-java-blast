@@ -1,6 +1,5 @@
 package org.veupathdb.lib.blast.common
 
-import org.veupathdb.lib.blast.field.*
 import org.veupathdb.lib.blast.common.fields.*
 
 /**
@@ -41,26 +40,26 @@ interface BlastQueryWithLists : BlastQueryBase {
    *
    * Restrict search of database to include only the specified taxonomy IDs
    */
-  var taxIdListFile: TaxIdList
+  var taxIDListFile: TaxIDList
 
   /**
    * -negative_taxidlist
    *
    * Restrict search of database to everything except the specified taxonomy IDs
    */
-  var negativeTaxIdListFile: NegativeTaxIdList
+  var negativeTaxIDListFile: NegativeTaxIDList
 
   /**
    * -taxids
    *
    * Restrict search of database to include only the specified taxonomy IDs
    */
-  var taxIds: TaxIDs
+  var taxIDs: TaxIDs
 
   /**
    * -negative_taxids
    *
    * Restrict search of database to everything except the specified taxonomy IDs
    */
-  var negativeTaxIds: NegativeTaxIDs
+  var negativeTaxIDs: NegativeTaxIDs
 }

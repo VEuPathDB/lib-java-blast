@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.BlastQueryWithIPGImpl
 import org.veupathdb.lib.blast.common.fields.*
-import org.veupathdb.lib.blast.field.NegativeTaxIdList
-import org.veupathdb.lib.blast.field.ParseNegTaxIdList
+import org.veupathdb.lib.blast.common.fields.NegativeTaxIDList
+import org.veupathdb.lib.blast.common.fields.ParseNegTaxIDList
 import org.veupathdb.lib.blast.psiblast.fields.*
 
 internal class PSIBlastImpl(
@@ -41,8 +41,8 @@ internal class PSIBlastImpl(
   negativeGIListFile:       NegativeGIList           = NegativeGIList(),
   seqIDListFile:            SeqIDList                = SeqIDList(),
   negativeSeqIDListFile:    NegativeSeqIDList        = NegativeSeqIDList(),
-  taxIdListFile:            TaxIdList                = TaxIdList(),
-  negativeTaxIdListFile:    NegativeTaxIdList        = NegativeTaxIdList(),
+  taxIDListFile:            TaxIDList                = TaxIDList(),
+  negativeTaxIDListFile: NegativeTaxIDList = NegativeTaxIDList(),
   taxIds:                   TaxIDs                   = TaxIDs(),
   negativeTaxIds:           NegativeTaxIDs           = NegativeTaxIDs(),
   ipgListFile:              IPGList                  = IPGList(),
@@ -115,8 +115,8 @@ internal class PSIBlastImpl(
   negativeGIListFile,
   seqIDListFile,
   negativeSeqIDListFile,
-  taxIdListFile,
-  negativeTaxIdListFile,
+  taxIDListFile,
+  negativeTaxIDListFile,
   taxIds,
   negativeTaxIds,
   ipgListFile,
@@ -155,8 +155,8 @@ internal class PSIBlastImpl(
     ParseNegGIList(js),
     ParseSeqIDList(js),
     ParseNegSeqIdList(js),
-    ParseTaxIdList(js),
-    ParseNegTaxIdList(js),
+    ParseTaxIDList(js),
+    ParseNegTaxIDList(js),
     ParseTaxIDs(js),
     ParseNegTaxIDs(js),
     ParseIPGList(js),

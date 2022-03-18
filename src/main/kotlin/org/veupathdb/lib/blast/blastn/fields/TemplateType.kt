@@ -55,6 +55,6 @@ enum class TemplateTypeType {
     Coding           -> "coding"
     CodingAndOptimal -> "coding_and_optimal"
     Optimal          -> "optimal"
-    None             -> throw IllegalStateException()
+    None             -> "none"
   }
 }

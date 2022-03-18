@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast.field
+package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagNegativeTaxIDList
@@ -9,14 +9,14 @@ import org.veupathdb.lib.blast.util.put
 import org.veupathdb.lib.blast.util.reqString
 
 
-internal fun ParseNegTaxIdList(js: ObjectNode) =
+internal fun ParseNegTaxIDList(js: ObjectNode) =
   js[FlagNegativeTaxIDList]?.let {
-    NegativeTaxIdList(it.reqString(FlagNegativeTaxIDList))
-  } ?: NegativeTaxIdList()
+    NegativeTaxIDList(it.reqString(FlagNegativeTaxIDList))
+  } ?: NegativeTaxIDList()
 
 
 @JvmInline
-value class NegativeTaxIdList(val value: String = "") : BlastField {
+value class NegativeTaxIDList(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
   override fun appendJson(js: ObjectNode) =

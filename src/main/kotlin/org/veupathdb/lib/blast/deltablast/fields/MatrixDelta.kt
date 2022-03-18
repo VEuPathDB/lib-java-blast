@@ -31,6 +31,7 @@ value class MatrixDelta(val value: MatrixDeltaType = MatrixDeltaType.None)
 }
 
 
+@Suppress("NOTHING_TO_INLINE")
 private inline fun parseEnum(js: JsonNode): MatrixDeltaType {
   val tmp = js.reqString(FlagMatrix).uppercase()
 

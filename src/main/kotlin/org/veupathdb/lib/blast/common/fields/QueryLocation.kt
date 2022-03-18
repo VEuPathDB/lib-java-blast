@@ -29,12 +29,19 @@ internal fun ParseQueryLocation(js: ObjectNode): QueryLocation {
 data class QueryLocation(val start: UInt = DefStart, val stop: UInt = DefStop)
   : BlastField
 {
+  init {
+    if (stop < start)
+      throw IllegalArgumentException("$FlagQueryLocation stop cannot be greater than the start.  Given value: $start-$stop")
+  }
+
   override val isDefault get() = start == DefStart && stop == DefStop
 
   override fun appendJson(js: ObjectNode) {
-    with(js.putObject(FlagQueryLocation)) {
-      put(KeyStart, start.toLong())
-      put(KeyStop, stop.toLong())
+    if (!isDefault) {
+      with(js.putObject(FlagQueryLocation)) {
+        put(KeyStart, start.toLong())
+        put(KeyStop, stop.toLong())
+      }
     }
   }
 

@@ -3,7 +3,6 @@ package org.veupathdb.lib.blast.common
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.fields.*
-import org.veupathdb.lib.blast.field.*
 
 internal abstract class BlastQueryWithListsImpl(
   tool: BlastTool,
@@ -40,10 +39,10 @@ internal abstract class BlastQueryWithListsImpl(
   override var negativeGIListFile: NegativeGIList,
   override var seqIDListFile: SeqIDList,
   override var negativeSeqIDListFile: NegativeSeqIDList,
-  override var taxIdListFile: TaxIdList,
-  override var negativeTaxIdListFile: NegativeTaxIdList,
-  override var taxIds: TaxIDs,
-  override var negativeTaxIds: NegativeTaxIDs,
+  override var taxIDListFile: TaxIDList,
+  override var negativeTaxIDListFile: NegativeTaxIDList,
+  override var taxIDs: TaxIDs,
+  override var negativeTaxIDs: NegativeTaxIDs,
 ) : BlastQueryWithLists, BlastQueryBaseImpl(
   tool,
   shortHelp,
@@ -83,10 +82,10 @@ internal abstract class BlastQueryWithListsImpl(
     negativeGIListFile.appendJson(js)
     seqIDListFile.appendJson(js)
     negativeSeqIDListFile.appendJson(js)
-    taxIdListFile.appendJson(js)
-    negativeTaxIdListFile.appendJson(js)
-    taxIds.appendJson(js)
-    negativeTaxIds.appendJson(js)
+    taxIDListFile.appendJson(js)
+    negativeTaxIDListFile.appendJson(js)
+    taxIDs.appendJson(js)
+    negativeTaxIDs.appendJson(js)
   }
 
   override fun appendCli(sb: StringBuilder) {
@@ -96,10 +95,10 @@ internal abstract class BlastQueryWithListsImpl(
     negativeGIListFile.appendCliSegment(sb)
     seqIDListFile.appendCliSegment(sb)
     negativeSeqIDListFile.appendCliSegment(sb)
-    taxIdListFile.appendCliSegment(sb)
-    negativeTaxIdListFile.appendCliSegment(sb)
-    taxIds.appendCliSegment(sb)
-    negativeTaxIds.appendCliSegment(sb)
+    taxIDListFile.appendCliSegment(sb)
+    negativeTaxIDListFile.appendCliSegment(sb)
+    taxIDs.appendCliSegment(sb)
+    negativeTaxIDs.appendCliSegment(sb)
   }
 
   override fun appendCli(cli: MutableList<String>) {
@@ -109,9 +108,9 @@ internal abstract class BlastQueryWithListsImpl(
     negativeGIListFile.appendCliParts(cli)
     seqIDListFile.appendCliParts(cli)
     negativeSeqIDListFile.appendCliParts(cli)
-    taxIdListFile.appendCliParts(cli)
-    negativeTaxIdListFile.appendCliParts(cli)
-    taxIds.appendCliParts(cli)
-    negativeTaxIds.appendCliParts(cli)
+    taxIDListFile.appendCliParts(cli)
+    negativeTaxIDListFile.appendCliParts(cli)
+    taxIDs.appendCliParts(cli)
+    negativeTaxIDs.appendCliParts(cli)
   }
 }

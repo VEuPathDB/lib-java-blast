@@ -36,7 +36,7 @@ internal fun ParseSegX(js: ObjectNode): SegX {
   val tmp = js[FlagSeg] ?: return NoSeg
 
   if (tmp.isTextual) {
-    return when (val v = js.textValue()) {
+    return when (js.textValue()) {
       "yes" -> YesSeg
       "no"  -> NoSeg
       else  -> throw IllegalArgumentException("$FlagSeg must be an object or one of the string values \"yes\" or \"no\".")
@@ -131,27 +131,33 @@ internal data class ValSeg(
     window == DefWindow && locut == DefLocut && hicut == DefHicut
 
   override fun appendJson(js: ObjectNode) {
-    js.set<ObjectNode>(FlagSeg, Json.new<ObjectNode> {
-      put(KeyWindow, window)
-      put(KeyLocut, locut)
-      put(KeyHicut, hicut)
-    })
+    if (!isDefault) {
+      js.set<ObjectNode>(FlagSeg, Json.new<ObjectNode> {
+        put(KeyWindow, window)
+        put(KeyLocut, locut)
+        put(KeyHicut, hicut)
+      })
+    }
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
-    cli.append(' ')
-      .append(FlagSeg)
-      .append(" '")
-      .append(window)
-      .append(' ')
-      .append(locut)
-      .append(' ')
-      .append(hicut)
-      .append('\'')
+    if (!isDefault) {
+      cli.append(' ')
+        .append(FlagSeg)
+        .append(" '")
+        .append(window)
+        .append(' ')
+        .append(locut)
+        .append(' ')
+        .append(hicut)
+        .append('\'')
+    }
   }
 
   override fun appendCliParts(cli: MutableList<String>) {
-    cli.add(FlagSeg)
-    cli.add("$window $locut $hicut")
+    if (!isDefault) {
+      cli.add(FlagSeg)
+      cli.add("$window $locut $hicut")
+    }
   }
 }

@@ -67,6 +67,6 @@ enum class ScoringMatrixXValue {
       Pam30    -> "PAM30"
       Pam70    -> "PAM70"
       Pam250   -> "PAM250"
-      else     -> throw IllegalStateException()
+      else     -> "NONE"
     }
 }

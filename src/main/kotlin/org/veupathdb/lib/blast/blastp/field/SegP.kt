@@ -126,11 +126,13 @@ internal data class ValSeg(
   override val isDefault = false
 
   override fun appendJson(js: ObjectNode) {
-    js.set<ObjectNode>(KeySeg, Json.new<ObjectNode> {
-      put(KeyWindow, window)
-      put(KeyLocut, locut)
-      put(KeyHicut, hicut)
-    })
+    if (!isDefault) {
+      js.set<ObjectNode>(KeySeg, Json.new<ObjectNode> {
+        put(KeyWindow, window)
+        put(KeyLocut, locut)
+        put(KeyHicut, hicut)
+      })
+    }
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
