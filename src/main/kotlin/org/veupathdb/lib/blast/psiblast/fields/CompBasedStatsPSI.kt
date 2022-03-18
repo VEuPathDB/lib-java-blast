@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast.blastx.field
+package org.veupathdb.lib.blast.psiblast.fields
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
@@ -10,15 +10,15 @@ import org.veupathdb.lib.blast.util.put
 
 private const val Key = "-comp_based_stats"
 
-private val Def = CompBasedStatsXValue.ConditionalScoreAdjustment
+private val Def = CompBasedStatsPSIValue.ConditionalScoreAdjustment
 
 
-internal fun ParseCompBasedStatsX(js: ObjectNode) =
-  js[Key]?.let { CompBasedStatsX(parseEnum(it)) } ?: CompBasedStatsX()
+internal fun ParseCompBasedStatsPSI(js: ObjectNode) =
+  js[Key]?.let { CompBasedStatsPSI(parseEnum(it)) } ?: CompBasedStatsPSI()
 
 
 @JvmInline
-value class CompBasedStatsX(val value: CompBasedStatsXValue = Def)
+value class CompBasedStatsPSI(val value: CompBasedStatsPSIValue = Def)
   : BlastField
 {
   override val isDefault get() = value == Def
@@ -34,23 +34,23 @@ value class CompBasedStatsX(val value: CompBasedStatsXValue = Def)
 }
 
 
-private fun parseEnum(j: JsonNode): CompBasedStatsXValue {
+private fun parseEnum(j: JsonNode): CompBasedStatsPSIValue {
   if (j.isTextual)
     return when (val v = j.textValue()) {
-      "d", "D"      -> CompBasedStatsXValue.ConditionalScoreAdjustment
-      "0", "f", "F" -> CompBasedStatsXValue.None
-      "1"           -> CompBasedStatsXValue.Statistics
-      "2", "t", "T" -> CompBasedStatsXValue.ConditionalScoreAdjustment
-      "3"           -> CompBasedStatsXValue.UnconditionalScoreAdjustment
+      "d", "D"      -> CompBasedStatsPSIValue.ConditionalScoreAdjustment
+      "0", "f", "F" -> CompBasedStatsPSIValue.None
+      "1"           -> CompBasedStatsPSIValue.Statistics
+      "2", "t", "T" -> CompBasedStatsPSIValue.ConditionalScoreAdjustment
+      "3"           -> CompBasedStatsPSIValue.UnconditionalScoreAdjustment
       else          -> throw IllegalArgumentException("Invalid value \"$v\" for $Key.")
     }
 
   if (j.isIntegralNumber)
     return when (val v = j.intValue()) {
-      0    -> CompBasedStatsXValue.None
-      1    -> CompBasedStatsXValue.Statistics
-      2    -> CompBasedStatsXValue.ConditionalScoreAdjustment
-      3    -> CompBasedStatsXValue.UnconditionalScoreAdjustment
+      0    -> CompBasedStatsPSIValue.None
+      1    -> CompBasedStatsPSIValue.Statistics
+      2    -> CompBasedStatsPSIValue.ConditionalScoreAdjustment
+      3    -> CompBasedStatsPSIValue.UnconditionalScoreAdjustment
       else -> throw IllegalArgumentException("Invalid value \"$v\" for $Key.")
     }
 
@@ -58,7 +58,7 @@ private fun parseEnum(j: JsonNode): CompBasedStatsXValue {
 }
 
 
-enum class CompBasedStatsXValue {
+enum class CompBasedStatsPSIValue {
   None,
   Statistics,
   ConditionalScoreAdjustment,

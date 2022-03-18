@@ -3,22 +3,28 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagMaxTargetSeqs
 import org.veupathdb.lib.blast.serial.BlastField
+import org.veupathdb.lib.blast.util.*
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
 import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqLong
 
 
-private const val Def = 500L
+private const val Def = 500u
 
 
 internal fun ParseMaxTargetSeqs(js: ObjectNode) =
-  js[FlagMaxTargetSeqs]?.let { MaxTargetSeqs(it.reqLong(FlagMaxTargetSeqs)) }
+  js[FlagMaxTargetSeqs]?.let { MaxTargetSeqs(it.reqUInt(FlagMaxTargetSeqs)) }
     ?: MaxTargetSeqs()
 
 
 @JvmInline
-value class MaxTargetSeqs(val value: Long = Def) : BlastField {
+value class MaxTargetSeqs(val value: UInt = Def) : BlastField {
+
+  init {
+    if (value < 1u)
+      throw IllegalArgumentException("$FlagMaxTargetSeqs must be >= 1")
+  }
+
   override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =

@@ -1,17 +1,20 @@
-package org.veupathdb.lib.blast.deltablast
+package org.veupathdb.lib.blast.psiblast
 
-import org.veupathdb.lib.blast.common.BlastQueryWithLists
+import org.veupathdb.lib.blast.common.BlastQueryWithIPG
 import org.veupathdb.lib.blast.common.fields.*
-import org.veupathdb.lib.blast.deltablast.fields.*
+import org.veupathdb.lib.blast.psiblast.fields.*
 
-interface DeltaBlast : BlastQueryWithLists {
+/**
+ * Position-Specific Iterated BLAST 2.11.0+
+ */
+interface PSIBlast : BlastQueryWithIPG {
 
   /**
-   * -word_size <Integer, >=2>
+   *  -word_size <Integer, >=2>
    *
    * Word size for wordfinder algorithm
    */
-  var wordSize: WordSizeDelta
+  var wordSize: WordSizePSI
 
   /**
    * -gapopen <Integer>
@@ -32,7 +35,7 @@ interface DeltaBlast : BlastQueryWithLists {
    *
    * Scoring matrix name (normally BLOSUM62)
    */
-  var matrix: MatrixDelta
+  var matrix: MatrixPSI
 
   /**
    * -threshold <Real, >=0>
@@ -43,14 +46,19 @@ interface DeltaBlast : BlastQueryWithLists {
 
   /**
    * -comp_based_stats <String>
-   * Use composition-based statistics:
-   * * D or d: default (equivalent to 1)
-   * * 0 or F or f: No composition-based statistics
-   * * 1 or T or t: Composition-based statistics as in NAR 29:2994-3005, 2001
    *
-   * Default = `1`
+   * Use composition-based statistics:
+   * * D or d: default (equivalent to 2 )
+   * * 0 or F or f: No composition-based statistics
+   * * 1: Composition-based statistics as in NAR 29:2994-3005, 2001
+   * * 2 or T or t : Composition-based score adjustment as in Bioinformatics
+   *   21:902-911, 2005, conditioned on sequence properties
+   * * 3: Composition-based score adjustment as in Bioinformatics 21:902-911,
+   *   2005, unconditionally
+   *
+   * Default = `2`
    */
-  var compBasedStats: CompBasedStatsDelta
+  var compBasedStats: CompBasedStatsPSI
 
   /**
    * -subject <File_In>
@@ -67,7 +75,8 @@ interface DeltaBlast : BlastQueryWithLists {
    * * taxidlist
    * * negative_taxids
    * * negative_taxidlist
-   * * show_domain_hits
+   * * ipglist
+   * * negative_ipglist
    */
   var subjectFile: SubjectFile
 
@@ -86,6 +95,8 @@ interface DeltaBlast : BlastQueryWithLists {
    * * taxidlist
    * * negative_taxids
    * * negative_taxidlist
+   * * ipglist
+   * * negative_ipglist
    * * remote
    */
   var subjectLocation: SubjectLocation
@@ -98,7 +109,7 @@ interface DeltaBlast : BlastQueryWithLists {
    *
    * Default = `no`
    */
-  var seg: SegDelta
+  var seg: SegPSI
 
   /**
    * -soft_masking <Boolean>
@@ -107,7 +118,7 @@ interface DeltaBlast : BlastQueryWithLists {
    *
    * Default = `false`
    */
-  var softMasking: SoftMaskingDelta
+  var softMasking: SoftMaskingPSI
 
   /**
    * -qcov_hsp_perc <Real, 0..100>
@@ -156,16 +167,9 @@ interface DeltaBlast : BlastQueryWithLists {
   var subjectBestHit: SubjectBestHit
 
   /**
-   * -max_target_seqs <Integer, >=1>
+   * -sum_stats <Boolean>
    *
-   * Maximum number of aligned sequences to keep (value of 5 or more is
-   * recommended)
-   *
-   * Default = `500`
-   *
-   * Incompatible with:
-   * * num_descriptions
-   * * num_alignments
+   * Use sum statistics
    */
   var sumStats: SumStats
 
@@ -217,6 +221,9 @@ interface DeltaBlast : BlastQueryWithLists {
    * Number of iterations to perform (0 means run until convergence)
    *
    * Default = `1`
+   *
+   * Incompatible with:
+   * * remote
    */
   var numIterations: NumIterations
 
@@ -244,10 +251,74 @@ interface DeltaBlast : BlastQueryWithLists {
   /**
    * -save_each_pssm
    *
-   * Save PSSM after each iteration (file name is given in -save_pssm or
-   * -save_ascii_pssm options)
+   * Save PSSM after each iteration (file name is given in `-save_pssm` or
+   * `-save_ascii_pssm` options)
    */
   var saveEachPSSM: SaveEachPSSM
+
+  /**
+   * -in_msa <File_In>
+   *
+   * File name of multiple sequence alignment to restart PSI-BLAST
+   *
+   * Incompatible with:
+   * * in_pssm
+   * * query
+   * * query_loc
+   * * phi_pattern
+   */
+  var inMSAFile: InMSAFile
+
+  /**
+   *  -msa_master_idx <Integer, >=1>
+   *
+   * Ordinal number (1-based index) of the sequence to use as a master in the
+   * multiple sequence alignment. If not provided, the first sequence in the
+   * multiple sequence alignment will be used
+   *
+   * Requires:
+   * * in_msa
+   *
+   * Incompatible with:
+   * * in_pssm
+   * * query
+   * * query_loc
+   * * phi_pattern,
+  ignore_msa_master
+   */
+  var msaMasterIndex: MSAMasterIndex
+
+  /**
+   * -ignore_msa_master
+   *
+   * Ignore the master sequence when creating PSSM
+   *
+   * Requires:
+   * * in_msa
+   *
+   * Incompatible with:
+   * * msa_master_idx
+   * * in_pssm
+   * * query
+   * * query_loc
+   * * phi_pattern
+   */
+  var ignoreMSAMaster: IgnoreMSAMaster
+
+  /**
+   * -in_pssm <File_In>
+   *
+   * PSI-BLAST checkpoint file
+   *
+   * Incompatible with:
+   * * in_msa
+   * * msa_master_idx
+   * * ignore_msa_master
+   * * query
+   * * query_loc
+   * * phi_pattern
+   */
+  var inPSSMFile: InPSSMFile
 
   /**
    * -pseudocount <Integer>
@@ -259,15 +330,6 @@ interface DeltaBlast : BlastQueryWithLists {
   var pseudoCount: PseudoCount
 
   /**
-   * -domain_inclusion_ethresh <Real>
-   *
-   * E-value inclusion threshold for alignments with conserved domains
-   *
-   * Default = `0.05`
-   */
-  var domainInclusionEValueThreshold: DomainInclusionEValueThreshold
-
-  /**
    * -inclusion_ethresh <Real>
    *
    * E-value inclusion threshold for pairwise alignments
@@ -277,22 +339,15 @@ interface DeltaBlast : BlastQueryWithLists {
   var inclusionEValueThreshold: InclusionEValueThreshold
 
   /**
-   * -rpsdb <String>
+   * -phi_pattern <File_In>
    *
-   * BLAST domain database name
-   *
-   * Default = `cdd_delta`
-   */
-  var rpsDB: RPSDB
-
-  /**
-   * -show_domain_hits
-   *
-   * Show domain hits
+   * File name containing pattern to search
    *
    * Incompatible with:
-   * * remote
-   * * subject
+   * * in_msa
+   * * msa_master_idx
+   * * ignore_msa_master
+   * * in_pssm
    */
-  var showDomainHits: ShowDomainHits
+  var phiPatternFile: PhiPatternFile
 }

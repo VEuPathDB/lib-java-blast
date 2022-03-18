@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "oneOf": [
+    {
+      "type": "string",
+      "enum": [
+        "d", "D",
+        "0", "f", "F",
+        "1",
+        "2", "t", "T",
+        "3"
+      ]
+    },
+    {
+      "type": "integer",
+      "enum": [
+        0, 1, 2, 3
+      ]
+    }
+  ]
+}

@@ -7,6 +7,8 @@ import org.veupathdb.lib.blast.blastp.BlastP
 import org.veupathdb.lib.blast.blastp.BlastPImpl
 import org.veupathdb.lib.blast.blastx.BlastX
 import org.veupathdb.lib.blast.blastx.BlastXImpl
+import org.veupathdb.lib.blast.deltablast.DeltaBlast
+import org.veupathdb.lib.blast.deltablast.DeltaBlastImpl
 
 object Blast {
 
@@ -57,4 +59,20 @@ object Blast {
    * @return The new [BlastX] instance.
    */
   fun blastx(): BlastX = BlastXImpl()
+
+  /**
+   * Creates a new [DeltaBlast] instance by parsing the given JSON input.
+   *
+   * @param js JSON object to parse.
+   *
+   * @return The new [DeltaBlast] instance.
+   */
+  fun deltaBlast(js: ObjectNode): DeltaBlast = DeltaBlastImpl(js)
+
+  /**
+   * Creates a new, defaulted [DeltaBlast] instance.
+   *
+   * @return The new [DeltaBlast] instance.
+   */
+  fun deltaBlast(): DeltaBlast = DeltaBlastImpl()
 }

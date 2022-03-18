@@ -37,10 +37,12 @@ value class CompBasedStatsP(val value: CompBasedStatsPValue = Def)
 private fun parseEnum(j: JsonNode): CompBasedStatsPValue {
   if (j.isTextual)
     return when (val v = j.textValue()) {
-      "d", "D" -> CompBasedStatsPValue.ConditionalScoreAdjustment
-      "f", "F" -> CompBasedStatsPValue.None
-      "t", "T" -> CompBasedStatsPValue.ConditionalScoreAdjustment
-      else     -> throw IllegalArgumentException("Invalid value \"$v\" for $Key.")
+      "d", "D"      -> CompBasedStatsPValue.ConditionalScoreAdjustment
+      "0", "f", "F" -> CompBasedStatsPValue.None
+      "1"           -> CompBasedStatsPValue.Statistics
+      "2", "t", "T" -> CompBasedStatsPValue.ConditionalScoreAdjustment
+      "3"           -> CompBasedStatsPValue.UnconditionalScoreAdjustment
+      else          -> throw IllegalArgumentException("Invalid value \"$v\" for $Key.")
     }
 
   if (j.isIntegralNumber)
