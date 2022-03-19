@@ -2,17 +2,15 @@ package org.veupathdb.lib.blast.blastn.fields
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagTask
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
 import org.veupathdb.lib.blast.util.put
 
 
-private const val Key = "-task"
-
-
 internal fun ParseBlastNTask(js: ObjectNode) =
-  BlastNTask(js[Key].parseTask())
+  BlastNTask(js[FlagTask].parseTask())
 
 
 @JvmInline
@@ -22,13 +20,13 @@ value class BlastNTask(val value: BlastNTaskType = BlastNTaskType.Megablast)
   override val isDefault get() = value == BlastNTaskType.Megablast
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, Key, value.value)
+    js.put(isDefault, FlagTask, value.value)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, Key, value.value)
+    cli.append(isDefault, FlagTask, value.value)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, Key, value.value)
+    cli.add(isDefault, FlagTask, value.value)
 }
 
 
@@ -40,7 +38,7 @@ private fun JsonNode?.parseTask(): BlastNTaskType {
     return BlastNTaskType.Megablast
 
   if (!isTextual)
-    throw IllegalArgumentException("$Key must be a string value.")
+    throw IllegalArgumentException("$FlagTask must be a string value.")
 
   val tmp = textValue()
 

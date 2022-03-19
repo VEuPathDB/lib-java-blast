@@ -55,9 +55,9 @@ internal class BlastNImpl(
   override var subjectFile:                  SubjectFile                  = SubjectFile(),
   override var subjectLocation:              SubjectLocation              = SubjectLocation(),
   override var dust:                         Dust                         = ValDust(),
-  override var filteringDB:                  FilteringDB                  = FilteringDB(),
+  override var filteringDBFile:              FilteringDB                  = FilteringDB(),
   override var windowMaskerTaxID:            WindowMaskerTaxID            = WindowMaskerTaxID(),
-  override var windowMaskerDB:               WindowMaskerDB               = WindowMaskerDB(),
+  override var windowMaskerDBFile:           WindowMaskerDB               = WindowMaskerDB(),
   override var dbSoftMask:                   DBSoftMask                   = DBSoftMask(),
   override var dbHardMask:                   DBHardMask                   = DBHardMask(),
   override var percentIdentity:              PercentIdentity              = PercentIdentity(),
@@ -66,12 +66,12 @@ internal class BlastNImpl(
   override var templateLength:               TemplateLength               = TemplateLength(),
   override var sumStats:                     SumStats                     = SumStats(),
   override var extensionDropoffPrelimGapped: ExtensionDropoffPrelimGapped = ExtensionDropoffPrelimGapped(),
-  override var extensionDropoffFinalGapped: ExtensionDropoffFinalGapped = ExtensionDropoffFinalGapped(),
+  override var extensionDropoffFinalGapped:  ExtensionDropoffFinalGapped  = ExtensionDropoffFinalGapped(),
   override var nonGreedy:                    NonGreedy                    = NonGreedy(),
   override var minRawGappedScore:            MinRawGappedScore            = MinRawGappedScore(),
   override var ungappedAlignmentsOnly:       UngappedAlignmentsOnly       = UngappedAlignmentsOnly(),
   override var offDiagonalRange:             OffDiagonalRange             = OffDiagonalRange(),
-  override var numCpuCores:                  NumCPUCores                  = NumCPUCores(),
+  override var numCPUCores:                  NumCPUCores                  = NumCPUCores(),
   override var bestHitOverhang:              BestHitOverhang              = BestHitOverhang(),
   override var bestHitScoreEdge:             BestHitScoreEdge             = BestHitScoreEdge(),
   override var subjectBestHit:               SubjectBestHit               = SubjectBestHit(),
@@ -200,9 +200,9 @@ internal class BlastNImpl(
     subjectFile.appendJson(js)
     subjectLocation.appendJson(js)
     dust.appendJson(js)
-    filteringDB.appendJson(js)
+    filteringDBFile.appendJson(js)
     windowMaskerTaxID.appendJson(js)
-    windowMaskerDB.appendJson(js)
+    windowMaskerDBFile.appendJson(js)
     dbSoftMask.appendJson(js)
     dbHardMask.appendJson(js)
     percentIdentity.appendJson(js)
@@ -216,10 +216,11 @@ internal class BlastNImpl(
     minRawGappedScore.appendJson(js)
     ungappedAlignmentsOnly.appendJson(js)
     offDiagonalRange.appendJson(js)
-    numCpuCores.appendJson(js)
+    numCPUCores.appendJson(js)
     bestHitOverhang.appendJson(js)
     bestHitScoreEdge.appendJson(js)
     subjectBestHit.appendJson(js)
+    softMasking.appendJson(js)
   }
 
   override fun appendCli(sb: StringBuilder) {
@@ -236,9 +237,9 @@ internal class BlastNImpl(
     subjectFile.appendCliSegment(sb)
     subjectLocation.appendCliSegment(sb)
     dust.appendCliSegment(sb)
-    filteringDB.appendCliSegment(sb)
+    filteringDBFile.appendCliSegment(sb)
     windowMaskerTaxID.appendCliSegment(sb)
-    windowMaskerDB.appendCliSegment(sb)
+    windowMaskerDBFile.appendCliSegment(sb)
     dbSoftMask.appendCliSegment(sb)
     dbHardMask.appendCliSegment(sb)
     percentIdentity.appendCliSegment(sb)
@@ -252,10 +253,11 @@ internal class BlastNImpl(
     minRawGappedScore.appendCliSegment(sb)
     ungappedAlignmentsOnly.appendCliSegment(sb)
     offDiagonalRange.appendCliSegment(sb)
-    numCpuCores.appendCliSegment(sb)
+    numCPUCores.appendCliSegment(sb)
     bestHitOverhang.appendCliSegment(sb)
     bestHitScoreEdge.appendCliSegment(sb)
     subjectBestHit.appendCliSegment(sb)
+    softMasking.appendCliSegment(sb)
   }
 
   override fun appendCli(cli: MutableList<String>) {
@@ -272,9 +274,9 @@ internal class BlastNImpl(
     subjectFile.appendCliParts(cli)
     subjectLocation.appendCliParts(cli)
     dust.appendCliParts(cli)
-    filteringDB.appendCliParts(cli)
+    filteringDBFile.appendCliParts(cli)
     windowMaskerTaxID.appendCliParts(cli)
-    windowMaskerDB.appendCliParts(cli)
+    windowMaskerDBFile.appendCliParts(cli)
     dbSoftMask.appendCliParts(cli)
     dbHardMask.appendCliParts(cli)
     percentIdentity.appendCliParts(cli)
@@ -288,9 +290,10 @@ internal class BlastNImpl(
     minRawGappedScore.appendCliParts(cli)
     ungappedAlignmentsOnly.appendCliParts(cli)
     offDiagonalRange.appendCliParts(cli)
-    numCpuCores.appendCliParts(cli)
+    numCPUCores.appendCliParts(cli)
     bestHitOverhang.appendCliParts(cli)
     bestHitScoreEdge.appendCliParts(cli)
     subjectBestHit.appendCliParts(cli)
+    softMasking.appendCliParts(cli)
   }
 }

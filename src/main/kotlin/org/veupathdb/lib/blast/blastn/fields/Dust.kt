@@ -1,10 +1,10 @@
 package org.veupathdb.lib.blast.blastn.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.serial.BlastField
 
 
-private const val KeyDust   = "-dust"
 private const val KeyLevel  = "level"
 private const val KeyWindow = "window"
 private const val KeyLinker = "linker"
@@ -47,7 +47,7 @@ sealed interface Dust : BlastField {
 
 
 internal fun ParseDust(js: ObjectNode): Dust {
-  val tmp = js[KeyDust] ?: return ValDust()
+  val tmp = js[FlagDust] ?: return ValDust()
 
   if (tmp.isTextual)
     return parseTextDust(tmp.textValue())
@@ -55,7 +55,7 @@ internal fun ParseDust(js: ObjectNode): Dust {
   if (tmp.isObject)
     return parseValDust(tmp as ObjectNode)
 
-  throw IllegalArgumentException("Invalid dust value $tmp")
+  throw IllegalArgumentException("Invalid $FlagDust value $tmp")
 }
 
 
@@ -68,11 +68,11 @@ private fun parseValDust(js: ObjectNode): ValDust {
   val nLinker = js[KeyLinker]
 
   if (nLevel != null && !nLevel.isIntegralNumber)
-    throw IllegalArgumentException("$KeyDust.$KeyLevel must be an int value.")
+    throw IllegalArgumentException("$FlagDust.$KeyLevel must be an int value.")
   if (nWindow != null && !nWindow.isIntegralNumber)
-    throw IllegalArgumentException("$KeyDust.$KeyWindow must be an int value.")
+    throw IllegalArgumentException("$FlagDust.$KeyWindow must be an int value.")
   if (nLinker != null && !nLinker.isIntegralNumber)
-    throw IllegalArgumentException("$KeyDust.$KeyLinker must be an int value.")
+    throw IllegalArgumentException("$FlagDust.$KeyLinker must be an int value.")
 
   return ValDust(
     nLevel?.intValue() ?: DefLevel,
@@ -101,7 +101,7 @@ internal data class ValDust(
     if (isDefault)
       return
 
-    with(js.putObject(KeyDust)) {
+    with(js.putObject(FlagDust)) {
       put(KeyLevel, level)
       put(KeyWindow, window)
       put(KeyLinker, linker)
@@ -111,7 +111,7 @@ internal data class ValDust(
   override fun appendCliSegment(cli: StringBuilder) {
     if (!isDefault)
       cli.append(' ')
-        .append(KeyDust)
+        .append(FlagDust)
         .append(" '")
         .append(level)
         .append(' ')
@@ -123,7 +123,7 @@ internal data class ValDust(
 
   override fun appendCliParts(cli: MutableList<String>) {
     if (!isDefault) {
-      cli.add(KeyDust)
+      cli.add(FlagDust)
       cli.add("$level $window $linker")
     }
   }
@@ -161,15 +161,15 @@ internal object YesDust : Dust {
   override val isDefault get() = false
 
   override fun appendJson(js: ObjectNode) {
-    js.put(KeyDust, "yes")
+    js.put(FlagDust, "yes")
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
-    cli.append(' ').append(KeyDust).append(' ').append("yes")
+    cli.append(' ').append(FlagDust).append(' ').append("yes")
   }
 
   override fun appendCliParts(cli: MutableList<String>) {
-    cli.add(KeyDust)
+    cli.add(FlagDust)
     cli.add("yes")
   }
 }
@@ -195,15 +195,15 @@ internal object NoDust : Dust {
   override val isDefault get() = false
 
   override fun appendJson(js: ObjectNode) {
-    js.put(KeyDust, "no")
+    js.put(FlagDust, "no")
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
-    cli.append(' ').append(KeyDust).append(' ').append("no")
+    cli.append(' ').append(FlagDust).append(' ').append("no")
   }
 
   override fun appendCliParts(cli: MutableList<String>) {
-    cli.add(KeyDust)
+    cli.add(FlagDust)
     cli.add("no")
   }
 }

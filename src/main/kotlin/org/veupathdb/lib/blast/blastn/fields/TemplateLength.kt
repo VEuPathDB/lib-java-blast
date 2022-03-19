@@ -1,20 +1,18 @@
-package org.veupathdb.lib.blast.blastn
+package org.veupathdb.lib.blast.blastn.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagTemplateLength
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
 import org.veupathdb.lib.blast.util.put
 
 
-private const val Key = "-template_length"
-
-
 internal fun ParseTemplateLength(js: ObjectNode): TemplateLength {
-  val tmp = js[Key] ?: return TemplateLength()
+  val tmp = js[FlagTemplateLength] ?: return TemplateLength()
 
   if (!tmp.isIntegralNumber)
-    throw IllegalArgumentException("$Key must be one of 16, 18, 21")
+    throw IllegalArgumentException("$FlagTemplateLength must be one of 16, 18, 21")
 
   return TemplateLength(parseTemplateLength(js.intValue()))
 }
@@ -27,13 +25,13 @@ value class TemplateLength(
   override val isDefault get() = value == TemplateLengthValue.None
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, Key, value.value)
+    js.put(isDefault, FlagTemplateLength, value.value)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, Key, value.value)
+    cli.append(isDefault, FlagTemplateLength, value.value)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, Key, value.value)
+    cli.add(isDefault, FlagTemplateLength, value.value)
 }
 
 
@@ -42,7 +40,7 @@ private fun parseTemplateLength(value: Int): TemplateLengthValue {
     16   -> TemplateLengthValue.Sixteen
     18   -> TemplateLengthValue.Eighteen
     21   -> TemplateLengthValue.TwentyOne
-    else -> throw IllegalArgumentException("$Key must be one of 16, 18, 21")
+    else -> throw IllegalArgumentException("$FlagTemplateLength must be one of 16, 18, 21")
   }
 }
 

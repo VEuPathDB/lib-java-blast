@@ -100,7 +100,7 @@ interface BlastN : BlastQueryWithLists {
    *
    * BLAST database containing filtering elements (i.e.: repeats)
    */
-  var filteringDB: FilteringDB
+  var filteringDBFile: FilteringDB
 
   /**
    * -window_masker_taxid
@@ -114,7 +114,7 @@ interface BlastN : BlastQueryWithLists {
    *
    * Enable WindowMasker filtering using this repeats database.
    */
-  var windowMaskerDB: WindowMaskerDB
+  var windowMaskerDBFile: WindowMaskerDB
 
   /**
    * -db_soft_mask
@@ -224,7 +224,7 @@ interface BlastN : BlastQueryWithLists {
    *
    * Default = `1`
    */
-  var numCpuCores: NumCPUCores
+  var numCPUCores: NumCPUCores
 
   /**
    * -best_hit_overhang
