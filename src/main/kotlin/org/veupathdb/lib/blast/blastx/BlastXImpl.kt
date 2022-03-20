@@ -40,7 +40,7 @@ internal class BlastXImpl(
   seqIDListFile:            SeqIDList                = SeqIDList(),
   negativeSeqIDListFile:    NegativeSeqIDList        = NegativeSeqIDList(),
   taxIDListFile:            TaxIDList                = TaxIDList(),
-  negativeTaxIDListFile: NegativeTaxIDList = NegativeTaxIDList(),
+  negativeTaxIDListFile:    NegativeTaxIDList        = NegativeTaxIDList(),
   taxIds:                   TaxIDs                   = TaxIDs(),
   negativeTaxIds:           NegativeTaxIDs           = NegativeTaxIDs(),
   ipgListFile:              IPGList                  = IPGList(),
@@ -64,7 +64,7 @@ internal class BlastXImpl(
   override var cullingLimit:                 CullingLimit                 = CullingLimit(),
   override var sumStats:                     SumStats                     = SumStats(),
   override var extensionDropoffPrelimGapped: ExtensionDropoffPrelimGapped = ExtensionDropoffPrelimGapped(),
-  override var extensionDropoffFinalGapped: ExtensionDropoffFinalGapped = ExtensionDropoffFinalGapped(),
+  override var extensionDropoffFinalGapped:  ExtensionDropoffFinalGapped  = ExtensionDropoffFinalGapped(),
   override var ungappedAlignmentsOnly:       UngappedAlignmentsOnly       = UngappedAlignmentsOnly(),
   override var numCPUCores:                  NumCPUCores                  = NumCPUCores(),
   override var useSmithWatermanTraceback:    UseSmithWatermanTraceback    = UseSmithWatermanTraceback(),
@@ -208,6 +208,7 @@ internal class BlastXImpl(
     bestHitOverhang.appendJson(js)
     bestHitScoreEdge.appendJson(js)
     subjectBestHit.appendJson(js)
+    softMasking.appendJson(js)
   }
 
   override fun appendCli(sb: StringBuilder) {
@@ -238,6 +239,7 @@ internal class BlastXImpl(
     bestHitOverhang.appendCliSegment(sb)
     bestHitScoreEdge.appendCliSegment(sb)
     subjectBestHit.appendCliSegment(sb)
+    softMasking.appendCliSegment(sb)
   }
 
   override fun appendCli(cli: MutableList<String>) {
@@ -268,5 +270,6 @@ internal class BlastXImpl(
     bestHitOverhang.appendCliParts(cli)
     bestHitScoreEdge.appendCliParts(cli)
     subjectBestHit.appendCliParts(cli)
+    softMasking.appendCliParts(cli)
   }
 }

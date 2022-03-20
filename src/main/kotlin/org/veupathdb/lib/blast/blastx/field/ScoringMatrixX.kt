@@ -16,9 +16,9 @@ internal fun ParseScoringMatrixX(js: ObjectNode) =
 
 @JvmInline
 value class ScoringMatrixX(
-  val value: ScoringMatrixXValue = ScoringMatrixXValue.None
+  val value: ScoringMatrixXType = ScoringMatrixXType.None
 ): BlastField {
-  override val isDefault get() = value == ScoringMatrixXValue.None
+  override val isDefault get() = value == ScoringMatrixXType.None
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagMatrix, value.value)
@@ -31,22 +31,22 @@ value class ScoringMatrixX(
 }
 
 
-private fun parseEnum(value: String): ScoringMatrixXValue {
+private fun parseEnum(value: String): ScoringMatrixXType {
   return when (value.uppercase()) {
-    "BLOSUM45" -> ScoringMatrixXValue.Blosum45
-    "BLOSUM50" -> ScoringMatrixXValue.Blosum50
-    "BLOSUM62" -> ScoringMatrixXValue.Blosum62
-    "BLOSUM80" -> ScoringMatrixXValue.Blosum80
-    "BLOSUM90" -> ScoringMatrixXValue.Blosum90
-    "PAM30"    -> ScoringMatrixXValue.Pam30
-    "PAM70"    -> ScoringMatrixXValue.Pam70
-    "PAM250"   -> ScoringMatrixXValue.Pam250
+    "BLOSUM45" -> ScoringMatrixXType.Blosum45
+    "BLOSUM50" -> ScoringMatrixXType.Blosum50
+    "BLOSUM62" -> ScoringMatrixXType.Blosum62
+    "BLOSUM80" -> ScoringMatrixXType.Blosum80
+    "BLOSUM90" -> ScoringMatrixXType.Blosum90
+    "PAM30"    -> ScoringMatrixXType.Pam30
+    "PAM70"    -> ScoringMatrixXType.Pam70
+    "PAM250"   -> ScoringMatrixXType.Pam250
     else       -> throw IllegalArgumentException("Invalid $FlagMatrix value: $value")
   }
 }
 
 
-enum class ScoringMatrixXValue {
+enum class ScoringMatrixXType {
   Blosum45,
   Blosum50,
   Blosum62,

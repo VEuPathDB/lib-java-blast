@@ -44,7 +44,7 @@ interface BlastP : BlastQueryWithIPG {
    *
    * Scoring matrix name (normally BLOSUM62)
    */
-  var matrix: BlastPMatrix
+  var matrix: ScoringMatrixP
 
   /**
    * -threshold

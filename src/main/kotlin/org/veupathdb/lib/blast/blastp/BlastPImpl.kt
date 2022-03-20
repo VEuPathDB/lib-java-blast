@@ -18,7 +18,7 @@ internal class BlastPImpl(
   lineLength:               LineLength               = LineLength(),
   html:                     HTML                     = HTML(),
   sortHits:                 SortHits                 = SortHits(),
-  sortHSPs: SortHSPs = SortHSPs(),
+  sortHSPs:                 SortHSPs                 = SortHSPs(),
   maxTargetSeqs:            MaxTargetSeqs            = MaxTargetSeqs(),
   parseDefLines:            ParseDefLines            = ParseDefLines(),
   queryFile:                QueryFile                = QueryFile(),
@@ -30,8 +30,8 @@ internal class BlastPImpl(
   maxHSPs:                  MaxHSPs                  = MaxHSPs(),
   dbSize:                   DBSize                   = DBSize(),
   searchSpace:              SearchSpace              = SearchSpace(),
-  importSearchStrategy: ImportSearchStrategy = ImportSearchStrategy(),
-  exportSearchStrategy: ExportSearchStrategy = ExportSearchStrategy(),
+  importSearchStrategy:     ImportSearchStrategy     = ImportSearchStrategy(),
+  exportSearchStrategy:     ExportSearchStrategy     = ExportSearchStrategy(),
   extensionDropoffUngapped: ExtensionDropoffUngapped = ExtensionDropoffUngapped(),
   windowSize:               WindowSize               = WindowSize(),
   remote:                   Remote                   = Remote(),
@@ -40,17 +40,17 @@ internal class BlastPImpl(
   seqIDListFile:            SeqIDList                = SeqIDList(),
   negativeSeqIDListFile:    NegativeSeqIDList        = NegativeSeqIDList(),
   taxIDListFile:            TaxIDList                = TaxIDList(),
-  negativeTaxIDListFile: NegativeTaxIDList = NegativeTaxIDList(),
+  negativeTaxIDListFile:    NegativeTaxIDList        = NegativeTaxIDList(),
   taxIds:                   TaxIDs                   = TaxIDs(),
   negativeTaxIds:           NegativeTaxIDs           = NegativeTaxIDs(),
   ipgListFile:              IPGList                  = IPGList(),
   negativeIPGListFile:      NegativeIPGList          = NegativeIPGList(),
 
   override var task:                         BlastPTask                   = BlastPTask(),
-  override var wordSize:                     WordSizeP               = WordSizeP(),
+  override var wordSize:                     WordSizeP                    = WordSizeP(),
   override var gapOpen:                      GapOpen                      = GapOpen(),
   override var gapExtend:                    GapExtend                    = GapExtend(),
-  override var matrix:                       BlastPMatrix                 = BlastPMatrix(),
+  override var matrix:                       ScoringMatrixP               = ScoringMatrixP(),
   override var threshold:                    Threshold                    = Threshold(),
   override var compBasedStats:               CompBasedStatsP              = CompBasedStatsP(),
   override var subjectFile:                  SubjectFile                  = SubjectFile(),
@@ -60,7 +60,7 @@ internal class BlastPImpl(
   override var dbHardMask:                   DBHardMask                   = DBHardMask(),
   override var cullingLimit:                 CullingLimit                 = CullingLimit(),
   override var extensionDropoffPrelimGapped: ExtensionDropoffPrelimGapped = ExtensionDropoffPrelimGapped(),
-  override var extensionDropoffFinalGapped: ExtensionDropoffFinalGapped = ExtensionDropoffFinalGapped(),
+  override var extensionDropoffFinalGapped:  ExtensionDropoffFinalGapped  = ExtensionDropoffFinalGapped(),
   override var ungappedAlignmentsOnly:       UngappedAlignmentsOnly       = UngappedAlignmentsOnly(),
   override var numCPUCores:                  NumCPUCores                  = NumCPUCores(),
   override var useSmithWatermanTraceback:    UseSmithWatermanTraceback    = UseSmithWatermanTraceback(),
@@ -153,7 +153,7 @@ internal class BlastPImpl(
     ParseWordSizeP(js),
     ParseGapOpen(js),
     ParseGapExtend(js),
-    ScoringMatrixP(js),
+    ParseScoringMatrixP(js),
     ParseThreshold(js),
     ParseCompBasedStatsP(js),
     ParseSubjectFile(js),
@@ -197,6 +197,7 @@ internal class BlastPImpl(
     bestHitOverhang.appendJson(js)
     bestHitScoreEdge.appendJson(js)
     subjectBestHit.appendJson(js)
+    softMasking.appendJson(js)
   }
 
   override fun appendCli(sb: StringBuilder) {
@@ -223,6 +224,7 @@ internal class BlastPImpl(
     bestHitOverhang.appendCliSegment(sb)
     bestHitScoreEdge.appendCliSegment(sb)
     subjectBestHit.appendCliSegment(sb)
+    softMasking.appendCliSegment(sb)
   }
 
   override fun appendCli(cli: MutableList<String>) {
@@ -249,5 +251,6 @@ internal class BlastPImpl(
     bestHitOverhang.appendCliParts(cli)
     bestHitScoreEdge.appendCliParts(cli)
     subjectBestHit.appendCliParts(cli)
+    softMasking.appendCliParts(cli)
   }
 }

@@ -11,13 +11,13 @@ import org.veupathdb.lib.blast.util.reqString
 private const val Key = "-matrix"
 
 
-internal fun ScoringMatrixP(js: ObjectNode) =
-  js[Key]?.let { BlastPMatrix(parseMatrix(it.reqString(Key))) }
-    ?: BlastPMatrix()
+internal fun ParseScoringMatrixP(js: ObjectNode) =
+  js[Key]?.let { ScoringMatrixP(parseMatrix(it.reqString(Key))) }
+    ?: ScoringMatrixP()
 
 
 @JvmInline
-value class BlastPMatrix(val value: ScoringMatrixPType = ScoringMatrixPType.None)
+value class ScoringMatrixP(val value: ScoringMatrixPType = ScoringMatrixPType.None)
   : BlastField
 {
   override val isDefault get() = value == ScoringMatrixPType.None
