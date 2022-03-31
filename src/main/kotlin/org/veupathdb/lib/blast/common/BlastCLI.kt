@@ -2,6 +2,7 @@ package org.veupathdb.lib.blast.common
 
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.err.ErrorMap
 import org.veupathdb.lib.blast.serial.BlastCommand
 
 /**
@@ -12,75 +13,77 @@ interface BlastCLI : BlastCommand {
   val tool: BlastTool
 
   /**
-   * Print USAGE and DESCRIPTION;  ignore all other parameters
+   * -h
    */
   var shortHelp: HelpShort
 
   /**
-   * Print USAGE, DESCRIPTION and ARGUMENTS; ignore all other parameters
+   * -help
    */
   var longHelp: HelpLong
 
   /**
-   * Print version number;  ignore other arguments
+   * -version
    */
   var version: Version
 
   /**
-   * Output file name
+   * -out <File_Out>
    */
   var outFile: OutFile
 
   /**
-   * Formatting options
+   * -outfmt <String>
    */
   var outFormat: OutFormat
 
   /**
-   * Show NCBI GIs in deflines
+   * -show_gis
    */
   var showGIs: ShowGIs
 
   /**
-   * Number of database sequences to show one-line descriptions for
-   * Not applicable for outfmt > 4
+   * -num_descriptions <Integer, >=0>
    */
   var numDescriptions: NumDescriptions
 
   /**
-   * Number of database sequences to show alignments for
+   * -num_alignments <Integer, >=0>
    */
   var numAlignments: NumAlignments
 
   /**
-   * Line length for formatting alignments
-   * Not applicable for outfmt > 4
+   * -line_length <Integer, >=1>
    */
   var lineLength: LineLength
 
   /**
-   * Produce HTML output
+   * -html
    */
   var html: HTML
 
   /**
-   * Sorting option for hits
+   * -sorthits <Integer, (>=0 and =<4)>
    */
   var sortHits: SortHits
 
   /**
-   * Sorting option for hps
+   * -sorthsps <Integer, (>=0 and =<4)>
    */
   var sortHSPs: SortHSPs
 
   /**
-   * Maximum number of aligned sequences to keep
-   * (value of 5 or more is recommended)
+   * -max_target_seqs <Integer, >=1>
    */
   var maxTargetSeqs: MaxTargetSeqs
 
   /**
-   * Should the query and subject defline(s) be parsed
+   * -parse_deflines
    */
   var parseDefLines: ParseDefLines
+
+  /**
+   * Validate the current configuration
+   */
+  fun validate(): ErrorMap
 }

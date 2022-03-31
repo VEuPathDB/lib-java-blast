@@ -1,6 +1,5 @@
 package org.veupathdb.lib.blast.serial
 
-import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 
 interface BlastCommand {
