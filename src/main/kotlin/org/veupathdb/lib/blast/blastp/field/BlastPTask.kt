@@ -15,6 +15,18 @@ internal fun ParseBlastPTask(js: ObjectNode) =
   js[Key]?.let { BlastPTask(parseTask(it.reqString(Key))) } ?: BlastPTask()
 
 
+/**
+ * -task `<String>`
+ *
+ * Permissible values:
+ * * blastp
+ * * blastp-fast
+ * * blastp-short
+ *
+ * Task to execute
+ *
+ * Default = `blastp`
+ */
 @JvmInline
 value class BlastPTask(val value: BlastPTaskType = BlastPTaskType.BlastP)
   : BlastField

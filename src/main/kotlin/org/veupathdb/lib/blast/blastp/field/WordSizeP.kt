@@ -16,6 +16,11 @@ internal fun ParseWordSizeP(js: ObjectNode) =
   js[Key]?.let { WordSizeP(it.reqUInt(Key)) } ?: WordSizeP()
 
 
+/**
+ * -word_size `<Integer, >=2>`
+ *
+ * Word size for wordfinder algorithm
+ */
 @JvmInline
 value class WordSizeP(val value: UInt = Def) : BlastField {
   init {

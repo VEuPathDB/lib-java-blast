@@ -12,6 +12,18 @@ private const val KeyLocut = "locut"
 private const val KeyHicut = "hicut"
 
 
+/**
+ * -seg `<String>`
+ *
+ * Filter query sequence with SEG
+ *
+ * Format:
+ * * yes
+ * * "window locut hicut"
+ * * no (to disable)
+ *
+ * Default = `no`
+ */
 sealed interface SegP : Seg {
   companion object {
 

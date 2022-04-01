@@ -16,6 +16,11 @@ internal fun ParseScoringMatrixP(js: ObjectNode) =
     ?: ScoringMatrixP()
 
 
+/**
+ * -matrix `<String>`
+ *
+ * Scoring matrix name (normally BLOSUM62)
+ */
 @JvmInline
 value class ScoringMatrixP(val value: ScoringMatrixPType = ScoringMatrixPType.None)
   : BlastField
