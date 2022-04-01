@@ -14,6 +14,13 @@ internal fun ParseGapTrigger(js: ObjectNode) =
     ?: GapTrigger()
 
 
+/**
+ * -gap_trigger `<Real>`
+ *
+ * Number of bits to trigger gapping
+ *
+ * Default = `22`
+ */
 @JvmInline
 value class GapTrigger(val value: Double = 22.0) : BlastField {
   override val isDefault get() = value == 22.0

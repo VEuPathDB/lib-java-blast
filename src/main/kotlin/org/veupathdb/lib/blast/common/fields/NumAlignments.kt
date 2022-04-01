@@ -17,6 +17,13 @@ internal fun ParseNumAlignments(js: ObjectNode) =
     ?: NumAlignments()
 
 
+/**
+ * -num_alignments `<Integer, >=0>`
+ *
+ * Number of database sequences to show alignments for
+ *
+ * Default = `250`
+ */
 @JvmInline
 value class NumAlignments(val value: Long = DefaultNumAlignments) : BlastField {
   override val isDefault get() = value == DefaultNumAlignments

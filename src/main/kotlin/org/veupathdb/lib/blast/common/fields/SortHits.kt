@@ -16,6 +16,20 @@ internal fun ParseSortHits(js: ObjectNode) =
     ?: SortHits()
 
 
+/**
+ * -sorthits `<Integer, (>=0 and =<4)>`
+ *
+ * Sorting option for hits.
+ *
+ * Alignment view options:
+ * * `0` = Sort by evalue
+ * * `1` = Sort by bit score
+ * * `2` = Sort by total score
+ * * `3` = Sort by percent identity
+ * * `4` = Sort by query coverage
+ *
+ * Not applicable for -outfmt > `4`
+ */
 @JvmInline
 value class SortHits(val value: HitSorting = HitSorting.None) : BlastField {
   override val isDefault get() = value == HitSorting.None

@@ -18,6 +18,15 @@ internal fun ParseNumDescriptions(js: ObjectNode) =
   } ?: NumDescriptions()
 
 
+/**
+ * -num_descriptions `<Integer, >=0>`
+ *
+ * Number of database sequences to show one-line descriptions for
+ *
+ * Not applicable for outfmt > 4
+ *
+ * Default = `500`
+ */
 @JvmInline
 value class NumDescriptions(val value: Long = DefaultNumDescriptions)
   : BlastField

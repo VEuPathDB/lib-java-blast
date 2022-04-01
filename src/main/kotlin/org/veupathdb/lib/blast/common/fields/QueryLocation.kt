@@ -26,6 +26,11 @@ internal fun ParseQueryLocation(js: ObjectNode): QueryLocation {
 }
 
 
+/**
+ * -query_loc `<String>`
+ *
+ * Location on the query sequence in 1-based offsets (Format: start-stop)
+ */
 data class QueryLocation(val start: UInt = DefStart, val stop: UInt = DefStop)
   : BlastField
 {

@@ -17,6 +17,11 @@ internal fun ParseSearchSpace(js: ObjectNode) =
     ?: SearchSpace()
 
 
+/**
+ * -searchsp `<Int8, >=0>`
+ *
+ * Effective length of the search space
+ */
 @JvmInline
 value class SearchSpace(val value: Byte = DefaultSearchSpace) : BlastField {
   override val isDefault get() = value == DefaultSearchSpace

@@ -13,6 +13,11 @@ internal fun ParseHelpShort(js: ObjectNode) =
   js[FlagHelpShort]?.let { HelpShort(it.reqBool(FlagHelpShort)) } ?: HelpShort()
 
 
+/**
+ * -h
+ *
+ * Print USAGE and DESCRIPTION;  ignore all other parameters.
+ */
 @JvmInline
 value class HelpShort(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

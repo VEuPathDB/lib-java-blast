@@ -15,6 +15,11 @@ internal fun ParseDBSoftMask(js: ObjectNode) =
     DBSoftMask()
 
 
+/**
+ * -db_soft_mask `<String>`
+ *
+ * Filtering algorithm ID to apply to the BLAST database as soft masking
+ */
 @JvmInline
 value class DBSoftMask(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()

@@ -14,6 +14,18 @@ internal fun ParseStrand(js: ObjectNode) =
     ?: Strand()
 
 
+/**
+ * -strand `<String>`
+ *
+ * Permissible values:
+ * * both
+ * * minus
+ * * plus
+ *
+ * Query strand(s) to search against database/subject
+ *
+ * Default = `both`
+ */
 @JvmInline
 value class Strand(val value: StrandType = StrandType.Both) : BlastField {
   override val isDefault get() = value == StrandType.Both

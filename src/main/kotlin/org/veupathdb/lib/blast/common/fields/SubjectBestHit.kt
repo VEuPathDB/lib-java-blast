@@ -21,6 +21,11 @@ internal fun ParseSubjectBestHit(js: ObjectNode): SubjectBestHit {
 }
 
 
+/**
+ * -subject_besthit
+ *
+ * Turn on best hit per subject sequence
+ */
 @JvmInline
 value class SubjectBestHit(val value: Boolean = Def) : BlastField {
   override val isDefault get() = value == Def

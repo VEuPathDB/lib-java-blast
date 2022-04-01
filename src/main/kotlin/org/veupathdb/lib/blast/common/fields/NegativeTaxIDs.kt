@@ -28,6 +28,12 @@ internal fun ParseNegTaxIDs(js: ObjectNode): NegativeTaxIDs {
 }
 
 
+/**
+ * -negative_taxids `<String>`
+ *
+ * Restrict search of database to everything except the specified taxonomy IDs
+ * (multiple IDs delimited by ',')
+ */
 @JvmInline
 value class NegativeTaxIDs(val value: List<String> = emptyList()) : BlastField {
   override val isDefault get() = value.isEmpty()

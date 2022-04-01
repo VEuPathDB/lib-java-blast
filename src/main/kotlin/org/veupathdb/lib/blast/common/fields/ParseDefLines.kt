@@ -14,6 +14,11 @@ internal fun ParseParseDefLines(js: ObjectNode) =
     ?: ParseDefLines()
 
 
+/**
+ * -parse_deflines
+ *
+ * Should the query and subject defline(s) be parsed?
+ */
 @JvmInline
 value class ParseDefLines(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

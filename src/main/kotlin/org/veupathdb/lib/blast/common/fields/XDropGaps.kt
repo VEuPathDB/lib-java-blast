@@ -17,6 +17,11 @@ internal fun ParseXDropUngap(js: ObjectNode) =
   } ?: ExtensionDropoffUngapped()
 
 
+/**
+ * -xdrop_ungap `<Real>`
+ *
+ * X-dropoff value (in bits) for ungapped extensions
+ */
 @JvmInline
 value class ExtensionDropoffUngapped(val value: Double = Double.NaN) : BlastField {
   override val isDefault get() = value.isNaN()
@@ -38,6 +43,11 @@ internal fun ParseXDropGap(js: ObjectNode) =
   } ?: ExtensionDropoffPrelimGapped()
 
 
+/**
+ * -xdrop_gap `<Real>`
+ *
+ * X-dropoff value (in bits) for preliminary gapped extensions
+ */
 @JvmInline
 value class ExtensionDropoffPrelimGapped(val value: Double = Double.NaN) : BlastField {
   override val isDefault get() = value.isNaN()
@@ -59,6 +69,11 @@ internal fun ParseXDropGapFinal(js: ObjectNode) =
   } ?: ExtensionDropoffFinalGapped()
 
 
+/**
+ * -xdrop_gap_final `<Real>`
+ *
+ * X-dropoff value (in bits) for final gapped alignment
+ */
 @JvmInline
 value class ExtensionDropoffFinalGapped(val value: Double = Double.NaN) : BlastField {
   override val isDefault get() = value.isNaN()

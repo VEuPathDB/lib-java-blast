@@ -17,6 +17,14 @@ internal fun ParseMaxTargetSeqs(js: ObjectNode) =
     ?: MaxTargetSeqs()
 
 
+/**
+ * -max_target_seqs `<Integer, >=1>`
+ *
+ * Maximum number of aligned sequences to keep (value of 5 or more is
+ * recommended)
+ *
+ * Default = `500`
+ */
 @JvmInline
 value class MaxTargetSeqs(val value: UInt = Def) : BlastField {
 

@@ -18,16 +18,21 @@ internal fun ParseDBFile(js: ObjectNode): DBFile {
 }
 
 
+/**
+ * -db `<String>`
+ *
+ * BLAST database name
+ */
 @JvmInline
-value class DBFile(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class DBFile(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagDBFile, value)
+    js.put(isDefault, FlagDBFile, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagDBFile, value)
+    cli.append(isDefault, FlagDBFile, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagDBFile, value)
+    cli.add(isDefault, FlagDBFile, file)
 }

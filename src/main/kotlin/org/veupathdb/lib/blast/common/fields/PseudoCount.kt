@@ -14,6 +14,13 @@ internal fun ParsePseudoCount(js: ObjectNode) =
     ?: PseudoCount()
 
 
+/**
+ * -pseudocount `<Integer>`
+ *
+ * Pseudo-count value used when constructing PSSM
+ *
+ * Default = `0`
+ */
 @JvmInline
 value class PseudoCount(val value: Int = 0) : BlastField {
   override val isDefault get() = value == 0

@@ -16,6 +16,11 @@ internal fun ParseSumStats(js: ObjectNode) =
   js[FlagSumStats]?.let { SumStats(it.reqBool(FlagSumStats)) } ?: SumStats()
 
 
+/**
+ * -sum_stats `<Boolean>`
+ *
+ * Use sum statistics
+ */
 @JvmInline
 value class SumStats(val value: Boolean = DefSumStats) : BlastField {
   override val isDefault get() = value == DefSumStats

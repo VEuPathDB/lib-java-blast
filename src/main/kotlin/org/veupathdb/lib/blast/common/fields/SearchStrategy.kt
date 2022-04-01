@@ -16,18 +16,23 @@ internal fun ParseImportSearchStrategy(js: ObjectNode) =
   } ?: ImportSearchStrategy()
 
 
+/**
+ * -import_search_strategy `<File_In>`
+ *
+ * Search strategy to use
+ */
 @JvmInline
-value class ImportSearchStrategy(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class ImportSearchStrategy(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagImportSearchStrategy, value)
+    js.put(isDefault, FlagImportSearchStrategy, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagImportSearchStrategy, value)
+    cli.append(isDefault, FlagImportSearchStrategy, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagImportSearchStrategy, value)
+    cli.add(isDefault, FlagImportSearchStrategy, file)
 }
 
 

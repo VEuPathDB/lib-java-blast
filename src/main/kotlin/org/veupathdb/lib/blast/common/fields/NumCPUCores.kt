@@ -11,6 +11,13 @@ import org.veupathdb.lib.blast.util.put
 private const val Def: UByte = 1u
 
 
+/**
+ * -num_threads `<Integer, >=1>`
+ *
+ * Number of threads (CPUs) to use in the BLAST search
+ *
+ * Default = `1`
+ */
 internal fun ParseNumCPUCores(js: ObjectNode): NumCPUCores {
   val tmp = js[FlagNumThreads] ?: return NumCPUCores()
 

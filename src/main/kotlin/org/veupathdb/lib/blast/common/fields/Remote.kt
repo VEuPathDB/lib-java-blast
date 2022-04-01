@@ -13,6 +13,11 @@ internal fun ParseRemote(js: ObjectNode) =
   js[FlagRemote]?.let { Remote(it.reqBool(FlagRemote)) } ?: Remote()
 
 
+/**
+ * -remote
+ *
+ * Execute search remotely?
+ */
 @JvmInline
 value class Remote(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

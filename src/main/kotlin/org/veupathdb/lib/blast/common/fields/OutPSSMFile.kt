@@ -14,16 +14,21 @@ internal fun ParseOutPSSMFile(js: ObjectNode) =
     ?: OutPSSMFile()
 
 
+/**
+ * -out_pssm `<File_Out>`
+ *
+ * File name to store checkpoint file
+ */
 @JvmInline
-value class OutPSSMFile(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class OutPSSMFile(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagOutPSSM, value)
+    js.put(isDefault, FlagOutPSSM, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagOutPSSM, value)
+    cli.append(isDefault, FlagOutPSSM, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagOutPSSM, value)
+    cli.add(isDefault, FlagOutPSSM, file)
 }

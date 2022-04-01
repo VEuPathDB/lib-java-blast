@@ -17,16 +17,23 @@ internal fun ParseQueryFile(js: ObjectNode) =
     ?: QueryFile()
 
 
+/**
+ * -query `<File_In>`
+ *
+ * Input file name
+ *
+ * Default = `-`
+ */
 @JvmInline
-value class QueryFile(val value: String = Def) : BlastField {
-  override val isDefault get() = value == Def
+value class QueryFile(val file: String = Def) : BlastField {
+  override val isDefault get() = file == Def
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagQueryFile, value)
+    js.put(isDefault, FlagQueryFile, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagQueryFile, value)
+    cli.append(isDefault, FlagQueryFile, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagQueryFile, value)
+    cli.add(isDefault, FlagQueryFile, file)
 }

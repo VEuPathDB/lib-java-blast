@@ -15,6 +15,11 @@ internal fun ParseUseSWTBack(js: ObjectNode) =
   } ?: UseSmithWatermanTraceback()
 
 
+/**
+ * -use_sw_tback
+ *
+ * Compute locally optimal Smith-Waterman alignments?
+ */
 @JvmInline
 value class UseSmithWatermanTraceback(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

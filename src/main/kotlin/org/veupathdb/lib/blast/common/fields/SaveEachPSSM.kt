@@ -14,6 +14,12 @@ internal fun ParseSaveEachPSSM(js: ObjectNode) =
     ?: SaveEachPSSM()
 
 
+/**
+ * -save_each_pssm
+ *
+ * Save PSSM after each iteration (file name is given in -save_pssm or
+ * -save_ascii_pssm options)
+ */
 @JvmInline
 value class SaveEachPSSM(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

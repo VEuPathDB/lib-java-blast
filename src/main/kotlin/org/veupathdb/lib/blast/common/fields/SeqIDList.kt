@@ -14,6 +14,11 @@ internal fun ParseSeqIDList(js: ObjectNode) =
     ?: SeqIDList()
 
 
+/**
+ * -seqidlist `<String>`
+ *
+ * Restrict search of database to list of SeqIDs
+ */
 @JvmInline
 value class SeqIDList(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()

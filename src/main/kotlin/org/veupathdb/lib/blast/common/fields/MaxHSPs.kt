@@ -15,6 +15,11 @@ internal fun ParseMaxHSPs(js: ObjectNode) =
   js[FlagMaxHSPs]?.let { MaxHSPs(it.reqUInt(FlagMaxHSPs)) } ?: MaxHSPs()
 
 
+/**
+ * -max_hsps `<Integer, >=1>`
+ *
+ * Set maximum number of HSPs per subject sequence to save for each query.
+ */
 @JvmInline
 value class MaxHSPs(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def

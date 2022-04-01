@@ -17,6 +17,8 @@ internal fun ParseVersion(js: ObjectNode) =
 
 
 /**
+ * -version
+ *
  * Print version number;  ignore other arguments
  */
 @JvmInline

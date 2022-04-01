@@ -14,16 +14,21 @@ internal fun ParseSubjectFile(js: ObjectNode) =
     ?: SubjectFile()
 
 
+/**
+ * -subject `<File_In>`
+ *
+ * Subject sequence(s) to search
+ */
 @JvmInline
-value class SubjectFile(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class SubjectFile(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagSubjectFile, value)
+    js.put(isDefault, FlagSubjectFile, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagSubjectFile, value)
+    cli.append(isDefault, FlagSubjectFile, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagSubjectFile, value)
+    cli.add(isDefault, FlagSubjectFile, file)
 }

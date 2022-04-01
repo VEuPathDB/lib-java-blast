@@ -14,6 +14,18 @@ internal fun ParseSortHSPs(js: ObjectNode) =
   js[FlagSortHSPs]?.let { SortHSPs(parseEnum(it)) } ?: SortHSPs()
 
 
+/**
+ * -sorthsps `<Integer, (>=0 and =<4)>`
+ *
+ * Sorting option for HSPs:
+ * * `0` = Sort by hsp evalue
+ * * `1` = Sort by hsp score
+ * * `2` = Sort by hsp query start
+ * * `3` = Sort by hsp percent identity
+ * * `4` = Sort by hsp subject start
+ *
+ * Not applicable for -outfmt != `0`
+ */
 @JvmInline
 value class SortHSPs(val value: HSPSorting = HSPSorting.None) : BlastField {
   override val isDefault get() = value == HSPSorting.None

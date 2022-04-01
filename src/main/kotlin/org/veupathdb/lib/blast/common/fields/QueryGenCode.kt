@@ -16,6 +16,17 @@ internal fun ParseQueryGenCode(js: ObjectNode) =
   js[FlagQueryGenCode]?.let { QueryGenCode(it.reqUByte(FlagQueryGenCode)) } ?: QueryGenCode()
 
 
+/**
+ * -query_gencode `<Integer>`
+ *
+ * Permissible values between:
+ *
+ * Genetic code to use to translate query (see
+ * https://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html/index.cgi?chapter=cgencodes
+ * for details)
+ *
+ * Default = `1`
+ */
 @JvmInline
 value class QueryGenCode(val value: UByte = Def) : BlastField {
   init {

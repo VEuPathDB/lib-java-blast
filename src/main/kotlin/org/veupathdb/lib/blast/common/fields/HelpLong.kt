@@ -13,6 +13,11 @@ internal fun ParseHelpLong(js: ObjectNode) =
   js[FlagHelpLong]?.let { HelpLong(it.reqBool(FlagHelpLong)) } ?: HelpLong()
 
 
+/**
+ * -help
+ *
+ * Print USAGE, DESCRIPTION and ARGUMENTS; ignore all other parameters.
+ */
 @JvmInline
 value class HelpLong(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

@@ -21,6 +21,11 @@ internal fun ParseBestHitOverhang(js: ObjectNode): BestHitOverhang {
 }
 
 
+/**
+ * -best_hit_overhang `<Real, (>0 and <0.5)>`
+ *
+ * Best Hit algorithm overhang value (recommended value: 0.1)
+ */
 @JvmInline
 value class BestHitOverhang(val value: Double = Def) : BlastField {
   init {

@@ -13,16 +13,21 @@ internal fun ParseGIList(js: ObjectNode) =
   js[FlagGIList]?.let { GIList(it.reqString(FlagGIList)) } ?: GIList()
 
 
+/**
+ * -gilist `<String>`
+ *
+ * Restrict search of database to list of GIs
+ */
 @JvmInline
-value class GIList(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class GIList(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagGIList, value)
+    js.put(isDefault, FlagGIList, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagGIList, value)
+    cli.append(isDefault, FlagGIList, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagGIList, value)
+    cli.add(isDefault, FlagGIList, file)
 }

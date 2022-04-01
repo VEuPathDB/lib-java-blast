@@ -17,6 +17,11 @@ internal fun ParseWindowSize(js: ObjectNode) =
     ?: WindowSize()
 
 
+/**
+ * -window_size `<Integer, >=0>`
+ *
+ * Multiple hits window size, use 0 to specify 1-hit algorithm
+ */
 @JvmInline
 value class WindowSize(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def

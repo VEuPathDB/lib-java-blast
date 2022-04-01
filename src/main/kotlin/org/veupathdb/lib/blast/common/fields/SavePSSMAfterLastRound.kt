@@ -15,6 +15,11 @@ internal fun ParseSavePSSMAfterLastRound(js: ObjectNode) =
   } ?: SavePSSMAfterLastRound()
 
 
+/**
+ * -save_pssm_after_last_round
+ *
+ * Save PSSM after the last database search
+ */
 @JvmInline
 value class SavePSSMAfterLastRound(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

@@ -27,6 +27,11 @@ internal fun ParseSubjectLocation(js: ObjectNode): SubjectLocation {
 }
 
 
+/**
+ * -subject_loc `<String>`
+ *
+ * Location on the subject sequence in 1-based offsets (Format: start-stop)
+ */
 data class SubjectLocation(val start: UInt = DefStart, val stop: UInt = DefStop)
   : BlastField
 {

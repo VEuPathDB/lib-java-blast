@@ -14,6 +14,11 @@ internal fun ParseDBHardMask(js: ObjectNode) =
   DBHardMask()
 
 
+/**
+ * -db_hard_mask `<String>`
+ *
+ * Filtering algorithm ID to apply to the BLAST database as hard masking
+ */
 @JvmInline
 value class DBHardMask(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()

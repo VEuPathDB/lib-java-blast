@@ -14,6 +14,13 @@ internal fun ParseNumIterations(js: ObjectNode) =
     ?: NumIterations()
 
 
+/**
+ * -num_iterations `<Integer, >=0>`
+ *
+ * Number of iterations to perform (0 means run until convergence)
+ *
+ * Default = `1`
+ */
 @JvmInline
 value class NumIterations(val value: UInt = 1u) : BlastField {
   override val isDefault get() = value == 1u

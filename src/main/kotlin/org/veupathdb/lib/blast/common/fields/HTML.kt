@@ -16,6 +16,11 @@ internal fun ParseHTML(js: ObjectNode) =
   js[FlagHTML]?.let { HTML(it.reqBool(FlagHTML)) } ?: HTML()
 
 
+/**
+ * -html
+ *
+ * Produce HTML output
+ */
 @JvmInline
 value class HTML(val value: Boolean = Def) : BlastField {
   override val isDefault get() = value == Def

@@ -13,6 +13,11 @@ internal fun ParseInPSSM(js: ObjectNode) =
   js[FlagInPSSM]?.let { InPSSMFile(it.reqString(FlagInPSSM)) } ?: InPSSMFile()
 
 
+/**
+ * -in_pssm `<File_In>`
+ *
+ * PSI-BLAST checkpoint file
+ */
 @JvmInline
 value class InPSSMFile(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()

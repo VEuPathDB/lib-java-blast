@@ -20,6 +20,11 @@ internal fun ParseGapOpen(js: ObjectNode): GapOpen {
 }
 
 
+/**
+ * -gapopen `<Integer>`
+ *
+ * Cost to open a gap
+ */
 @JvmInline
 value class GapOpen(val value: Int = Def) : BlastField {
   override val isDefault get() = value == Def

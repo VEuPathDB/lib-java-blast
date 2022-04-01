@@ -15,16 +15,21 @@ internal fun ParseNegTaxIDList(js: ObjectNode) =
   } ?: NegativeTaxIDList()
 
 
+/**
+ * -negative_taxidlist `<String>`
+ *
+ * Restrict search of database to everything except the specified taxonomy IDs
+ */
 @JvmInline
-value class NegativeTaxIDList(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class NegativeTaxIDList(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagNegativeTaxIDList, value)
+    js.put(isDefault, FlagNegativeTaxIDList, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagNegativeTaxIDList, value)
+    cli.append(isDefault, FlagNegativeTaxIDList, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagNegativeTaxIDList, value)
+    cli.add(isDefault, FlagNegativeTaxIDList, file)
 }

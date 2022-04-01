@@ -14,16 +14,21 @@ internal fun ParseOutASCIIPSSMFile(js: ObjectNode) =
     ?: OutASCIIPSSMFile()
 
 
+/**
+ * -out_ascii_pssm `<File_Out>`
+ *
+ * File name to store ASCII version of PSSM
+ */
 @JvmInline
-value class OutASCIIPSSMFile(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class OutASCIIPSSMFile(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagOutASCIIPSSM, value)
+    js.put(isDefault, FlagOutASCIIPSSM, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagOutASCIIPSSM, value)
+    cli.append(isDefault, FlagOutASCIIPSSM, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagOutASCIIPSSM, value)
+    cli.add(isDefault, FlagOutASCIIPSSM, file)
 }

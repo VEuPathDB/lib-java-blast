@@ -19,6 +19,13 @@ internal fun ParseEValue(j: ObjectNode) =
     ExpectValue()
 
 
+/**
+ * -evalue `<Real>`
+ *
+ * Expectation value (E) threshold for saving hits
+ *
+ * Default = `10`
+ */
 @JvmInline
 value class ExpectValue(val value: String = Def): BlastField {
 

@@ -17,6 +17,15 @@ internal fun ParseLineLength(js: ObjectNode) =
     ?: LineLength()
 
 
+/**
+ * -line_length `<Integer, >=1>`
+ *
+ * Line length for formatting alignments
+ *
+ * Not applicable for outfmt > 4
+ *
+ * Default = `60`
+ */
 @JvmInline
 value class LineLength(val value: Int = Def) : BlastField {
   override val isDefault get() = value == Def

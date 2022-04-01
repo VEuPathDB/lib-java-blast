@@ -16,6 +16,11 @@ internal fun ParseLowercaseMasking(js: ObjectNode) =
     ?: LowercaseMasking()
 
 
+/**
+ * -lcase_masking
+ *
+ * Use lower case filtering in query and subject sequence(s)
+ */
 @JvmInline
 value class LowercaseMasking(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

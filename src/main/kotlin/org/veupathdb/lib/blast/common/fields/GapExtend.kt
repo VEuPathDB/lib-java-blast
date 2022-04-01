@@ -21,6 +21,11 @@ internal fun ParseGapExtend(js: ObjectNode): GapExtend {
 }
 
 
+/**
+ * -gapextend `<Integer>`
+ *
+ * Cost to extend a gap
+ */
 @JvmInline
 value class GapExtend(val value: Int = Def) : BlastField {
   override val isDefault get() = value == Def

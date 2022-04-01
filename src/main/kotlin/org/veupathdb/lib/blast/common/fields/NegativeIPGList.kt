@@ -14,16 +14,21 @@ internal fun ParseNegativeIPGList(js: ObjectNode) =
   js[FlagNegativeIPGList]?.let { NegativeIPGList(it.reqString(FlagNegativeIPGList)) } ?: NegativeIPGList()
 
 
+/**
+ * -negative_ipglist `<String>`
+ *
+ * Restrict search of database to everything except the specified IPGs
+ */
 @JvmInline
-value class NegativeIPGList(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class NegativeIPGList(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagNegativeIPGList, value)
+    js.put(isDefault, FlagNegativeIPGList, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagNegativeIPGList, value)
+    cli.append(isDefault, FlagNegativeIPGList, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagNegativeIPGList, value)
+    cli.add(isDefault, FlagNegativeIPGList, file)
 }

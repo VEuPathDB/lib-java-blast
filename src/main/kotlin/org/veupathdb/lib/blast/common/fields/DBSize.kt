@@ -16,6 +16,11 @@ internal fun ParseDBSize(js: ObjectNode) =
   js[FlagDBSize]?.let { DBSize(it.reqByte(FlagDBSize)) } ?: DBSize()
 
 
+/**
+ * -dbsize `<Int8>`
+ *
+ * Effective length of the database
+ */
 @JvmInline
 value class DBSize(val value: Byte = Def) : BlastField {
   override val isDefault get() = value == Def

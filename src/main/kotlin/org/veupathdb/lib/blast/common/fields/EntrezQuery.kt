@@ -14,6 +14,11 @@ internal fun ParseEntrezQuery(js: ObjectNode) =
     EntrezQuery()
 
 
+/**
+ * -entrez_query `<String>`
+ *
+ * Restrict search with the given Entrez query
+ */
 @JvmInline
 value class EntrezQuery(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()

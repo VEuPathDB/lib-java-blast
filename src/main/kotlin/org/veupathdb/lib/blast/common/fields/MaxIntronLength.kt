@@ -16,6 +16,14 @@ internal fun ParseMaxIntronLength(js: ObjectNode) =
   js[FlagMaxIntronLength]?.let { MaxIntronLength(it.reqUInt(FlagMaxIntronLength)) } ?: MaxIntronLength()
 
 
+/**
+ * -max_intron_length `<Integer, >=0>`
+ *
+ * Length of the largest intron allowed in a translated nucleotide sequence
+ * when linking multiple distinct alignments
+ *
+ * Default = `0`
+ */
 @JvmInline
 value class MaxIntronLength(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def

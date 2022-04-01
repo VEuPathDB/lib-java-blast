@@ -21,6 +21,11 @@ internal fun ParseBestHitScoreEdge(js: ObjectNode): BestHitScoreEdge {
 }
 
 
+/**
+ * -best_hit_score_edge `<Real, (>0 and <0.5)>`
+ *
+ * Best Hit algorithm score edge value (recommended value: 0.1)
+ */
 @JvmInline
 value class BestHitScoreEdge(val value: Double = Def) : BlastField {
   init {

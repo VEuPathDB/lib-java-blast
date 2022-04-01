@@ -14,6 +14,11 @@ internal fun ParseUngappedAlignmentsOnly(js: ObjectNode) =
     ?: UngappedAlignmentsOnly()
 
 
+/**
+ * -ungapped
+ *
+ * Perform ungapped alignment only?
+ */
 @JvmInline
 value class UngappedAlignmentsOnly(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

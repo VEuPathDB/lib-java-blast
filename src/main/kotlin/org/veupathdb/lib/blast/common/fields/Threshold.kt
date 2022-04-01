@@ -22,6 +22,11 @@ internal fun ParseThreshold(js: ObjectNode): Threshold {
 }
 
 
+/**
+ * -threshold `<Real, >=0>`
+ *
+ * Minimum word score such that the word is added to the BLAST lookup table
+ */
 @JvmInline
 value class Threshold(val value: Double = Def) : BlastField {
   override val isDefault get() = value == Def

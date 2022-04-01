@@ -15,6 +15,13 @@ internal fun ParseInclusionEValueThreshold(js: ObjectNode) =
   } ?: InclusionEValueThreshold()
 
 
+/**
+ * -inclusion_ethresh `<Real>`
+ *
+ * E-value inclusion threshold for pairwise alignments
+ *
+ * Default = `0.002`
+ */
 @JvmInline
 value class InclusionEValueThreshold(val value: Double = 0.002) : BlastField {
   override val isDefault get() = value == 0.002

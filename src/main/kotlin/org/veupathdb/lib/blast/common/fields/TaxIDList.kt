@@ -14,17 +14,22 @@ internal fun ParseTaxIDList(js: ObjectNode) =
     ?: TaxIDList()
 
 
+/**
+ * -taxidlist `<String>`
+ *
+ * Restrict search of database to include only the specified taxonomy IDs
+ */
 @JvmInline
-value class TaxIDList(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class TaxIDList(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagTaxIDList, value)
+    js.put(isDefault, FlagTaxIDList, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagTaxIDList, value)
+    cli.append(isDefault, FlagTaxIDList, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagTaxIDList, value)
+    cli.add(isDefault, FlagTaxIDList, file)
 }
 

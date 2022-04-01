@@ -15,16 +15,21 @@ internal fun ParseNegSeqIdList(js: ObjectNode) =
   } ?: NegativeSeqIDList()
 
 
+/**
+ * -negative_seqidlist `<String>`
+ *
+ * Restrict search of database to everything except the specified SeqIDs
+ */
 @JvmInline
-value class NegativeSeqIDList(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class NegativeSeqIDList(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagNegativeSeqIDList, value)
+    js.put(isDefault, FlagNegativeSeqIDList, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagNegativeSeqIDList, value)
+    cli.append(isDefault, FlagNegativeSeqIDList, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagNegativeSeqIDList, value)
+    cli.add(isDefault, FlagNegativeSeqIDList, file)
 }

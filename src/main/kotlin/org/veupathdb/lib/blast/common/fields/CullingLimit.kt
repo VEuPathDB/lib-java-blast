@@ -26,6 +26,12 @@ internal fun ParseCullingLimit(js: ObjectNode): CullingLimit {
 }
 
 
+/**
+ * -culling_limit `<Integer, >=0>`
+ *
+ * If the query range of a hit is enveloped by that of at least this many
+ * higher-scoring hits, delete the hit
+ */
 @JvmInline
 value class CullingLimit(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def

@@ -13,6 +13,11 @@ internal fun ParseShowGIs(js: ObjectNode) =
   js[FlagShowGIs]?.let { ShowGIs(it.reqBool(FlagShowGIs)) } ?: ShowGIs()
 
 
+/**
+ * -show_gis
+ *
+ * Show NCBI GIs in deflines?
+ */
 @JvmInline
 value class ShowGIs(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value
