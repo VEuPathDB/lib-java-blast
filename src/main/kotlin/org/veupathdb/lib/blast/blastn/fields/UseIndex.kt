@@ -13,6 +13,13 @@ internal fun ParseUseIndex(js: ObjectNode) =
   js[FlagUseIndex]?.let { UseIndex(it.reqBool(FlagUseIndex)) } ?: UseIndex()
 
 
+/**
+ * -use_index `<Boolean>`
+ *
+ * Use MegaBLAST database index
+ *
+ * Default = `false`
+ */
 @JvmInline
 value class UseIndex(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

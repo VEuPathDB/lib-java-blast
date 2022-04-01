@@ -13,6 +13,20 @@ internal fun ParseBlastNTask(js: ObjectNode) =
   BlastNTask(js[FlagTask].parseTask())
 
 
+/**
+ * -task `<String>`
+ *
+ * Permissible values:
+ * * 'blastn'
+ * * 'blastn-short'
+ * * 'dc-megablast'
+ * * 'megablast'
+ * * 'rmblastn'
+ *
+ * Task to execute
+ *
+ * Default = `megablast`
+ */
 @JvmInline
 value class BlastNTask(val value: BlastNTaskType = BlastNTaskType.Megablast)
   : BlastField

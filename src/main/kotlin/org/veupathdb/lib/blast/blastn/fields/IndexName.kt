@@ -14,6 +14,11 @@ internal fun ParseIndexName(js: ObjectNode) =
     ?: IndexName()
 
 
+/**
+ * -index_name `<String>`
+ *
+ * MegaBLAST database index name (deprecated; use only for old style indices)
+ */
 @JvmInline
 value class IndexName(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()

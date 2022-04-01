@@ -15,16 +15,21 @@ internal fun ParseWindowMaskerDB(js: ObjectNode) =
   } ?: WindowMaskerDB()
 
 
+/**
+ * -window_masker_db `<String>`
+ *
+ * Enable WindowMasker filtering using this repeats database.
+ */
 @JvmInline
-value class WindowMaskerDB(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class WindowMaskerDB(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagWindowMaskerDB, value)
+    js.put(isDefault, FlagWindowMaskerDB, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagWindowMaskerDB, value)
+    cli.append(isDefault, FlagWindowMaskerDB, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagWindowMaskerDB, value)
+    cli.add(isDefault, FlagWindowMaskerDB, file)
 }

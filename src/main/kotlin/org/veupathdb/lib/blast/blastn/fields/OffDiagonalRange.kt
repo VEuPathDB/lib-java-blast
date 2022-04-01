@@ -18,6 +18,13 @@ internal fun ParseOffDiagonalRange(js: ObjectNode) =
   } ?: OffDiagonalRange()
 
 
+/**
+ * -off_diagonal_range `<Integer, >=0>`
+ *
+ * Number of off-diagonals to search for the 2nd hit, use 0 to turn off
+ *
+ * Default = `0`
+ */
 @JvmInline
 value class OffDiagonalRange(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def

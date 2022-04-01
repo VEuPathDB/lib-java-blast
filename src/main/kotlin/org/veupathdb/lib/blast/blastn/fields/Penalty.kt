@@ -16,6 +16,11 @@ internal fun ParsePenalty(js: ObjectNode) =
   js[FlagPenalty]?.let { Penalty(it.reqInt(FlagPenalty)) } ?: Penalty()
 
 
+/**
+ * -penalty `<Integer, <=0>`
+ *
+ * Penalty for a nucleotide mismatch
+ */
 @JvmInline
 value class Penalty(val value: Int = Def) : BlastField {
   init {

@@ -17,6 +17,11 @@ internal fun ParseWindowMaskerTaxID(js: ObjectNode) =
   } ?: WindowMaskerTaxID()
 
 
+/**
+ * -window_masker_taxid `<Integer>`
+ *
+ * Enable WindowMasker filtering using a Taxonomic ID
+ */
 @JvmInline
 value class WindowMaskerTaxID(val value: Int = Def) : BlastField {
   override val isDefault get() = value == Def

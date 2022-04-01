@@ -15,6 +15,16 @@ internal fun ParseTemplateType(js: ObjectNode) =
   } ?: TemplateType()
 
 
+/**
+ * -template_type `<String>`
+ *
+ * Permissible Values:
+ * * coding
+ * * coding_and_optimal
+ * * optimal
+ *
+ * Discontiguous MegaBLAST template type
+ */
 @JvmInline
 value class TemplateType(val value: TemplateTypeType = TemplateTypeType.None)
   : BlastField

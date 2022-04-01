@@ -13,25 +13,85 @@ private const val DefWindow = 64
 private const val DefLinker = 1
 
 
+/**
+ * -dust `<String>`
+ *
+ * Filter query sequence with DUST (Format: 'yes', 'level window linker', or
+ * 'no' to disable)
+ *
+ * Default = `"20 64 1"`
+ */
 sealed interface Dust : BlastField {
+
+  /**
+   * Indicates whether this Dust value is `"yes"`.
+   */
   val isYes: Boolean
 
+  /**
+   * Indicates whether this Dust value is `"no"`.
+   */
   val isNo: Boolean
 
+  /**
+   * The level value for a value based Dust value.
+   *
+   * DUST level (score threshold for subwindows)
+   *
+   * Default = `20`
+   *
+   * @throws IllegalStateException If the current Dust implementation is a
+   * `"yes"` or `"no"` value.
+   */
   val level: Int
 
+  /**
+   * The window value for a value based Dust value.
+   *
+   * DUST window length
+   *
+   * Default = `64`
+   *
+   * @throws IllegalStateException If the current Dust implementation is a
+   * `"yes"` or `"no"` value.
+   */
   val window: Int
 
+  /**
+   * The linker value for a value based Dust value.
+   *
+   * DUST linker (how close masked intervals should be to get merged together).
+   *
+   * Default = `1`
+   *
+   * @throws IllegalStateException If the current Dust implementation is a
+   * `"yes"` or `"no"` value.
+   */
   val linker: Int
 
   companion object {
 
+    /**
+     * Returns a `"yes"` Dust value.
+     */
     @JvmStatic
     fun yes(): Dust = YesDust
 
+    /**
+     * Returns a `"no"` Dust value.
+     */
     @JvmStatic
     fun no(): Dust = NoDust
 
+    /**
+     * Returns a value based Dust value wrapping the given inputs.
+     *
+     * @param level Value Dust level.
+     *
+     * @param window Value Dust window.
+     *
+     * @param linker Value Dust linker.
+     */
     @JvmStatic
     fun of(
       level:  Int = DefLevel,

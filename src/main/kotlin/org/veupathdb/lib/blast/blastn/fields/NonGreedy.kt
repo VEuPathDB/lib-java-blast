@@ -14,6 +14,11 @@ internal fun ParseNonGreedy(js: ObjectNode) =
     ?: NonGreedy()
 
 
+/**
+ * -no_greedy
+ *
+ * Use non-greedy dynamic programming extension
+ */
 @JvmInline
 value class NonGreedy(val value: Boolean = Def) : BlastField {
   override val isDefault get() = value == Def

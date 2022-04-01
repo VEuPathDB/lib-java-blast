@@ -14,6 +14,13 @@ internal fun ParseSoftMaskingN(js: ObjectNode) =
     ?: SoftMaskingN()
 
 
+/**
+ * -soft_masking `<Boolean>`
+ *
+ * Apply filtering locations as soft masks
+ *
+ * Default = `true`
+ */
 @JvmInline
 value class SoftMaskingN(val value: Boolean = true) : BlastField {
   override val isDefault get() = value

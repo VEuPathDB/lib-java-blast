@@ -14,6 +14,11 @@ internal fun ParseFilteringDB(js: ObjectNode): FilteringDB =
     ?: FilteringDB()
 
 
+/**
+ * -filtering_db `<String>`
+ *
+ * BLAST database containing filtering elements (i.e.: repeats)
+ */
 @JvmInline
 value class FilteringDB(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()

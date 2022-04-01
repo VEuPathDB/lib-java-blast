@@ -10,245 +10,162 @@ import org.veupathdb.lib.blast.common.fields.*
 interface BlastN : BlastQueryWithLists {
 
   /**
-   * -strand
-   *
-   * Query strand(s) to search against database/subject
-   *
-   * Default = `both`
+   * -strand `<String>`
    */
   var strand: Strand
 
   /**
-   * -task
-   *
-   * Task to execute
-   *
-   * Default = `megablast`
+   * -task `<String>`
    */
   var task: BlastNTask
 
   /**
-   * -gapopen
-   *
-   * Cost to open a gap
+   * -gapopen `<Integer>`
    */
   var gapOpen: GapOpen
 
   /**
-   * -gapextend
-   *
-   * Cost to extend a gap
+   * -gapextend `<Integer>`
    */
   var gapExtend: GapExtend
 
   /**
-   * -penalty
-   *
-   * Penalty for a nucleotide mismatch
+   * -penalty `<Integer>`
    */
   var penalty: Penalty
 
   /**
-   * -reward
-   *
-   * Reward for a nucleotide match
+   * -reward `<Integer>`
    */
   var reward: Reward
 
   /**
-   * -use_index
-   *
-   * Use MegaBLAST database index
-   *
-   * Default = `false`
+   * -use_index `<Boolean>`
    */
   var useIndex: UseIndex
 
   /**
-   * -index_name
-   *
-   * MegaBLAST database index name (deprecated; use only for old style indices)
+   * -index_name `<String>`
    */
   var indexName: IndexName
 
   /**
-   * -subject
-   *
-   * Subject sequence(s) to search
+   * -subject `<File_In>`
    */
   var subjectFile: SubjectFile
 
   /**
-   * -subject_loc
-   *
-   * Location on the subject sequence in 1-based offsets (Format: start-stop)
+   * -subject_loc `<String>`
    */
   var subjectLocation: SubjectLocation
 
   /**
-   * -dust
-   *
-   * Filter query sequence with DUST (Format: 'yes', 'level window linker', or
-   * 'no' to disable)
-   *
-   * Default = `20 64 1`
+   * -dust `<String>`
    */
   var dust: Dust
 
   /**
-   * -filtering_db
-   *
-   * BLAST database containing filtering elements (i.e.: repeats)
+   * -filtering_db `<String>`
    */
   var filteringDBFile: FilteringDB
 
   /**
-   * -window_masker_taxid
-   *
-   * Enable WindowMasker filtering using a Taxonomic ID
+   * -window_masker_taxid `<Integer>`
    */
   var windowMaskerTaxID: WindowMaskerTaxID
 
   /**
-   * -window_masker_db
-   *
-   * Enable WindowMasker filtering using this repeats database.
+   * -window_masker_db `<String>`
    */
   var windowMaskerDBFile: WindowMaskerDB
 
   /**
-   * -db_soft_mask
-   *
-   * Filtering algorithm ID to apply to the BLAST database as soft masking
+   * -db_soft_mask `<String>`
    */
   var dbSoftMask: DBSoftMask
 
   /**
-   * -db_hard_mask
-   *
-   * Filtering algorithm ID to apply to the BLAST database as hard masking
+   * -db_hard_mask `<String>`
    */
   var dbHardMask: DBHardMask
 
   /**
-   * -perc_identity
-   *
-   * Percent identity
+   * -perc_identity `<Real>`
    */
   var percentIdentity: PercentIdentity
 
   /**
-   * -culling_limit
-   *
-   * If the query range of a hit is enveloped by that of at least this many
-   * higher-scoring hits, delete the hit
+   * -culling_limit `<Integer>`
    */
   var cullingLimit: CullingLimit
 
   /**
-   * -template_type
-   *
-   * Discontiguous MegaBLAST template type
-   *
-   * Requires:
-   * * template_length
+   * -template_type `<String>`
    */
   var templateType: TemplateType
 
   /**
-   * -template_length
-   *
-   * Discontiguous MegaBLAST template length
-   *
-   * Requires:
-   * * template_type
+   * -template_length `<Integer>`
    */
   var templateLength: TemplateLength
 
   /**
-   * -sum_stats
-   *
-   * Use sum statistics
+   * -sum_stats `<Boolean>`
    */
   var sumStats: SumStats
 
   /**
-   * -xdrop_gap
-   *
-   * X-dropoff value (in bits) for preliminary gapped extensions
+   * -xdrop_gap `<Real>`
    */
   var extensionDropoffPrelimGapped: ExtensionDropoffPrelimGapped
 
   /**
-   * -xdrop_gap_final
-   *
-   * X-dropoff value (in bits) for final gapped alignment
+   * -xdrop_gap_final `<Real>`
    */
   var extensionDropoffFinalGapped: ExtensionDropoffFinalGapped
 
   /**
    * -no_greedy
-   *
-   * Use non-greedy dynamic programming extension
    */
   var nonGreedy: NonGreedy
 
   /**
-   * -min_raw_gapped_score
-   *
-   * Minimum raw gapped score to keep an alignment in the preliminary gapped and
-   * traceback stages
+   * -min_raw_gapped_score `<Integer>`
    */
   var minRawGappedScore: MinRawGappedScore
 
   /**
    * -ungapped
-   *
-   * Perform ungapped alignment only?
    */
   var ungappedAlignmentsOnly: UngappedAlignmentsOnly
 
   /**
-   * -off_diagonal_range
-   *
-   * Number of off-diagonals to search for the 2nd hit, use 0 to turn off
-   *
-   * Default = `0`
+   * -off_diagonal_range `<Integer>`
    */
   var offDiagonalRange: OffDiagonalRange
 
   /**
-   * -num_threads
-   *
-   * Number of threads (CPUs) to use in the BLAST search
-   *
-   * Default = `1`
+   * -num_threads `<Integer>`
    */
   var numCPUCores: NumCPUCores
 
   /**
-   * -best_hit_overhang
-   *
-   * Best Hit algorithm overhang value (recommended value: 0.1)
+   * -best_hit_overhang `<Real>`
    */
   var bestHitOverhang: BestHitOverhang
 
   /**
-   * -best_hit_score_edge
-   *
-   * Best Hit algorithm score edge value (recommended value: 0.1)
+   * -best_hit_score_edge `<Real>`
    */
   var bestHitScoreEdge: BestHitScoreEdge
 
   /**
    * -subject_besthit
-   *
-   * Turn on best hit per subject sequence
    */
   var subjectBestHit: SubjectBestHit
 
   /**
-   * Apply filtering locations as soft masks
+   * -soft_masking `<Boolean>`
    */
   var softMasking: SoftMaskingN
 }

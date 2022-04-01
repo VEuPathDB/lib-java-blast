@@ -18,6 +18,11 @@ internal fun ParsePercentIdentity(js: ObjectNode) =
   } ?: PercentIdentity()
 
 
+/**
+ * -perc_identity `<Real, 0..100>`
+ *
+ * Percent identity
+ */
 @JvmInline
 value class PercentIdentity(val value: Double = Def)
   : BlastField

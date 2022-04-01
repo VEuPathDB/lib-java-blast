@@ -16,6 +16,11 @@ internal fun ParseReward(js: ObjectNode) =
   js[FlagReward]?.let { Reward(it.reqUInt(FlagReward)) } ?: Reward()
 
 
+/**
+ * -reward `<Integer, >=0>`
+ *
+ * Reward for a nucleotide match
+ */
 @JvmInline
 value class Reward(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def

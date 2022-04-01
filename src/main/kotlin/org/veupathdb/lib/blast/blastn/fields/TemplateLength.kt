@@ -18,6 +18,16 @@ internal fun ParseTemplateLength(js: ObjectNode): TemplateLength {
 }
 
 
+/**
+ * -template_length `<Integer>`
+ *
+ * Permissible values:
+ * * 16
+ * * 18
+ * * 21
+ *
+ * Discontiguous MegaBLAST template length
+ */
 @JvmInline
 value class TemplateLength(
   val value: TemplateLengthValue = TemplateLengthValue.None
