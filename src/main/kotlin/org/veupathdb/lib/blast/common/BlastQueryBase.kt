@@ -9,72 +9,72 @@ import org.veupathdb.lib.blast.common.fields.*
 interface BlastQueryBase : BlastCLI {
 
   /**
-   * Input file name
+   * -query `<File_In>`
    */
   var queryFile: QueryFile
 
   /**
-   * Location on the query sequence in 1-based offsets (Format: start-stop)
+   * -query_loc `<String>`
    */
   var queryLocation: QueryLocation
 
   /**
-   * BLAST database name(s)
+   * -db `<String>`
    */
   var dbFile: DBFile
 
   /**
-   * Expectation value (E) threshold for saving hits
+   * -evalue `<Real>`
    */
   var expectValue: ExpectValue
 
   /**
-   * Use lower case filtering in query and subject sequence(s)
+   * -lcase_masking
    */
   var lowercaseMasking: LowercaseMasking
 
   /**
-   * Restrict search with the given Entrez query
+   * -entrez_query `<String>`
    */
   var entrezQuery: EntrezQuery
 
   /**
-   * Set maximum number of HSPs per subject sequence to save for each query
+   * -max_hsps `<Integer>`
    */
   var maxHSPs: MaxHSPs
 
   /**
-   * Effective length of the database
+   * -dbsize `<Int8>`
    */
   var dbSize: DBSize
 
   /**
-   * Effective length of the search space
+   * -searchsp `<Int8>`
    */
   var searchSpace: SearchSpace
 
   /**
-   * Search strategy to use
+   * -import_search_strategy `<File_In>`
    */
   var importSearchStrategy: ImportSearchStrategy
 
   /**
-   * File name to record the search strategy used
+   * -export_search_strategy `<File_Out>`
    */
   var exportSearchStrategy: ExportSearchStrategy
 
   /**
-   * X-dropoff value (in bits) for ungapped extensions
+   * -xdrop_ungap `<Real>`
    */
   var extensionDropoffUngapped: ExtensionDropoffUngapped
 
   /**
-   * Multiple hits window size, use 0 to specify 1-hit algorithm
+   * -window_size `<Integer>`
    */
   var windowSize: WindowSize
 
   /**
-   * Execute search remotely
+   * -remote
    */
   var remote: Remote
 }

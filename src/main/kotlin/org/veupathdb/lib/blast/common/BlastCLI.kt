@@ -28,12 +28,12 @@ interface BlastCLI : BlastCommand {
   var version: Version
 
   /**
-   * -out <File_Out>
+   * -out `<File_Out>`
    */
   var outFile: OutFile
 
   /**
-   * -outfmt <String>
+   * -outfmt `<String>`
    */
   var outFormat: OutFormat
 
@@ -43,17 +43,17 @@ interface BlastCLI : BlastCommand {
   var showGIs: ShowGIs
 
   /**
-   * -num_descriptions <Integer, >=0>
+   * -num_descriptions `<Integer>`
    */
   var numDescriptions: NumDescriptions
 
   /**
-   * -num_alignments <Integer, >=0>
+   * -num_alignments `<Integer>`
    */
   var numAlignments: NumAlignments
 
   /**
-   * -line_length <Integer, >=1>
+   * -line_length `<Integer>`
    */
   var lineLength: LineLength
 
@@ -63,17 +63,17 @@ interface BlastCLI : BlastCommand {
   var html: HTML
 
   /**
-   * -sorthits <Integer, (>=0 and =<4)>
+   * -sorthits `<Integer>`
    */
   var sortHits: SortHits
 
   /**
-   * -sorthsps <Integer, (>=0 and =<4)>
+   * -sorthsps `<Integer>`
    */
   var sortHSPs: SortHSPs
 
   /**
-   * -max_target_seqs <Integer, >=1>
+   * -max_target_seqs `<Integer>`
    */
   var maxTargetSeqs: MaxTargetSeqs
 

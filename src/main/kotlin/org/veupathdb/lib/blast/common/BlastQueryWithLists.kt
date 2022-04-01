@@ -8,58 +8,42 @@ import org.veupathdb.lib.blast.common.fields.*
 interface BlastQueryWithLists : BlastQueryBase {
 
   /**
-   * -gilist
-   *
-   * Restrict search of database to list of GIs
+   * -gilist `<String>`
    */
   var giListFile: GIList
 
   /**
-   * -negative_gilist
-   *
-   * Restrict search of database to everything except the specified GIs
+   * -negative_gilist `<String>`
    */
   var negativeGIListFile: NegativeGIList
 
   /**
-   * -seqidlist
-   *
-   * Restrict search of database to list of SeqIDs
+   * -seqidlist `<String>`
    */
   var seqIDListFile: SeqIDList
 
   /**
-   * -negative_seqidlist
-   *
-   * Restrict search of database to everything except the specified SeqIDs
+   * -negative_seqidlist `<String>`
    */
   var negativeSeqIDListFile: NegativeSeqIDList
 
   /**
-   * -taxidlist
-   *
-   * Restrict search of database to include only the specified taxonomy IDs
+   * -taxidlist `<String>`
    */
   var taxIDListFile: TaxIDList
 
   /**
-   * -negative_taxidlist
-   *
-   * Restrict search of database to everything except the specified taxonomy IDs
+   * -negative_taxidlist `<String>`
    */
   var negativeTaxIDListFile: NegativeTaxIDList
 
   /**
-   * -taxids
-   *
-   * Restrict search of database to include only the specified taxonomy IDs
+   * -taxids `<String>`
    */
   var taxIDs: TaxIDs
 
   /**
-   * -negative_taxids
-   *
-   * Restrict search of database to everything except the specified taxonomy IDs
+   * -negative_taxids `<String>`
    */
   var negativeTaxIDs: NegativeTaxIDs
 }

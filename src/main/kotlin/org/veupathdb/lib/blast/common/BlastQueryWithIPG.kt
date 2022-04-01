@@ -6,16 +6,12 @@ import org.veupathdb.lib.blast.common.fields.NegativeIPGList
 interface BlastQueryWithIPG : BlastQueryWithLists {
 
   /**
-   * -ipglist
-   *
-   * Restrict search of database to list of IPGs
+   * -ipglist `<String>`
    */
   var ipgListFile: IPGList
 
   /**
-   * -negative_ipglist
-   *
-   * Restrict search of database to everything except the specified IPGs
+   * -negative_ipglist `<String>`
    */
   var negativeIPGListFile: NegativeIPGList
 }
