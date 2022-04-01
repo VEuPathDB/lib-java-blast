@@ -9,6 +9,10 @@ import org.veupathdb.lib.blast.blastx.BlastX
 import org.veupathdb.lib.blast.blastx.BlastXImpl
 import org.veupathdb.lib.blast.deltablast.DeltaBlast
 import org.veupathdb.lib.blast.deltablast.DeltaBlastImpl
+import org.veupathdb.lib.blast.psiblast.PSIBlast
+import org.veupathdb.lib.blast.psiblast.PSIBlastImpl
+import org.veupathdb.lib.blast.rpsblast.RPSBlast
+import org.veupathdb.lib.blast.rpsblast.RPSBlastImpl
 
 object Blast {
 
@@ -75,4 +79,36 @@ object Blast {
    * @return The new [DeltaBlast] instance.
    */
   fun deltaBlast(): DeltaBlast = DeltaBlastImpl()
+
+  /**
+   * Creates a new [PSIBlast] instance by parsing the given JSON input.
+   *
+   * @param js JSON object to parse.
+   *
+   * @return The new [PSIBlast] instance.
+   */
+  fun psiBlast(js: ObjectNode): PSIBlast = PSIBlastImpl(js)
+
+  /**
+   * Creates a new, defaulted [PSIBlast] instance.
+   *
+   * @return The new [PSIBlast] instance.
+   */
+  fun psiBlast(): PSIBlast = PSIBlastImpl()
+
+  /**
+   * Creates a new [RPSBlast] instance by parsing the given JSON input.
+   *
+   * @param js JSON object to parse.
+   *
+   * @return The new [RPSBlast] instance.
+   */
+  fun rpsBlast(js: ObjectNode): RPSBlast = RPSBlastImpl(js)
+
+  /**
+   * Creates a new, defaulted [RPSBlast] instance.
+   *
+   * @return The new [RPSBlast] instance.
+   */
+  fun rpsBlast(): RPSBlast = RPSBlastImpl()
 }

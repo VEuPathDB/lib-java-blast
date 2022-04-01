@@ -17,7 +17,6 @@ internal fun ParseQueryCoverageHSPPercent(js: ObjectNode) =
     QueryCoverageHSPPercent(it.reqDub(FlagQueryCoverageHSPPercent))
   } ?: QueryCoverageHSPPercent()
 
-
 /**
  * -qcov_hsp_perc `<Real, 0..100>`
  *
