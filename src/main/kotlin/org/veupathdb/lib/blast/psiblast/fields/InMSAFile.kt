@@ -13,16 +13,21 @@ internal fun ParseInMSA(js: ObjectNode) =
   js[FlagInMSA]?.let { InMSAFile(it.reqString(FlagInMSA)) } ?: InMSAFile()
 
 
+/**
+ * -in_msa `<File_In>`
+ *
+ * File name of multiple sequence alignment to restart PSI-BLAST
+ */
 @JvmInline
-value class InMSAFile(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class InMSAFile(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagInMSA, value)
+    js.put(isDefault, FlagInMSA, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagInMSA, value)
+    cli.append(isDefault, FlagInMSA, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagInMSA, value)
+    cli.add(isDefault, FlagInMSA, file)
 }

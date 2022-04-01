@@ -14,6 +14,11 @@ internal fun ParsePhiPatternFile(js: ObjectNode) =
     ?: PhiPatternFile()
 
 
+/**
+ * -phi_pattern `<File_In>`
+ *
+ * File name containing pattern to search
+ */
 @JvmInline
 value class PhiPatternFile(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()

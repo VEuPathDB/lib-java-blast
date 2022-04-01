@@ -17,6 +17,11 @@ internal fun ParseWordSizePSI(js: ObjectNode) =
     ?: WordSizePSI()
 
 
+/**
+ * -word_size `<Integer, >=2>`
+ *
+ * Word size for wordfinder algorithm
+ */
 @JvmInline
 value class WordSizePSI(val value: UInt = Def) : BlastField {
   init {

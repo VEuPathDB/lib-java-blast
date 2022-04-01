@@ -14,6 +14,11 @@ internal fun ParseMatrixPSI(js: ObjectNode) =
   js[FlagMatrix]?.let { MatrixPSI(parseEnum(it)) } ?: MatrixPSI()
 
 
+/**
+ * -matrix `<String>`
+ *
+ * Scoring matrix name (normally BLOSUM62)
+ */
 @JvmInline
 value class MatrixPSI(val value: MatrixPSIType = MatrixPSIType.None)
   : BlastField

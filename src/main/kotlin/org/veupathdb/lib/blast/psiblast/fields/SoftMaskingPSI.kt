@@ -14,6 +14,13 @@ internal fun ParseSoftMaskingPSI(js: ObjectNode) =
     ?: SoftMaskingPSI()
 
 
+/**
+ * -soft_masking `<Boolean>`
+ *
+ * Apply filtering locations as soft masks
+ *
+ * Default = `false`
+ */
 @JvmInline
 value class SoftMaskingPSI(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value

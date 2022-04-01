@@ -17,6 +17,20 @@ internal fun ParseCompBasedStatsPSI(js: ObjectNode) =
   js[Key]?.let { CompBasedStatsPSI(parseEnum(it)) } ?: CompBasedStatsPSI()
 
 
+/**
+ * -comp_based_stats `<String>`
+ *
+ * Use composition-based statistics:
+ * * `D` or `d`: default (equivalent to 2)
+ * * `0` or `F` or `f`: No composition-based statistics
+ * * `1`: Composition-based statistics as in NAR 29:2994-3005, 2001
+ * * `2` or `T` or `t` : Composition-based score adjustment as in Bioinformatics
+ *   21:902-911, 2005, conditioned on sequence properties
+ * * `3`: Composition-based score adjustment as in Bioinformatics 21:902-911,
+ *   2005, unconditionally
+ *
+ * Default = `2'
+ */
 @JvmInline
 value class CompBasedStatsPSI(val value: CompBasedStatsPSIValue = Def)
   : BlastField

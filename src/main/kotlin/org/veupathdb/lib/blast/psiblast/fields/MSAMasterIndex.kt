@@ -14,6 +14,15 @@ internal fun ParseMSAMasterIndex(js: ObjectNode) =
     ?: MSAMasterIndex()
 
 
+/**
+ * -msa_master_idx `<Integer, >=1>`
+ *
+ * Ordinal number (1-based index) of the sequence to use as a master in the
+ * multiple sequence alignment. If not provided, the first sequence in the
+ * multiple sequence alignment will be used
+ *
+ * Requires: -in_msa
+ */
 @JvmInline
 value class MSAMasterIndex(val value: UInt = 0u) : BlastField {
   override val isDefault get() = value == 0u

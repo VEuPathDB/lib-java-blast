@@ -15,6 +15,13 @@ internal fun ParseIgnoreMSAMaster(js: ObjectNode) =
   } ?: IgnoreMSAMaster()
 
 
+/**
+ * -ignore_msa_master
+ *
+ * Ignore the master sequence when creating PSSM
+ *
+ * Requires: -in_msa
+ */
 @JvmInline
 value class IgnoreMSAMaster(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value
