@@ -2,7 +2,6 @@ package org.veupathdb.lib.blast.common
 
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.fields.*
-import org.veupathdb.lib.blast.err.ErrorMap
 import org.veupathdb.lib.blast.serial.BlastCommand
 
 /**
@@ -81,9 +80,4 @@ interface BlastCLI : BlastCommand {
    * -parse_deflines
    */
   var parseDefLines: ParseDefLines
-
-  /**
-   * Validate the current configuration
-   */
-  fun validate(): ErrorMap
 }
