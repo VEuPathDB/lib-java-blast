@@ -14,6 +14,11 @@ internal fun ParseMatrixDelta(js: ObjectNode) =
   js[FlagMatrix]?.let { MatrixDelta(parseEnum(it)) } ?: MatrixDelta()
 
 
+/**
+ * -matrix `<String>`
+ *
+ * Scoring matrix name (normally BLOSUM62)
+ */
 @JvmInline
 value class MatrixDelta(val value: MatrixDeltaType = MatrixDeltaType.None)
   : BlastField

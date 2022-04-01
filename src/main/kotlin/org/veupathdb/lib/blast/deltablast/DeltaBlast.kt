@@ -7,292 +7,157 @@ import org.veupathdb.lib.blast.deltablast.fields.*
 interface DeltaBlast : BlastQueryWithLists {
 
   /**
-   * -word_size <Integer, >=2>
-   *
-   * Word size for wordfinder algorithm
+   * -word_size `<Integer>`
    */
   var wordSize: WordSizeDelta
 
   /**
-   * -gapopen <Integer>
-   *
-   * Cost to open a gap
+   * -gapopen `<Integer>`
    */
   var gapOpen: GapOpen
 
   /**
-   * -gapextend <Integer>
-   *
-   * Cost to extend a gap
+   * -gapextend `<Integer>`
    */
   var gapExtend: GapExtend
 
   /**
-   * -matrix <String>
-   *
-   * Scoring matrix name (normally BLOSUM62)
+   * -matrix `<String>`
    */
   var matrix: MatrixDelta
 
   /**
-   * -threshold <Real, >=0>
-   *
-   * Minimum word score such that the word is added to the BLAST lookup table
+   * -threshold `<Real>`
    */
   var threshold: Threshold
 
   /**
-   * -comp_based_stats <String>
-   * Use composition-based statistics:
-   * * D or d: default (equivalent to 1)
-   * * 0 or F or f: No composition-based statistics
-   * * 1 or T or t: Composition-based statistics as in NAR 29:2994-3005, 2001
-   *
-   * Default = `1`
+   * -comp_based_stats `<String>`
    */
   var compBasedStats: CompBasedStatsDelta
 
   /**
-   * -subject <File_In>
-   *
-   * Subject sequence(s) to search
-   *
-   * Incompatible with:
-   * * db
-   * * gilist
-   * * seqidlist
-   * * negative_gilist
-   * * negative_seqidlist
-   * * taxids
-   * * taxidlist
-   * * negative_taxids
-   * * negative_taxidlist
-   * * show_domain_hits
+   * -subject `<File_In>`
    */
   var subjectFile: SubjectFile
 
   /**
-   * -subject_loc <String>
-   *
-   * Location on the subject sequence in 1-based offsets (Format: start-stop)
-   *
-   * Incompatible with:
-   * * db
-   * * gilist
-   * * seqidlist
-   * * negative_gilist
-   * * negative_seqidlist
-   * * taxids
-   * * taxidlist
-   * * negative_taxids
-   * * negative_taxidlist
-   * * remote
+   * -subject_loc `<String>`
    */
   var subjectLocation: SubjectLocation
 
   /**
-   * -seg <String>
-   *
-   * Filter query sequence with SEG (Format: 'yes', 'window locut hicut', or
-   * 'no' to disable)
-   *
-   * Default = `no`
+   * -seg `<String>`
    */
   var seg: SegDelta
 
   /**
-   * -soft_masking <Boolean>
-   *
-   * Apply filtering locations as soft masks
-   *
-   * Default = `false`
+   * -soft_masking `<Boolean>`
    */
   var softMasking: SoftMaskingDelta
 
   /**
-   * -qcov_hsp_perc <Real, 0..100>
-   *
-   * Percent query coverage per hsp
+   * -qcov_hsp_perc `<Real>`
    */
   var queryCoverageHSPPercent: QueryCoverageHSPPercent
 
   /**
-   * -culling_limit <Integer, >=0>
-   *
-   * If the query range of a hit is enveloped by that of at least this many
-   * higher-scoring hits, delete the hit
-   *
-   * Incompatible with:
-   * * best_hit_overhang
-   * * best_hit_score_edge
+   * -culling_limit `<Integer>`
    */
   var cullingLimit: CullingLimit
 
   /**
-   * -best_hit_overhang <Real, (>0 and <0.5)>
-   *
-   * Best Hit algorithm overhang value (recommended value: 0.1)
-   *
-   * Incompatible with:
-   * * culling_limit
+   * -best_hit_overhang `<Real>`
    */
   var bestHitOverhang: BestHitOverhang
 
   /**
-   * -best_hit_score_edge <Real, (>0 and <0.5)>
-   *
-   * Best Hit algorithm score edge value (recommended value: 0.1)
-   *
-   * Incompatible with:
-   * * culling_limit
+   * -best_hit_score_edge `<Real>`
    */
   var bestHitScoreEdge: BestHitScoreEdge
 
   /**
    * -subject_besthit
-   *
-   * Turn on best hit per subject sequence
    */
   var subjectBestHit: SubjectBestHit
 
   /**
-   * -max_target_seqs <Integer, >=1>
-   *
-   * Maximum number of aligned sequences to keep (value of 5 or more is
-   * recommended)
-   *
-   * Default = `500`
-   *
-   * Incompatible with:
-   * * num_descriptions
-   * * num_alignments
+   * -max_target_seqs `<Integer>`
    */
   var sumStats: SumStats
 
   /**
-   * -xdrop_gap <Real>
-   *
-   * X-dropoff value (in bits) for preliminary gapped extensions
+   * -xdrop_gap `<Real>`
    */
   var extensionDropoffPrelimGapped: ExtensionDropoffPrelimGapped
 
   /**
-   * -xdrop_gap_final <Real>
-   *
-   * X-dropoff value (in bits) for final gapped alignment
+   * -xdrop_gap_final `<Real>`
    */
   var extensionDropoffFinalGapped: ExtensionDropoffFinalGapped
 
   /**
-   * -gap_trigger <Real>
-   *
-   * Number of bits to trigger gapping
-   *
-   * Default = `22`
+   * -gap_trigger `<Real>`
    */
   var gapTrigger: GapTrigger
 
   /**
-   * -num_threads <Integer, >=1>
-   *
-   * Number of threads (CPUs) to use in the BLAST search
-   *
-   * Default = `1`
-   *
-   * Incompatible with:
-   * * remote
+   * -num_threads `<Integer>`
    */
   var numCPUCores: NumCPUCores
 
   /**
    * -use_sw_tback
-   *
-   * Compute locally optimal Smith-Waterman alignments?
    */
   var useSmithWatermanTraceback: UseSmithWatermanTraceback
 
   /**
-   * -num_iterations <Integer, >=0>
-   *
-   * Number of iterations to perform (0 means run until convergence)
-   *
-   * Default = `1`
+   * -num_iterations `<Integer>`
    */
   var numIterations: NumIterations
 
   /**
-   * -out_pssm <File_Out>
-   *
-   * File name to store checkpoint file
+   * -out_pssm `<File_Out>`
    */
   var outPSSMFile: OutPSSMFile
 
   /**
-   * -out_ascii_pssm <File_Out>
-   *
-   * File name to store ASCII version of PSSM
+   * -out_ascii_pssm `<File_Out>`
    */
   var outASCIIPSSMFile: OutASCIIPSSMFile
 
   /**
    * -save_pssm_after_last_round
-   *
-   * Save PSSM after the last database search
    */
   var savePSSMAfterLastRound: SavePSSMAfterLastRound
 
   /**
    * -save_each_pssm
-   *
-   * Save PSSM after each iteration (file name is given in -save_pssm or
-   * -save_ascii_pssm options)
    */
   var saveEachPSSM: SaveEachPSSM
 
   /**
-   * -pseudocount <Integer>
-   *
-   * Pseudo-count value used when constructing PSSM
-   *
-   * Default = `0`
+   * -pseudocount `<Integer>`
    */
   var pseudoCount: PseudoCount
 
   /**
-   * -domain_inclusion_ethresh <Real>
-   *
-   * E-value inclusion threshold for alignments with conserved domains
-   *
-   * Default = `0.05`
+   * -domain_inclusion_ethresh `<Real>`
    */
   var domainInclusionEValueThreshold: DomainInclusionEValueThreshold
 
   /**
-   * -inclusion_ethresh <Real>
-   *
-   * E-value inclusion threshold for pairwise alignments
-   *
-   * Default = `0.002`
+   * -inclusion_ethresh `<Real>`
    */
   var inclusionEValueThreshold: InclusionEValueThreshold
 
   /**
-   * -rpsdb <String>
-   *
-   * BLAST domain database name
-   *
-   * Default = `cdd_delta`
+   * -rpsdb `<String>`
    */
   var rpsDB: RPSDB
 
   /**
    * -show_domain_hits
-   *
-   * Show domain hits
-   *
-   * Incompatible with:
-   * * remote
-   * * subject
    */
   var showDomainHits: ShowDomainHits
 }

@@ -17,6 +17,11 @@ internal fun ParseWordSizeDelta(js: ObjectNode) =
     ?: WordSizeDelta()
 
 
+/**
+ * -word_size `<Integer, >=2>`
+ *
+ * Word size for wordfinder algorithm
+ */
 @JvmInline
 value class WordSizeDelta(val value: UInt = Def) : BlastField {
   init {

@@ -14,6 +14,17 @@ internal fun ParseCompBasedStatsDelta(js: ObjectNode) =
     ?: CompBasedStatsDelta()
 
 
+/**
+ * -comp_based_stats `<String>`
+ *
+ * Use composition-based statistics:
+ * * `D` or `d`: default (equivalent to 1)
+ * * `0` or `F` or `f`: No composition-based statistics
+ * * `1` or `T` or `t`: Composition-based statistics as in NAR 29:2994-3005,
+ *   2001
+ *
+ * Default = `1`
+ */
 @JvmInline
 value class CompBasedStatsDelta(
   val value: CompBasedStatsDeltaValue = CompBasedStatsDeltaValue.CompBasedStats

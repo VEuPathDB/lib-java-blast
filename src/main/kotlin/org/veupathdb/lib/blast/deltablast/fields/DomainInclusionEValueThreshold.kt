@@ -15,6 +15,13 @@ internal fun ParseDomainInclusionEValueThreshold(js: ObjectNode) =
   } ?: DomainInclusionEValueThreshold()
 
 
+/**
+ * -domain_inclusion_ethresh `<Real>`
+ *
+ * E-value inclusion threshold for alignments with conserved domains
+ *
+ * Default = `0.05`
+ */
 @JvmInline
 value class DomainInclusionEValueThreshold(val value: Double = 0.05)
   : BlastField

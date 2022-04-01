@@ -14,6 +14,11 @@ internal fun ParseShowDomainHits(js: ObjectNode) =
     ?: ShowDomainHits()
 
 
+/**
+ * -show_domain_hits
+ *
+ * Show domain hits
+ */
 @JvmInline
 value class ShowDomainHits(val value: Boolean = false): BlastField {
   override val isDefault get() = !value

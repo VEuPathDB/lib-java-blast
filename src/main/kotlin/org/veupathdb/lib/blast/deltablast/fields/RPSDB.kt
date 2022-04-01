@@ -13,6 +13,13 @@ internal fun ParseRPSDB(js: ObjectNode) =
   js[FlagRPSDB]?.let { RPSDB(it.reqString(FlagRPSDB)) } ?: RPSDB()
 
 
+/**
+ * -rpsdb `<String>`
+ *
+ * BLAST domain database name
+ *
+ * Default = `cdd_delta`
+ */
 @JvmInline
 value class RPSDB(val value: String = "cdd_delta") : BlastField {
   override val isDefault get() = value == "cdd_delta"
