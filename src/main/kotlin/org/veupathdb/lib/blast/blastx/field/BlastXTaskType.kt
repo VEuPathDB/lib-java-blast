@@ -16,6 +16,17 @@ internal fun ParseBlastXTask(js: ObjectNode) =
   js[FlagTask]?.let { BlastXTask(parseEnum(it.reqString(FlagTask))) } ?: BlastXTask()
 
 
+/**
+ * -task `<String>`
+ *
+ * Permissible values:
+ * * blastx
+ * * blastx-fast
+ *
+ * Task to execute
+ *
+ * Default = `blastx`
+ */
 @JvmInline
 value class BlastXTask(val value: BlastXTaskType = Def) : BlastField {
   override val isDefault get() = value == Def

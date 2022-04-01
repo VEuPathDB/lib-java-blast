@@ -16,6 +16,18 @@ private const val DefLocut  = 2.5
 private const val DefHicut  = 2.5
 
 
+/**
+ * -seg `<String>`
+ *
+ * Filter query sequence with SEG.
+ *
+ * Format:
+ * * yes
+ * * "window locut hicut"
+ * * no (to disable)
+ *
+ * Default = `"12 2.2 2.5"`
+ */
 sealed interface SegX : Seg {
   companion object {
 

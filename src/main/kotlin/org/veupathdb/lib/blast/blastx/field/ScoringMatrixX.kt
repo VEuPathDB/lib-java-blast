@@ -14,6 +14,11 @@ internal fun ParseScoringMatrixX(js: ObjectNode) =
     ScoringMatrixX()
 
 
+/**
+ * -matrix `<String>`
+ *
+ * Scoring matrix name (normally BLOSUM62)
+ */
 @JvmInline
 value class ScoringMatrixX(
   val value: ScoringMatrixXType = ScoringMatrixXType.None

@@ -69,7 +69,7 @@ OPTIONAL ARGUMENTS
    Word size for wordfinder algorithm
  -gapopen <Integer>
    Cost to open a gap
- -gapextend <Integer>comp
+ -gapextend <Integer>
    Cost to extend a gap
  -max_intron_length <Integer, >=0>
    Length of the largest intron allowed in a translated nucleotide sequence
