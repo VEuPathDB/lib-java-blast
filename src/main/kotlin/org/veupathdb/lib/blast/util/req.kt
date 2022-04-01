@@ -6,6 +6,28 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 
+/**
+ * Ensures that the target `Int` value is in the given inclusive range.
+ *
+ * @param k JSON object key for the target `Int` value.
+ *
+ * @param sI Inclusive start value.
+ *
+ * @param eI Inclusive end value.
+ *
+ * @return The target `Int` value.
+ *
+ * @throws IllegalArgumentException If the target `Int` value is outside the
+ * range defined by the given start and end values.
+ */
+internal inline fun Int.inSet(k: String, sI: Int, eI: Int) =
+  if (this !in sI .. eI)
+    throw IllegalArgumentException("$k must be an int value between $sI and $eI (inclusive)")
+  else
+    this
+
+internal inline fun <R> ObjectNode.optInt(k: String, f: (Int) -> R) : R? =
+  this[k]?.reqInt(k)?.let(f)
 
 internal inline fun JsonNode.requireArray(k: () -> String): ArrayNode {
   if (!isArray)

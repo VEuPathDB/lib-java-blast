@@ -17,6 +17,11 @@ internal fun ParseQueryCoverageHSPPercent(js: ObjectNode) =
     QueryCoverageHSPPercent(it.reqDub(FlagQueryCoverageHSPPercent))
   } ?: QueryCoverageHSPPercent()
 
+/**
+ * -qcov_hsp_perc <Real, 0..100>
+ *
+ * Percent query coverage per hsp
+ */
 @JvmInline
 value class QueryCoverageHSPPercent(val value: Double = DefaultQueryCovHSPPerc)
   : BlastField
