@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import org.veupathdb.lib.blast.blastp.field.SoftMaskingP
 import org.veupathdb.lib.blast.common.*
 import org.veupathdb.lib.blast.common.BlastQueryBaseImplTest
 import org.veupathdb.lib.blast.common.fields.*
