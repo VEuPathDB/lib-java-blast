@@ -5,9 +5,6 @@ import org.veupathdb.lib.blast.common.FlagQueryLocation
 import org.veupathdb.lib.blast.common.FlagSubjectLocation
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.requireObject
 
 private const val DefStart = 0u
 private const val DefStop  = 0u
@@ -16,15 +13,13 @@ private const val KeyStop  = "stop"
 
 
 
-internal fun ParseSubjectLocation(js: ObjectNode): SubjectLocation {
-  val obj = js[FlagSubjectLocation]?.requireObject(FlagSubjectLocation)
-    ?: return SubjectLocation()
-
-  return SubjectLocation(
-    obj[KeyStart]?.reqUInt { "$FlagSubjectLocation.$KeyStart" } ?: DefStart,
-    obj[KeyStop]?.reqUInt { "$FlagSubjectLocation.$KeyStop" } ?: DefStop
-  )
-}
+internal fun ParseSubjectLocation(js: ObjectNode) =
+  js.optObject(FlagSubjectLocation) {
+    SubjectLocation(
+      it[KeyStart]?.reqUInt { "$FlagSubjectLocation.$KeyStart" } ?: DefStart,
+      it[KeyStop]?.reqUInt { "$FlagSubjectLocation.$KeyStop" } ?: DefStop
+    )
+  } ?: SubjectLocation()
 
 
 /**

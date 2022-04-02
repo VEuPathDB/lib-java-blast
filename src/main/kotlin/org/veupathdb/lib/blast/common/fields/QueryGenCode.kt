@@ -3,23 +3,24 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagQueryGenCode
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqUByte
+import org.veupathdb.lib.blast.util.*
 
 
 private const val Def: UByte  = 1u
 
 
 internal fun ParseQueryGenCode(js: ObjectNode) =
-  js[FlagQueryGenCode]?.let { QueryGenCode(it.reqUByte(FlagQueryGenCode)) } ?: QueryGenCode()
+  js.optUByte(FlagQueryGenCode) { QueryGenCode(it) } ?: QueryGenCode()
 
 
 /**
  * -query_gencode `<Integer>`
  *
  * Permissible values between:
+ * * [1..6]
+ * * [9..16]
+ * * [21..31]
+ * * [33]
  *
  * Genetic code to use to translate query (see
  * https://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html/index.cgi?chapter=cgencodes

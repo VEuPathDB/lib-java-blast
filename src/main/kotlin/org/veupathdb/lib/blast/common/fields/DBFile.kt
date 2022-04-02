@@ -5,17 +5,12 @@ import org.veupathdb.lib.blast.common.FlagDBFile
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
+import org.veupathdb.lib.blast.util.optString
 import org.veupathdb.lib.blast.util.put
 
 
-internal fun ParseDBFile(js: ObjectNode): DBFile {
-  val tmp = js[FlagDBFile] ?: return DBFile()
-
-  if (!tmp.isTextual)
-    throw IllegalArgumentException("$FlagDBFile must be a text value.")
-
-  return DBFile(tmp.textValue())
-}
+internal fun ParseDBFile(js: ObjectNode) =
+  js.optString(FlagDBFile) { DBFile(it) } ?: DBFile()
 
 
 /**

@@ -3,17 +3,14 @@ package org.veupathdb.lib.blast.blastn.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagPenalty
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqInt
+import org.veupathdb.lib.blast.util.*
 
 
 private const val Def = Int.MIN_VALUE
 
 
 internal fun ParsePenalty(js: ObjectNode) =
-  js[FlagPenalty]?.let { Penalty(it.reqInt(FlagPenalty)) } ?: Penalty()
+  js.optInt(FlagPenalty) { Penalty(it) } ?: Penalty()
 
 
 /**

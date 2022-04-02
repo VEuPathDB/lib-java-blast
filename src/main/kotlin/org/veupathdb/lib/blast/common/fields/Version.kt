@@ -3,17 +3,14 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagVersion
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqBool
+import org.veupathdb.lib.blast.util.*
 
 
-private const val DefaultVersion = false
+private const val Def = false
 
 
 internal fun ParseVersion(js: ObjectNode) =
-  js[FlagVersion]?.let { Version(it.reqBool(FlagVersion)) } ?: Version()
+  js.optBool(FlagVersion) { Version(it) } ?: Version()
 
 
 /**
@@ -22,8 +19,8 @@ internal fun ParseVersion(js: ObjectNode) =
  * Print version number;  ignore other arguments
  */
 @JvmInline
-value class Version(val value: Boolean = DefaultVersion) : BlastField {
-  override val isDefault get() = value == DefaultVersion
+value class Version(val value: Boolean = Def) : BlastField {
+  override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagVersion, value)

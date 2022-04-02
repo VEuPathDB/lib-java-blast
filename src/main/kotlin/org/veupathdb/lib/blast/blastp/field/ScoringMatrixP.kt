@@ -1,18 +1,16 @@
 package org.veupathdb.lib.blast.blastp.field
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagMatrix
 import org.veupathdb.lib.blast.serial.BlastField
+import org.veupathdb.lib.blast.util.*
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
 import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqString
-
-
-private const val Key = "-matrix"
 
 
 internal fun ParseScoringMatrixP(js: ObjectNode) =
-  js[Key]?.let { ScoringMatrixP(parseMatrix(it.reqString(Key))) }
+  js.optString(FlagMatrix) { ScoringMatrixP(parseMatrix(it)) }
     ?: ScoringMatrixP()
 
 
@@ -28,13 +26,13 @@ value class ScoringMatrixP(val value: ScoringMatrixPType = ScoringMatrixPType.No
   override val isDefault get() = value == ScoringMatrixPType.None
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, Key, value.value)
+    js.put(isDefault, FlagMatrix, value.value)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, Key, value.value)
+    cli.append(isDefault, FlagMatrix, value.value)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, Key, value.value)
+    cli.add(isDefault, FlagMatrix, value.value)
 }
 
 

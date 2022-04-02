@@ -12,7 +12,7 @@ internal fun ParseMultiThreadingMode(js: ObjectNode) =
     ?: MultiThreadingMode()
 
 /**
- * -mt_mode <Integer, (>=0 and =<1)>
+ * -mt_mode `<Integer, (>=0 and =<1)>`
  *
  * Multi-thread mode to use in RPS BLAST search:
  * * 0 (auto) split by database vols

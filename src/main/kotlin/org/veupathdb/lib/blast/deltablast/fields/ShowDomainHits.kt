@@ -3,15 +3,11 @@ package org.veupathdb.lib.blast.deltablast.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagShowDomainHits
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqBool
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseShowDomainHits(js: ObjectNode) =
-  js[FlagShowDomainHits]?.let { ShowDomainHits(it.reqBool(FlagShowDomainHits)) }
-    ?: ShowDomainHits()
+  js.optBool(FlagShowDomainHits) { ShowDomainHits(it) } ?: ShowDomainHits()
 
 
 /**

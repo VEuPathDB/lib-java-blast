@@ -3,15 +3,11 @@ package org.veupathdb.lib.blast.psiblast.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagMSAMasterIndex
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqUInt
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseMSAMasterIndex(js: ObjectNode) =
-  js[FlagMSAMasterIndex]?.let { MSAMasterIndex(it.reqUInt(FlagMSAMasterIndex)) }
-    ?: MSAMasterIndex()
+  js.optUInt(FlagMSAMasterIndex) { MSAMasterIndex(it) } ?: MSAMasterIndex()
 
 
 /**

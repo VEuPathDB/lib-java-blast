@@ -3,15 +3,11 @@ package org.veupathdb.lib.blast.blastp.field
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagSoftMasking
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqBool
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseSoftMaskingP(js: ObjectNode) =
-  js[FlagSoftMasking]?.let { SoftMaskingP(it.reqBool(FlagSoftMasking)) }
-    ?: SoftMaskingP()
+  js.optBool(FlagSoftMasking) { SoftMaskingP(it) } ?: SoftMaskingP()
 
 
 /**

@@ -3,15 +3,11 @@ package org.veupathdb.lib.blast.blastx.field
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagMatrix
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqString
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseScoringMatrixX(js: ObjectNode) =
-  js[FlagMatrix]?.let { ScoringMatrixX(parseEnum(it.reqString(FlagMatrix))) } ?:
-    ScoringMatrixX()
+  js.optString(FlagMatrix) { ScoringMatrixX(parseEnum(it)) } ?: ScoringMatrixX()
 
 
 /**

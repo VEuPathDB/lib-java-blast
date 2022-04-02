@@ -3,18 +3,14 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagSearchSpace
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqByte
+import org.veupathdb.lib.blast.util.*
 
 
 private const val DefaultSearchSpace: Byte = -1
 
 
 internal fun ParseSearchSpace(js: ObjectNode) =
-  js[FlagSearchSpace]?.let { SearchSpace(it.reqByte(FlagSearchSpace)) }
-    ?: SearchSpace()
+  js.optByte(FlagSearchSpace) { SearchSpace(it) } ?: SearchSpace()
 
 
 /**

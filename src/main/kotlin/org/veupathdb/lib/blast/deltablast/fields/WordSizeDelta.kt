@@ -3,18 +3,14 @@ package org.veupathdb.lib.blast.deltablast.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagWordSize
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqUInt
+import org.veupathdb.lib.blast.util.*
 
 
 private const val Def = UInt.MAX_VALUE
 
 
 internal fun ParseWordSizeDelta(js: ObjectNode) =
-  js[FlagWordSize]?.let { WordSizeDelta(it.reqUInt(FlagWordSize)) }
-    ?: WordSizeDelta()
+  js.optUInt(FlagWordSize) { WordSizeDelta(it) } ?: WordSizeDelta()
 
 
 /**

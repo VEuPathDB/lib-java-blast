@@ -1,18 +1,13 @@
 package org.veupathdb.lib.blast.blastp.field
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagTask
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqString
-
-
-private const val Key = "-task"
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseBlastPTask(js: ObjectNode) =
-  js[Key]?.let { BlastPTask(parseTask(it.reqString(Key))) } ?: BlastPTask()
+  js.optString(FlagTask) { BlastPTask(parseTask(it)) } ?: BlastPTask()
 
 
 /**
@@ -34,13 +29,13 @@ value class BlastPTask(val value: BlastPTaskType = BlastPTaskType.BlastP)
   override val isDefault get() = value == BlastPTaskType.BlastP
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, Key, value.value)
+    js.put(isDefault, FlagTask, value.value)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, Key, value.value)
+    cli.append(isDefault, FlagTask, value.value)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, Key, value.value)
+    cli.add(isDefault, FlagTask, value.value)
 }
 
 

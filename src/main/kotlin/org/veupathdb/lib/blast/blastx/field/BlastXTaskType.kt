@@ -3,17 +3,14 @@ package org.veupathdb.lib.blast.blastx.field
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagTask
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqString
+import org.veupathdb.lib.blast.util.*
 
 
 private val Def = BlastXTaskType.BlastX
 
 
 internal fun ParseBlastXTask(js: ObjectNode) =
-  js[FlagTask]?.let { BlastXTask(parseEnum(it.reqString(FlagTask))) } ?: BlastXTask()
+  js.optString(FlagTask) { BlastXTask(parseEnum(it)) } ?: BlastXTask()
 
 
 /**

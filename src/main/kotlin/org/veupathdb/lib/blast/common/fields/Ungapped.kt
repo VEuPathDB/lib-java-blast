@@ -3,14 +3,11 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagUngapped
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqBool
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseUngappedAlignmentsOnly(js: ObjectNode) =
-  js[FlagUngapped]?.let { UngappedAlignmentsOnly(it.reqBool(FlagUngapped)) }
+  js.optBool(FlagUngapped) { UngappedAlignmentsOnly(it) }
     ?: UngappedAlignmentsOnly()
 
 

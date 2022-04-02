@@ -3,17 +3,14 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagSumStats
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqBool
+import org.veupathdb.lib.blast.util.*
 
 
-private const val DefSumStats = false
+private const val Def = false
 
 
 internal fun ParseSumStats(js: ObjectNode) =
-  js[FlagSumStats]?.let { SumStats(it.reqBool(FlagSumStats)) } ?: SumStats()
+  js.optBool(FlagSumStats) { SumStats(it) } ?: SumStats()
 
 
 /**
@@ -22,8 +19,8 @@ internal fun ParseSumStats(js: ObjectNode) =
  * Use sum statistics
  */
 @JvmInline
-value class SumStats(val value: Boolean = DefSumStats) : BlastField {
-  override val isDefault get() = value == DefSumStats
+value class SumStats(val value: Boolean = Def) : BlastField {
+  override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagSumStats, value)

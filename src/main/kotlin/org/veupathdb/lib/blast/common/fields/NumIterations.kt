@@ -3,15 +3,14 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagNumIterations
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqUInt
+import org.veupathdb.lib.blast.util.*
+
+
+private const val Def: UByte = 1u
 
 
 internal fun ParseNumIterations(js: ObjectNode) =
-  js[FlagNumIterations]?.let { NumIterations(it.reqUInt(FlagNumIterations)) }
-    ?: NumIterations()
+  js.optUByte(FlagNumIterations) { NumIterations(it) } ?: NumIterations()
 
 
 /**
@@ -22,8 +21,8 @@ internal fun ParseNumIterations(js: ObjectNode) =
  * Default = `1`
  */
 @JvmInline
-value class NumIterations(val value: UInt = 1u) : BlastField {
-  override val isDefault get() = value == 1u
+value class NumIterations(val value: UByte = Def) : BlastField {
+  override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagNumIterations, value)

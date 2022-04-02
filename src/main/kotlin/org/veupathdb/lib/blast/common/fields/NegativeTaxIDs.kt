@@ -1,31 +1,15 @@
 package org.veupathdb.lib.blast.common.fields
 
-import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagNegativeTaxIDs
-import org.veupathdb.lib.blast.common.FlagTaxIDs
 import org.veupathdb.lib.blast.serial.BlastField
+import org.veupathdb.lib.blast.util.optArray
+import org.veupathdb.lib.blast.util.toStrList
 
 
-internal fun ParseNegTaxIDs(js: ObjectNode): NegativeTaxIDs {
-  val arr = js[FlagNegativeTaxIDs] ?: return NegativeTaxIDs()
-
-  if (!arr.isArray)
-    throw IllegalArgumentException("$FlagTaxIDs must be an array of strings.")
-
-  arr as ArrayNode
-
-  val tmp = ArrayList<String>(arr.size())
-
-  arr.forEach {
-    if (!it.isTextual)
-      throw IllegalArgumentException("$FlagTaxIDs must be an array of strings.")
-
-    tmp.add(it.textValue())
-  }
-
-  return NegativeTaxIDs(tmp)
-}
+internal fun ParseNegTaxIDs(js: ObjectNode) =
+  js.optArray(FlagNegativeTaxIDs) { NegativeTaxIDs(it.toStrList(FlagNegativeTaxIDs)) }
+    ?: NegativeTaxIDs()
 
 
 /**

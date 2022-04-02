@@ -3,16 +3,12 @@ package org.veupathdb.lib.blast.deltablast.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagDomainInclusionEThresh
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqDub
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseDomainInclusionEValueThreshold(js: ObjectNode) =
-  js[FlagDomainInclusionEThresh]?.let {
-    DomainInclusionEValueThreshold(it.reqDub(FlagDomainInclusionEThresh))
-  } ?: DomainInclusionEValueThreshold()
+  js.optDub(FlagDomainInclusionEThresh) { DomainInclusionEValueThreshold(it) }
+    ?: DomainInclusionEValueThreshold()
 
 
 /**

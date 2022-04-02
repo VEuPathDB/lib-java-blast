@@ -5,16 +5,12 @@ import org.veupathdb.lib.blast.common.FlagXDropFinalGap
 import org.veupathdb.lib.blast.common.FlagXDropPrelimGap
 import org.veupathdb.lib.blast.common.FlagXDropUngap
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqDub
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseXDropUngap(js: ObjectNode) =
-  js[FlagXDropUngap]?.let {
-    ExtensionDropoffUngapped(it.reqDub(FlagXDropUngap))
-  } ?: ExtensionDropoffUngapped()
+  js.optDub(FlagXDropUngap) { ExtensionDropoffUngapped(it) }
+    ?: ExtensionDropoffUngapped()
 
 
 /**
@@ -38,9 +34,8 @@ value class ExtensionDropoffUngapped(val value: Double = Double.NaN) : BlastFiel
 
 
 internal fun ParseXDropGap(js: ObjectNode) =
-  js[FlagXDropPrelimGap]?.let {
-    ExtensionDropoffPrelimGapped(it.reqDub(FlagXDropPrelimGap))
-  } ?: ExtensionDropoffPrelimGapped()
+  js.optDub(FlagXDropPrelimGap) { ExtensionDropoffPrelimGapped(it) }
+    ?: ExtensionDropoffPrelimGapped()
 
 
 /**
@@ -64,9 +59,8 @@ value class ExtensionDropoffPrelimGapped(val value: Double = Double.NaN) : Blast
 
 
 internal fun ParseXDropGapFinal(js: ObjectNode) =
-  js[FlagXDropFinalGap]?.let {
-    ExtensionDropoffFinalGapped(it.reqDub(FlagXDropFinalGap))
-  } ?: ExtensionDropoffFinalGapped()
+  js.optDub(FlagXDropFinalGap) { ExtensionDropoffFinalGapped(it) }
+    ?: ExtensionDropoffFinalGapped()
 
 
 /**

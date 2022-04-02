@@ -4,16 +4,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagExportSearchStrategy
 import org.veupathdb.lib.blast.common.FlagImportSearchStrategy
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqString
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseImportSearchStrategy(js: ObjectNode) =
-  js[FlagImportSearchStrategy]?.let {
-    ImportSearchStrategy(it.reqString(FlagImportSearchStrategy))
-  } ?: ImportSearchStrategy()
+  js.optString(FlagImportSearchStrategy) { ImportSearchStrategy(it) }
+    ?: ImportSearchStrategy()
 
 
 /**
@@ -37,9 +33,8 @@ value class ImportSearchStrategy(val file: String = "") : BlastField {
 
 
 internal fun ParseExportSearchStrategy(js: ObjectNode) =
-  js[FlagExportSearchStrategy]?.let {
-    ExportSearchStrategy(it.reqString(FlagExportSearchStrategy))
-  } ?: ExportSearchStrategy()
+  js.optString(FlagExportSearchStrategy) { ExportSearchStrategy(it) }
+    ?: ExportSearchStrategy()
 
 
 @JvmInline

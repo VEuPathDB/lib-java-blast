@@ -3,19 +3,15 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagQueryCoverageHSPPercent
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqDub
+import org.veupathdb.lib.blast.util.*
 
 
-private const val DefaultQueryCovHSPPerc = -1.0
+private const val Def = -1.0
 
 
 internal fun ParseQueryCoverageHSPPercent(js: ObjectNode) =
-  js[FlagQueryCoverageHSPPercent]?.let {
-    QueryCoverageHSPPercent(it.reqDub(FlagQueryCoverageHSPPercent))
-  } ?: QueryCoverageHSPPercent()
+  js.optDub(FlagQueryCoverageHSPPercent) { QueryCoverageHSPPercent(it) }
+    ?: QueryCoverageHSPPercent()
 
 /**
  * -qcov_hsp_perc `<Real, 0..100>`
@@ -23,10 +19,10 @@ internal fun ParseQueryCoverageHSPPercent(js: ObjectNode) =
  * Percent query coverage per hsp
  */
 @JvmInline
-value class QueryCoverageHSPPercent(val value: Double = DefaultQueryCovHSPPerc)
+value class QueryCoverageHSPPercent(val value: Double = Def)
   : BlastField
 {
-  override val isDefault get() = value == DefaultQueryCovHSPPerc
+  override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagQueryCoverageHSPPercent, value)

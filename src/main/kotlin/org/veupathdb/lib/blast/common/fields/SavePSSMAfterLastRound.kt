@@ -3,16 +3,12 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagSavePSSMAfterLastRound
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqBool
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseSavePSSMAfterLastRound(js: ObjectNode) =
-  js[FlagSavePSSMAfterLastRound]?.let {
-    SavePSSMAfterLastRound(it.reqBool(FlagSavePSSMAfterLastRound))
-  } ?: SavePSSMAfterLastRound()
+  js.optBool(FlagSavePSSMAfterLastRound) { SavePSSMAfterLastRound(it) }
+    ?: SavePSSMAfterLastRound()
 
 
 /**

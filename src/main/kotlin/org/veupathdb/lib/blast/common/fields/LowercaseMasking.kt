@@ -3,16 +3,11 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagLowercaseMasking
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqBool
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseLowercaseMasking(js: ObjectNode) =
-  js[FlagLowercaseMasking]?.let {
-    LowercaseMasking(it.reqBool(FlagLowercaseMasking))
-  }
+  js.optBool(FlagLowercaseMasking) { LowercaseMasking(it) }
     ?: LowercaseMasking()
 
 

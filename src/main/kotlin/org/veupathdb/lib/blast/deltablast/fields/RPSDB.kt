@@ -3,14 +3,11 @@ package org.veupathdb.lib.blast.deltablast.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagRPSDB
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqString
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseRPSDB(js: ObjectNode) =
-  js[FlagRPSDB]?.let { RPSDB(it.reqString(FlagRPSDB)) } ?: RPSDB()
+  js.optString(FlagRPSDB) { RPSDB(it) } ?: RPSDB()
 
 
 /**

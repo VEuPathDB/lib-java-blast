@@ -3,15 +3,11 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagGapTrigger
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqDub
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseGapTrigger(js: ObjectNode) =
-  js[FlagGapTrigger]?.let { GapTrigger(it.reqDub(FlagGapTrigger)) }
-    ?: GapTrigger()
+  js.optDub(FlagGapTrigger) { GapTrigger(it) } ?: GapTrigger()
 
 
 /**

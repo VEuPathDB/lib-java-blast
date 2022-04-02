@@ -5,6 +5,7 @@ import org.veupathdb.lib.blast.common.FlagOut
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
+import org.veupathdb.lib.blast.util.optString
 import org.veupathdb.lib.blast.util.put
 
 
@@ -12,7 +13,7 @@ private const val Def = "-"
 
 
 internal fun ParseOutFile(js: ObjectNode) =
-  OutFile(js[FlagOut]?.textValue() ?: Def)
+  js.optString(FlagOut) { OutFile(it) } ?: OutFile()
 
 
 /**

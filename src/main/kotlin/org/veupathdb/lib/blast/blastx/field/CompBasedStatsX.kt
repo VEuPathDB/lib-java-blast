@@ -2,19 +2,18 @@ package org.veupathdb.lib.blast.blastx.field
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagCompBasedStats
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
 import org.veupathdb.lib.blast.util.put
 
 
-private const val Key = "-comp_based_stats"
-
 private val Def = CompBasedStatsXValue.ConditionalScoreAdjustment
 
 
 internal fun ParseCompBasedStatsX(js: ObjectNode) =
-  js[Key]?.let { CompBasedStatsX(parseEnum(it)) } ?: CompBasedStatsX()
+  js[FlagCompBasedStats]?.let { CompBasedStatsX(parseEnum(it)) } ?: CompBasedStatsX()
 
 
 /**
@@ -38,13 +37,13 @@ value class CompBasedStatsX(val value: CompBasedStatsXValue = Def)
   override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, Key, value.value)
+    js.put(isDefault, FlagCompBasedStats, value.value)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, Key, value.value)
+    cli.append(isDefault, FlagCompBasedStats, value.value)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, Key, value.value)
+    cli.add(isDefault, FlagCompBasedStats, value.value)
 }
 
 
@@ -56,7 +55,7 @@ private fun parseEnum(j: JsonNode): CompBasedStatsXValue {
       "1"           -> CompBasedStatsXValue.Statistics
       "2", "t", "T" -> CompBasedStatsXValue.ConditionalScoreAdjustment
       "3"           -> CompBasedStatsXValue.UnconditionalScoreAdjustment
-      else          -> throw IllegalArgumentException("Invalid value \"$v\" for $Key.")
+      else          -> throw IllegalArgumentException("Invalid value \"$v\" for $FlagCompBasedStats.")
     }
 
   if (j.isIntegralNumber)
@@ -65,10 +64,10 @@ private fun parseEnum(j: JsonNode): CompBasedStatsXValue {
       1    -> CompBasedStatsXValue.Statistics
       2    -> CompBasedStatsXValue.ConditionalScoreAdjustment
       3    -> CompBasedStatsXValue.UnconditionalScoreAdjustment
-      else -> throw IllegalArgumentException("Invalid value \"$v\" for $Key.")
+      else -> throw IllegalArgumentException("Invalid value \"$v\" for $FlagCompBasedStats.")
     }
 
-  throw IllegalArgumentException("$Key must be a string or int value.")
+  throw IllegalArgumentException("$FlagCompBasedStats must be a string or int value.")
 }
 
 

@@ -1,12 +1,12 @@
 package org.veupathdb.lib.blast.blastp.field
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagSeg
 import org.veupathdb.lib.blast.common.fields.Seg
 import org.veupathdb.lib.blast.util.reqDub
 import org.veupathdb.lib.blast.util.reqInt
 import org.veupathdb.lib.jackson.Json
 
-private const val KeySeg = "-seg"
 private const val KeyWindow = "window"
 private const val KeyLocut = "locut"
 private const val KeyHicut = "hicut"
@@ -41,20 +41,20 @@ sealed interface SegP : Seg {
 
 
 internal fun ParseSegP(js: ObjectNode): SegP {
-  val tmp = js[KeySeg] ?: return NoSeg
+  val tmp = js[FlagSeg] ?: return NoSeg
 
   if (tmp.isTextual) {
     return when (js.textValue()) {
       "yes" -> YesSeg
       "no"  -> NoSeg
-      else  -> throw IllegalArgumentException("$KeySeg must be an object or one of the string values \"yes\" or \"no\".")
+      else  -> throw IllegalArgumentException("$FlagSeg must be an object or one of the string values \"yes\" or \"no\".")
     }
   }
 
   if (tmp.isObject)
     return parseSeg(tmp as ObjectNode)
 
-  throw IllegalArgumentException("$KeySeg must be an object or one of the string values \"yes\" or \"no\".")
+  throw IllegalArgumentException("$FlagSeg must be an object or one of the string values \"yes\" or \"no\".")
 }
 
 
@@ -64,26 +64,26 @@ internal object YesSeg : SegP {
   override val isNo get() = false
 
   override val window
-    get() = throw IllegalStateException("Cannot get a $KeySeg.$KeyWindow value from \"yes\".")
+    get() = throw IllegalStateException("Cannot get a $FlagSeg.$KeyWindow value from \"yes\".")
 
   override val locut: Double
-    get() = throw IllegalStateException("Cannot get a $KeySeg.$KeyLocut value from \"yes\".")
+    get() = throw IllegalStateException("Cannot get a $FlagSeg.$KeyLocut value from \"yes\".")
 
   override val hicut: Double
-    get() = throw IllegalStateException("Cannot get a $KeySeg.$KeyHicut value from \"yes\".")
+    get() = throw IllegalStateException("Cannot get a $FlagSeg.$KeyHicut value from \"yes\".")
 
   override val isDefault get() = false
 
   override fun appendJson(js: ObjectNode) {
-    js.put(KeySeg, "yes")
+    js.put(FlagSeg, "yes")
   }
 
   override fun appendCliSegment(cli: StringBuilder) {
-    cli.append(" $KeySeg yes")
+    cli.append(" $FlagSeg yes")
   }
 
   override fun appendCliParts(cli: MutableList<String>) {
-    cli.add(KeySeg)
+    cli.add(FlagSeg)
     cli.add("yes")
   }
 }
@@ -95,13 +95,13 @@ internal object NoSeg : SegP {
   override val isNo get() = true
 
   override val window
-    get() = throw IllegalStateException("Cannot get a $KeySeg.$KeyWindow value from \"no\".")
+    get() = throw IllegalStateException("Cannot get a $FlagSeg.$KeyWindow value from \"no\".")
 
   override val locut: Double
-    get() = throw IllegalStateException("Cannot get a $KeySeg.$KeyLocut value from \"no\".")
+    get() = throw IllegalStateException("Cannot get a $FlagSeg.$KeyLocut value from \"no\".")
 
   override val hicut: Double
-    get() = throw IllegalStateException("Cannot get a $KeySeg.$KeyHicut value from \"no\".")
+    get() = throw IllegalStateException("Cannot get a $FlagSeg.$KeyHicut value from \"no\".")
 
   override val isDefault get() = true
 
@@ -114,13 +114,13 @@ internal object NoSeg : SegP {
 
 
 private fun parseSeg(js: ObjectNode): SegP {
-  val wn = js[KeyWindow] ?: throw IllegalArgumentException("Missing required key $KeySeg.$KeyWindow.")
-  val ln = js[KeyLocut]  ?: throw IllegalArgumentException("Missing required key $KeySeg.$KeyLocut.")
-  val hn = js[KeyHicut]  ?: throw IllegalArgumentException("Missing required key $KeySeg.$KeyHicut.")
+  val wn = js[KeyWindow] ?: throw IllegalArgumentException("Missing required key $FlagSeg.$KeyWindow.")
+  val ln = js[KeyLocut]  ?: throw IllegalArgumentException("Missing required key $FlagSeg.$KeyLocut.")
+  val hn = js[KeyHicut]  ?: throw IllegalArgumentException("Missing required key $FlagSeg.$KeyHicut.")
 
-  val w = wn.reqInt { "$KeySeg.$KeyWindow" }
-  val l = ln.reqDub { "$KeySeg.$KeyLocut" }
-  val h = hn.reqDub { "$KeySeg.$KeyHicut" }
+  val w = wn.reqInt { "$FlagSeg.$KeyWindow" }
+  val l = ln.reqDub { "$FlagSeg.$KeyLocut" }
+  val h = hn.reqDub { "$FlagSeg.$KeyHicut" }
 
   return ValSeg(w, l, h)
 }
@@ -139,7 +139,7 @@ internal data class ValSeg(
 
   override fun appendJson(js: ObjectNode) {
     if (!isDefault) {
-      js.set<ObjectNode>(KeySeg, Json.new<ObjectNode> {
+      js.set<ObjectNode>(FlagSeg, Json.new<ObjectNode> {
         put(KeyWindow, window)
         put(KeyLocut, locut)
         put(KeyHicut, hicut)
@@ -149,7 +149,7 @@ internal data class ValSeg(
 
   override fun appendCliSegment(cli: StringBuilder) {
     cli.append(' ')
-      .append(KeySeg)
+      .append(FlagSeg)
       .append(" '")
       .append(window)
       .append(' ')
@@ -160,7 +160,7 @@ internal data class ValSeg(
   }
 
   override fun appendCliParts(cli: MutableList<String>) {
-    cli.add(KeySeg)
+    cli.add(FlagSeg)
     cli.add("$window $locut $hicut")
   }
 }

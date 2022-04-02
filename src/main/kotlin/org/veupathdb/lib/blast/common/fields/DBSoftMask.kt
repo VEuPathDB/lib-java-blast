@@ -3,16 +3,11 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagDBSoftMask
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqString
-
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseDBSoftMask(js: ObjectNode) =
-  js[FlagDBSoftMask]?.let { DBSoftMask(it.reqString(FlagDBSoftMask)) } ?:
-    DBSoftMask()
+  js.optString(FlagDBSoftMask) { DBSoftMask(it) } ?: DBSoftMask()
 
 
 /**

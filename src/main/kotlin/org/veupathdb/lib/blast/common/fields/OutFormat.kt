@@ -3,24 +3,17 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagOutFormat
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.reqInt
-import org.veupathdb.lib.blast.util.reqString
-import org.veupathdb.lib.blast.util.requireArray
-import org.veupathdb.lib.blast.util.requireObject
+import org.veupathdb.lib.blast.util.*
 
 
-private const val KeyOutFormat = "-outfmt"
-
-
-internal fun ParseOutFormat(js: ObjectNode): OutFormat {
-  val obj = js[KeyOutFormat]?.requireObject(FlagOutFormat) ?: return OutFormat()
-
-  return OutFormat(
-    parseFormatType(obj),
-    parseFormatDelimiter(obj),
-    parseFormatFields(obj)
-  )
-}
+internal fun ParseOutFormat(js: ObjectNode) =
+  js.optObject(FlagOutFormat) {
+    OutFormat(
+      parseFormatType(it),
+      parseFormatDelimiter(it),
+      parseFormatFields(it)
+    )
+  } ?: OutFormat()
 
 
 /**
@@ -137,7 +130,7 @@ data class OutFormat(
 
   override fun appendJson(js: ObjectNode) {
     if (!isDefault)
-      with(js.putObject(KeyOutFormat)) {
+      with(js.putObject(FlagOutFormat)) {
         type.appendJson(this)
         delimiter.appendJson(this)
         fields.appendJson(this)
@@ -150,7 +143,7 @@ data class OutFormat(
 
     // Always insert the format type if we are adding this flag to the CLI call.
     cli.append(' ')
-      .append(KeyOutFormat)
+      .append(FlagOutFormat)
       .append(" '")
       .append(type.value)
 
@@ -162,7 +155,7 @@ data class OutFormat(
 
   override fun appendCliParts(cli: MutableList<String>) {
     if (!isDefault) {
-      cli.add(KeyOutFormat)
+      cli.add(FlagOutFormat)
 
       val tmp = StringBuilder(256)
 
@@ -212,7 +205,7 @@ private const val KeyFormatFields = "fields"
 
 private fun parseFormatFields(js: ObjectNode): FormatFields {
   // Require node is a JSON array (or absent)
-  val arr = js[KeyFormatFields]?.requireArray {
+  val arr = js[KeyFormatFields]?.reqArray {
     "$FlagOutFormat.$KeyFormatFields"
   }
     ?: return FormatFields()

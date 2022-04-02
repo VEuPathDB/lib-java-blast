@@ -1,24 +1,19 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagSubjectBestHit
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
+import org.veupathdb.lib.blast.util.optBool
 import org.veupathdb.lib.blast.util.put
 
 
-private const val Key = "-subject_besthit"
 private const val Def = false
 
 
-internal fun ParseSubjectBestHit(js: ObjectNode): SubjectBestHit {
-  val tmp = js[Key] ?: return SubjectBestHit()
-
-  if (!tmp.isBoolean)
-    throw IllegalArgumentException("$Key must be a boolean value.")
-
-  return SubjectBestHit(tmp.booleanValue())
-}
+internal fun ParseSubjectBestHit(js: ObjectNode) =
+  js.optBool(FlagSubjectBestHit) { SubjectBestHit(it) } ?: SubjectBestHit()
 
 
 /**
@@ -31,11 +26,11 @@ value class SubjectBestHit(val value: Boolean = Def) : BlastField {
   override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, Key, value)
+    js.put(isDefault, FlagSubjectBestHit, value)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, Key)
+    cli.append(isDefault, FlagSubjectBestHit)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, Key)
+    cli.add(isDefault, FlagSubjectBestHit)
 }

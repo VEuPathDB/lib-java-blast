@@ -3,15 +3,17 @@ package org.veupathdb.lib.blast.blastn.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagNonGreedy
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.reqBool
+import org.veupathdb.lib.blast.util.add
+import org.veupathdb.lib.blast.util.append
+import org.veupathdb.lib.blast.util.optBool
+import org.veupathdb.lib.blast.util.put
 
 
 private const val Def = false
 
 
 internal fun ParseNonGreedy(js: ObjectNode) =
-  js[FlagNonGreedy]?.let { NonGreedy(it.reqBool(FlagNonGreedy)) }
-    ?: NonGreedy()
+  js.optBool(FlagNonGreedy) { NonGreedy(it) } ?: NonGreedy()
 
 
 /**
@@ -23,18 +25,12 @@ internal fun ParseNonGreedy(js: ObjectNode) =
 value class NonGreedy(val value: Boolean = Def) : BlastField {
   override val isDefault get() = value == Def
 
-  override fun appendJson(js: ObjectNode) {
-    if (!isDefault)
-      js.put(FlagNonGreedy, value)
-  }
+  override fun appendJson(js: ObjectNode) =
+    js.put(isDefault, FlagNonGreedy, value)
 
-  override fun appendCliSegment(cli: StringBuilder) {
-    if (!isDefault)
-      cli.append(' ').append(FlagNonGreedy)
-  }
+  override fun appendCliSegment(cli: StringBuilder) =
+    cli.append(isDefault, FlagNonGreedy)
 
-  override fun appendCliParts(cli: MutableList<String>) {
-    if (!isDefault)
-      cli.add(FlagNonGreedy)
-  }
+  override fun appendCliParts(cli: MutableList<String>) =
+    cli.add(isDefault, FlagNonGreedy)
 }

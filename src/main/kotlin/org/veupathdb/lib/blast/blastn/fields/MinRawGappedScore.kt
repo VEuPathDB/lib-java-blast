@@ -3,19 +3,15 @@ package org.veupathdb.lib.blast.blastn.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagMinRawGappedScore
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqInt
+import org.veupathdb.lib.blast.util.*
 
 
 private const val Def = Integer.MAX_VALUE
 
 
 internal fun ParseMinRawGappedScore(js: ObjectNode) =
-  js[FlagMinRawGappedScore]?.let {
-    MinRawGappedScore(it.reqInt(FlagMinRawGappedScore))
-  } ?: MinRawGappedScore()
+  js.optInt(FlagMinRawGappedScore) { MinRawGappedScore(it) }
+    ?: MinRawGappedScore()
 
 
 /**

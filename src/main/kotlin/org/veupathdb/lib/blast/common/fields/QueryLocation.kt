@@ -3,10 +3,7 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagQueryLocation
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.reqUInt
-import org.veupathdb.lib.blast.util.requireObject
+import org.veupathdb.lib.blast.util.*
 
 
 private const val KeyStart = "start"
@@ -15,15 +12,13 @@ private const val DefStart = 0u
 private const val DefStop  = 0u
 
 
-internal fun ParseQueryLocation(js: ObjectNode): QueryLocation {
-  val obj = js[FlagQueryLocation]?.requireObject(FlagQueryLocation)
-    ?: return QueryLocation()
-
-  return QueryLocation(
-    obj[KeyStart]?.reqUInt { "$FlagQueryLocation.$KeyStart" } ?: DefStart,
-    obj[KeyStop]?.reqUInt { "$FlagQueryLocation.$KeyStop" } ?: DefStop
-  )
-}
+internal fun ParseQueryLocation(js: ObjectNode) =
+  js.optObject(FlagQueryLocation) {
+    QueryLocation(
+      it[KeyStart]?.reqUInt { "$FlagQueryLocation.$KeyStart" } ?: DefStart,
+      it[KeyStop]?.reqUInt { "$FlagQueryLocation.$KeyStop" } ?: DefStop
+    )
+  } ?: QueryLocation()
 
 
 /**

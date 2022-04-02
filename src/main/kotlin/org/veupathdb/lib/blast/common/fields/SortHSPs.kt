@@ -1,17 +1,13 @@
 package org.veupathdb.lib.blast.common.fields
 
-import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagSortHSPs
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqInt
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseSortHSPs(js: ObjectNode) =
-  js[FlagSortHSPs]?.let { SortHSPs(parseEnum(it)) } ?: SortHSPs()
+  js.optInt(FlagSortHSPs) { SortHSPs(parse(it)) } ?: SortHSPs()
 
 
 /**
@@ -45,9 +41,7 @@ value class SortHSPs(val value: HSPSorting = HSPSorting.None) : BlastField {
 
 
 @Suppress("NOTHING_TO_INLINE")
-private inline fun parseEnum(js: JsonNode): HSPSorting {
-  val i = js.reqInt(FlagSortHSPs)
-
+private inline fun parse(i: Int): HSPSorting {
   try {
     return HSPSorting.values()[i]
   } catch (e: IndexOutOfBoundsException) {

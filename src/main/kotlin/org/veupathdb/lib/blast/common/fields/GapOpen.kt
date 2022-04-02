@@ -5,19 +5,15 @@ import org.veupathdb.lib.blast.common.FlagGapOpen
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
+import org.veupathdb.lib.blast.util.optInt
 import org.veupathdb.lib.blast.util.put
+
 
 private const val Def = Integer.MIN_VALUE
 
 
-internal fun ParseGapOpen(js: ObjectNode): GapOpen {
-  val tmp = js[FlagGapOpen] ?: return GapOpen()
-
-  if (!tmp.isIntegralNumber)
-    throw IllegalArgumentException("$FlagGapOpen must be an integral number.")
-
-  return GapOpen(tmp.intValue())
-}
+internal fun ParseGapOpen(js: ObjectNode) =
+  js.optInt(FlagGapOpen) { GapOpen(it) } ?: GapOpen()
 
 
 /**

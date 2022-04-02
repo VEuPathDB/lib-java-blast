@@ -4,17 +4,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagWindowSize
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
 
 
 private const val Def = UInt.MAX_VALUE
 
 
 internal fun ParseWindowSize(js: ObjectNode) =
-  js[FlagWindowSize]?.let { WindowSize(it.reqUInt(FlagWindowSize)) }
-    ?: WindowSize()
+  js.optUInt(FlagWindowSize) { WindowSize(it) } ?: WindowSize()
 
 
 /**

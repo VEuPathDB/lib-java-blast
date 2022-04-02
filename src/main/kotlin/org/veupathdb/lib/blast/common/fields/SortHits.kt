@@ -3,17 +3,11 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagSortHits
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqInt
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseSortHits(js: ObjectNode) =
-  js[FlagSortHits]?.let {
-    SortHits(HitSorting.values()[it.reqInt(FlagSortHits)])
-  }
-    ?: SortHits()
+  js.optInt(FlagSortHits) { SortHits(parse(it)) } ?: SortHits()
 
 
 /**
@@ -46,6 +40,15 @@ value class SortHits(val value: HitSorting = HitSorting.None) : BlastField {
 
 
 ////////////////////////////////////////////////////////////////////////////////
+
+
+private inline fun parse(i: Int): HitSorting {
+  try {
+    return HitSorting.values()[i]
+  } catch (e: IndexOutOfBoundsException) {
+    throw IllegalArgumentException("Invalid $FlagSortHits value: $i")
+  }
+}
 
 
 enum class HitSorting {

@@ -3,19 +3,14 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagNumDescriptions
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqLong
+import org.veupathdb.lib.blast.util.*
 
 
-private const val DefaultNumDescriptions = 500L
+private const val DefaultNumDescriptions = 500u
 
 
 internal fun ParseNumDescriptions(js: ObjectNode) =
-  js[FlagNumDescriptions]?.let {
-    NumDescriptions(it.reqLong(FlagNumDescriptions))
-  } ?: NumDescriptions()
+  js.optUInt(FlagNumDescriptions) { NumDescriptions(it) } ?: NumDescriptions()
 
 
 /**
@@ -28,7 +23,7 @@ internal fun ParseNumDescriptions(js: ObjectNode) =
  * Default = `500`
  */
 @JvmInline
-value class NumDescriptions(val value: Long = DefaultNumDescriptions)
+value class NumDescriptions(val value: UInt = DefaultNumDescriptions)
   : BlastField
 {
   override val isDefault get() = value == DefaultNumDescriptions

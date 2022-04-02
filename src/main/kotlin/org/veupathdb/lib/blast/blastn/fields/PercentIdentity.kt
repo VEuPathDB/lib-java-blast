@@ -3,19 +3,14 @@ package org.veupathdb.lib.blast.blastn.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagPercentIdentity
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqDub
+import org.veupathdb.lib.blast.util.*
 
 
 private const val Def = -1.0
 
 
 internal fun ParsePercentIdentity(js: ObjectNode) =
-  js[FlagPercentIdentity]?.let {
-    PercentIdentity(it.reqDub(FlagPercentIdentity))
-  } ?: PercentIdentity()
+  js.optDub(FlagPercentIdentity) { PercentIdentity(it) } ?: PercentIdentity()
 
 
 /**

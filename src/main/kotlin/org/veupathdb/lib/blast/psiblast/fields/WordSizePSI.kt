@@ -3,18 +3,14 @@ package org.veupathdb.lib.blast.psiblast.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagWordSize
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqUInt
+import org.veupathdb.lib.blast.util.*
 
 
 private const val Def = UInt.MAX_VALUE
 
 
 internal fun ParseWordSizePSI(js: ObjectNode) =
-  js[FlagWordSize]?.let { WordSizePSI(it.reqUInt(FlagWordSize)) }
-    ?: WordSizePSI()
+  js.optUInt(FlagWordSize) { WordSizePSI(it) } ?: WordSizePSI()
 
 
 /**

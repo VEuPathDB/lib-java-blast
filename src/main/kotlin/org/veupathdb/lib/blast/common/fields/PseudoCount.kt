@@ -3,15 +3,11 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagPseudoCount
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqInt
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParsePseudoCount(js: ObjectNode) =
-  js[FlagPseudoCount]?.let { PseudoCount(it.reqInt(FlagPseudoCount)) }
-    ?: PseudoCount()
+  js.optInt(FlagPseudoCount) { PseudoCount(it) } ?: PseudoCount()
 
 
 /**

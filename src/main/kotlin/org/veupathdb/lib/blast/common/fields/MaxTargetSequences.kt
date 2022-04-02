@@ -4,17 +4,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagMaxTargetSeqs
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
 
 
 private const val Def = 500u
 
 
 internal fun ParseMaxTargetSeqs(js: ObjectNode) =
-  js[FlagMaxTargetSeqs]?.let { MaxTargetSeqs(it.reqUInt(FlagMaxTargetSeqs)) }
-    ?: MaxTargetSeqs()
+  js.optUInt(FlagMaxTargetSeqs) { MaxTargetSeqs(it) } ?: MaxTargetSeqs()
 
 
 /**

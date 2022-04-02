@@ -3,16 +3,11 @@ package org.veupathdb.lib.blast.blastn.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagWindowMaskerDB
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqString
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseWindowMaskerDB(js: ObjectNode) =
-  js[FlagWindowMaskerDB]?.let {
-    WindowMaskerDB(it.reqString(FlagWindowMaskerDB))
-  } ?: WindowMaskerDB()
+  js.optString(FlagWindowMaskerDB) { WindowMaskerDB(it) } ?: WindowMaskerDB()
 
 
 /**

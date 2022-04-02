@@ -3,16 +3,12 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagNegativeSeqIDList
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqString
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseNegSeqIdList(js: ObjectNode) =
-  js[FlagNegativeSeqIDList]?.let {
-    NegativeSeqIDList(it.reqString(FlagNegativeSeqIDList))
-  } ?: NegativeSeqIDList()
+  js.optString(FlagNegativeSeqIDList) { NegativeSeqIDList(it) }
+    ?: NegativeSeqIDList()
 
 
 /**

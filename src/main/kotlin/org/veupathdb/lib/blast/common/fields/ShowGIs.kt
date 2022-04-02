@@ -3,14 +3,11 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagShowGIs
 import org.veupathdb.lib.blast.serial.BlastField
-import org.veupathdb.lib.blast.util.add
-import org.veupathdb.lib.blast.util.append
-import org.veupathdb.lib.blast.util.put
-import org.veupathdb.lib.blast.util.reqBool
+import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParseShowGIs(js: ObjectNode) =
-  js[FlagShowGIs]?.let { ShowGIs(it.reqBool(FlagShowGIs)) } ?: ShowGIs()
+  js.optBool(FlagShowGIs) { ShowGIs(it) } ?: ShowGIs()
 
 
 /**
