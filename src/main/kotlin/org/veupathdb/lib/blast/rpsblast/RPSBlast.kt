@@ -11,37 +11,37 @@ import org.veupathdb.lib.blast.rpsblast.fields.SoftMaskingRPS
  */
 interface RPSBlast : BlastQueryBase {
   /**
-   * -comp_based_stats <String>
+   * -comp_based_stats `<String>`
    */
   var compBasedStats: CompBasedStatsRPS
 
   /**
-   * -seg <String>
+   * -seg `<String>`
    */
   var seg: SegRPS
 
   /**
-   * -soft_masking <Boolean>
+   * -soft_masking `<Boolean>`
    */
   var softMasking: SoftMaskingRPS
 
   /**
-   * -qcov_hsp_perc <Real, 0..100>
+   * -qcov_hsp_perc `<Real>`
    */
   var queryCoverageHSPPercent: QueryCoverageHSPPercent
 
   /**
-   * -culling_limit <Integer, >=0>
+   * -culling_limit `<Integer>`
    */
   var cullingLimit: CullingLimit
 
   /**
-   * -best_hit_overhang <Real, (>0 and <0.5)>
+   * -best_hit_overhang `<Real>`
    */
   var bestHitOverhang: BestHitOverhang
 
   /**
-   * -best_hit_score_edge <Real, (>0 and <0.5)>
+   * -best_hit_score_edge `<Real>`
    */
   var bestHitScoreEdge: BestHitScoreEdge
 
@@ -51,27 +51,27 @@ interface RPSBlast : BlastQueryBase {
   var subjectBestHit: SubjectBestHit
 
   /**
-   * -sum_stats <Boolean>
+   * -sum_stats `<Boolean>`
    */
   var sumStats: SumStats
 
   /**
-   * -xdrop_gap <Real>
+   * -xdrop_gap `<Real>`
    */
   var extensionDropoffPrelimGapped: ExtensionDropoffPrelimGapped
 
   /**
-   * -xdrop_gap_final <Real>
+   * -xdrop_gap_final `<Real>`
    */
   var extensionDropoffFinalGapped: ExtensionDropoffFinalGapped
 
   /**
-   * -num_threads <Integer, >=0>
+   * -num_threads `<Integer>`
    */
   var autoCPUCores: AutoCPUCores
 
   /**
-   * -mt_mode <Integer, (>=0 and =<1)>
+   * -mt_mode `<Integer>`
    */
   var multiThreadingMode: MultiThreadingMode
 

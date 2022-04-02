@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast.rpsblast
+package org.veupathdb.lib.blast.rpstblastn
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
@@ -7,16 +7,136 @@ import org.junit.jupiter.api.Test
 import org.veupathdb.lib.blast.common.*
 import org.veupathdb.lib.blast.common.BlastQueryBaseImplTest
 import org.veupathdb.lib.blast.common.fields.*
-import org.veupathdb.lib.blast.rpsblast.fields.CompBasedStatsRPS
-import org.veupathdb.lib.blast.rpsblast.fields.CompBasedStatsRPSValue
-import org.veupathdb.lib.blast.rpsblast.fields.SoftMaskingRPS
-import org.veupathdb.lib.blast.rpsblast.fields.YesSeg
+import org.veupathdb.lib.blast.rpstblastn.fields.CompBasedStatsRPSTN
+import org.veupathdb.lib.blast.rpstblastn.fields.CompBasedStatsRPSTNValue
+import org.veupathdb.lib.blast.rpstblastn.fields.SoftMaskingRPSTN
+import org.veupathdb.lib.blast.rpstblastn.fields.YesSeg
 
-@DisplayName("RPSBlast")
-internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
+@DisplayName("RPSTBlastN")
+internal class RPSTBlastNImplTest : BlastQueryBaseImplTest() {
 
-  override fun getEmptyImpl(): RPSBlast {
-    return RPSBlastImpl()
+  override fun getEmptyImpl(): RPSTBlastN {
+    return RPSTBlastNImpl()
+  }
+
+  @Nested
+  @DisplayName(FlagQueryGenCode)
+  inner class BlastCLIQueryGenCode {
+
+    @Nested
+    @DisplayName("when generating json output")
+    inner class BlastCLIQueryGenCodeJson {
+
+      @Test
+      @DisplayName("appends the flag to the output json")
+      fun t1() {
+        val tgt = getEmptyImpl()
+        tgt.queryGenCode = QueryGenCode(33u)
+
+        assertEquals(
+          """
+            {
+              "tool" : "${tgt.tool.value}",
+              "$FlagQueryGenCode" : 33
+            }
+          """.trimIndent(),
+          tgt.toJson().toPrettyString()
+        )
+      }
+    }
+
+    @Nested
+    @DisplayName("when generating cli call strings")
+    inner class BlastCLIQueryGenCodeCLIString {
+
+      @Test
+      @DisplayName("appends the flag to the cli call string")
+      fun t1() {
+        val tgt = getEmptyImpl()
+        tgt.queryGenCode = QueryGenCode(33u)
+
+        assertEquals("${tgt.tool.value} $FlagQueryGenCode 33", tgt.toCliString())
+      }
+    }
+
+    @Nested
+    @DisplayName("when generating cli call argument lists")
+    inner class BlastCLIToolCLIList {
+
+      @Test
+      @DisplayName("appends the flag to the cli call string")
+      fun t1() {
+        val tgt = getEmptyImpl()
+        tgt.queryGenCode = QueryGenCode(33u)
+
+        val cli = tgt.toCliArray()
+
+        assertEquals(3, cli.size)
+        assertEquals(tgt.tool.value, cli[0])
+        assertEquals(FlagQueryGenCode, cli[1])
+        assertEquals("33", cli[2])
+      }
+    }
+  }
+
+  @Nested
+  @DisplayName(FlagStrand)
+  inner class BlastCLIStrand {
+
+    @Nested
+    @DisplayName("when generating json output")
+    inner class BlastCLIStrandJson {
+
+      @Test
+      @DisplayName("appends the flag to the output json")
+      fun t1() {
+        val tgt = getEmptyImpl()
+        tgt.strand = Strand(StrandType.Minus)
+
+        assertEquals(
+          """
+            {
+              "tool" : "${tgt.tool.value}",
+              "$FlagStrand" : "minus"
+            }
+          """.trimIndent(),
+          tgt.toJson().toPrettyString()
+        )
+      }
+    }
+
+    @Nested
+    @DisplayName("when generating cli call strings")
+    inner class BlastCLIStrandCLIString {
+
+      @Test
+      @DisplayName("appends the flag to the cli call string")
+      fun t1() {
+        val tgt = getEmptyImpl()
+        tgt.strand = Strand(StrandType.Minus)
+
+        assertEquals("${tgt.tool.value} $FlagStrand 'minus'", tgt.toCliString())
+      }
+    }
+
+    @Nested
+    @DisplayName("when generating cli call argument lists")
+    inner class BlastCLIToolCLIList {
+
+      @Test
+      @DisplayName("appends the flag to the cli call string")
+      fun t1() {
+        val tgt = getEmptyImpl()
+        tgt.strand = Strand(StrandType.Minus)
+
+        val cli = tgt.toCliArray()
+
+        assertEquals(3, cli.size)
+        assertEquals(tgt.tool.value, cli[0])
+        assertEquals(FlagStrand, cli[1])
+        assertEquals("minus", cli[2])
+      }
+    }
   }
 
   @Nested
@@ -31,7 +151,7 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
       @DisplayName("appends the flag to the output json")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.compBasedStats = CompBasedStatsRPS(CompBasedStatsRPSValue.SimplifiedCompBasedStats)
+        tgt.compBasedStats = CompBasedStatsRPSTN(CompBasedStatsRPSTNValue.NoCompBasedStats)
 
         assertEquals(
           """
@@ -53,7 +173,7 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.compBasedStats = CompBasedStatsRPS(CompBasedStatsRPSValue.SimplifiedCompBasedStats)
+        tgt.compBasedStats = CompBasedStatsRPSTN(CompBasedStatsRPSTNValue.NoCompBasedStats)
 
         assertEquals("${tgt.tool.value} $FlagCompBasedStats 0", tgt.toCliString())
       }
@@ -67,7 +187,7 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.compBasedStats = CompBasedStatsRPS(CompBasedStatsRPSValue.SimplifiedCompBasedStats)
+        tgt.compBasedStats = CompBasedStatsRPSTN(CompBasedStatsRPSTNValue.NoCompBasedStats)
 
         val cli = tgt.toCliArray()
 
@@ -96,7 +216,7 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
         assertEquals(
           """
             {
-              "tool" : "rpsblast",
+              "tool" : "${tgt.tool.value}",
               "$FlagSeg" : "yes"
             }
           """.trimIndent(),
@@ -151,7 +271,7 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
       @DisplayName("appends the flag to the output json")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.softMasking = SoftMaskingRPS(true)
+        tgt.softMasking = SoftMaskingRPSTN(true)
 
         assertEquals(
           """
@@ -173,7 +293,7 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.softMasking = SoftMaskingRPS(true)
+        tgt.softMasking = SoftMaskingRPSTN(true)
 
         assertEquals("${tgt.tool.value} $FlagSoftMasking true", tgt.toCliString())
       }
@@ -187,7 +307,7 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.softMasking = SoftMaskingRPS(true)
+        tgt.softMasking = SoftMaskingRPSTN(true)
 
         val cli = tgt.toCliArray()
 
@@ -255,253 +375,6 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
         assertEquals(tgt.tool.value, cli[0])
         assertEquals(FlagQueryCoverageHSPPercent, cli[1])
         assertEquals("33.3", cli[2])
-      }
-    }
-  }
-
-  @Nested
-  @DisplayName(FlagCullingLimit)
-  inner class BlastCLICullingLimit {
-
-    @Nested
-    @DisplayName("when generating json output")
-    inner class BlastCLICullingLimitJson {
-
-      @Test
-      @DisplayName("appends the flag to the output json")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.cullingLimit = CullingLimit(35u)
-
-        val json = tgt.toJson()
-
-        assertEquals(2, json.size())
-
-        assertTrue(json.has("tool"))
-        assertTrue(json["tool"].isTextual)
-        assertEquals(tgt.tool.value, json["tool"].textValue())
-
-        assertTrue(json.has(FlagCullingLimit))
-        assertTrue(json[FlagCullingLimit].isIntegralNumber)
-        assertEquals(35, json[FlagCullingLimit].intValue())
-      }
-    }
-
-    @Nested
-    @DisplayName("when generating cli call strings")
-    inner class BlastCLICullingLimitCLIString {
-
-      @Test
-      @DisplayName("appends the flag to the cli call string")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.cullingLimit = CullingLimit(35u)
-
-        assertEquals("${tgt.tool.value} $FlagCullingLimit 35", tgt.toCliString())
-      }
-    }
-
-    @Nested
-    @DisplayName("when generating cli call argument lists")
-    inner class BlastCLIToolCLIList {
-
-      @Test
-      @DisplayName("appends the flag to the cli call string")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.cullingLimit = CullingLimit(35u)
-
-        val cli = tgt.toCliArray()
-
-        assertEquals(3, cli.size)
-        assertEquals(tgt.tool.value, cli[0])
-        assertEquals(FlagCullingLimit, cli[1])
-        assertEquals("35", cli[2])
-      }
-    }
-  }
-
-  @Nested
-  @DisplayName(FlagBestHitOverhang)
-  inner class BlastCLIBestHitOverhangFile {
-
-    @Nested
-    @DisplayName("when generating json output")
-    inner class BlastCLIBestHitOverhangFileJson {
-
-      @Test
-      @DisplayName("appends the flag to the output json")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.bestHitOverhang = BestHitOverhang(0.4)
-
-        val json = tgt.toJson()
-
-        assertEquals(2, json.size())
-
-        assertTrue(json.has("tool"))
-        assertTrue(json["tool"].isTextual)
-        assertEquals(tgt.tool.value, json["tool"].textValue())
-
-        assertTrue(json.has(FlagBestHitOverhang))
-        assertTrue(json[FlagBestHitOverhang].isDouble)
-        assertEquals(0.4, json[FlagBestHitOverhang].doubleValue())
-      }
-    }
-
-    @Nested
-    @DisplayName("when generating cli call strings")
-    inner class BlastCLIBestHitOverhangCLIString {
-
-      @Test
-      @DisplayName("appends the flag to the cli call string")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.bestHitOverhang = BestHitOverhang(0.4)
-
-        assertEquals("${tgt.tool.value} $FlagBestHitOverhang 0.4", tgt.toCliString())
-      }
-    }
-
-    @Nested
-    @DisplayName("when generating cli call argument lists")
-    inner class BlastCLIToolCLIList {
-
-      @Test
-      @DisplayName("appends the flag to the cli call string")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.bestHitOverhang = BestHitOverhang(0.4)
-
-        val cli = tgt.toCliArray()
-
-        assertEquals(3, cli.size)
-        assertEquals(tgt.tool.value, cli[0])
-        assertEquals(FlagBestHitOverhang, cli[1])
-        assertEquals("0.4", cli[2])
-      }
-    }
-  }
-
-  @Nested
-  @DisplayName(FlagBestHitScoreEdge)
-  inner class BlastCLIBestHitScoreEdgeFile {
-
-    @Nested
-    @DisplayName("when generating json output")
-    inner class BlastCLIBestHitScoreEdgeFileJson {
-
-      @Test
-      @DisplayName("appends the flag to the output json")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.bestHitScoreEdge = BestHitScoreEdge(0.4)
-
-        val json = tgt.toJson()
-
-        assertEquals(2, json.size())
-
-        assertTrue(json.has("tool"))
-        assertTrue(json["tool"].isTextual)
-        assertEquals(tgt.tool.value, json["tool"].textValue())
-
-        assertTrue(json.has(FlagBestHitScoreEdge))
-        assertTrue(json[FlagBestHitScoreEdge].isDouble)
-        assertEquals(0.4, json[FlagBestHitScoreEdge].doubleValue())
-      }
-    }
-
-    @Nested
-    @DisplayName("when generating cli call strings")
-    inner class BlastCLIBestHitScoreEdgeCLIString {
-
-      @Test
-      @DisplayName("appends the flag to the cli call string")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.bestHitScoreEdge = BestHitScoreEdge(0.4)
-
-        assertEquals("${tgt.tool.value} $FlagBestHitScoreEdge 0.4", tgt.toCliString())
-      }
-    }
-
-    @Nested
-    @DisplayName("when generating cli call argument lists")
-    inner class BlastCLIToolCLIList {
-
-      @Test
-      @DisplayName("appends the flag to the cli call string")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.bestHitScoreEdge = BestHitScoreEdge(0.4)
-
-        val cli = tgt.toCliArray()
-
-        assertEquals(3, cli.size)
-        assertEquals(tgt.tool.value, cli[0])
-        assertEquals(FlagBestHitScoreEdge, cli[1])
-        assertEquals("0.4", cli[2])
-      }
-    }
-  }
-
-  @Nested
-  @DisplayName(FlagSubjectBestHit)
-  inner class BlastCLISubjectBestHit {
-
-    @Nested
-    @DisplayName("when generating json output")
-    inner class BlastCLISubjectBestHitJson {
-
-      @Test
-      @DisplayName("appends the flag to the output json")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.subjectBestHit = SubjectBestHit(true)
-
-        val json = tgt.toJson()
-
-        assertEquals(2, json.size())
-
-        assertTrue(json.has("tool"))
-        assertTrue(json["tool"].isTextual)
-        assertEquals(tgt.tool.value, json["tool"].textValue())
-
-        assertTrue(json.has(FlagSubjectBestHit))
-        assertTrue(json[FlagSubjectBestHit].isBoolean)
-        assertTrue(json[FlagSubjectBestHit].booleanValue())
-      }
-    }
-
-    @Nested
-    @DisplayName("when generating cli call strings")
-    inner class BlastCLISubjectBestHitCLIString {
-
-      @Test
-      @DisplayName("appends the flag to the cli call string")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.subjectBestHit = SubjectBestHit(true)
-
-        assertEquals("${tgt.tool.value} $FlagSubjectBestHit", tgt.toCliString())
-      }
-    }
-
-    @Nested
-    @DisplayName("when generating cli call argument lists")
-    inner class BlastCLIToolCLIList {
-
-      @Test
-      @DisplayName("appends the flag to the cli call string")
-      fun t1() {
-        val tgt = getEmptyImpl()
-        tgt.subjectBestHit = SubjectBestHit(true)
-
-        val cli = tgt.toCliArray()
-
-        assertEquals(2, cli.size)
-        assertEquals(tgt.tool.value, cli[0])
-        assertEquals(FlagSubjectBestHit, cli[1])
       }
     }
   }
@@ -693,6 +566,67 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
   }
 
   @Nested
+  @DisplayName(FlagUngapped)
+  inner class BlastCLIUngapped {
+
+    @Nested
+    @DisplayName("when generating json output")
+    inner class BlastCLIUngappedJson {
+
+      @Test
+      @DisplayName("appends the flag to the output json")
+      fun t1() {
+        val tgt = getEmptyImpl()
+        tgt.ungappedAlignmentsOnly = UngappedAlignmentsOnly(true)
+
+        val json = tgt.toJson()
+
+        assertEquals(2, json.size())
+
+        assertTrue(json.has("tool"))
+        assertTrue(json["tool"].isTextual)
+        assertEquals(tgt.tool.value, json["tool"].textValue())
+
+        assertTrue(json.has(FlagUngapped))
+        assertTrue(json[FlagUngapped].isBoolean)
+        assertTrue(json[FlagUngapped].booleanValue())
+      }
+    }
+
+    @Nested
+    @DisplayName("when generating cli call strings")
+    inner class BlastCLIUngappedCLIString {
+
+      @Test
+      @DisplayName("appends the flag to the cli call string")
+      fun t1() {
+        val tgt = getEmptyImpl()
+        tgt.ungappedAlignmentsOnly = UngappedAlignmentsOnly(true)
+
+        assertEquals("${tgt.tool.value} $FlagUngapped", tgt.toCliString())
+      }
+    }
+
+    @Nested
+    @DisplayName("when generating cli call argument lists")
+    inner class BlastCLIToolCLIList {
+
+      @Test
+      @DisplayName("appends the flag to the cli call string")
+      fun t1() {
+        val tgt = getEmptyImpl()
+        tgt.ungappedAlignmentsOnly = UngappedAlignmentsOnly(true)
+
+        val cli = tgt.toCliArray()
+
+        assertEquals(2, cli.size)
+        assertEquals(tgt.tool.value, cli[0])
+        assertEquals(FlagUngapped, cli[1])
+      }
+    }
+  }
+
+  @Nested
   @DisplayName(FlagNumThreads)
   inner class BlastCLINumThreadsFile {
 
@@ -874,4 +808,5 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
       }
     }
   }
+
 }

@@ -1,4 +1,4 @@
-package org.veupathdb.lib.blast.rpsblast.fields
+package org.veupathdb.lib.blast.rpstblastn.fields
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
@@ -9,28 +9,28 @@ import org.veupathdb.lib.blast.util.append
 import org.veupathdb.lib.blast.util.put
 
 
-internal fun ParseCompBasedStatsRPS(js: ObjectNode) =
-  js[FlagCompBasedStats]?.let { CompBasedStatsRPS(parseEnum(it)) }
-    ?: CompBasedStatsRPS()
+internal fun ParseCompBasedStatsRPSTN(js: ObjectNode) =
+  js[FlagCompBasedStats]?.let { CompBasedStatsRPSTN(parseEnum(it)) }
+    ?: CompBasedStatsRPSTN()
 
 
 /**
- * -comp_based_stats <String>
+ * -comp_based_stats `<String>`
  *
  * Use composition-based statistics:
- * * D or d: default (equivalent to 1)
- * * 0 or F or f: Simplified Composition-based statistics as in Bioinformatics
- *   15:1000-1011, 1999
- * * 1 or T or t: Composition-based statistics as in NAR 29:2994-3005, 2001
+ * * `D` or `d`: default (equivalent to 1)
+ * * `0` or `F` or `f`: No composition-based statistics
+ * * `1` or `T` or `t`: Composition-based statistics as in NAR 29:2994-3005,
+ *   2001
  *
  * Default = `1`
  */
 @JvmInline
-value class CompBasedStatsRPS(
-  val value: CompBasedStatsRPSValue = CompBasedStatsRPSValue.CompBasedStats
+value class CompBasedStatsRPSTN(
+  val value: CompBasedStatsRPSTNValue = CompBasedStatsRPSTNValue.CompBasedStats
 ) : BlastField {
   override val isDefault
-    get() = value == CompBasedStatsRPSValue.CompBasedStats
+    get() = value == CompBasedStatsRPSTNValue.CompBasedStats
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagCompBasedStats, value.value)
@@ -44,19 +44,19 @@ value class CompBasedStatsRPS(
 
 
 @Suppress("NOTHING_TO_INLINE")
-private inline fun parseEnum(js: JsonNode): CompBasedStatsRPSValue {
+private inline fun parseEnum(js: JsonNode): CompBasedStatsRPSTNValue {
   if (js.isTextual)
     return when(val v = js.textValue()) {
-      "D", "d"      -> CompBasedStatsRPSValue.CompBasedStats
-      "0", "F", "f" -> CompBasedStatsRPSValue.SimplifiedCompBasedStats
-      "1", "T", "t" -> CompBasedStatsRPSValue.CompBasedStats
+      "D", "d"      -> CompBasedStatsRPSTNValue.CompBasedStats
+      "0", "F", "f" -> CompBasedStatsRPSTNValue.NoCompBasedStats
+      "1", "T", "t" -> CompBasedStatsRPSTNValue.CompBasedStats
       else          -> throw IllegalArgumentException("Invalid $FlagCompBasedStats value: $v")
     }
 
   if (js.isIntegralNumber)
     return when(val v = js.intValue()) {
-      0    -> CompBasedStatsRPSValue.SimplifiedCompBasedStats
-      1    -> CompBasedStatsRPSValue.CompBasedStats
+      0    -> CompBasedStatsRPSTNValue.NoCompBasedStats
+      1    -> CompBasedStatsRPSTNValue.CompBasedStats
       else -> throw IllegalArgumentException("Invalid $FlagCompBasedStats value: $v")
     }
 
@@ -64,8 +64,8 @@ private inline fun parseEnum(js: JsonNode): CompBasedStatsRPSValue {
 }
 
 
-enum class CompBasedStatsRPSValue {
-  SimplifiedCompBasedStats,
+enum class CompBasedStatsRPSTNValue {
+  NoCompBasedStats,
   CompBasedStats;
 
   inline val value get() = ordinal

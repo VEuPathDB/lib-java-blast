@@ -13,6 +13,8 @@ import org.veupathdb.lib.blast.psiblast.PSIBlast
 import org.veupathdb.lib.blast.psiblast.PSIBlastImpl
 import org.veupathdb.lib.blast.rpsblast.RPSBlast
 import org.veupathdb.lib.blast.rpsblast.RPSBlastImpl
+import org.veupathdb.lib.blast.rpstblastn.RPSTBlastN
+import org.veupathdb.lib.blast.rpstblastn.RPSTBlastNImpl
 
 object Blast {
 
@@ -111,4 +113,20 @@ object Blast {
    * @return The new [RPSBlast] instance.
    */
   fun rpsBlast(): RPSBlast = RPSBlastImpl()
+
+  /**
+   * Creates a new [RPSBlast] instance by parsing the given JSON input.
+   *
+   * @param js JSON object to parse.
+   *
+   * @return The new [RPSBlast] instance.
+   */
+  fun rpsTBlastN(js: ObjectNode): RPSTBlastN = RPSTBlastNImpl(js)
+
+  /**
+   * Creates a new, defaulted [RPSTBlastN] instance.
+   *
+   * @return The new [RPSTBlastN] instance.
+   */
+  fun rpsTBlastN(): RPSTBlastN = RPSTBlastNImpl()
 }
