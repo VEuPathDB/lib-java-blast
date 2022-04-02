@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-  api("org.veupathdb.lib:jackson-singleton:2.1.0")
+  api("org.veupathdb.lib:jackson-singleton:2.2.0")
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
   testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")

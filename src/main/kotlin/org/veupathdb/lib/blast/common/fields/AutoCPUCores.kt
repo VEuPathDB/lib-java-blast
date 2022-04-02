@@ -10,7 +10,7 @@ private val Def = AutoCPUCoresValue.Disable
 
 
 internal fun ParseAutoCPUCores(js: ObjectNode) =
-  js.optInt(FlagNumThreads) { AutoCPUCores(parse(it)) } ?: AutoCPUCores()
+  js.optUByte(FlagNumThreads) { AutoCPUCores(parse(it)) } ?: AutoCPUCores()
 
 /**
  * -num_threads `<Integer, >=0>`
@@ -38,8 +38,8 @@ value class AutoCPUCores(val value: AutoCPUCoresValue = Def) : BlastField {
 }
 
 
-private fun parse(v: Int) =
-  AutoCPUCoresValue.values()[v.inSet(FlagNumThreads, 0, 1)]
+private fun parse(v: UByte) =
+  AutoCPUCoresValue.values()[v.inSet(FlagNumThreads, 0u, 1u).toInt()]
 
 
 enum class AutoCPUCoresValue {

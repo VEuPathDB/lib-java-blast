@@ -8,7 +8,7 @@ import org.veupathdb.lib.blast.util.*
 
 private const val Def = "10"
 
-private val Rgx = Regex("^\\d+(\\.\\d+)$")
+private val Rgx = Regex("^\\d+(?:\\.\\d+)?$")
 
 
 internal fun ParseEValue(j: ObjectNode) =

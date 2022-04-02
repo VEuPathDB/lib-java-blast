@@ -442,7 +442,7 @@ internal abstract class BlastCLIImplTest {
       @DisplayName("appends the flag to the output json")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.numDescriptions = NumDescriptions(12)
+        tgt.numDescriptions = NumDescriptions(12u)
 
         val json = tgt.toJson()
 
@@ -466,7 +466,7 @@ internal abstract class BlastCLIImplTest {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.numDescriptions = NumDescriptions(12)
+        tgt.numDescriptions = NumDescriptions(12u)
 
         assertEquals("${tgt.tool.value} $FlagNumDescriptions 12", tgt.toCliString())
       }
@@ -480,7 +480,7 @@ internal abstract class BlastCLIImplTest {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.numDescriptions = NumDescriptions(12)
+        tgt.numDescriptions = NumDescriptions(12u)
 
         val cli = tgt.toCliArray()
 
@@ -504,7 +504,7 @@ internal abstract class BlastCLIImplTest {
       @DisplayName("appends the flag to the output json")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.numAlignments = NumAlignments(12)
+        tgt.numAlignments = NumAlignments(12u)
 
         val json = tgt.toJson()
 
@@ -528,7 +528,7 @@ internal abstract class BlastCLIImplTest {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.numAlignments = NumAlignments(12)
+        tgt.numAlignments = NumAlignments(12u)
 
         assertEquals("${tgt.tool.value} $FlagNumAlignments 12", tgt.toCliString())
       }
@@ -542,7 +542,7 @@ internal abstract class BlastCLIImplTest {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.numAlignments = NumAlignments(12)
+        tgt.numAlignments = NumAlignments(12u)
 
         val cli = tgt.toCliArray()
 
