@@ -3,22 +3,30 @@ package org.veupathdb.lib.blast.common.fields
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagBestHitOverhang
 import org.veupathdb.lib.blast.serial.BlastField
+import org.veupathdb.lib.blast.util.*
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
+import org.veupathdb.lib.blast.util.optDub
 import org.veupathdb.lib.blast.util.put
 
-
+/**
+ * Default value.
+ */
 private const val Def = -1.0
 
+/**
+ * Exclusive Minimum
+ */
+private const val EMin = 0.0
 
-internal fun ParseBestHitOverhang(js: ObjectNode): BestHitOverhang {
-  val tmp = js[FlagBestHitOverhang] ?: return BestHitOverhang()
+/**
+ * Exclusive Maximum
+ */
+private const val EMax = 0.5
 
-  if (!tmp.isNumber)
-    throw IllegalArgumentException("$FlagBestHitOverhang must be a numeric value > 0 and < 0.5")
 
-  return BestHitOverhang(js.doubleValue())
-}
+internal fun ParseBestHitOverhang(js: ObjectNode) =
+  js.optDub(FlagBestHitOverhang) { BestHitOverhang(it) } ?: BestHitOverhang()
 
 
 /**
@@ -29,8 +37,8 @@ internal fun ParseBestHitOverhang(js: ObjectNode): BestHitOverhang {
 @JvmInline
 value class BestHitOverhang(val value: Double = Def) : BlastField {
   init {
-    if (value != Def && (value <= 0 || value >= 0.5))
-      throw IllegalArgumentException("$FlagBestHitOverhang must be (>0 and <0.5)")
+    if (value != Def)
+      value.inESet(FlagBestHitOverhang, EMin, EMax)
   }
 
   override val isDefault get() = value == Def

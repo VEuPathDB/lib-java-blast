@@ -6,6 +6,28 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 
+
+/**
+ * Ensures that the target `Double` value is in the given exclusive range.
+ *
+ * @param k JSON object key for the target `Double` value.
+ *
+ * @param sE Exclusive start value.
+ *
+ * @param eE Exclusive end value.
+ *
+ * @return The target `Double` value.
+ *
+ * @throws IllegalArgumentException If the target `Double` value is outside the
+ * range defined by the given start and end values.
+ */
+internal inline fun Double.inESet(k: String, sE: Double, eE: Double) =
+  if (this > sE && this < eE)
+    this
+  else
+    throw IllegalArgumentException("$k must be an double value between $sE and $eE (exclusive)")
+
+
 /**
  * Ensures that the target `Int` value is in the given inclusive range.
  *
