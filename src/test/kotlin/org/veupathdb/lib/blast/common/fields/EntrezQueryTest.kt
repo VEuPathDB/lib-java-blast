@@ -5,25 +5,25 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.veupathdb.lib.blast.common.FlagDBSize
+import org.veupathdb.lib.blast.common.FlagEntrezQuery
 import org.veupathdb.lib.jackson.Json
 
-@DisplayName(FlagDBSize)
-internal class DBSizeTest {
+@DisplayName(FlagEntrezQuery)
+internal class EntrezQueryTest {
 
   @Nested
-  @DisplayName("ParseDBSize()")
+  @DisplayName("ParseEntrezQuery()")
   inner class Parse {
 
     @Nested
-    @DisplayName("when given a JSON object containing a non-number value")
+    @DisplayName("when given a JSON object containing a non-text value")
     inner class NonString {
 
       @Test
       @DisplayName("throws an exception")
       fun t1() {
         assertThrows<IllegalArgumentException> {
-          ParseDBSize(Json.new { put(FlagDBSize, "yodeling") })
+          ParseEntrezQuery(Json.new { put(FlagEntrezQuery, 40) })
         }
       }
     }
@@ -33,9 +33,9 @@ internal class DBSizeTest {
     inner class Absent {
 
       @Test
-      @DisplayName("returns a defaulted DBSize instance")
+      @DisplayName("returns a defaulted EntrezQuery instance")
       fun t1() {
-        assertTrue(ParseDBSize(Json.new {}).isDefault)
+        assertTrue(ParseEntrezQuery(Json.new {}).isDefault)
       }
     }
 
@@ -44,16 +44,16 @@ internal class DBSizeTest {
     inner class Present {
 
       @Test
-      @DisplayName("returns a DBSize instance wrapping")
+      @DisplayName("returns a EntrezQuery instance wrapping")
       fun t1() {
-        val inp = Json.newObject { put(FlagDBSize, 32) }
-        assertEquals(32, ParseDBSize(inp).value)
+        val inp = Json.newObject { put(FlagEntrezQuery, "bunny") }
+        assertEquals("bunny", ParseEntrezQuery(inp).value)
       }
     }
   }
 
   @Nested
-  @DisplayName("DBSize()")
+  @DisplayName("EntrezQuery()")
   inner class Type {
 
     @Nested
@@ -63,14 +63,14 @@ internal class DBSizeTest {
       @Test
       @DisplayName("default == true")
       fun t1() {
-        assertTrue(DBSize().isDefault)
+        assertTrue(EntrezQuery().isDefault)
       }
 
       @Test
       @DisplayName("appendJson() does nothing")
       fun t2() {
         val inp = Json.newObject()
-        DBSize().appendJson(inp)
+        EntrezQuery().appendJson(inp)
         assertEquals(0, inp.size())
       }
 
@@ -78,7 +78,7 @@ internal class DBSizeTest {
       @DisplayName("appendCliSegment() does nothing")
       fun t3() {
         val inp = StringBuilder(0)
-        DBSize().appendCliSegment(inp)
+        EntrezQuery().appendCliSegment(inp)
         assertEquals("", inp.toString())
       }
 
@@ -86,7 +86,7 @@ internal class DBSizeTest {
       @DisplayName("appendCliParts() does nothing")
       fun t4() {
         val inp = ArrayList<String>(0)
-        DBSize().appendCliParts(inp)
+        EntrezQuery().appendCliParts(inp)
         assertTrue(inp.isEmpty())
       }
     }
@@ -98,33 +98,33 @@ internal class DBSizeTest {
       @Test
       @DisplayName("isDefault == false")
       fun t1() {
-        assertFalse(DBSize(99).isDefault)
+        assertFalse(EntrezQuery("bye.db").isDefault)
       }
 
       @Test
       @DisplayName("appendJson() appends the flag to the JSON object input.")
       fun t2() {
         val inp = Json.newObject()
-        DBSize(3).appendJson(inp)
-        assertEquals("""{"$FlagDBSize":3}""", inp.toString())
+        EntrezQuery("goop.txt").appendJson(inp)
+        assertEquals("""{"$FlagEntrezQuery":"goop.txt"}""", inp.toString())
       }
 
       @Test
       @DisplayName("appendCliSegment() appends the flag to the StringBuilder input.")
       fun t3() {
         val inp = StringBuilder(32)
-        DBSize(69).appendCliSegment(inp)
-        assertEquals(" $FlagDBSize 69", inp.toString())
+        EntrezQuery("nope.nope.nope").appendCliSegment(inp)
+        assertEquals(" $FlagEntrezQuery 'nope.nope.nope'", inp.toString())
       }
 
       @Test
       @DisplayName("appendCliParts() appends the flag to the List input.")
       fun t4() {
         val inp = ArrayList<String>(2)
-        DBSize(42).appendCliParts(inp)
+        EntrezQuery("yup.yup.yup").appendCliParts(inp)
         assertEquals(2, inp.size)
-        assertEquals(FlagDBSize, inp[0])
-        assertEquals("42", inp[1])
+        assertEquals(FlagEntrezQuery, inp[0])
+        assertEquals("yup.yup.yup", inp[1])
       }
     }
   }

@@ -11,8 +11,17 @@ private const val Def = "10"
 private val Rgx = Regex("^\\d+(?:\\.\\d+)?(?:[eE][-+]\\d+)?$")
 
 
-internal fun ParseEValue(j: ObjectNode) =
-  j.optString(FlagExpectValue) { ExpectValue(it) } ?: ExpectValue()
+internal fun ParseEValue(j: ObjectNode): ExpectValue {
+  val node = j[FlagExpectValue] ?: return ExpectValue()
+
+  if (node.isTextual)
+    return ExpectValue(node.textValue())
+
+  if (node.isNumber)
+    return ExpectValue(node.decimalValue().toPlainString())
+
+  throw IllegalArgumentException("$FlagExpectValue must be a number value or numeric string.")
+}
 
 
 /**
