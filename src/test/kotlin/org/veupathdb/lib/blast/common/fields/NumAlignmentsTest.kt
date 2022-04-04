@@ -22,7 +22,7 @@ internal class NumAlignmentsTest {
       @Test
       @DisplayName("returns a new NumAlignments instance wrapping that value")
       fun t1() {
-        for (i in 1u .. 10u) {
+        for (i in 0u .. 10u) {
           val inp = Json.newObject { put(FlagNumAlignments, i.toInt()) }
           assertEquals(i, ParseNumAlignments(inp).value)
         }
@@ -30,14 +30,14 @@ internal class NumAlignmentsTest {
     }
 
     @Nested
-    @DisplayName("when given a JSON object containing an int value less than 1")
+    @DisplayName("when given a JSON object containing an int value less than 0")
     inner class OutOfRange {
 
       @Test
       @DisplayName("throws an exception")
       fun t1() {
         assertThrows<IllegalArgumentException> {
-          ParseNumAlignments(Json.new { put(FlagNumAlignments, 0) })
+          ParseNumAlignments(Json.new { put(FlagNumAlignments, -1) })
         }
       }
     }

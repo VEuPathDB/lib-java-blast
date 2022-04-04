@@ -15,6 +15,8 @@ import org.veupathdb.lib.blast.rpsblast.RPSBlast
 import org.veupathdb.lib.blast.rpsblast.RPSBlastImpl
 import org.veupathdb.lib.blast.rpstblastn.RPSTBlastN
 import org.veupathdb.lib.blast.rpstblastn.RPSTBlastNImpl
+import org.veupathdb.lib.blast.tblastn.TBlastN
+import org.veupathdb.lib.blast.tblastn.TBlastNImpl
 
 object Blast {
 
@@ -73,14 +75,14 @@ object Blast {
    *
    * @return The new [DeltaBlast] instance.
    */
-  fun deltaBlast(js: ObjectNode): DeltaBlast = DeltaBlastImpl(js)
+  fun deltablast(js: ObjectNode): DeltaBlast = DeltaBlastImpl(js)
 
   /**
    * Creates a new, defaulted [DeltaBlast] instance.
    *
    * @return The new [DeltaBlast] instance.
    */
-  fun deltaBlast(): DeltaBlast = DeltaBlastImpl()
+  fun deltablast(): DeltaBlast = DeltaBlastImpl()
 
   /**
    * Creates a new [PSIBlast] instance by parsing the given JSON input.
@@ -89,14 +91,14 @@ object Blast {
    *
    * @return The new [PSIBlast] instance.
    */
-  fun psiBlast(js: ObjectNode): PSIBlast = PSIBlastImpl(js)
+  fun psiblast(js: ObjectNode): PSIBlast = PSIBlastImpl(js)
 
   /**
    * Creates a new, defaulted [PSIBlast] instance.
    *
    * @return The new [PSIBlast] instance.
    */
-  fun psiBlast(): PSIBlast = PSIBlastImpl()
+  fun psiblast(): PSIBlast = PSIBlastImpl()
 
   /**
    * Creates a new [RPSBlast] instance by parsing the given JSON input.
@@ -105,28 +107,44 @@ object Blast {
    *
    * @return The new [RPSBlast] instance.
    */
-  fun rpsBlast(js: ObjectNode): RPSBlast = RPSBlastImpl(js)
+  fun rpsblast(js: ObjectNode): RPSBlast = RPSBlastImpl(js)
 
   /**
    * Creates a new, defaulted [RPSBlast] instance.
    *
    * @return The new [RPSBlast] instance.
    */
-  fun rpsBlast(): RPSBlast = RPSBlastImpl()
+  fun rpsblast(): RPSBlast = RPSBlastImpl()
 
   /**
-   * Creates a new [RPSBlast] instance by parsing the given JSON input.
+   * Creates a new [RPSTBlastN] instance by parsing the given JSON input.
    *
    * @param js JSON object to parse.
    *
-   * @return The new [RPSBlast] instance.
+   * @return The new [RPSTBlastN] instance.
    */
-  fun rpsTBlastN(js: ObjectNode): RPSTBlastN = RPSTBlastNImpl(js)
+  fun rpstblastn(js: ObjectNode): RPSTBlastN = RPSTBlastNImpl(js)
 
   /**
    * Creates a new, defaulted [RPSTBlastN] instance.
    *
    * @return The new [RPSTBlastN] instance.
    */
-  fun rpsTBlastN(): RPSTBlastN = RPSTBlastNImpl()
+  fun rpstblastn(): RPSTBlastN = RPSTBlastNImpl()
+
+  /**
+   * Creates a new [TBlastN] instance by parsing the given JSON input.
+   *
+   * @param js JSON object to parse.
+   *
+   * @return The new [TBlastN] instance.
+   */
+  fun tblastn(js: ObjectNode): TBlastN = TBlastNImpl(js)
+
+  /**
+   * Creates a new, defaulted [TBlastN] instance.
+   *
+   * @return The new [TBlastN] instance.
+   */
+  fun tblastn(): TBlastN = TBlastNImpl()
 }
