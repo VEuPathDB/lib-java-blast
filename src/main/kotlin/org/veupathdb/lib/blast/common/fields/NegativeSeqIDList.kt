@@ -6,7 +6,7 @@ import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
 
 
-internal fun ParseNegSeqIdList(js: ObjectNode) =
+internal fun ParseNegSeqIDList(js: ObjectNode) =
   js.optString(FlagNegativeSeqIDList) { NegativeSeqIDList(it) }
     ?: NegativeSeqIDList()
 

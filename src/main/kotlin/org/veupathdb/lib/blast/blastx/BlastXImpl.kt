@@ -145,7 +145,7 @@ internal class BlastXImpl(
     ParseGIList(js),
     ParseNegGIList(js),
     ParseSeqIDList(js),
-    ParseNegSeqIdList(js),
+    ParseNegSeqIDList(js),
     ParseTaxIDList(js),
     ParseNegTaxIDList(js),
     ParseTaxIDs(js),
