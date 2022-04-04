@@ -114,7 +114,7 @@ internal class ExportSearchStrategyTest {
       fun t3() {
         val inp = StringBuilder(32)
         ExportSearchStrategy("nope.nope.nope").appendCliSegment(inp)
-        assertEquals(" $FlagExportSearchStrategy nope.nope.nope", inp.toString())
+        assertEquals(" $FlagExportSearchStrategy 'nope.nope.nope'", inp.toString())
       }
 
       @Test

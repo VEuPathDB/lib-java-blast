@@ -114,7 +114,7 @@ internal class ImportSearchStrategyTest {
       fun t3() {
         val inp = StringBuilder(32)
         ImportSearchStrategy("nope.nope.nope").appendCliSegment(inp)
-        assertEquals(" $FlagImportSearchStrategy nope.nope.nope", inp.toString())
+        assertEquals(" $FlagImportSearchStrategy 'nope.nope.nope'", inp.toString())
       }
 
       @Test

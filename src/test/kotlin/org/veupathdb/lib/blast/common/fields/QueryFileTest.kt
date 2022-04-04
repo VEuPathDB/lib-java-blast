@@ -114,7 +114,7 @@ internal class QueryFileTest {
       fun t3() {
         val inp = StringBuilder(32)
         QueryFile("nope.nope.nope").appendCliSegment(inp)
-        assertEquals(" $FlagQueryFile nope.nope.nope", inp.toString())
+        assertEquals(" $FlagQueryFile 'nope.nope.nope'", inp.toString())
       }
 
       @Test

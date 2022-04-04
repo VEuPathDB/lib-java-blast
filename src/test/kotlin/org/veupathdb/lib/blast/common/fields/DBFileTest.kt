@@ -114,7 +114,7 @@ internal class DBFileTest {
       fun t3() {
         val inp = StringBuilder(32)
         DBFile("nope.nope.nope").appendCliSegment(inp)
-        assertEquals(" $FlagDBFile nope.nope.nope", inp.toString())
+        assertEquals(" $FlagDBFile 'nope.nope.nope'", inp.toString())
       }
 
       @Test

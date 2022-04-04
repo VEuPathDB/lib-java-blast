@@ -114,7 +114,7 @@ internal class OutFileTest {
       fun t3() {
         val inp = StringBuilder(32)
         OutFile("nope.nope.nope").appendCliSegment(inp)
-        assertEquals(" $FlagOut nope.nope.nope", inp.toString())
+        assertEquals(" $FlagOut 'nope.nope.nope'", inp.toString())
       }
 
       @Test

@@ -114,7 +114,7 @@ internal class SubjectFileTest {
       fun t3() {
         val inp = StringBuilder(32)
         SubjectFile("nope.nope.nope").appendCliSegment(inp)
-        assertEquals(" $FlagSubjectFile nope.nope.nope", inp.toString())
+        assertEquals(" $FlagSubjectFile 'nope.nope.nope'", inp.toString())
       }
 
       @Test
