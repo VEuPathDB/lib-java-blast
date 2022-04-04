@@ -6,11 +6,11 @@ import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
 
 
-private const val Def = 60
+private const val Def = 60u
 
 
 internal fun ParseLineLength(js: ObjectNode) =
-  js.optInt(FlagLineLength) { LineLength(it) } ?: LineLength()
+  js.optUInt(FlagLineLength) { LineLength(it) } ?: LineLength()
 
 
 /**
@@ -23,7 +23,13 @@ internal fun ParseLineLength(js: ObjectNode) =
  * Default = `60`
  */
 @JvmInline
-value class LineLength(val value: Int = Def) : BlastField {
+value class LineLength(val value: UInt = Def) : BlastField {
+
+  init {
+    if (value < 1u)
+      throw IllegalArgumentException("$FlagLineLength must be greater than or equal to 1")
+  }
+
   override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =

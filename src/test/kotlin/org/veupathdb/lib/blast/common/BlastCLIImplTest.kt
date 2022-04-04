@@ -566,7 +566,7 @@ internal abstract class BlastCLIImplTest {
       @DisplayName("appends the flag to the output json")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.lineLength = LineLength(12)
+        tgt.lineLength = LineLength(12u)
 
         val json = tgt.toJson()
 
@@ -590,7 +590,7 @@ internal abstract class BlastCLIImplTest {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.lineLength = LineLength(12)
+        tgt.lineLength = LineLength(12u)
 
         assertEquals("${tgt.tool.value} $FlagLineLength 12", tgt.toCliString())
       }
@@ -604,7 +604,7 @@ internal abstract class BlastCLIImplTest {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.lineLength = LineLength(12)
+        tgt.lineLength = LineLength(12u)
 
         val cli = tgt.toCliArray()
 
