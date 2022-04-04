@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.veupathdb.lib.jackson.Json
 
-@DisplayName("ParseHelpLong()")
+@DisplayName("ParseHelpShort()")
 internal class HelpShortKtTest {
 
   @Test
-  @DisplayName("returns a defaulted HelpLong instance when the input object does not contain a -h entry")
+  @DisplayName("returns a defaulted HelpShort instance when the input object does not contain a -h entry")
   fun t1() {
     val inp = Json.newObject()
 

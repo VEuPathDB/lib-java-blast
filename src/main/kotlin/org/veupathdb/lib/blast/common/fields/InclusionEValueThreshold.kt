@@ -6,6 +6,12 @@ import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
 
 
+/**
+ * Default Value
+ */
+private const val Def = 0.002
+
+
 internal fun ParseInclusionEValueThreshold(js: ObjectNode) =
   js.optDub(FlagInclusionEThresh) { InclusionEValueThreshold(it) }
     ?: InclusionEValueThreshold()
@@ -19,8 +25,8 @@ internal fun ParseInclusionEValueThreshold(js: ObjectNode) =
  * Default = `0.002`
  */
 @JvmInline
-value class InclusionEValueThreshold(val value: Double = 0.002) : BlastField {
-  override val isDefault get() = value == 0.002
+value class InclusionEValueThreshold(val value: Double = Def) : BlastField {
+  override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagInclusionEThresh, value)
