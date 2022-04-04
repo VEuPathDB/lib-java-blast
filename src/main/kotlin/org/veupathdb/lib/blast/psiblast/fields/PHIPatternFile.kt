@@ -7,7 +7,7 @@ import org.veupathdb.lib.blast.util.*
 
 
 internal fun ParsePhiPatternFile(js: ObjectNode) =
-  js.optString(FlagPHIPattern) { PhiPatternFile(it) } ?: PhiPatternFile()
+  js.optString(FlagPHIPattern) { PHIPatternFile(it) } ?: PHIPatternFile()
 
 
 /**
@@ -16,7 +16,7 @@ internal fun ParsePhiPatternFile(js: ObjectNode) =
  * File name containing pattern to search
  */
 @JvmInline
-value class PhiPatternFile(val value: String = "") : BlastField {
+value class PHIPatternFile(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
 
   override fun appendJson(js: ObjectNode) =

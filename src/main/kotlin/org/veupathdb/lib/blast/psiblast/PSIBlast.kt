@@ -172,5 +172,5 @@ interface PSIBlast : BlastQueryWithIPG {
   /**
    * -phi_pattern `<File_In>`
    */
-  var phiPatternFile: PhiPatternFile
+  var phiPatternFile: PHIPatternFile
 }

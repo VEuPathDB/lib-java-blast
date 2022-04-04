@@ -25,7 +25,7 @@ value class WordSizePSI(val value: UInt = Def) : BlastField {
       throw IllegalArgumentException("$FlagWordSize must be >= 2")
   }
 
-  override val isDefault get() = value == 0u
+  override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagWordSize, value)

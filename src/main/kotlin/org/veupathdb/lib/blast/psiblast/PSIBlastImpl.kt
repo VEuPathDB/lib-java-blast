@@ -80,7 +80,7 @@ internal class PSIBlastImpl(
   override var inPSSMFile:                   InPSSMFile                   = InPSSMFile(),
   override var pseudoCount:                  PseudoCount                  = PseudoCount(),
   override var inclusionEValueThreshold:     InclusionEValueThreshold     = InclusionEValueThreshold(),
-  override var phiPatternFile:               PhiPatternFile               = PhiPatternFile(),
+  override var phiPatternFile:               PHIPatternFile               = PHIPatternFile(),
 ) : PSIBlast, BlastQueryWithIPGImpl(
   BlastTool.PSIBlast,
   shortHelp,
