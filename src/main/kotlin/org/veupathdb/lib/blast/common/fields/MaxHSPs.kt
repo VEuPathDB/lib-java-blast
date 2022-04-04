@@ -6,7 +6,7 @@ import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
 
 
-private const val Def = 0u
+private const val Def = UInt.MAX_VALUE
 
 
 internal fun ParseMaxHSPs(js: ObjectNode) =
@@ -20,6 +20,12 @@ internal fun ParseMaxHSPs(js: ObjectNode) =
  */
 @JvmInline
 value class MaxHSPs(val value: UInt = Def) : BlastField {
+
+  init {
+    if (value < 1u)
+      throw IllegalArgumentException("$FlagMaxHSPs must be greater than or equal to 1")
+  }
+
   override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =
