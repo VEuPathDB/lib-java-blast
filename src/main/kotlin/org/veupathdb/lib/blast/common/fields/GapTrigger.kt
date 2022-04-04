@@ -6,6 +6,12 @@ import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
 
 
+/**
+ * Default Value
+ */
+private const val Def = 22.0
+
+
 internal fun ParseGapTrigger(js: ObjectNode) =
   js.optDub(FlagGapTrigger) { GapTrigger(it) } ?: GapTrigger()
 
@@ -18,8 +24,8 @@ internal fun ParseGapTrigger(js: ObjectNode) =
  * Default = `22`
  */
 @JvmInline
-value class GapTrigger(val value: Double = 22.0) : BlastField {
-  override val isDefault get() = value == 22.0
+value class GapTrigger(val value: Double = Def) : BlastField {
+  override val isDefault get() = value == Def
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagGapTrigger, value)
