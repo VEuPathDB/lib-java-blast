@@ -38,15 +38,15 @@ internal fun ParseExportSearchStrategy(js: ObjectNode) =
 
 
 @JvmInline
-value class ExportSearchStrategy(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class ExportSearchStrategy(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagExportSearchStrategy, value)
+    js.put(isDefault, FlagExportSearchStrategy, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagExportSearchStrategy, value)
+    cli.append(isDefault, FlagExportSearchStrategy, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagExportSearchStrategy, value)
+    cli.add(isDefault, FlagExportSearchStrategy, file)
 }
