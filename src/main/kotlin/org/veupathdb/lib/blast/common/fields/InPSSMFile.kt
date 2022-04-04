@@ -16,15 +16,15 @@ internal fun ParseInPSSM(js: ObjectNode) =
  * PSI-BLAST checkpoint file
  */
 @JvmInline
-value class InPSSMFile(val value: String = "") : BlastField {
-  override val isDefault get() = value.isBlank()
+value class InPSSMFile(val file: String = "") : BlastField {
+  override val isDefault get() = file.isBlank()
 
   override fun appendJson(js: ObjectNode) =
-    js.put(isDefault, FlagInPSSM, value)
+    js.put(isDefault, FlagInPSSM, file)
 
   override fun appendCliSegment(cli: StringBuilder) =
-    cli.append(isDefault, FlagInPSSM, value)
+    cli.append(isDefault, FlagInPSSM, file)
 
   override fun appendCliParts(cli: MutableList<String>) =
-    cli.add(isDefault, FlagInPSSM, value)
+    cli.add(isDefault, FlagInPSSM, file)
 }
