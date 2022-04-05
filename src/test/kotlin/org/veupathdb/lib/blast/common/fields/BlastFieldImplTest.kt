@@ -55,6 +55,12 @@ abstract class BlastFieldImplTest {
         blank().appendCliParts(inp)
         assertTrue(inp.isEmpty())
       }
+
+      @Test
+      @DisplayName("toJson() returns an empty JSON object")
+      fun t5() {
+        assertEquals("{}", blank().toJson().toString())
+      }
     }
 
     @Nested
@@ -89,6 +95,12 @@ abstract class BlastFieldImplTest {
         val inp = ArrayList<String>(2)
         populated().appendCliParts(inp)
         assertEquals(argList, inp)
+      }
+
+      @Test
+      @DisplayName("toJson() returns a populated JSON object")
+      fun t5() {
+        assertEquals(jsonString, populated().toJson().toString())
       }
     }
   }
