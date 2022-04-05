@@ -10,6 +10,8 @@ import org.veupathdb.lib.blast.blastx.BlastXImpl
 import org.veupathdb.lib.blast.common.BlastCLI
 import org.veupathdb.lib.blast.deltablast.DeltaBlast
 import org.veupathdb.lib.blast.deltablast.DeltaBlastImpl
+import org.veupathdb.lib.blast.formatter.BlastFormatter
+import org.veupathdb.lib.blast.formatter.BlastFormatterImpl
 import org.veupathdb.lib.blast.psiblast.PSIBlast
 import org.veupathdb.lib.blast.psiblast.PSIBlastImpl
 import org.veupathdb.lib.blast.rpsblast.RPSBlast
@@ -36,7 +38,7 @@ object Blast {
         BlastTool.RPSTBlastN     -> RPSTBlastNImpl(js)
         BlastTool.TBlastN        -> TBlastNImpl(js)
         BlastTool.TBlastX        -> TBlastXImpl(js)
-        BlastTool.BlastFormatter -> TODO()
+        BlastTool.BlastFormatter -> BlastFormatterImpl(js)
       }
     }
       ?: throw IllegalArgumentException("Missing required property \"tool\".")
@@ -185,4 +187,20 @@ object Blast {
    * @return The new [TBlastX] instance.
    */
   fun tblastx(): TBlastX = TBlastXImpl()
+
+  /**
+   * Creates a new [BlastFormatter] instance by parsing the given JSON input.
+   *
+   * @param js JSON object to parse.
+   *
+   * @return The new [BlastFormatter] instance.
+   */
+  fun blastFormatter(js: ObjectNode): BlastFormatter = BlastFormatterImpl(js)
+
+  /**
+   * Creates a new, defaulted [BlastFormatter] instance.
+   *
+   * @return The new [BlastFormatter] instance.
+   */
+  fun blastFormatter(): BlastFormatter = BlastFormatterImpl()
 }

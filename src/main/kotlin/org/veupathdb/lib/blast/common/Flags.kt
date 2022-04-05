@@ -1,5 +1,6 @@
 package org.veupathdb.lib.blast.common
 
+const val FlagArchive                 = "-archive"
 const val FlagBestHitOverhang         = "-best_hit_overhang"
 const val FlagBestHitScoreEdge        = "-best_hit_score_edge"
 const val FlagCompBasedStats          = "-comp_based_stats"
@@ -64,6 +65,7 @@ const val FlagQueryGenCode            = "-query_gencode"
 const val FlagQueryLocation           = "-query_loc"
 const val FlagRemote                  = "-remote"
 const val FlagReward                  = "-reward"
+const val FlagRID                     = "-rid"
 const val FlagRPSDB                   = "-rpsdb"
 const val FlagSaveEachPSSM            = "-save_each_pssm"
 const val FlagSavePSSMAfterLastRound  = "-save_pssm_after_last_round"

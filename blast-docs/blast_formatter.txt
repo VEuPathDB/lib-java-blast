@@ -47,7 +47,7 @@ OPTIONAL ARGUMENTS
     16 = Single-file BLAST XML2,
     17 = Sequence Alignment/Map (SAM),
     18 = Organism Report
-   
+
    Options 6, 7, 10 and 17 can be additionally configured to produce
    a custom format specified by space delimited format specifiers,
    or in the case of options 6, 7, and 10, by a token specified
@@ -101,7 +101,7 @@ OPTIONAL ARGUMENTS
    	sblastnames means unique Subject Blast Name(s), separated by a ';'
    			 (in alphabetical order)
    	sskingdoms means unique Subject Super Kingdom(s), separated by a ';'
-   			 (in alphabetical order) 
+   			 (in alphabetical order)
    	    stitle means Subject Title
    	salltitles means All Subject Title(s), separated by a '<>'
    	   sstrand means Subject Strand
