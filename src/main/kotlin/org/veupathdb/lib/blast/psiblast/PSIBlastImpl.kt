@@ -56,7 +56,7 @@ internal class PSIBlastImpl(
   override var compBasedStats:               CompBasedStatsPSI            = CompBasedStatsPSI(),
   override var subjectFile:                  SubjectFile                  = SubjectFile(),
   override var subjectLocation:              SubjectLocation              = SubjectLocation(),
-  override var seg:                          SegPSI                       = NoSeg,
+  override var seg:                          SegPSI                       = NoSegPSI,
   override var softMasking:                  SoftMaskingPSI               = SoftMaskingPSI(),
   override var queryCoverageHSPPercent:      QueryCoverageHSPPercent      = QueryCoverageHSPPercent(),
   override var cullingLimit:                 CullingLimit                 = CullingLimit(),

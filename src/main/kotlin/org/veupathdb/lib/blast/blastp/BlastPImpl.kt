@@ -55,7 +55,7 @@ internal class BlastPImpl(
   override var compBasedStats:               CompBasedStatsP              = CompBasedStatsP(),
   override var subjectFile:                  SubjectFile                  = SubjectFile(),
   override var subjectLocation:              SubjectLocation              = SubjectLocation(),
-  override var seg:                          SegP                         = NoSeg,
+  override var seg:                          SegP                         = NoSegP,
   override var dbSoftMask:                   DBSoftMask                   = DBSoftMask(),
   override var dbHardMask:                   DBHardMask                   = DBHardMask(),
   override var cullingLimit:                 CullingLimit                 = CullingLimit(),

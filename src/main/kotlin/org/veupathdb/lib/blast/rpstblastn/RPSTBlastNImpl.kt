@@ -39,7 +39,7 @@ internal class RPSTBlastNImpl(
   override var queryGenCode:                 QueryGenCode                 = QueryGenCode(),
   override var strand:                       Strand                       = Strand(),
   override var compBasedStats:               CompBasedStatsRPSTN          = CompBasedStatsRPSTN(),
-  override var seg:                          SegRPSTN                     = NoSeg,
+  override var seg:                          SegRPSTN                     = NoSegRPSTN,
   override var softMasking:                  SoftMaskingRPSTN             = SoftMaskingRPSTN(),
   override var queryCoverageHSPPercent:      QueryCoverageHSPPercent      = QueryCoverageHSPPercent(),
   override var sumStats:                     SumStats                     = SumStats(),

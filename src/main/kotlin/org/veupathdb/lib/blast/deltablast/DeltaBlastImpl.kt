@@ -54,7 +54,7 @@ internal class DeltaBlastImpl(
   override var compBasedStats:                 CompBasedStatsDelta            = CompBasedStatsDelta(),
   override var subjectFile:                    SubjectFile                    = SubjectFile(),
   override var subjectLocation:                SubjectLocation                = SubjectLocation(),
-  override var seg:                            SegDelta                       = NoSeg,
+  override var seg:                            SegDelta                       = NoSegD,
   override var softMasking:                    SoftMaskingDelta               = SoftMaskingDelta(),
   override var queryCoverageHSPPercent:        QueryCoverageHSPPercent        = QueryCoverageHSPPercent(),
   override var cullingLimit:                   CullingLimit                   = CullingLimit(),

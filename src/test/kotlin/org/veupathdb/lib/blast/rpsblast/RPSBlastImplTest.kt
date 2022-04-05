@@ -10,7 +10,7 @@ import org.veupathdb.lib.blast.common.fields.*
 import org.veupathdb.lib.blast.rpsblast.fields.CompBasedStatsRPS
 import org.veupathdb.lib.blast.rpsblast.fields.CompBasedStatsRPSValue
 import org.veupathdb.lib.blast.rpsblast.fields.SoftMaskingRPS
-import org.veupathdb.lib.blast.rpsblast.fields.YesSeg
+import org.veupathdb.lib.blast.rpsblast.fields.YesSegRPS
 
 @DisplayName("RPSBlast")
 internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
@@ -91,7 +91,7 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
       @DisplayName("appends the flag to the output json")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegRPS
 
         assertEquals(
           """
@@ -113,7 +113,7 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegRPS
 
         assertEquals("${tgt.tool.value} $FlagSeg yes", tgt.toCliString())
       }
@@ -127,7 +127,7 @@ internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegRPS
 
         val cli = tgt.toCliArray()
 

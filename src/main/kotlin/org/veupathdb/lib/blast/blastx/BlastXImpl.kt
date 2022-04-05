@@ -58,7 +58,7 @@ internal class BlastXImpl(
   override var compBasedStats:               CompBasedStatsX              = CompBasedStatsX(),
   override var subjectFile:                  SubjectFile                  = SubjectFile(),
   override var subjectLocation:              SubjectLocation              = SubjectLocation(),
-  override var seg:                          SegX                         = ValSeg(),
+  override var seg:                          SegX                         = ValSegX(),
   override var dbSoftMask:                   DBSoftMask                   = DBSoftMask(),
   override var dbHardMask:                   DBHardMask                   = DBHardMask(),
   override var cullingLimit:                 CullingLimit                 = CullingLimit(),

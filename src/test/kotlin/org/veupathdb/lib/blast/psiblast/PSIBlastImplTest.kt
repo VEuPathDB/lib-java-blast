@@ -514,7 +514,7 @@ internal class PSIBlastImplTest : BlastQueryWithIPGImplTest() {
       @DisplayName("appends the flag to the output json")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegPSI
 
         assertEquals(
           """
@@ -536,7 +536,7 @@ internal class PSIBlastImplTest : BlastQueryWithIPGImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegPSI
 
         assertEquals("${tgt.tool.value} $FlagSeg yes", tgt.toCliString())
       }
@@ -550,7 +550,7 @@ internal class PSIBlastImplTest : BlastQueryWithIPGImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegPSI
 
         val cli = tgt.toCliArray()
 

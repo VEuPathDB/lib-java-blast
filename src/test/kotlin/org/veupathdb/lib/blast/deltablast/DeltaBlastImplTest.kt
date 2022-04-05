@@ -515,7 +515,7 @@ internal class DeltaBlastImplTest() : BlastQueryWithListsImplTest() {
       @DisplayName("appends the flag to the output json")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegD
 
         assertEquals(
           """
@@ -537,7 +537,7 @@ internal class DeltaBlastImplTest() : BlastQueryWithListsImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegD
 
         assertEquals("${tgt.tool.value} $FlagSeg yes", tgt.toCliString())
       }
@@ -551,7 +551,7 @@ internal class DeltaBlastImplTest() : BlastQueryWithListsImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegD
 
         val cli = tgt.toCliArray()
 

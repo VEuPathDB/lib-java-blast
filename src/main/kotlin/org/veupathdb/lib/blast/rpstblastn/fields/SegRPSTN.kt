@@ -25,25 +25,25 @@ sealed interface SegRPSTN : Seg {
   companion object {
 
     @JvmStatic
-    fun yes(): SegRPSTN = YesSeg
+    fun yes(): SegRPSTN = YesSegRPSTN
 
     @JvmStatic
-    fun No(): SegRPSTN = NoSeg
+    fun no(): SegRPSTN = NoSegRPSTN
 
     @JvmStatic
-    fun Of(window: Int, locut: Double, hicut: Double): SegRPSTN =
-      ValSeg(window, locut, hicut)
+    fun of(window: Int, locut: Double, hicut: Double): SegRPSTN =
+      ValSegRPSTN(window, locut, hicut)
   }
 }
 
 
 internal fun ParseSegRPSTN(js: ObjectNode): SegRPSTN {
-  val tmp = js[KeySeg] ?: return NoSeg
+  val tmp = js[KeySeg] ?: return NoSegRPSTN
 
   if (tmp.isTextual) {
     return when (js.textValue()) {
-      "yes" -> YesSeg
-      "no"  -> NoSeg
+      "yes" -> YesSegRPSTN
+      "no"  -> NoSegRPSTN
       else  -> throw IllegalArgumentException("$KeySeg must be an object or one of the string values \"yes\" or \"no\".")
     }
   }
@@ -55,7 +55,7 @@ internal fun ParseSegRPSTN(js: ObjectNode): SegRPSTN {
 }
 
 
-internal object YesSeg : SegRPSTN {
+internal object YesSegRPSTN : SegRPSTN {
   override val isYes get() = true
 
   override val isNo get() = false
@@ -86,7 +86,7 @@ internal object YesSeg : SegRPSTN {
 }
 
 
-internal object NoSeg : SegRPSTN {
+internal object NoSegRPSTN : SegRPSTN {
   override val isYes get() = false
 
   override val isNo get() = true
@@ -119,11 +119,11 @@ private fun parseSeg(js: ObjectNode): SegRPSTN {
   val l = ln.reqDub { "$KeySeg.$KeyLocut" }
   val h = hn.reqDub { "$KeySeg.$KeyHicut" }
 
-  return ValSeg(w, l, h)
+  return ValSegRPSTN(w, l, h)
 }
 
 
-internal data class ValSeg(
+internal data class ValSegRPSTN(
   override val window: Int,
   override val locut: Double,
   override val hicut: Double

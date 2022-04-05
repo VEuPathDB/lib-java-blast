@@ -8,6 +8,7 @@ import org.veupathdb.lib.blast.common.*
 import org.veupathdb.lib.blast.common.fields.*
 import org.veupathdb.lib.blast.tblastn.fields.*
 
+@DisplayName("TBlastN")
 internal class TBlastNImplTest : BlastQueryWithListsImplTest() {
   override fun getEmptyImpl(): TBlastN = TBlastNImpl()
 
@@ -706,7 +707,7 @@ internal class TBlastNImplTest : BlastQueryWithListsImplTest() {
       @DisplayName("appends the flag to the output json")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegTN
 
         Assertions.assertEquals(
           """
@@ -728,7 +729,7 @@ internal class TBlastNImplTest : BlastQueryWithListsImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegTN
 
         Assertions.assertEquals("${tgt.tool.value} $FlagSeg yes",
           tgt.toCliString())
@@ -743,7 +744,7 @@ internal class TBlastNImplTest : BlastQueryWithListsImplTest() {
       @DisplayName("appends the flag to the cli call string")
       fun t1() {
         val tgt = getEmptyImpl()
-        tgt.seg = YesSeg
+        tgt.seg = YesSegTN
 
         val cli = tgt.toCliArray()
 

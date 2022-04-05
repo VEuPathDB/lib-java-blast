@@ -55,7 +55,7 @@ internal class TBlastNImpl(
   override var compBasedStats:               CompBasedStatsTN             = CompBasedStatsTN(),
   override var subjectFile:                  SubjectFile                  = SubjectFile(),
   override var subjectLocation:              SubjectLocation              = SubjectLocation(),
-  override var seg:                          SegTN                        = SegTN.Of(),
+  override var seg:                          SegTN                        = SegTN.of(),
   override var softMasking:                  SoftMaskingTN                = SoftMaskingTN(),
   override var dbSoftMask:                   DBSoftMask                   = DBSoftMask(),
   override var dbHardMask:                   DBHardMask                   = DBHardMask(),

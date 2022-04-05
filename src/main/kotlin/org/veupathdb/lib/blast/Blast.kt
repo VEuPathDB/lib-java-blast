@@ -7,6 +7,7 @@ import org.veupathdb.lib.blast.blastp.BlastP
 import org.veupathdb.lib.blast.blastp.BlastPImpl
 import org.veupathdb.lib.blast.blastx.BlastX
 import org.veupathdb.lib.blast.blastx.BlastXImpl
+import org.veupathdb.lib.blast.common.BlastCLI
 import org.veupathdb.lib.blast.deltablast.DeltaBlast
 import org.veupathdb.lib.blast.deltablast.DeltaBlastImpl
 import org.veupathdb.lib.blast.psiblast.PSIBlast
@@ -17,8 +18,29 @@ import org.veupathdb.lib.blast.rpstblastn.RPSTBlastN
 import org.veupathdb.lib.blast.rpstblastn.RPSTBlastNImpl
 import org.veupathdb.lib.blast.tblastn.TBlastN
 import org.veupathdb.lib.blast.tblastn.TBlastNImpl
+import org.veupathdb.lib.blast.tblastx.TBlastX
+import org.veupathdb.lib.blast.tblastx.TBlastXImpl
+import org.veupathdb.lib.blast.util.optString
 
 object Blast {
+
+  fun of(js: ObjectNode): BlastCLI {
+    return js.optString("tool") {
+      when (parseTool(it)) {
+        BlastTool.BlastN         -> BlastNImpl(js)
+        BlastTool.BlastP         -> BlastPImpl(js)
+        BlastTool.BlastX         -> BlastXImpl(js)
+        BlastTool.DeltaBlast     -> DeltaBlastImpl(js)
+        BlastTool.PSIBlast       -> PSIBlastImpl(js)
+        BlastTool.RPSBlast       -> RPSBlastImpl(js)
+        BlastTool.RPSTBlastN     -> RPSTBlastNImpl(js)
+        BlastTool.TBlastN        -> TBlastNImpl(js)
+        BlastTool.TBlastX        -> TBlastXImpl(js)
+        BlastTool.BlastFormatter -> TODO()
+      }
+    }
+      ?: throw IllegalArgumentException("Missing required property \"tool\".")
+  }
 
   /**
    * Creates a new [BlastN] instance by parsing the given JSON input.
@@ -147,4 +169,20 @@ object Blast {
    * @return The new [TBlastN] instance.
    */
   fun tblastn(): TBlastN = TBlastNImpl()
+
+  /**
+   * Creates a new [TBlastX] instance by parsing the given JSON input.
+   *
+   * @param js JSON object to parse.
+   *
+   * @return The new [TBlastX] instance.
+   */
+  fun tblastx(js: ObjectNode): TBlastX = TBlastXImpl(js)
+
+  /**
+   * Creates a new, defaulted [TBlastX] instance.
+   *
+   * @return The new [TBlastX] instance.
+   */
+  fun tblastx(): TBlastX = TBlastXImpl()
 }

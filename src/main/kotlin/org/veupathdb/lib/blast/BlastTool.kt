@@ -1,6 +1,14 @@
 package org.veupathdb.lib.blast
 
-import com.fasterxml.jackson.databind.node.ObjectNode
+
+internal fun parseTool(value: String): BlastTool {
+  for (t in BlastTool.values())
+    if (value == t.value)
+      return t
+
+  throw IllegalArgumentException("Invalid BlastTool value \"$value\".")
+}
+
 
 enum class BlastTool(val value: String) {
   BlastN("blastn"),
