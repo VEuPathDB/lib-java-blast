@@ -8,7 +8,7 @@ import org.veupathdb.lib.blast.common.*
 import org.veupathdb.lib.blast.common.fields.*
 import org.veupathdb.lib.blast.tblastx.fields.*
 
-@DisplayName("TBlastX")
+@DisplayName("tblastx")
 internal class TBlastXImplTest : BlastQueryWithListsImplTest() {
   override fun getEmptyImpl(): TBlastX = TBlastXImpl()
 

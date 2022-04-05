@@ -12,7 +12,7 @@ import org.veupathdb.lib.blast.rpstblastn.fields.CompBasedStatsRPSTNValue
 import org.veupathdb.lib.blast.rpstblastn.fields.SoftMaskingRPSTN
 import org.veupathdb.lib.blast.rpstblastn.fields.YesSegRPSTN
 
-@DisplayName("RPSTBlastN")
+@DisplayName("rpstblastn")
 internal class RPSTBlastNImplTest : BlastQueryBaseImplTest() {
 
   override fun getEmptyImpl(): RPSTBlastN {

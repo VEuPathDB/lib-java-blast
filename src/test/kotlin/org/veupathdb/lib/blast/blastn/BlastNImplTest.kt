@@ -8,7 +8,7 @@ import org.veupathdb.lib.blast.blastn.fields.*
 import org.veupathdb.lib.blast.common.*
 import org.veupathdb.lib.blast.common.fields.*
 
-@DisplayName("BlastN")
+@DisplayName("blastn")
 internal class BlastNImplTest : BlastQueryWithListsImplTest() {
 
   override fun getEmptyImpl(): BlastN {

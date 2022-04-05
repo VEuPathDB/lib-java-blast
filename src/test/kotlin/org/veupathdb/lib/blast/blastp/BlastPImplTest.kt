@@ -8,7 +8,7 @@ import org.veupathdb.lib.blast.blastp.field.*
 import org.veupathdb.lib.blast.common.*
 import org.veupathdb.lib.blast.common.fields.*
 
-@DisplayName("BlastP")
+@DisplayName("blastp")
 internal class BlastPImplTest : BlastQueryWithIPGImplTest() {
 
   override fun getEmptyImpl(): BlastP {

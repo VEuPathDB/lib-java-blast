@@ -12,7 +12,7 @@ import org.veupathdb.lib.blast.rpsblast.fields.CompBasedStatsRPSValue
 import org.veupathdb.lib.blast.rpsblast.fields.SoftMaskingRPS
 import org.veupathdb.lib.blast.rpsblast.fields.YesSegRPS
 
-@DisplayName("RPSBlast")
+@DisplayName("rpsblast")
 internal class RPSBlastImplTest : BlastQueryBaseImplTest() {
 
   override fun getEmptyImpl(): RPSBlast {

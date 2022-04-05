@@ -8,6 +8,7 @@ import org.veupathdb.lib.blast.common.*
 import org.veupathdb.lib.blast.common.fields.*
 import org.veupathdb.lib.blast.psiblast.fields.*
 
+@DisplayName("psiblast")
 internal class PSIBlastImplTest : BlastQueryWithIPGImplTest() {
   override fun getEmptyImpl(): PSIBlast = PSIBlastImpl()
 
