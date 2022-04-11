@@ -24,8 +24,60 @@ import org.veupathdb.lib.blast.tblastx.TBlastX
 import org.veupathdb.lib.blast.tblastx.TBlastXImpl
 import org.veupathdb.lib.blast.util.optString
 
+/**
+ * Entrypoint to the Blast library.
+ *
+ * Provides methods for constructing BLAST+ tool configurations or parsing them
+ * from JSON input.
+ *
+ * @author Elizabeth Harper [foxcapades.io@gmail.com]
+ * @since  v6.0.0
+ */
 object Blast {
 
+  /**
+   * Creates a new [BlastCLI] instance of one of the following types from the
+   * given input JSON:
+   *
+   * * [BlastN]
+   * * [BlastP]
+   * * [BlastX]
+   * * [DeltaBlast]
+   * * [PSIBlast]
+   * * [RPSBlast]
+   * * [RPSTBlastN]
+   * * [TBlastN]
+   * * [TBlastX]
+   * * [BlastFormatter]
+   *
+   * This method is intended to be used to construct a BLAST+ configuration
+   * instance from a JSON value where the type of the config is not known
+   * beforehand.
+   *
+   * The [BlastCLI.tool] property may be used after deserialization to determine
+   * the type of the config and cast it correctly.
+   *
+   * Example
+   * ```kotlin
+   * // input == {
+   * //   "tool": "blastn",
+   * //   ...
+   * //}
+   *
+   * val config = Blast.of(input)
+   *
+   * if (config.tool == BlastTool.BlastN)
+   *   val blastnConfig = config as BlastN
+   * ```
+   *
+   * @param js JSON object to parse.
+   *
+   * @return The parsed [BlastCLI] subtype.
+   *
+   * @throws IllegalArgumentException If the input JSON object is missing the
+   * `"tool"` property, or if the value of that property is not a valid BLAST+
+   * tool name.
+   */
   fun of(js: ObjectNode): BlastCLI {
     return js.optString("tool") {
       when (parseTool(it)) {
