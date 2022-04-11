@@ -1,7 +1,140 @@
 = lib-java-blast
+:source-highlighter: highlightjs
+:toc:
 
-Library for parsing/serializing JSON blast cli configs.
+Library for parsing, serializing, and validating JSON BLAST+ cli configs.
 
-Based on ncbi/blast 2.10.1.
+Configs may be constructed or parsed from JSON and written out to several
+formats including a CLI call string.
+
+Based on ncbi/blast 2.11.0.
 
 Requires Java 16+.
+
+
+== Usage
+
+.Building a CLI Command
+[source, kotlin]
+----
+val config = Blast.blastn()
+
+config.task      = BlastNTaskType.DiscontiguousMegablast
+config.queryFile = "my-query.txt"
+config.dbFile    = "my-blast-db"
+
+config.toCliString() == "blastn -task 'dc-megablast' -query 'my-query.txt' -db 'my-blast-db'"
+----
+
+
+.Serializing to JSON
+[source, kotlin]
+----
+val config = Blast.blastp()
+
+config.task      = BlastPTaskType.BlastPFast
+config.queryFile = "my-query.txt"
+config.dbFile    = "my-blast-db"
+
+config.toJson() == """
+{
+  "tool"   : "blastp",
+  "-task"  : "blastp-fast",
+  "-query" : "my-query.txt"
+  "-db"    : "my-blast-db"
+}
+"""
+----
+
+
+.Deserializing from JSON
+[source, kotlin]
+----
+val inputJson = """
+{
+  "tool"   : "blastx",
+  "-task"  : "blastx-fast"
+  "-query" : "my-query.txt"
+  "-db"    : "my-blast-db"
+}
+"""
+
+val config = Blast.blastx(inputJson) // or Blast.of(inputJson) if the tool is unknown.
+
+assert(config.task == BlastXTaskType.BlastXFast)
+assert(config.queryFile == "my-query.txt")
+assert(config.dbFile == "my-blast-db")
+----
+
+== Default Values
+
+This library knows all the documented default values for all  flags for each
+BLAST+ tool, and will omit those values from serialized forms.  This is done to
+keep the serialized form of each config down to the bare minimum as the BLAST+
+tools have a large number of flags and options.
+
+
+.Setting Default Values
+[source, kotlin]
+----
+val config = Blast.deltablast()
+
+config.seg            = SegDelta.no()
+config.gapTrigger     = 22.0
+config.compBasedStats = CompBasedStatsDeltaValue.CompBasedStats
+
+config.toCliString() == "deltablast"
+
+config.toJson() == """
+{
+  "tool" : "deltablast"
+}
+"""
+----
+
+
+== Validation
+
+
+=== Field Level Validation
+
+Each field that has a documented set or range of valid values validates the set
+value on construction, preventing an invalid flag being used when building a
+BLAST+ tool configuration.
+
+If an invalid value is used when constructing a field, an
+`IllegalArgumentException` will be thrown.
+
+
+[source, kotlin]
+----
+val field = LineLength(-1) // Throws an exception
+----
+
+
+=== Config Level Validation
+
+In addition to the field level validation, whole configs come with a `validate`
+method that builds a list of errors for flags that are incompatible with one
+another or require an additional flag that is missing.
+
+This validation method returns a `Map` of all the errors encountered keyed on
+the name of the relevant flag.
+
+[source, kotlin]
+----
+val config = Blast.blastFormatter()
+
+config.archive = "some-archive"
+config.rid     = "some-request-id"
+
+val errors = config.validate()
+
+errors.toJson() == """
+{
+  "-archive" : [ "Incompatible with -rid" ],
+  "-rid"     : [ "Incompatible with -archive" ]
+}
+"""
+
+----

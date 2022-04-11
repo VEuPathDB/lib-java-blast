@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.err
 
 import org.veupathdb.lib.blast.serial.BlastField
+import org.veupathdb.lib.jackson.Json
 
 class ErrorMap(size: Int = 16) {
   private val root = HashMap<String, ArrayList<String>>(size)
@@ -31,6 +32,17 @@ class ErrorMap(size: Int = 16) {
    * `false`.
    */
   fun hasErrors() = root.isNotEmpty()
+
+  @Suppress("DEPRECATION")
+  fun toJson() = Json.newObject {
+    root.forEach { (k, v) ->
+      put(k, Json.newArray {
+        v.forEach {
+          add(it)
+        }
+      })
+    }
+  }
 
   /**
    * Tests flags that are incompatible with one another and appends errors for
