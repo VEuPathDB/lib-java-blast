@@ -1,0 +1,37 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:org.veupathdb.lib.blast.blastn.fields/Dust.Companion///PointingToDeclaration/org/veupathdb/lib/blast/blastn/fields/Dust.Companion.html
+$dokka.location:org.veupathdb.lib.blast.blastp.field/SegP.Companion///PointingToDeclaration/org/veupathdb/lib/blast/blastp/field/SegP.Companion.html
+$dokka.location:org.veupathdb.lib.blast.blastx.field/SegX.Companion///PointingToDeclaration/org/veupathdb/lib/blast/blastx/field/SegX.Companion.html
+$dokka.location:org.veupathdb.lib.blast.deltablast.fields/SegDelta.Companion///PointingToDeclaration/org/veupathdb/lib/blast/deltablast/fields/SegDelta.Companion.html
+$dokka.location:org.veupathdb.lib.blast.psiblast.fields/SegPSI.Companion///PointingToDeclaration/org/veupathdb/lib/blast/psiblast/fields/SegPSI.Companion.html
+$dokka.location:org.veupathdb.lib.blast.rpsblast.fields/SegRPS.Companion///PointingToDeclaration/org/veupathdb/lib/blast/rpsblast/fields/SegRPS.Companion.html
+$dokka.location:org.veupathdb.lib.blast.rpstblastn.fields/SegRPSTN.Companion///PointingToDeclaration/org/veupathdb/lib/blast/rpstblastn/fields/SegRPSTN.Companion.html
+$dokka.location:org.veupathdb.lib.blast.tblastn.fields/SegTN.Companion///PointingToDeclaration/org/veupathdb/lib/blast/tblastn/fields/SegTN.Companion.html
+$dokka.location:org.veupathdb.lib.blast.tblastx.fields/SegTX.Companion///PointingToDeclaration/org/veupathdb/lib/blast/tblastx/fields/SegTX.Companion.html
+org.veupathdb.lib.blast
+org.veupathdb.lib.blast.blastn
+org.veupathdb.lib.blast.blastn.fields
+org.veupathdb.lib.blast.blastp
+org.veupathdb.lib.blast.blastp.field
+org.veupathdb.lib.blast.blastx
+org.veupathdb.lib.blast.blastx.field
+org.veupathdb.lib.blast.common
+org.veupathdb.lib.blast.common.fields
+org.veupathdb.lib.blast.deltablast
+org.veupathdb.lib.blast.deltablast.fields
+org.veupathdb.lib.blast.err
+org.veupathdb.lib.blast.formatter
+org.veupathdb.lib.blast.formatter.fields
+org.veupathdb.lib.blast.psiblast
+org.veupathdb.lib.blast.psiblast.fields
+org.veupathdb.lib.blast.rpsblast
+org.veupathdb.lib.blast.rpsblast.fields
+org.veupathdb.lib.blast.rpstblastn
+org.veupathdb.lib.blast.rpstblastn.fields
+org.veupathdb.lib.blast.serial
+org.veupathdb.lib.blast.tblastn
+org.veupathdb.lib.blast.tblastn.fields
+org.veupathdb.lib.blast.tblastx
+org.veupathdb.lib.blast.tblastx.fields
+

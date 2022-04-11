@@ -39,6 +39,10 @@ tasks.dokkaHtml {
   outputDirectory.set(rootDir.resolve("docs/dokka"))
 }
 
+tasks.dokkaJavadoc {
+  outputDirectory.set(rootDir.resolve("docs/javadoc"))
+}
+
 dependencies {
   api("org.veupathdb.lib:jackson-singleton:2.2.0")
 

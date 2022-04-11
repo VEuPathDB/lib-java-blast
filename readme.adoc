@@ -1,6 +1,11 @@
 = lib-java-blast
 :source-highlighter: highlightjs
-:toc:
+:toc: macro
+
+image:https://img.shields.io/badge/docs-dokka-green[link="https://veupathdb.github.io/lib-jvm-blast/dokka/"]
+image:https://img.shields.io/badge/docs-javadoc-blue[link="https://veupathdb.github.io/lib-jvm-blast/javadoc/"]
+
+toc::[]
 
 Library for parsing, serializing, and validating JSON BLAST+ cli configs.
 

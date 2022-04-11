@@ -1,0 +1,406 @@
+<!DOCTYPE HTML>
+<!-- NewPage -->
+<html lang="en"><head>
+    <title>Package org.veupathdb.lib.blast.common.fields </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="dc.created" content="2020-03-25">
+    <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
+    <link rel="stylesheet" type="text/css" href="../../../../../../dokka-javadoc-stylesheet.css" title="Style">
+    <link rel="stylesheet" type="text/css" href="../../../../../../jquery/jquery-ui.css" title="Style">
+    <script type="text/javascript" src="../../../../../../jquery/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../../../../../../jquery/jquery-migrate-3.0.1.js"></script>
+    <script type="text/javascript" src="../../../../../../jquery/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="../../../../../../search.js"></script>
+    <script async type="text/javascript" src="../../../../../../module-search-index.js"></script>
+    <script async type="text/javascript" src="../../../../../../package-search-index.js"></script>
+    <script async type="text/javascript" src="../../../../../../type-search-index.js"></script>
+    <script async type="text/javascript" src="../../../../../../member-search-index.js"></script>
+    <script async type="text/javascript" src="../../../../../../tag-search-index.js"></script>
+</head><body>
+<script type="text/javascript">
+var pathtoroot = "../../../../../../";
+</script>
+<noscript>
+    <div>JavaScript is disabled on your browser.</div>
+</noscript><header role="banner">
+    <nav role="navigation">
+        <div class="fixedNav">
+            <!-- ========= START OF TOP NAVBAR ======= -->
+            <div class="topNav"><a id="navbar.top">
+                <!--   -->
+            </a>
+                <div class="skipNav"><a href="#skip.navbar.top" title="Skip navigation links">Skip navigation links</a>
+                </div>
+                <a id="navbar.top.firstrow">
+                    <!--   -->
+                </a>
+                <ul class="navList" title="Navigation">
+    <li><a href="../../../../../../index.html">Overview</a></li>
+    
+    <li class="navBarCell1Rev">Package</li>
+    
+    <li>Class</li>
+    
+    <li><a href="package-tree.html">Tree</a></li>
+    
+    <li><a href="../../../../../../deprecated.html">Deprecated</a></li>
+    <li><a href="../../../../../../index-files/index-1.html">Index</a></li>
+    <li>Help</li>
+</ul></div>
+            <div class="subNav">
+<ul class="navList" id="allclasses_navbar_top" style="display: block;">
+    <li><a href="../../../../../../allclasses.html">All&nbsp;Classes</a></li>
+</ul>
+
+<ul class="navListSearch">
+<li><label for="search">SEARCH:</label>
+<input type="text" id="search" value="search" class="ui-autocomplete-input" autocomplete="off" placeholder="Search">
+<input type="reset" id="reset" value="reset">
+</li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+</div>
+<a id="skip.navbar.top">
+<!--   -->
+</a></div><!-- ========= END OF TOP NAVBAR ========= -->
+        </div>
+        <div class="navPadding">&nbsp;</div>
+        <script type="text/javascript"><!--
+        $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
+        //-->
+        </script>
+    </nav>
+</header>
+<main role="main">
+    <div class="header">
+        <h1 title="Package" class="title">Package org.veupathdb.lib.blast.common.fields </h1>
+    </div>
+        <div class="header">
+            <div class="subtitle">
+                <div class="block"></div>
+            </div>
+            <p>See: <a href="#overview_description">Description</a></p>
+        </div>
+    <div class="contentContainer">
+        
+            <ul class="blockList">
+                
+                <li class="blockList">
+                    
+                    
+                    
+                    
+                    
+    <div class="typeSummary">
+
+<table>
+<caption><span>Class Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Class</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=AutoCPUCores.html>AutoCPUCores</a></th><td class="colLast">-num_threads <code>&lt;Integer, &gt;=0&gt;</code>Number of threads to use in RPS BLAST search:<ul><li><p>0 (auto = num of databases)</p></li><li><p>1 (disable)</p></li></ul>Max number of threads = num of databasesDefault = <code>1</code></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=BestHitOverhang.html>BestHitOverhang</a></th><td class="colLast">-best_hit_overhang <code>&lt;Real, (&gt;0 and &lt;0.5)&gt;</code>Best Hit algorithm overhang value (recommended value: 0.</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=BestHitScoreEdge.html>BestHitScoreEdge</a></th><td class="colLast">-best_hit_score_edge <code>&lt;Real, (&gt;0 and &lt;0.5)&gt;</code>Best Hit algorithm score edge value (recommended value: 0.</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=CullingLimit.html>CullingLimit</a></th><td class="colLast">-culling_limit <code>&lt;Integer, &gt;=0&gt;</code>If the query range of a hit is enveloped by that of at least this many higher-scoring hits, delete the hit</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=DBFile.html>DBFile</a></th><td class="colLast">-db <code>&lt;String&gt;</code>BLAST database name</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=DBGenCode.html>DBGenCode</a></th><td class="colLast">-db_gencode <code>&lt;Integer&gt;</code>Permissible values between:<ul><li><p>1..6</p></li><li><p>9..16</p></li><li><p>21..31</p></li><li><p>33</p></li></ul>Genetic code to use to translate database/subjects (see user manual for details)Default = <code>1</code></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=DBHardMask.html>DBHardMask</a></th><td class="colLast">-db_hard_mask <code>&lt;String&gt;</code>Filtering algorithm ID to apply to the BLAST database as hard masking</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=DBSize.html>DBSize</a></th><td class="colLast">-dbsize <code>&lt;Int8&gt;</code>Effective length of the database</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=DBSoftMask.html>DBSoftMask</a></th><td class="colLast">-db_soft_mask <code>&lt;String&gt;</code>Filtering algorithm ID to apply to the BLAST database as soft masking</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=EntrezQuery.html>EntrezQuery</a></th><td class="colLast">-entrez_query <code>&lt;String&gt;</code>Restrict search with the given Entrez query</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=ExpectValue.html>ExpectValue</a></th><td class="colLast">-evalue <code>&lt;Real&gt;</code>Expectation value (E) threshold for saving hitsDefault = <code>10</code></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=GIList.html>GIList</a></th><td class="colLast">-gilist <code>&lt;String&gt;</code>Restrict search of database to list of GIs</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=GapExtend.html>GapExtend</a></th><td class="colLast">-gapextend <code>&lt;Integer&gt;</code>Cost to extend a gap</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=GapOpen.html>GapOpen</a></th><td class="colLast">-gapopen <code>&lt;Integer&gt;</code>Cost to open a gap</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=GapTrigger.html>GapTrigger</a></th><td class="colLast">-gap_trigger <code>&lt;Real&gt;</code>Number of bits to trigger gappingDefault = <code>22</code></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=HTML.html>HTML</a></th><td class="colLast">-htmlProduce HTML output</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=HelpLong.html>HelpLong</a></th><td class="colLast">-helpPrint USAGE, DESCRIPTION and ARGUMENTS; ignore all other parameters.</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=HelpShort.html>HelpShort</a></th><td class="colLast">-hPrint USAGE and DESCRIPTION;  ignore all other parameters.</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=IPGList.html>IPGList</a></th><td class="colLast">-ipglist <code>&lt;String&gt;</code>Restrict search of database to list of IPGs</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=InPSSMFile.html>InPSSMFile</a></th><td class="colLast">-in_pssm <code>&lt;File_In&gt;</code>PSI-BLAST checkpoint file</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=InclusionEValueThreshold.html>InclusionEValueThreshold</a></th><td class="colLast">-inclusion_ethresh <code>&lt;Real&gt;</code>E-value inclusion threshold for pairwise alignmentsDefault = <code>0.002</code></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=LineLength.html>LineLength</a></th><td class="colLast">-line_length <code>&lt;Integer, &gt;=1&gt;</code>Line length for formatting alignmentsNot applicable for outfmt 4Default = <code>60</code></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=LowercaseMasking.html>LowercaseMasking</a></th><td class="colLast">-lcase_maskingUse lower case filtering in query and subject sequence(s)</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=MaxHSPs.html>MaxHSPs</a></th><td class="colLast">-max_hsps <code>&lt;Integer, &gt;=1&gt;</code>Set maximum number of HSPs per subject sequence to save for each query.</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=MaxIntronLength.html>MaxIntronLength</a></th><td class="colLast">-max_intron_length <code>&lt;Integer, &gt;=0&gt;</code>Length of the largest intron allowed in a translated nucleotide sequence when linking multiple distinct alignmentsDefault = <code>0</code></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=MaxTargetSeqs.html>MaxTargetSeqs</a></th><td class="colLast">-max_target_seqs <code>&lt;Integer, &gt;=1&gt;</code>Maximum number of aligned sequences to keep (value of 5 or more is recommended)Default = <code>500</code></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=MultiThreadingMode.html>MultiThreadingMode</a></th><td class="colLast">-mt_mode <code>&lt;Integer, (&gt;=0 and =&lt;1)&gt;</code>Multi-thread mode to use in RPS BLAST search:<ul><li><p>0 (auto) split by database vols</p></li><li><p>1 split by queries</p></li></ul>Default = <code>0</code></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=NegativeGIList.html>NegativeGIList</a></th><td class="colLast">-negative_gilist <code>&lt;String&gt;</code>Restrict search of database to everything except the specified GIs</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=NegativeIPGList.html>NegativeIPGList</a></th><td class="colLast">-negative_ipglist <code>&lt;String&gt;</code>Restrict search of database to everything except the specified IPGs</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=NegativeSeqIDList.html>NegativeSeqIDList</a></th><td class="colLast">-negative_seqidlist <code>&lt;String&gt;</code>Restrict search of database to everything except the specified SeqIDs</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=NegativeTaxIDList.html>NegativeTaxIDList</a></th><td class="colLast">-negative_taxidlist <code>&lt;String&gt;</code>Restrict search of database to everything except the specified taxonomy IDs</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=NegativeTaxIDs.html>NegativeTaxIDs</a></th><td class="colLast">-negative_taxids <code>&lt;String&gt;</code>Restrict search of database to everything except the specified taxonomy IDs (multiple IDs delimited by ',')</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=NumAlignments.html>NumAlignments</a></th><td class="colLast">-num_alignments <code>&lt;Integer, &gt;=0&gt;</code>Number of database sequences to show alignments forDefault = <code>250</code></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=NumCPUCores.html>NumCPUCores</a></th><td class="colLast"></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=NumDescriptions.html>NumDescriptions</a></th><td class="colLast">-num_descriptions <code>&lt;Integer, &gt;=0&gt;</code>Number of database sequences to show one-line descriptions forNot applicable for outfmt 4Default = <code>500</code></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=NumIterations.html>NumIterations</a></th><td class="colLast">-num_iterations <code>&lt;Integer, &gt;=0&gt;</code>Number of iterations to perform (0 means run until convergence)Default = <code>1</code></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=OutASCIIPSSMFile.html>OutASCIIPSSMFile</a></th><td class="colLast">-out_ascii_pssm <code>&lt;File_Out&gt;</code>File name to store ASCII version of PSSM</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=OutFile.html>OutFile</a></th><td class="colLast">-out <code>&lt;File_Out&gt;</code>Output file nameDefault = <code>-</code></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=OutFormat.html>OutFormat</a></th><td class="colLast">-outfmt <code>&lt;String&gt;</code>Alignment view options:<pre><code>0  = Pairwise
+1  = Query-anchored showing identities
+2  = Query-anchored no identities
+3  = Flat query-anchored showing identities
+4  = Flat query-anchored no identities
+5  = BLAST XML
+6  = Tabular
+7  = Tabular with comment lines
+8  = Seqalign (Text ASN.1)
+9  = Seqalign (Binary ASN.1)
+10 = Comma-separated values
+11 = BLAST archive (ASN.1)
+12 = Seqalign (JSON)
+13 = Multiple-file BLAST JSON
+14 = Multiple-file BLAST XML2
+15 = Single-file BLAST JSON
+16 = Single-file BLAST XML2
+17 = Sequence Alignment/Map (SAM)
+18 = Organism Report</code></pre>Options 6, 7, 10 and 17 can be additionally configured to produce a custom format specified by space delimited format specifiers, or in the case of options 6, 7, and 10, by a token specified by the delim keyword.</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=FormatDelimiter.html>FormatDelimiter</a></th><td class="colLast"></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=FormatFields.html>FormatFields</a></th><td class="colLast"></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=OutPSSMFile.html>OutPSSMFile</a></th><td class="colLast">-out_pssm <code>&lt;File_Out&gt;</code>File name to store checkpoint file</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=ParseDefLines.html>ParseDefLines</a></th><td class="colLast">-parse_deflinesShould the query and subject defline(s) be parsed?</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=PseudoCount.html>PseudoCount</a></th><td class="colLast">-pseudocount <code>&lt;Integer&gt;</code>Pseudo-count value used when constructing PSSMDefault = <code>0</code></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=QueryCoverageHSPPercent.html>QueryCoverageHSPPercent</a></th><td class="colLast">-qcov_hsp_perc <code>&lt;Real, 0..100&gt;</code>Percent query coverage per hsp</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=QueryFile.html>QueryFile</a></th><td class="colLast">-query <code>&lt;File_In&gt;</code>Input file nameDefault = <code>-</code></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=QueryGenCode.html>QueryGenCode</a></th><td class="colLast">-query_gencode <code>&lt;Integer&gt;</code>Permissible values between:<ul><li><p>1..6</p></li><li><p>9..16</p></li><li><p>21..31</p></li><li><p>33</p></li></ul>Genetic code to use to translate query (see https://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html/index.cgi?</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=QueryLocation.html>QueryLocation</a></th><td class="colLast">-query_loc <code>&lt;String&gt;</code>Location on the query sequence in 1-based offsets (Format: start-stop)</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=Remote.html>Remote</a></th><td class="colLast">-remoteExecute search remotely?</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=SaveEachPSSM.html>SaveEachPSSM</a></th><td class="colLast">-save_each_pssmSave PSSM after each iteration (file name is given in -save_pssm or -save_ascii_pssm options)</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=SavePSSMAfterLastRound.html>SavePSSMAfterLastRound</a></th><td class="colLast">-save_pssm_after_last_roundSave PSSM after the last database search</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=SearchSpace.html>SearchSpace</a></th><td class="colLast">-searchsp <code>&lt;Int8, &gt;=0&gt;</code>Effective length of the search space</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=ImportSearchStrategy.html>ImportSearchStrategy</a></th><td class="colLast">-import_search_strategy <code>&lt;File_In&gt;</code>Search strategy to use</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=ExportSearchStrategy.html>ExportSearchStrategy</a></th><td class="colLast"></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=SeqIDList.html>SeqIDList</a></th><td class="colLast">-seqidlist <code>&lt;String&gt;</code>Restrict search of database to list of SeqIDs</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=ShowGIs.html>ShowGIs</a></th><td class="colLast">-show_gisShow NCBI GIs in deflines?</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=SortHSPs.html>SortHSPs</a></th><td class="colLast">-sorthsps <code>&lt;Integer, (&gt;=0 and =&lt;4)&gt;</code>Sorting option for HSPs:<ul><li><p><code>0</code> = Sort by hsp evalue</p></li><li><p><code>1</code> = Sort by hsp score</p></li><li><p><code>2</code> = Sort by hsp query start</p></li><li><p><code>3</code> = Sort by hsp percent identity</p></li><li><p><code>4</code> = Sort by hsp subject start</p></li></ul>Not applicable for -outfmt !</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=SortHits.html>SortHits</a></th><td class="colLast">-sorthits <code>&lt;Integer, (&gt;=0 and =&lt;4)&gt;</code>Sorting option for hits.</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=Strand.html>Strand</a></th><td class="colLast">-strand <code>&lt;String&gt;</code>Permissible values:<ul><li><p>both</p></li><li><p>minus</p></li><li><p>plus</p></li></ul>Query strand(s) to search against database/subjectDefault = <code>both</code></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=SubjectBestHit.html>SubjectBestHit</a></th><td class="colLast">-subject_besthitTurn on best hit per subject sequence</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=SubjectFile.html>SubjectFile</a></th><td class="colLast">-subject <code>&lt;File_In&gt;</code>Subject sequence(s) to search</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=SubjectLocation.html>SubjectLocation</a></th><td class="colLast">-subject_loc <code>&lt;String&gt;</code>Location on the subject sequence in 1-based offsets (Format: start-stop)</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=SumStats.html>SumStats</a></th><td class="colLast">-sum_stats <code>&lt;Boolean&gt;</code>Use sum statistics</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=TaxIDList.html>TaxIDList</a></th><td class="colLast">-taxidlist <code>&lt;String&gt;</code>Restrict search of database to include only the specified taxonomy IDs</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=TaxIDs.html>TaxIDs</a></th><td class="colLast">-taxids <code>&lt;String&gt;</code>Restrict search of database to include only the specified taxonomy IDs (multiple IDs delimited by ',')</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=Threshold.html>Threshold</a></th><td class="colLast">-threshold <code>&lt;Real, &gt;=0&gt;</code>Minimum word score such that the word is added to the BLAST lookup table</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=UngappedAlignmentsOnly.html>UngappedAlignmentsOnly</a></th><td class="colLast">-ungappedPerform ungapped alignment only?</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=UseSmithWatermanTraceback.html>UseSmithWatermanTraceback</a></th><td class="colLast">-use_sw_tbackCompute locally optimal Smith-Waterman alignments?</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=Version.html>Version</a></th><td class="colLast">-versionPrint version number;  ignore other arguments</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=WindowSize.html>WindowSize</a></th><td class="colLast">-window_size <code>&lt;Integer, &gt;=0&gt;</code>Multiple hits window size, use 0 to specify 1-hit algorithm</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=ExtensionDropoffUngapped.html>ExtensionDropoffUngapped</a></th><td class="colLast">-xdrop_ungap <code>&lt;Real&gt;</code>X-dropoff value (in bits) for ungapped extensions</td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=ExtensionDropoffPrelimGapped.html>ExtensionDropoffPrelimGapped</a></th><td class="colLast">-xdrop_gap <code>&lt;Real&gt;</code>X-dropoff value (in bits) for preliminary gapped extensions</td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=ExtensionDropoffFinalGapped.html>ExtensionDropoffFinalGapped</a></th><td class="colLast">-xdrop_gap_final <code>&lt;Real&gt;</code>X-dropoff value (in bits) for final gapped alignment</td></tr>
+</tbody>
+</table>
+
+    </div>
+
+                </li>
+                
+                <li class="blockList">
+                    
+                    
+                    
+                    
+                    
+    <div class="typeSummary">
+
+<table>
+<caption><span>Enum Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Enum</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=AutoCPUCoresValue.html>AutoCPUCoresValue</a></th><td class="colLast"></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=MultiThreadingModeValue.html>MultiThreadingModeValue</a></th><td class="colLast"></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=FormatType.html>FormatType</a></th><td class="colLast"></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=FormatField.html>FormatField</a></th><td class="colLast"></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=HSPSorting.html>HSPSorting</a></th><td class="colLast"></td></tr>
+
+    <tr class="rowColor"><th class="colFirst" scope="row"><a href=HitSorting.html>HitSorting</a></th><td class="colLast"></td></tr>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=StrandType.html>StrandType</a></th><td class="colLast"></td></tr>
+</tbody>
+</table>
+
+    </div>
+
+                </li>
+                
+                <li class="blockList">
+                    
+                    
+                    
+                    
+                    
+    <div class="typeSummary">
+
+<table>
+<caption><span>Interface Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Interface</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+
+    <tr class="altColor"><th class="colFirst" scope="row"><a href=Seg.html>Seg</a></th><td class="colLast">Low complexity region masker based on the SEG algorithm.</td></tr>
+</tbody>
+</table>
+
+    </div>
+
+                </li>
+                
+            </ul>
+        
+    </div>
+</main>
+<footer role="contentinfo">
+    <nav role="navigation">
+        <!-- ======= START OF BOTTOM NAVBAR ====== -->
+        <div class="bottomNav"><a id="navbar.bottom">
+            <!--   -->
+        </a>
+            <div class="skipNav"><a href="#skip.navbar.bottom" title="Skip navigation links">Skip navigation links</a>
+            </div>
+            <a id="navbar.bottom.firstrow">
+                <!--   -->
+            </a>
+            <ul class="navList" title="Navigation">
+    <li><a href="../../../../../../index.html">Overview</a></li>
+    
+    <li class="navBarCell1Rev">Package</li>
+    
+    <li>Class</li>
+    
+    <li><a href="package-tree.html">Tree</a></li>
+    
+    <li><a href="../../../../../../deprecated.html">Deprecated</a></li>
+    <li><a href="../../../../../../index-files/index-1.html">Index</a></li>
+    <li>Help</li>
+</ul></div>
+        <a id="skip.navbar.bottom">
+            <!--   -->
+        </a>
+        <div class="subNav">
+<ul class="navList" id="allclasses_navbar_top" style="display: block;">
+    <li><a href="../../../../../../allclasses.html">All&nbsp;Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+</div>
+<a id="skip.navbar.top">
+<!--   -->
+</a></div><!-- ======== END OF BOTTOM NAVBAR ======= -->
+    </nav>
+</footer><ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0"
+    style="display: none;"></ul>
+<span role="status" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></span>
+</body>
+</html>
