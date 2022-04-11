@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagOut
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
@@ -26,6 +27,9 @@ internal fun ParseOutFile(js: ObjectNode) =
 @JvmInline
 value class OutFile(val file: String = Def): BlastField {
   override val isDefault get() = file == Def || file.isBlank()
+
+  override val name: String
+    get() = FlagOut
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagOut, file)

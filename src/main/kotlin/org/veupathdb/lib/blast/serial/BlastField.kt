@@ -15,6 +15,11 @@ interface BlastField {
   val isDefault: Boolean
 
   /**
+   * The name of this field.
+   */
+  val name: String
+
+  /**
    * Serializes this field into a JSON [ObjectNode].
    *
    * If this field is set to its default value, the returned object will be

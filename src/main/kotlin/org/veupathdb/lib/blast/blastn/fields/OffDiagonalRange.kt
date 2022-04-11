@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.blastn.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagOffDiagonalRange
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -24,6 +25,9 @@ internal fun ParseOffDiagonalRange(js: ObjectNode) =
 @JvmInline
 value class OffDiagonalRange(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagOffDiagonalRange
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagOffDiagonalRange, value)

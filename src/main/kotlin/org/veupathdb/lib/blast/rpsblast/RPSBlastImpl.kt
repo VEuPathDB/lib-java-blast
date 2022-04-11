@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.BlastQueryBaseImpl
 import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.err.ErrorMap
 import org.veupathdb.lib.blast.rpsblast.fields.*
 
 internal class RPSBlastImpl(
@@ -181,5 +182,11 @@ internal class RPSBlastImpl(
     autoCPUCores.appendCliParts(cli)
     multiThreadingMode.appendCliParts(cli)
     useSmithWatermanTraceback.appendCliParts(cli)
+  }
+
+  override fun validate(errs: ErrorMap) {
+    super.validate(errs)
+
+    errs.incompatible(cullingLimit, bestHitOverhang, bestHitScoreEdge)
   }
 }

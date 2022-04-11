@@ -7,6 +7,7 @@ import org.veupathdb.lib.blast.common.fields.*
 import org.veupathdb.lib.blast.deltablast.fields.*
 import org.veupathdb.lib.blast.common.fields.NegativeTaxIDList
 import org.veupathdb.lib.blast.common.fields.ParseNegTaxIDList
+import org.veupathdb.lib.blast.err.ErrorMap
 
 internal class DeltaBlastImpl(
   shortHelp:                HelpShort                = HelpShort(),
@@ -292,5 +293,20 @@ internal class DeltaBlastImpl(
     inclusionEValueThreshold.appendCliParts(cli)
     rpsDB.appendCliParts(cli)
     showDomainHits.appendCliParts(cli)
+  }
+
+  override fun validate(errs: ErrorMap) {
+    super.validate(errs)
+
+    errs.incompatible(subjectFile, dbFile, giListFile, seqIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, taxIDs, taxIDListFile,
+      negativeTaxIDs, negativeTaxIDListFile, showDomainHits)
+    errs.incompatible(subjectLocation, dbFile, giListFile, seqIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, taxIDs, taxIDListFile,
+      negativeTaxIDs, negativeTaxIDListFile, remote)
+    errs.incompatible(cullingLimit, bestHitOverhang, bestHitScoreEdge)
+    errs.incompatible(numCPUCores, remote)
+    errs.incompatible(numIterations, remote)
+    errs.incompatible(showDomainHits, remote, subjectFile)
   }
 }

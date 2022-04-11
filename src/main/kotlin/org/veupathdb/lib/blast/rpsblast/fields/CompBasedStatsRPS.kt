@@ -3,6 +3,7 @@ package org.veupathdb.lib.blast.rpsblast.fields
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagCompBasedStats
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
@@ -31,6 +32,9 @@ value class CompBasedStatsRPS(
 ) : BlastField {
   override val isDefault
     get() = value == CompBasedStatsRPSValue.CompBasedStats
+
+  override val name: String
+    get() = FlagCompBasedStats
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagCompBasedStats, value.value)

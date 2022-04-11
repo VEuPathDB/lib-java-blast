@@ -2,6 +2,7 @@ package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagDBGenCode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
 
@@ -43,6 +44,9 @@ value class DBGenCode(val value: UByte = Def) : BlastField {
   }
 
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagDBGenCode
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagDBGenCode, value)

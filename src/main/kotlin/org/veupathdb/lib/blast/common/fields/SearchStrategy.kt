@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagExportSearchStrategy
 import org.veupathdb.lib.blast.common.FlagImportSearchStrategy
 import org.veupathdb.lib.blast.serial.BlastField
@@ -21,6 +22,9 @@ internal fun ParseImportSearchStrategy(js: ObjectNode) =
 value class ImportSearchStrategy(val file: String = "") : BlastField {
   override val isDefault get() = file.isBlank()
 
+  override val name: String
+    get() = FlagImportSearchStrategy
+
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagImportSearchStrategy, file)
 
@@ -40,6 +44,9 @@ internal fun ParseExportSearchStrategy(js: ObjectNode) =
 @JvmInline
 value class ExportSearchStrategy(val file: String = "") : BlastField {
   override val isDefault get() = file.isBlank()
+
+  override val name: String
+    get() = FlagExportSearchStrategy
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagExportSearchStrategy, file)

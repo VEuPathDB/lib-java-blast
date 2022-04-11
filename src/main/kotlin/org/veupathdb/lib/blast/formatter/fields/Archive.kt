@@ -2,6 +2,7 @@ package org.veupathdb.lib.blast.formatter.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagArchive
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
@@ -32,6 +33,9 @@ internal fun ParseArchive(js: ObjectNode) =
 @JvmInline
 value class Archive(val file: String = "") : BlastField {
   override val isDefault get() = file.isBlank()
+
+  override val name: String
+    get() = FlagArchive
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagArchive, file)

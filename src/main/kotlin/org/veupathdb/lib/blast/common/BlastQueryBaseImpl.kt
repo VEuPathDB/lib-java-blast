@@ -3,6 +3,7 @@ package org.veupathdb.lib.blast.common
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.err.ErrorMap
 
 internal abstract class BlastQueryBaseImpl(
   tool: BlastTool,
@@ -102,5 +103,10 @@ internal abstract class BlastQueryBaseImpl(
     extensionDropoffUngapped.appendCliParts(cli)
     windowSize.appendCliParts(cli)
     remote.appendCliParts(cli)
+  }
+
+  override fun validate(errs: ErrorMap) {
+    errs.requires(entrezQuery, remote)
+    errs.incompatible(importSearchStrategy, exportSearchStrategy)
   }
 }

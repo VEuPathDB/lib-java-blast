@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagQueryLocation
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -35,6 +36,9 @@ data class QueryLocation(val start: UInt = DefStart, val stop: UInt = DefStop)
   }
 
   override val isDefault get() = start == DefStart && stop == DefStop
+
+  override val name: String
+    get() = FlagQueryLocation
 
   override fun appendJson(js: ObjectNode) {
     if (!isDefault) {

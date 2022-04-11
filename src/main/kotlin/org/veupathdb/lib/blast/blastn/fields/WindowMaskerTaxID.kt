@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.blastn.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagWindowMaskerDB
 import org.veupathdb.lib.blast.common.FlagWindowMaskerTaxID
 import org.veupathdb.lib.blast.serial.BlastField
@@ -21,6 +22,9 @@ internal fun ParseWindowMaskerTaxID(js: ObjectNode) =
 @JvmInline
 value class WindowMaskerTaxID(val value: Int = Def) : BlastField {
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagWindowMaskerTaxID
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagWindowMaskerTaxID, value)

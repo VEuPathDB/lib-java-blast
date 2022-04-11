@@ -157,6 +157,9 @@ internal data class ValDust(
   override val isDefault
     get() = level == DefLevel && window == DefWindow && linker == DefLinker
 
+  override val name: String
+    get() = FlagDust
+
   override fun appendJson(js: ObjectNode) {
     if (isDefault)
       return
@@ -220,6 +223,9 @@ internal object YesDust : Dust {
 
   override val isDefault get() = false
 
+  override val name: String
+    get() = FlagDust
+
   override fun appendJson(js: ObjectNode) {
     js.put(FlagDust, "yes")
   }
@@ -253,6 +259,9 @@ internal object NoDust : Dust {
     get() = throw IllegalStateException("Cannot get the linker value from a \"no\" dust argument.")
 
   override val isDefault get() = false
+
+  override val name: String
+    get() = FlagDust
 
   override fun appendJson(js: ObjectNode) {
     js.put(FlagDust, "no")

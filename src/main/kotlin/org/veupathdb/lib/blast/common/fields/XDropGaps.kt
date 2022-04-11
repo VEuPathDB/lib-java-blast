@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagXDropFinalGap
 import org.veupathdb.lib.blast.common.FlagXDropPrelimGap
 import org.veupathdb.lib.blast.common.FlagXDropUngap
@@ -21,6 +22,9 @@ internal fun ParseXDropUngap(js: ObjectNode) =
 @JvmInline
 value class ExtensionDropoffUngapped(val value: Double = Double.NaN) : BlastField {
   override val isDefault get() = value.isNaN()
+
+  override val name: String
+    get() = FlagXDropUngap
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagXDropUngap, value)
@@ -47,6 +51,9 @@ internal fun ParseXDropGap(js: ObjectNode) =
 value class ExtensionDropoffPrelimGapped(val value: Double = Double.NaN) : BlastField {
   override val isDefault get() = value.isNaN()
 
+  override val name: String
+    get() = FlagXDropPrelimGap
+
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagXDropPrelimGap, value)
 
@@ -71,6 +78,9 @@ internal fun ParseXDropGapFinal(js: ObjectNode) =
 @JvmInline
 value class ExtensionDropoffFinalGapped(val value: Double = Double.NaN) : BlastField {
   override val isDefault get() = value.isNaN()
+
+  override val name: String
+    get() = FlagXDropFinalGap
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagXDropFinalGap, value)

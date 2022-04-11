@@ -3,6 +3,7 @@ package org.veupathdb.lib.blast.common
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.err.ErrorMap
 
 internal abstract class BlastQueryWithListsImpl(
   tool: BlastTool,
@@ -112,5 +113,18 @@ internal abstract class BlastQueryWithListsImpl(
     negativeTaxIDListFile.appendCliParts(cli)
     taxIDs.appendCliParts(cli)
     negativeTaxIDs.appendCliParts(cli)
+  }
+
+  override fun validate(errs: ErrorMap) {
+    super.validate(errs)
+
+    errs.incompatible(giListFile, seqIDListFile, taxIDs, taxIDListFile, negativeGIListFile, negativeSeqIDListFile, negativeTaxIDs, negativeSeqIDListFile, remote)
+    errs.incompatible(seqIDListFile, taxIDs, taxIDListFile, negativeGIListFile, negativeSeqIDListFile, negativeTaxIDs, negativeSeqIDListFile, remote)
+    errs.incompatible(taxIDs, taxIDListFile, negativeGIListFile, negativeSeqIDListFile, negativeTaxIDs, negativeSeqIDListFile, remote)
+    errs.incompatible(taxIDListFile, negativeGIListFile, negativeSeqIDListFile, negativeTaxIDs, negativeSeqIDListFile, remote)
+    errs.incompatible(negativeGIListFile, negativeSeqIDListFile, negativeTaxIDs, negativeSeqIDListFile, remote)
+    errs.incompatible(negativeSeqIDListFile, negativeTaxIDs, negativeSeqIDListFile, remote)
+    errs.incompatible(negativeTaxIDs, negativeSeqIDListFile, remote)
+    errs.incompatible(negativeSeqIDListFile, remote)
   }
 }

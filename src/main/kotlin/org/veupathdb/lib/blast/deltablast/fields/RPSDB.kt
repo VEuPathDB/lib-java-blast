@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.deltablast.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagRPSDB
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -20,6 +21,9 @@ internal fun ParseRPSDB(js: ObjectNode) =
 @JvmInline
 value class RPSDB(val value: String = "cdd_delta") : BlastField {
   override val isDefault get() = value == "cdd_delta"
+
+  override val name: String
+    get() = FlagRPSDB
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagRPSDB, value)

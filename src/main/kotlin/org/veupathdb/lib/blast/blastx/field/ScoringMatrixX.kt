@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.blastx.field
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagMatrix
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -20,6 +21,9 @@ value class ScoringMatrixX(
   val value: ScoringMatrixXType = ScoringMatrixXType.None
 ): BlastField {
   override val isDefault get() = value == ScoringMatrixXType.None
+
+  override val name: String
+    get() = FlagMatrix
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagMatrix, value.value)

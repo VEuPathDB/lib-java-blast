@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.blastn.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagTemplateLength
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
@@ -33,6 +34,9 @@ value class TemplateLength(
   val value: TemplateLengthValue = TemplateLengthValue.None
 ) : BlastField {
   override val isDefault get() = value == TemplateLengthValue.None
+
+  override val name: String
+    get() = FlagTemplateLength
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagTemplateLength, value.value)

@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagSearchSpace
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -21,6 +22,9 @@ internal fun ParseSearchSpace(js: ObjectNode) =
 @JvmInline
 value class SearchSpace(val value: Byte = DefaultSearchSpace) : BlastField {
   override val isDefault get() = value == DefaultSearchSpace
+
+  override val name: String
+    get() = FlagSearchSpace
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagSearchSpace, value)

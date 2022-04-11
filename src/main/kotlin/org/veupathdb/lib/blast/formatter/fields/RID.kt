@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.formatter.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagRID
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
@@ -31,6 +32,9 @@ internal fun ParseRID(js: ObjectNode) =
 @JvmInline
 value class RID(val value: String = "") : BlastField {
   override val isDefault get() = value.isBlank()
+
+  override val name: String
+    get() = FlagRID
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagRID, value)

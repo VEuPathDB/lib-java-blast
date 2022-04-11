@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.BlastQueryWithListsImpl
 import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.err.ErrorMap
 import org.veupathdb.lib.blast.tblastx.fields.*
 
 internal class TBlastXImpl(
@@ -236,5 +237,22 @@ internal class TBlastXImpl(
     subjectBestHit.appendCliParts(cli)
     sumStats.appendCliParts(cli)
     numCPUCores.appendCliParts(cli)
+  }
+
+  override fun validate(errs: ErrorMap) {
+    super.validate(errs)
+
+    errs.incompatible(subjectFile, dbFile, giListFile, seqIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, taxIDs, taxIDListFile,
+      negativeTaxIDs, negativeTaxIDListFile, dbSoftMask, dbHardMask)
+    errs.incompatible(subjectLocation, dbFile, giListFile, seqIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, taxIDs, taxIDListFile,
+      negativeTaxIDs, negativeTaxIDListFile, dbSoftMask, dbHardMask, remote)
+    errs.incompatible(dbSoftMask, dbHardMask)
+    errs.incompatible(cullingLimit, bestHitOverhang, bestHitScoreEdge)
+    errs.incompatible(numCPUCores, remote)
+    errs.incompatible(remote, giListFile, seqIDListFile, taxIDs, taxIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, negativeTaxIDs,
+      negativeTaxIDListFile)
   }
 }

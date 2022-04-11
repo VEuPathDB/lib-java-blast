@@ -5,6 +5,8 @@ import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.blastn.fields.*
 import org.veupathdb.lib.blast.common.BlastQueryWithListsImpl
 import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.err.ErrorMap
+import org.veupathdb.lib.blast.tblastn.fields.TBlastNTaskValue
 
 internal class BlastNImpl(
   shortHelp:                HelpShort                = HelpShort(),
@@ -295,5 +297,33 @@ internal class BlastNImpl(
     bestHitScoreEdge.appendCliParts(cli)
     subjectBestHit.appendCliParts(cli)
     softMasking.appendCliParts(cli)
+  }
+
+  override fun validate(errs: ErrorMap) {
+    super.validate(errs)
+
+    if (task.value != BlastNTaskType.Megablast) {
+      if (!useIndex.isDefault)
+        errs.addError(useIndex.name, "Requires task type ${BlastNTaskType.Megablast.value}")
+      if (!indexName.isDefault)
+        errs.addError(indexName.name, "Requires task type ${BlastNTaskType.Megablast.value}")
+    }
+
+    if (task.value != BlastNTaskType.DiscontiguousMegablast) {
+      if (!templateType.isDefault)
+        errs.addError(templateType.name, "Requires task type ${BlastNTaskType.DiscontiguousMegablast.value}")
+      if (!templateLength.isDefault)
+        errs.addError(templateLength.name, "Requires task type ${BlastNTaskType.DiscontiguousMegablast.value}")
+    }
+
+    errs.incompatible(subjectFile, dbFile, giListFile, seqIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, taxIDs, taxIDListFile,
+      negativeTaxIDs, negativeTaxIDListFile, dbSoftMask, dbHardMask)
+    errs.incompatible(subjectLocation, dbFile, giListFile, seqIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, taxIDs, taxIDListFile,
+      negativeTaxIDs, negativeTaxIDListFile, dbSoftMask, dbHardMask, remote)
+    errs.incompatible(dbSoftMask, dbHardMask)
+    errs.incompatible(cullingLimit, bestHitOverhang, bestHitScoreEdge)
+    errs.incompatible(numCPUCores, remote)
   }
 }

@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagNumDescriptions
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -27,6 +28,9 @@ value class NumDescriptions(val value: UInt = DefaultNumDescriptions)
   : BlastField
 {
   override val isDefault get() = value == DefaultNumDescriptions
+
+  override val name: String
+    get() = FlagNumDescriptions
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagNumDescriptions, value)

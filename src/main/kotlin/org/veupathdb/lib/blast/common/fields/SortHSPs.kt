@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagSortHSPs
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -25,6 +26,9 @@ internal fun ParseSortHSPs(js: ObjectNode) =
 @JvmInline
 value class SortHSPs(val value: HSPSorting = HSPSorting.None) : BlastField {
   override val isDefault get() = value == HSPSorting.None
+
+  override val name: String
+    get() = FlagSortHSPs
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagSortHSPs, value.value)

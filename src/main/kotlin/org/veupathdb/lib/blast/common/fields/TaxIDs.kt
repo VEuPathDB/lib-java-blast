@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagTaxIDs
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.optArray
@@ -20,6 +21,9 @@ internal fun ParseTaxIDs(js: ObjectNode) =
 @JvmInline
 value class TaxIDs(val value: List<String> = emptyList()) : BlastField {
   override val isDefault get() = value.isEmpty()
+
+  override val name: String
+    get() = FlagTaxIDs
 
   override fun appendJson(js: ObjectNode) {
     if (!isDefault)

@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagInPSSM
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -18,6 +19,9 @@ internal fun ParseInPSSM(js: ObjectNode) =
 @JvmInline
 value class InPSSMFile(val file: String = "") : BlastField {
   override val isDefault get() = file.isBlank()
+
+  override val name: String
+    get() = FlagInPSSM
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagInPSSM, file)

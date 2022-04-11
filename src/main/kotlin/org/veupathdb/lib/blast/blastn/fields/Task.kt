@@ -2,6 +2,7 @@ package org.veupathdb.lib.blast.blastn.fields
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagTask
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
@@ -32,6 +33,9 @@ value class BlastNTask(val value: BlastNTaskType = BlastNTaskType.Megablast)
   : BlastField
 {
   override val isDefault get() = value == BlastNTaskType.Megablast
+
+  override val name: String
+    get() = FlagTask
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagTask, value.value)

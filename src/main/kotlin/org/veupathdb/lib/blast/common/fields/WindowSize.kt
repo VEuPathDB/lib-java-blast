@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagWindowSize
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -21,6 +22,9 @@ internal fun ParseWindowSize(js: ObjectNode) =
 @JvmInline
 value class WindowSize(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagWindowSize
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagWindowSize, value)

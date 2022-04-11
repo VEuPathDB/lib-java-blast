@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagNumThreads
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -24,6 +25,9 @@ internal fun ParseNumCPUCores(js: ObjectNode) =
 @JvmInline
 value class NumCPUCores(val value: UByte = Def) : BlastField {
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagNumThreads
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagNumThreads, value)

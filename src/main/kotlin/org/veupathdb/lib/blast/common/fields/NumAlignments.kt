@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagNumAlignments
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -23,6 +24,9 @@ internal fun ParseNumAlignments(js: ObjectNode) =
 @JvmInline
 value class NumAlignments(val value: UInt = DefaultNumAlignments) : BlastField {
   override val isDefault get() = value == DefaultNumAlignments
+
+  override val name: String
+    get() = FlagNumAlignments
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagNumAlignments, value)

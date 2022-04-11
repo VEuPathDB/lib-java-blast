@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagGapExtend
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
@@ -24,6 +25,9 @@ internal fun ParseGapExtend(js: ObjectNode) =
 @JvmInline
 value class GapExtend(val value: Int = Def) : BlastField {
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagGapExtend
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagGapExtend, value)

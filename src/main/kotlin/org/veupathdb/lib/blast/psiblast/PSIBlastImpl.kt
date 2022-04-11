@@ -6,6 +6,7 @@ import org.veupathdb.lib.blast.common.BlastQueryWithIPGImpl
 import org.veupathdb.lib.blast.common.fields.*
 import org.veupathdb.lib.blast.common.fields.NegativeTaxIDList
 import org.veupathdb.lib.blast.common.fields.ParseNegTaxIDList
+import org.veupathdb.lib.blast.err.ErrorMap
 import org.veupathdb.lib.blast.psiblast.fields.*
 
 internal class PSIBlastImpl(
@@ -308,5 +309,29 @@ internal class PSIBlastImpl(
     pseudoCount.appendCliParts(cli)
     inclusionEValueThreshold.appendCliParts(cli)
     phiPatternFile.appendCliParts(cli)
+  }
+
+  override fun validate(errs: ErrorMap) {
+    super.validate(errs)
+
+    errs.incompatible(subjectFile, dbFile, giListFile, seqIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, taxIDs, taxIDListFile,
+      negativeTaxIDs, negativeTaxIDListFile, ipgListFile, negativeIPGListFile)
+    errs.incompatible(subjectLocation, dbFile, giListFile, seqIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, taxIDs, taxIDListFile,
+      negativeTaxIDs, negativeTaxIDListFile, ipgListFile, negativeIPGListFile,
+      remote)
+    errs.incompatible(cullingLimit, bestHitOverhang, bestHitScoreEdge)
+    errs.incompatible(numCPUCores, remote)
+    errs.incompatible(inMSAFile, inPSSMFile, queryFile, queryLocation,
+      phiPatternFile)
+    errs.requires(msaMasterIndex, inMSAFile)
+    errs.incompatible(msaMasterIndex, inPSSMFile, queryFile, queryLocation,
+      phiPatternFile, ignoreMSAMaster)
+    errs.requires(ignoreMSAMaster, inMSAFile)
+    errs.incompatible(ignoreMSAMaster, inPSSMFile, queryFile, queryLocation,
+      phiPatternFile)
+    errs.incompatible(inPSSMFile, queryFile, queryLocation, phiPatternFile)
+    errs.incompatible(remote, numIterations)
   }
 }

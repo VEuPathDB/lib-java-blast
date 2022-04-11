@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagUngapped
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -19,6 +20,9 @@ internal fun ParseUngappedAlignmentsOnly(js: ObjectNode) =
 @JvmInline
 value class UngappedAlignmentsOnly(val value: Boolean = false) : BlastField {
   override val isDefault get() = !value
+
+  override val name: String
+    get() = FlagUngapped
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagUngapped, value)

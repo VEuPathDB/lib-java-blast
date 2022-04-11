@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.tblastx.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagSeg
 import org.veupathdb.lib.blast.common.FlagSoftMasking
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -36,6 +37,9 @@ internal fun ParseSoftMaskingTX(js: ObjectNode) =
 @JvmInline
 value class SoftMaskingTX(val value: Boolean = Def) : BlastField {
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagSoftMasking
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagSoftMasking, value)

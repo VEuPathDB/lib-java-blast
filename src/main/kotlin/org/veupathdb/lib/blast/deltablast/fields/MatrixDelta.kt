@@ -2,6 +2,7 @@ package org.veupathdb.lib.blast.deltablast.fields
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagMatrix
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
@@ -24,6 +25,9 @@ value class MatrixDelta(val value: MatrixDeltaType = MatrixDeltaType.None)
   : BlastField
 {
   override val isDefault get() = value == MatrixDeltaType.None
+
+  override val name: String
+    get() = FlagMatrix
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagMatrix, value.value)

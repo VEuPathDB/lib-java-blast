@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.blastp.field
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagWordSize
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -26,6 +27,9 @@ value class WordSizeP(val value: UInt = Def) : BlastField {
   }
 
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagWordSize
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagWordSize, value)

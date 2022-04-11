@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.BlastCLIImpl
 import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.err.ErrorMap
 import org.veupathdb.lib.blast.formatter.fields.Archive
 import org.veupathdb.lib.blast.formatter.fields.ParseArchive
 import org.veupathdb.lib.blast.formatter.fields.ParseRID
@@ -77,5 +78,9 @@ internal class BlastFormatterImpl(
   override fun appendCli(cli: MutableList<String>) {
     rid.appendCliParts(cli)
     archive.appendCliParts(cli)
+  }
+
+  override fun validate(errs: ErrorMap) {
+    errs.incompatible(archive, rid)
   }
 }

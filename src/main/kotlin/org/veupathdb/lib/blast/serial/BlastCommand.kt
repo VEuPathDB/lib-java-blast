@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.serial
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.err.ErrorMap
 
 /**
  * Blast Command Type Base
@@ -37,4 +38,12 @@ interface BlastCommand {
    * @return CLI call argument array.
    */
   fun toCliArray(): Array<String>
+
+  /**
+   * Validates this Blast+ config checking for flags that are incompatible and
+   * values that are out of range or invalid.
+   *
+   * @return An [ErrorMap] containing any errors found in the configuration.
+   */
+  fun validate(): ErrorMap
 }

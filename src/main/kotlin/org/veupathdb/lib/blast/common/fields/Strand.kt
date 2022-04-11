@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagStrand
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -25,6 +26,9 @@ internal fun ParseStrand(js: ObjectNode) =
 @JvmInline
 value class Strand(val value: StrandType = StrandType.Both) : BlastField {
   override val isDefault get() = value == StrandType.Both
+
+  override val name: String
+    get() = FlagStrand
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagStrand, value.value)

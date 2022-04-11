@@ -78,6 +78,9 @@ internal object YesSegTN : SegTN {
 
   override val isDefault get() = false
 
+  override val name: String
+    get() = FlagSeg
+
   override fun appendJson(js: ObjectNode) {
     js.put(FlagSeg, "yes")
   }
@@ -108,6 +111,9 @@ internal object NoSegTN : SegTN {
     get() = throw IllegalStateException("Cannot get a $FlagSeg.$KeyHicut value from \"no\".")
 
   override val isDefault get() = true
+
+  override val name: String
+    get() = FlagSeg
 
   override fun appendJson(js: ObjectNode) {}
 
@@ -141,6 +147,9 @@ internal data class ValSegTN(
 
   override val isDefault
     get() = window == DefWindow && locut == DefLoCut && hicut == DefHiCut
+
+  override val name: String
+    get() = FlagSeg
 
   override fun appendJson(js: ObjectNode) {
     if (!isDefault) {

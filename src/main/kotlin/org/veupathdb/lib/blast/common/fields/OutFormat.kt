@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagOutFormat
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -127,6 +128,9 @@ data class OutFormat(
 ) : BlastField {
   override val isDefault: Boolean
     get() = type.isDefault && delimiter.isDefault && fields.isDefault
+
+  override val name: String
+    get() = FlagOutFormat
 
   override fun appendJson(js: ObjectNode) {
     if (!isDefault)

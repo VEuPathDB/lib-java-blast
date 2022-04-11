@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.blastx.field
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagSeg
 import org.veupathdb.lib.blast.common.fields.Seg
 import org.veupathdb.lib.blast.util.reqDub
@@ -78,6 +79,9 @@ internal object YesSegX : SegX {
 
   override val isDefault get() = false
 
+  override val name: String
+    get() = FlagSeg
+
   override fun appendJson(js: ObjectNode) {
     js.put(FlagSeg, "yes")
   }
@@ -108,6 +112,9 @@ internal object NoSegX : SegX {
     get() = throw IllegalStateException("Cannot get a $FlagSeg.$KeyHicut value from \"no\".")
 
   override val isDefault get() = false
+
+  override val name: String
+    get() = FlagSeg
 
   override fun appendJson(js: ObjectNode) {}
 
@@ -141,6 +148,9 @@ internal data class ValSegX(
 
   override val isDefault =
     window == DefWindow && locut == DefLocut && hicut == DefHicut
+
+  override val name: String
+    get() = FlagSeg
 
   override fun appendJson(js: ObjectNode) {
     if (!isDefault) {

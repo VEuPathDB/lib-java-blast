@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagMaxIntronLength
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -24,6 +25,9 @@ internal fun ParseMaxIntronLength(js: ObjectNode) =
 @JvmInline
 value class MaxIntronLength(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagMaxIntronLength
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagMaxIntronLength, value)

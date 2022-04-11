@@ -5,6 +5,7 @@ import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.blastp.field.*
 import org.veupathdb.lib.blast.common.BlastQueryWithIPGImpl
 import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.err.ErrorMap
 
 internal class BlastPImpl(
   shortHelp:                HelpShort                = HelpShort(),
@@ -252,5 +253,21 @@ internal class BlastPImpl(
     bestHitScoreEdge.appendCliParts(cli)
     subjectBestHit.appendCliParts(cli)
     softMasking.appendCliParts(cli)
+  }
+
+  override fun validate(errs: ErrorMap) {
+    super.validate(errs)
+
+    errs.incompatible(subjectFile, dbFile, giListFile, seqIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, taxIDs, taxIDListFile,
+      negativeTaxIDs, negativeTaxIDListFile, ipgListFile, negativeIPGListFile,
+      dbSoftMask, dbHardMask)
+    errs.incompatible(subjectLocation, dbFile, giListFile, seqIDListFile,
+      negativeGIListFile, negativeSeqIDListFile, taxIDs, taxIDListFile,
+      negativeTaxIDs, negativeTaxIDListFile, ipgListFile, negativeIPGListFile,
+      dbSoftMask, dbHardMask, remote)
+    errs.incompatible(dbSoftMask, dbHardMask)
+    errs.incompatible(cullingLimit, bestHitOverhang, bestHitScoreEdge)
+    errs.incompatible(numCPUCores, remote)
   }
 }

@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.blastn.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagTemplateType
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.*
@@ -26,6 +27,9 @@ value class TemplateType(val value: TemplateTypeType = TemplateTypeType.None)
   : BlastField
 {
   override val isDefault get() = value == TemplateTypeType.None
+
+  override val name: String
+    get() = FlagTemplateType
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagTemplateType, value.value)

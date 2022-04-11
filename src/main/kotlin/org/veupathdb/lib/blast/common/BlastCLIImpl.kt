@@ -3,6 +3,8 @@ package org.veupathdb.lib.blast.common
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.BlastTool
 import org.veupathdb.lib.blast.common.fields.*
+import org.veupathdb.lib.blast.err.ErrorMap
+import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.jackson.Json
 
 internal abstract class BlastCLIImpl(
@@ -99,4 +101,17 @@ internal abstract class BlastCLIImpl(
   }
 
   protected abstract fun appendCli(cli: MutableList<String>)
+
+  final override fun validate(): ErrorMap {
+    val out = ErrorMap()
+
+    out.incompatible(numDescriptions, maxTargetSeqs)
+    out.incompatible(numAlignments, maxTargetSeqs)
+
+    validate(out)
+
+    return out
+  }
+
+  protected abstract fun validate(errs: ErrorMap)
 }

@@ -2,6 +2,7 @@ package org.veupathdb.lib.blast.common.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import org.veupathdb.lib.blast.common.FlagCullingLimit
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
 import org.veupathdb.lib.blast.util.append
@@ -25,6 +26,9 @@ internal fun ParseCullingLimit(js: ObjectNode) =
 @JvmInline
 value class CullingLimit(val value: UInt = Def) : BlastField {
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagCullingLimit
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagCullingLimit, value)

@@ -1,6 +1,7 @@
 package org.veupathdb.lib.blast.blastn.fields
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import org.veupathdb.lib.blast.common.FlagDust
 import org.veupathdb.lib.blast.common.FlagNonGreedy
 import org.veupathdb.lib.blast.serial.BlastField
 import org.veupathdb.lib.blast.util.add
@@ -24,6 +25,9 @@ internal fun ParseNonGreedy(js: ObjectNode) =
 @JvmInline
 value class NonGreedy(val value: Boolean = Def) : BlastField {
   override val isDefault get() = value == Def
+
+  override val name: String
+    get() = FlagNonGreedy
 
   override fun appendJson(js: ObjectNode) =
     js.put(isDefault, FlagNonGreedy, value)
