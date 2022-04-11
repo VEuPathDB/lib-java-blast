@@ -32,20 +32,63 @@ class ErrorMap(size: Int = 16) {
    */
   fun hasErrors() = root.isNotEmpty()
 
+  /**
+   * Tests flags that are incompatible with one another and appends errors for
+   * both incompatible flags when an entry in [others] has a non-default value.
+   *
+   * If [field] is its default value, this method does nothing.
+   *
+   * ```
+   * errs := ErrorMap()
+   *
+   * inp_1 := {name: foo, isDefault: false}
+   * inp_2 := {name: bar, isDefault: false}
+   *
+   * errs.incompatible(inp_1, inp_2)
+   *
+   * errs.toMap == {
+   *   foo: Incompatible with bar
+   *   bar: Incompatible with foo
+   * }
+   * ```
+   *
+   * @param field Primary field to test against.
+   *
+   * @param others Other fields to test against.
+   */
   fun incompatible(field: BlastField, vararg others: BlastField) {
     if (field.isDefault)
       return
 
     for (f in others) {
       if (!f.isDefault) {
-        addError(field.name, "Flag ${field.name} is incompatible with ${f.name}")
-        addError(f.name, "Flag ${f.name} is incompatible with ${field.name}")
+        addError(field.name, "Incompatible with ${f.name}")
+        addError(f.name, "Incompatible with ${field.name}")
       }
     }
   }
 
+  /**
+   * Tests a flag that requires another flag to ensure that either the first
+   * field is its default value, otherwise both fields are non-default.
+   *
+   * If the first field is non-default and the second field is default, an error
+   * will be appended to this [ErrorMap].
+   *
+   * ```
+   * errs := ErrorMap()
+   *
+   * inp_1 := {name: foo, isDefault: false}
+   * inp_2 := {name: bar, isDefault: true}
+   *
+   * errs.requires(inp_1, inp_2)
+   *
+   * errs.toMap == {
+   *   foo: Requires bar
+   * }
+   */
   fun requires(field1: BlastField, field2: BlastField) {
     if (!field1.isDefault && field2.isDefault)
-      addError(field1.name, "Flag ${field1.name} requires ${field2.name}")
+      addError(field1.name, "Requires ${field2.name}")
   }
 }
