@@ -138,4 +138,9 @@ interface BlastX : BlastQueryWithIPG {
    * -soft_masking `<Boolean>`
    */
   var softMasking: SoftMaskingX
+
+  /**
+   * -mt_mode `<Integer>`
+   */
+  var multiThreadingMode: MultiThreadingMode
 }

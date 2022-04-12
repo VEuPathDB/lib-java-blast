@@ -72,6 +72,7 @@ internal class TBlastNImpl(
   override var numCPUCores:                  NumCPUCores                  = NumCPUCores(),
   override var useSmithWatermanTraceback:    UseSmithWatermanTraceback    = UseSmithWatermanTraceback(),
   override var inPSSMFile:                   InPSSMFile                   = InPSSMFile(),
+  override var multiThreadingMode:           MultiThreadingMode           = MultiThreadingMode(),
 ) : TBlastN, BlastQueryWithListsImpl(
   BlastTool.TBlastN,
   shortHelp,
@@ -176,6 +177,7 @@ internal class TBlastNImpl(
     ParseNumCPUCores(js),
     ParseUseSWTBack(js),
     ParseInPSSM(js),
+    ParseMultiThreadingMode(js),
   )
 
   override fun appendJson(js: ObjectNode) {
@@ -208,6 +210,7 @@ internal class TBlastNImpl(
     numCPUCores.appendJson(js)
     useSmithWatermanTraceback.appendJson(js)
     inPSSMFile.appendJson(js)
+    multiThreadingMode.appendJson(js)
   }
 
   override fun appendCli(sb: StringBuilder) {
@@ -240,6 +243,7 @@ internal class TBlastNImpl(
     numCPUCores.appendCliSegment(sb)
     useSmithWatermanTraceback.appendCliSegment(sb)
     inPSSMFile.appendCliSegment(sb)
+    multiThreadingMode.appendCliSegment(sb)
   }
 
   override fun appendCli(cli: MutableList<String>) {
@@ -272,6 +276,7 @@ internal class TBlastNImpl(
     numCPUCores.appendCliParts(cli)
     useSmithWatermanTraceback.appendCliParts(cli)
     inPSSMFile.appendCliParts(cli)
+    multiThreadingMode.appendCliParts(cli)
   }
 
   override fun validate(errs: ErrorMap) {
@@ -288,5 +293,6 @@ internal class TBlastNImpl(
     errs.incompatible(numCPUCores, remote)
     errs.incompatible(remote, inPSSMFile)
     errs.incompatible(inPSSMFile, queryFile, queryLocation)
+    errs.requires(multiThreadingMode, numCPUCores)
   }
 }

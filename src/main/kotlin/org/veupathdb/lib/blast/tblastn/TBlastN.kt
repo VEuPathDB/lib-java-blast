@@ -142,4 +142,9 @@ interface TBlastN : BlastQueryWithLists {
    * -in_pssm `<File_In>`
    */
   var inPSSMFile: InPSSMFile
+
+  /**
+   * -mt_mode `<Integer>`
+   */
+  var multiThreadingMode: MultiThreadingMode
 }

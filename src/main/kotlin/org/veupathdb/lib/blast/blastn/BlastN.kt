@@ -168,4 +168,9 @@ interface BlastN : BlastQueryWithLists {
    * -soft_masking `<Boolean>`
    */
   var softMasking: SoftMaskingN
+
+  /**
+   * -mt_mode `<Integer>`
+   */
+  var multiThreadingMode: MultiThreadingMode
 }

@@ -72,7 +72,8 @@ internal class BlastXImpl(
   override var bestHitOverhang:              BestHitOverhang              = BestHitOverhang(),
   override var bestHitScoreEdge:             BestHitScoreEdge             = BestHitScoreEdge(),
   override var subjectBestHit:               SubjectBestHit               = SubjectBestHit(),
-  override var softMasking:                  SoftMaskingX                 = SoftMaskingX()
+  override var softMasking:                  SoftMaskingX                 = SoftMaskingX(),
+  override var multiThreadingMode:           MultiThreadingMode           = MultiThreadingMode(),
 ) : BlastX, BlastQueryWithIPGImpl(
   BlastTool.BlastX,
   shortHelp,
@@ -179,6 +180,7 @@ internal class BlastXImpl(
     ParseBestHitScoreEdge(js),
     ParseSubjectBestHit(js),
     ParseSoftMaskingX(js),
+    ParseMultiThreadingMode(js),
   )
 
   override fun appendJson(js: ObjectNode) {
@@ -210,6 +212,7 @@ internal class BlastXImpl(
     bestHitScoreEdge.appendJson(js)
     subjectBestHit.appendJson(js)
     softMasking.appendJson(js)
+    multiThreadingMode.appendJson(js)
   }
 
   override fun appendCli(sb: StringBuilder) {
@@ -241,6 +244,7 @@ internal class BlastXImpl(
     bestHitScoreEdge.appendCliSegment(sb)
     subjectBestHit.appendCliSegment(sb)
     softMasking.appendCliSegment(sb)
+    multiThreadingMode.appendCliSegment(sb)
   }
 
   override fun appendCli(cli: MutableList<String>) {
@@ -272,6 +276,7 @@ internal class BlastXImpl(
     bestHitScoreEdge.appendCliParts(cli)
     subjectBestHit.appendCliParts(cli)
     softMasking.appendCliParts(cli)
+    multiThreadingMode.appendCliParts(cli)
   }
 
   override fun validate(errs: ErrorMap) {
@@ -288,5 +293,6 @@ internal class BlastXImpl(
     errs.incompatible(dbSoftMask, dbHardMask)
     errs.incompatible(cullingLimit, bestHitOverhang, bestHitScoreEdge)
     errs.incompatible(numCPUCores, remote)
+    errs.requires(multiThreadingMode, numCPUCores)
   }
 }
