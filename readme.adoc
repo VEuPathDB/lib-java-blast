@@ -1,4 +1,4 @@
-= lib-java-blast
+= lib-jvm-blast
 :source-highlighter: highlightjs
 :toc: macro
 
