@@ -8,6 +8,10 @@ image:https://img.shields.io/badge/docs-javadoc-blue[link="https://veupathdb.git
 [WARNING]
 ====
 This repository has been migrated into the link:https://github.com/VEuPathDB/service-multi-blast[MultiBlast Monorepo]
+
+Maven packages will continue to be published to this repository as per GitHub's
+rules, however all future code updates will be published to the MultiBlast
+Monorepo.
 ====
 
 toc::[]
