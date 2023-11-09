@@ -1,6 +1,6 @@
 plugins {
-  kotlin("jvm") version "1.6.10"
-  id("org.jetbrains.dokka") version "1.6.10"
+  kotlin("jvm") version "1.9.20"
+  id("org.jetbrains.dokka") version "1.9.10"
   `java-library`
   `maven-publish`
 }
@@ -44,7 +44,7 @@ tasks.dokkaJavadoc {
 }
 
 dependencies {
-  api("org.veupathdb.lib:jackson-singleton:2.2.0")
+  api("org.veupathdb.lib:jackson-singleton:3.1.1")
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
   testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
